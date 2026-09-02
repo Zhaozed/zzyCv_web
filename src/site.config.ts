@@ -3,24 +3,24 @@ import type { SiteConfig } from "@/types";
 
 export const siteConfig: SiteConfig = {
 	// ! Please remember to replace the following site property with your own domain, used in astro.config.ts
-	url: "https://astro-cactus.chriswilliams.dev/",
+	url: "https://zhaozed.github.io/",
 	/*
 		- Used to construct the meta title property found in src/components/BaseHead.astro L:11
 		- The webmanifest name found in astro.config.ts L:42
 		- The link value found in src/components/layout/Header.astro L:35
 		- In the footer found in src/components/layout/Footer.astro L:12
 	*/
-	title: "Astro Cactus",
+	title: "赵泽宇 / AI PM",
 	// Used as both a meta property (src/components/BaseHead.astro L:31 + L:49) & the generated satori png (src/pages/og-image/[slug].png.ts)
-	author: "Chris Williams",
+	author: "赵泽宇",
 	// Used as the default description meta property and webmanifest description
-	description: "An opinionated starter theme for Astro",
+	description: "赵泽宇的 AI 产品经理作品集：Agent 产品设计、工具治理、记忆体系与质量评测。",
 	// HTML lang property, found in src/layouts/Base.astro L:18 & astro.config.ts L:48
-	lang: "en-GB",
+	lang: "zh-CN",
 	// Meta property, found in src/components/BaseHead.astro L:42
-  ogLocale: "en_GB",
-  // Determines whether to show the logo in the templates header
-	showLogo: true,
+	ogLocale: "zh_CN",
+	// Determines whether to show the logo in the templates header
+	showLogo: false,
 	// Date.prototype.toLocaleDateString() parameters, found in src/utils/date.ts.
 	date: {
 		options: {
@@ -38,16 +38,16 @@ export const menuLinks: { path: string; title: string }[] = [
 		title: "Home",
 	},
 	{
+		path: "/projects/",
+		title: "精选项目",
+	},
+	{
+		path: "/practice/",
+		title: "其他实践",
+	},
+	{
 		path: "/about/",
-		title: "About",
-	},
-	{
-		path: "/posts/",
-		title: "Blog",
-	},
-	{
-		path: "/notes/",
-		title: "Notes",
+		title: "关于我",
 	},
 ];
 

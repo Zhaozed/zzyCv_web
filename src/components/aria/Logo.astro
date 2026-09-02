@@ -1,0 +1,17 @@
+---
+interface Props {
+	text?: string;
+}
+const { text = "zhaozeyu" } = Astro.props;
+---
+
+<a
+	href="/"
+	class="group relative z-30 flex h-5 items-center space-x-1.5 text-base font-semibold text-black dark:text-white"
+>
+	<span
+		class="-translate-y-0.5 text-xl duration-300 ease-in-out group-hover:-rotate-12 group-hover:scale-[1.2]"
+		>✦</span
+	>
+	<span class="-translate-y-0.5">{text}</span>
+</a>

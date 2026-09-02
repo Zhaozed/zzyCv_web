@@ -1,0 +1,63 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+
+interface Props {
+	title: string;
+	description: string;
+	eyebrow: string;
+	intro: string;
+	tags: string[];
+	meta: { label: string; value: string }[];
+}
+const { title, description, eyebrow, intro, tags, meta } = Astro.props;
+---
+
+<PageLayout meta={{ title, description }}>
+	<section class="relative z-20 mx-auto mt-10 max-w-4xl px-5 md:rounded-t-md md:border-r md:border-l md:border-t md:rounded-t-2xl border-neutral-200 pb-1 md:pt-20 dark:border-neutral-800">
+		<div class="pt-6 md:pt-0">
+			<a
+				class="mb-10 inline-flex font-mono text-xs text-neutral-400 duration-200 ease-out hover:text-neutral-900 dark:hover:text-white"
+				href="/projects/"
+				>← 返回精选项目</a
+			>
+			<p
+				class="mb-4 font-mono text-xs uppercase tracking-widest text-neutral-400 dark:text-neutral-500"
+			>
+				{eyebrow}
+			</p>
+			<h1
+				class="max-w-3xl text-3xl leading-tight font-bold tracking-tighter md:text-4xl lg:text-5xl dark:text-neutral-100"
+			>
+				{title}
+			</h1>
+			<p
+				class="mt-6 max-w-3xl text-base leading-8 text-neutral-600 sm:text-lg dark:text-neutral-400"
+			>
+				{intro}
+			</p>
+			<div class="mt-6 flex flex-wrap gap-2">
+				{tags.map((tag) => (
+					<span
+						class="inline-flex rounded-full border border-neutral-300 px-3 py-1 font-mono text-xs dark:border-neutral-600"
+						>{tag}</span
+					>
+				))}
+			</div>
+			<dl class="case-meta mt-10 mb-2">
+				{
+					meta.map((item) => (
+						<div>
+							<>
+								<dt>{item.label}</dt>
+								<dd>{item.value}</dd>
+							</>
+						</div>
+					))
+				}
+			</dl>
+		</div>
+	</section>
+	<div class="relative z-20 mx-auto max-w-4xl px-5 pb-20 md:px-10">
+		<slot />
+	</div>
+</PageLayout>

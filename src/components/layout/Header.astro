@@ -1,124 +1,256 @@
 ---
-import Search from "@/components/Search.astro";
-import ThemeToggle from "@/components/ThemeToggle.astro";
+import Logo from "@/components/aria/Logo.astro";
 import { menuLinks } from "@/site.config";
-import { siteConfig } from "../../site.config";
 ---
 
-<header
-	class:list={["group relative mb-28 flex items-center", siteConfig.showLogo && "sm:ps-18"]}
-	id="main-header"
->
-	<div class="flex sm:flex-col sm:items-start">
-		<a
-			aria-current={Astro.url.pathname === "/" ? "page" : false}
-			class="inline-flex items-center sm:relative sm:inline-block sm:grayscale sm:hover:filter-none"
-			href="/"
-		>
-			{
-				siteConfig.showLogo && (
-					<svg
-						aria-hidden="true"
-						class="me-3 h-10 w-6 sm:absolute sm:-inset-s-18 sm:me-0 sm:h-20 sm:w-12"
-						fill="none"
-						focusable="false"
-						viewBox="0 0 272 480"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path
-							fill="#cdffb8"
-							d="M181.334 93.333v-40L226.667 80v40zM136.001 53.333 90.667 26.667v426.666L136.001 480zM45.333 220 0 193.334v140L45.333 360z"
-						/>
-						<path
-							fill="#d482ab"
-							d="M90.667 26.667 136.001 0l45.333 26.667-45.333 26.666zM181.334 53.33l45.333-26.72L272 53.33 226.667 80zM136 240l-45.333-26.67v53.34zM0 193.33l45.333-26.72 45.334 26.72L45.333 220zM181.334 93.277 226.667 120l-45.333 26.67z"
-						/>
-						<path
-							fill="#2abc89"
-							d="m136 53.333 45.333-26.666v120L226.667 120V80L272 53.333V160l-90.667 53.333v240L136 480V306.667L45.334 360V220l45.333-26.667v73.334L136 240z"
-						/>
-					</svg>
-				)
-			}
-			<span class="text-accent-2 text-xl font-bold sm:text-2xl">{siteConfig.title}</span>
-		</a>
+<!-- 占位：header 绝对定位，这里撑起高度 -->
+<div class="relative h-20 w-full opacity-0 pointer-events-none"></div>
+<header id="header" class="absolute top-0 z-50 h-20 w-full">
+	<div
+		class="mx-auto flex h-full max-w-5xl items-center justify-between border-b border-l border-r-0 border-transparent pl-6 pr-4 select-none lg:rounded-b-xl lg:border-r lg:border-l"
+		id="headerContainer"
+	>
+		<Logo />
+		<div
+			id="mobileMenuBackground"
+			onclick="closeMobileMenu()"
+			class="fixed inset-0 z-20 hidden h-screen w-screen bg-white/90 duration-300 ease-out dark:bg-neutral-950/90"
+		></div>
 		<nav
-			aria-label="Main"
-			class="bg-global-bg absolute -inset-x-4 top-12 hidden flex-col divide-y px-2 py-4 group-[.menu-open]:z-50 group-[.menu-open]:flex sm:static sm:z-auto sm:-ms-4 sm:mt-1 sm:flex sm:flex-row sm:divide-x sm:divide-y-0 sm:bg-transparent sm:p-0"
-			id="navigation-menu"
+			class="relative z-30 flex w-full flex-row-reverse justify-start text-sm text-neutral-500 dark:text-neutral-400 sm:flex-row sm:justify-end"
 		>
-			{
-				menuLinks.map((link) => (
-					<a
-						aria-current={Astro.url.pathname === link.path ? "page" : false}
-						class="text-accent px-2 py-4 font-semibold sm:px-4 sm:py-0 sm:underline-offset-2 sm:hover:underline"
-						href={link.path}
+			<div
+				id="openMenu"
+				class="ml-4 flex h-6 w-6 cursor-pointer flex-col items-end justify-center sm:hidden"
+			>
+				<svg
+					class="h-8 w-8 dark:text-neutral-200"
+					fill="none"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+					><path d="M4 8h16M4 16h16"></path
+				></svg>
+			</div>
+			<div
+				id="closeMenu"
+				class="ml-4 hidden h-6 w-6 -translate-x-1 cursor-pointer flex-col items-end justify-center sm:hidden"
+			>
+				<svg
+					class="h-6 w-6 text-neutral-600 dark:text-neutral-200"
+					fill="none"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+					><path d="M6 18L18 6M6 6l12 12"></path
+				></svg>
+			</div>
+			<div
+				id="menu"
+				class="left-0 z-40 flex h-auto w-full flex-col items-end justify-start pt-7 pb-4 sm:relative sm:flex sm:h-auto sm:w-auto sm:flex-row sm:pt-0 sm:pr-0 sm:pb-0 sm:text-sm fixed top-[75px] duration-300 ease-out sm:top-0"
+			>
+				<div class="absolute top-0 right-0 block h-full w-full px-3 sm:hidden">
+					<div
+						class="relative h-full w-full rounded-xl border border-dashed border-neutral-300 bg-white backdrop-blur-sm dark:border-neutral-700 dark:bg-neutral-950"
+					></div>
+				</div>
+				{
+					menuLinks.map((menu) => (
+						<a
+							href={menu.path}
+							class="relative flex w-full items-center justify-center px-3 py-2 font-medium tracking-wide text-center duration-200 ease-out sm:mb-0 sm:py-0 md:w-auto hover:text-neutral-900 dark:hover:text-white"
+						>
+							{menu.title}
+						</a>
+					))
+				}
+			</div>
+			<div
+				id="darkToggle"
+				class="group relative ml-4 flex cursor-pointer items-center pl-6 font-medium tracking-wide text-neutral-800 dark:text-white"
+			>
+				<div
+					class="horizon absolute left-0 flex h-6 w-6 items-center justify-center overflow-hidden border-b border-transparent group-hover:border-neutral-600"
+				>
+					<svg
+						class="absolute h-6 w-6 transform transition duration-700 ease"
+						id="sun"
+						fill="none"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						><path
+							d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+						></path></svg
 					>
-						{link.title}
-					</a>
-				))
-			}
+					<svg
+						class="absolute hidden h-6 w-6 transform transition duration-700 ease"
+						id="moon"
+						fill="none"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						><path
+							d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+						></path></svg
+					>
+				</div>
+				<span class="hidden sm:inline-block">
+					<span id="dayText" class="ml-2">Day mode</span>
+					<span id="nightText" class="ml-2 hidden">Night mode</span>
+				</span>
+			</div>
 		</nav>
 	</div>
-	<Search />
-	<ThemeToggle />
-	<mobile-button>
-		<button
-			aria-expanded="false"
-			aria-haspopup="menu"
-			class="group relative ms-4 h-7 w-7 sm:invisible sm:hidden"
-			id="toggle-navigation-menu"
-			type="button"
-		>
-			<span class="sr-only">Open main menu</span>
-			<svg
-				aria-hidden="true"
-				class="absolute start-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 transition-all group-aria-expanded:scale-0 group-aria-expanded:opacity-0"
-				fill="none"
-				focusable="false"
-				id="line-svg"
-				stroke="currentColor"
-				stroke-width="1.5"
-				viewBox="0 0 24 24"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<path d="M3.75 9h16.5m-16.5 6.75h16.5" stroke-linecap="round" stroke-linejoin="round"
-				></path>
-			</svg>
-			<svg
-				aria-hidden="true"
-				class="text-accent absolute start-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all group-aria-expanded:scale-100 group-aria-expanded:opacity-100"
-				fill="none"
-				focusable="false"
-				id="cross-svg"
-				stroke="currentColor"
-				stroke-width="1.5"
-				viewBox="0 0 24 24"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
-			</svg>
-		</button>
-	</mobile-button>
 </header>
 
 <script>
-	import { toggleClass } from "@/utils/domElement";
-
-	class MobileNavBtn extends HTMLElement {
-		#menuOpen: boolean = false;
-
-		connectedCallback() {
-			const headerEl = document.getElementById("main-header")!;
-			const mobileButtonEl = this.querySelector<HTMLButtonElement>("button");
-
-			mobileButtonEl?.addEventListener("click", () => {
-				if (headerEl) toggleClass(headerEl, "menu-open");
-				this.#menuOpen = !this.#menuOpen;
-				mobileButtonEl.setAttribute("aria-expanded", this.#menuOpen.toString());
-			});
+	declare global {
+		interface Window {
+			openMobileMenu: () => void;
+			closeMobileMenu: () => void;
+			evaluateHeaderPosition: () => void;
 		}
 	}
+	function currentIsDark() {
+		return document.documentElement.getAttribute("data-theme") === "dark";
+	}
 
-	customElements.define("mobile-button", MobileNavBtn);
+	function showDay(animate: boolean) {
+		const sun = document.getElementById("sun")!;
+		const moon = document.getElementById("moon")!;
+		sun.classList.remove("setting");
+		moon.classList.remove("rising");
+		let timeout = 0;
+		if (animate) {
+			timeout = 500;
+			moon.classList.add("setting");
+		}
+		setTimeout(() => {
+			document.getElementById("dayText")!.classList.remove("hidden");
+			document.getElementById("nightText")!.classList.add("hidden");
+			moon.classList.add("hidden");
+			sun.classList.remove("hidden");
+			if (animate) {
+				document.getElementById("headerContainer")?.classList.remove("dark");
+				sun.classList.add("rising");
+			}
+		}, timeout);
+	}
+
+	function showNight(animate: boolean) {
+		const sun = document.getElementById("sun")!;
+		const moon = document.getElementById("moon")!;
+		moon.classList.remove("setting");
+		sun.classList.remove("rising");
+		let timeout = 0;
+		if (animate) {
+			timeout = 500;
+			sun.classList.add("setting");
+		}
+		setTimeout(() => {
+			document.getElementById("nightText")!.classList.remove("hidden");
+			document.getElementById("dayText")!.classList.add("hidden");
+			sun.classList.add("hidden");
+			moon.classList.remove("hidden");
+			if (animate) {
+				document.getElementById("headerContainer")?.classList.add("dark");
+				moon.classList.add("rising");
+			}
+		}, timeout);
+	}
+
+	document.addEventListener("DOMContentLoaded", () => {
+		// 初始化阴阳切换状态
+		if (currentIsDark()) {
+			showNight(false);
+		} else {
+			showDay(false);
+		}
+
+		// 滚动吸附
+		const header = document.getElementById("header")!;
+		const container = document.getElementById("headerContainer")!;
+		const menu = document.getElementById("menu")!;
+		const sticky = ["fixed", "h-14"];
+		const unsticky = ["absolute", "h-20"];
+		const stickyContainer = [
+			"border-neutral-300/50",
+			"bg-white/80",
+			"dark:border-neutral-600/40",
+			"dark:bg-neutral-900/60",
+			"backdrop-blur-2xl",
+		];
+		const unstickyContainer = ["border-transparent"];
+
+		window.evaluateHeaderPosition = () => {
+			if (window.scrollY > 16) {
+				container.classList.add(...stickyContainer);
+				container.classList.remove(...unstickyContainer);
+				header.classList.add(...sticky);
+				header.classList.remove(...unsticky);
+				menu.classList.add("top-[56px]");
+				menu.classList.remove("top-[75px]");
+			} else {
+				container.classList.remove(...stickyContainer);
+				container.classList.add(...unstickyContainer);
+				header.classList.add(...unsticky);
+				header.classList.remove(...sticky);
+				menu.classList.remove("top-[56px]");
+				menu.classList.add("top-[75px]");
+			}
+		};
+		window.addEventListener("scroll", window.evaluateHeaderPosition);
+
+		// 暗色切换
+		document.getElementById("darkToggle")!.addEventListener("click", () => {
+			const nextDark = !currentIsDark();
+			if (nextDark) {
+				showNight(true);
+			} else {
+				showDay(true);
+			}
+			document.dispatchEvent(
+				new CustomEvent("theme-change", { detail: { theme: nextDark ? "dark" : "light" } }),
+			);
+		});
+
+		// 移动菜单
+		document.getElementById("openMenu")!.addEventListener("click", window.openMobileMenu);
+		document.getElementById("closeMenu")!.addEventListener("click", window.closeMobileMenu);
+	});
+
+	window.openMobileMenu = () => {
+		const open = document.getElementById("openMenu")!;
+		const close = document.getElementById("closeMenu")!;
+		const menu = document.getElementById("menu")!;
+		const bg = document.getElementById("mobileMenuBackground")!;
+		open.classList.add("hidden");
+		close.classList.remove("hidden");
+		menu.classList.remove("hidden");
+		bg.classList.add("opacity-0");
+		bg.classList.remove("hidden");
+		setTimeout(() => {
+			bg.classList.remove("opacity-0");
+		}, 1);
+	};
+
+	window.closeMobileMenu = () => {
+		const open = document.getElementById("openMenu")!;
+		const close = document.getElementById("closeMenu")!;
+		const menu = document.getElementById("menu")!;
+		const bg = document.getElementById("mobileMenuBackground")!;
+		close.classList.add("hidden");
+		open.classList.remove("hidden");
+		menu.classList.add("hidden");
+		bg.classList.add("hidden");
+	};
 </script>

@@ -1,0 +1,133 @@
+---
+import LoopVideo from "@/components/LoopVideo.astro";
+import CaseStudy from "@/layouts/CaseStudy.astro";
+---
+
+<CaseStudy
+	title="DayMate"
+	description="DayMate macOS 个人工作代理产品案例。"
+	eyebrow="Independent product · 2026"
+	intro="面向海外求学与国内求职的信息分散问题，把非结构化邮件转化为必读清单、可跟进待办与求职档案。由我独立完成产品定义、全栈开发与评测闭环。"
+	tags={["macOS Agent", "Product 0→1", "Evaluation", "Electron", "Privacy-first"]}
+	meta={[
+		{ label: "项目性质", value: "个人项目" },
+		{ label: "角色", value: "产品 / 设计 / 开发" },
+		{ label: "状态", value: "自用，未商业上架" },
+		{ label: "平台", value: "macOS" },
+		{ label: "代码", value: "GitHub 公开" },
+	]}
+>
+	<section class="py-14">
+		<LoopVideo
+			label="DayMate 首页与必读模块演示"
+			poster="/portfolio/daymate/home.png"
+		src="/portfolio/daymate/home-demo.mp4"
+		/>
+	</section>
+	<section class="case-section">
+		<div>
+			<p class="number-label">01 / PROBLEM</p><h2>真正的问题不是信息多，而是没有被推进</h2>
+		</div><div class="case-copy">
+			<p>
+				海外求学和国内求职的信息散落在 Gmail、163
+				邮箱、日历与招聘平台。关键节点埋在非结构化邮件中，用户需要反复筛选、判断和手动维护状态。
+			</p><p>
+				因此 DayMate
+				没有被定位成聊天机器人，而是常驻桌面的个人工作代理：主动整理今天需要关注的事情，并把信息继续推进为行动。
+			</p>
+		</div>
+	</section>
+	<section class="case-section">
+		<div><p class="number-label">02 / PRODUCT</p><h2>六项任务围绕一天展开</h2></div><div
+			class="case-copy"
+		>
+			<div class="grid gap-3 sm:grid-cols-2">
+				{
+					[
+						"跨邮箱必读聚合",
+						"天气与每日晨报",
+						"邮件转可管理待办",
+						"求职漏斗与事件时间线",
+						"个人记忆与草稿语气",
+						"集成、安全与审批门",
+					].map((item, i) => (
+						<div class="callout !my-0">
+							<>
+								<span class="text-neutral-400 font-mono text-xs">0{i + 1}</span>
+								<p class="mt-2 font-medium">{item}</p>
+							</>
+						</div>
+					))
+				}
+			</div><p class="muted mt-7">
+				凭据、Provider 调用、Agent 执行与数据库写入均留在 Electron
+				主进程；外部写操作必须预览并确认。
+			</p>
+		</div>
+	</section>
+	<section class="case-section">
+		<div><p class="number-label">03 / APPLICATIONS</p><h2>把邮件变成求职漏斗</h2></div><div
+			class="case-copy"
+		>
+			<p>
+				系统从邮件中识别投递、测评、笔试、面试、Offer
+				与复盘事件。低置信结果停留在待确认状态，不自动污染档案。
+			</p><LoopVideo
+				class="mt-8"
+				label="DayMate 求职追踪模块演示"
+				poster="/portfolio/daymate/applications.png"
+				src="/portfolio/daymate/application-demo.mp4"
+			/>
+		</div>
+	</section>
+	<section class="case-section">
+		<div><p class="number-label">04 / MEMORY</p><h2>记忆不是一个输入框</h2></div><div
+			class="case-copy"
+		>
+			<p>
+				记忆用于保存长期偏好和用户可控事实，帮助生成更贴合个人背景的晨报与草稿。它必须可见、可改、可删除，而不是隐藏在模型上下文里。
+			</p><LoopVideo
+				class="mt-8"
+				label="DayMate 记忆模块演示"
+				poster="/portfolio/daymate/memory.png"
+				src="/portfolio/daymate/memory-demo.mp4"
+			/>
+		</div>
+	</section>
+	<section class="case-section">
+		<div><p class="number-label">05 / EVALUATION</p><h2>把回归评测设为提交门禁</h2></div><div
+			class="case-copy"
+		>
+			<p>
+				我为各核心任务定义成功标准，分别建立功能测试集与跨功能回归集；通过 Langfuse
+				管理数据集、Rubric 和评测结果。
+			</p><div class="grid gap-4 pt-8 sm:grid-cols-3">
+				<div class="metric">
+					<strong class="font-mono text-3xl">62</strong><p class="muted text-sm">回归用例</p>
+				</div><div class="metric">
+					<strong class="font-mono text-3xl">5 类</strong><p class="muted text-sm">Badcase</p>
+				</div><div class="metric">
+					<strong class="font-mono text-3xl">72→96%</strong><p class="muted text-sm">
+						邮件分类准确率
+					</p>
+				</div>
+			</div><h3>一次真实迭代</h3><p>
+				用量数据暴露了冗余例程，退役后消除单日 30+ 次无效调用；随后重构信息过滤门控，将“必读”噪音由
+				27 条降至 1 条。
+			</p>
+		</div>
+	</section>
+	<section class="case-section">
+		<div><p class="number-label">06 / STATUS</p><h2>当前状态与边界</h2></div><div class="case-copy">
+			<p>
+				核心能力已完成并在本人真实邮箱环境中自用，Gmail 与 163
+				邮箱已接入，飞书日历保留配置入口。项目尚未商业化，也没有外部用户规模数据。
+			</p><div class="mt-7 flex flex-wrap gap-3">
+				<a class="button-primary" href="https://github.com/Zhaozed/DayMate" target="_blank"
+					>查看 GitHub ↗</a
+				><a class="button-ghost" href="https://github.com/Zhaozed/DayMate/releases" target="_blank"
+					>下载版本</a>
+			</div>
+		</div>
+	</section>
+</CaseStudy>

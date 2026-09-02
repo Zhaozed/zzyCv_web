@@ -1,0 +1,21 @@
+---
+interface Props {
+	link: string;
+	text: string;
+	variant?: "solid" | "outline";
+}
+const { link, text, variant = "solid" } = Astro.props;
+const solid =
+	"border-neutral-900 bg-neutral-900 text-neutral-100 hover:border-neutral-700 hover:bg-white hover:text-neutral-900 dark:border-white dark:bg-white dark:text-neutral-900 dark:hover:border-neutral-300 dark:hover:bg-black dark:hover:text-white";
+const outline =
+	"border-neutral-300 bg-transparent text-neutral-700 hover:border-neutral-500 hover:text-neutral-900 dark:border-neutral-600 dark:text-neutral-300 dark:hover:border-neutral-400 dark:hover:text-white";
+---
+
+<a
+	href={link}
+	class={`inline-flex w-auto items-center justify-center rounded-full border px-4 py-2 text-xs font-semibold duration-300 ease-out ${
+		variant === "solid" ? solid : outline
+	}`}
+>
+	{text}
+</a>

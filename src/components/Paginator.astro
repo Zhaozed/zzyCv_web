@@ -13,13 +13,13 @@ const { nextUrl, prevUrl } = Astro.props;
 	(prevUrl || nextUrl) && (
 		<nav class="mt-8 flex items-center gap-x-4">
 			{prevUrl && (
-				<a class="hover:text-accent me-auto py-2" href={prevUrl.url}>
+				<a class="me-auto py-2 text-sm font-medium text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white" href={prevUrl.url}>
 					{prevUrl.srLabel && <span class="sr-only">{prevUrl.srLabel}</span>}
 					{prevUrl.text ? prevUrl.text : "Previous"}
 				</a>
 			)}
 			{nextUrl && (
-				<a class="hover:text-accent ms-auto py-2" href={nextUrl.url}>
+				<a class="ms-auto py-2 text-sm font-medium text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white" href={nextUrl.url}>
 					{nextUrl.srLabel && <span class="sr-only">{nextUrl.srLabel}</span>}
 					{nextUrl.text ? nextUrl.text : "Next"}
 				</a>

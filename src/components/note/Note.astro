@@ -13,34 +13,70 @@ const { Content } = await render(note);
 ---
 
 <article
-	class:list={[isPreview && "bg-global-text/5 inline-grid rounded-md px-4 py-3"]}
+	class:list={[
+		"group relative rounded-2xl border border-transparent border-dashed",
+		isPreview ? "p-7" : "p-1",
+	]}
 	data-pagefind-body={isPreview ? false : true}
 >
-	<Tag class="title" class:list={{ "text-base": isPreview }}>
-		{
-			isPreview ? (
-				<a class="cactus-link" href={`/notes/${note.id}/`}>
-					{note.data.title}
-				</a>
-			) : (
-				<>{note.data.title}</>
-			)
-		}
-	</Tag>
-	<FormattedDate
-		dateTimeOptions={{
-			hour: "2-digit",
-			minute: "2-digit",
-			year: "2-digit",
-			month: "2-digit",
-			day: "2-digit",
-		}}
-		date={note.data.publishDate}
-	/>
+	{
+		isPreview && (
+			<>
+				<div
+					class="absolute inset-0 z-20 h-full w-full rounded-2xl border border-dashed border-neutral-300 bg-white duration-300 ease-out group-hover:-translate-x-1 group-hover:-translate-y-1 dark:border-neutral-600 dark:bg-neutral-950"
+				></div>
+				<div
+					class="absolute inset-0 z-10 h-full w-full rounded-2xl border border-dashed border-neutral-300 duration-300 ease-out group-hover:translate-x-1 group-hover:translate-y-1 dark:border-neutral-600"
+				></div>
+			</>
+		)
+	}
 	<div
-		class="prose prose-sm prose-cactus mt-4 max-w-none [&>p:last-of-type]:mb-0"
-		class:list={{ "line-clamp-6": isPreview }}
+		class:list={[
+			"relative z-30",
+			isPreview && "duration-300 ease-out group-hover:-translate-x-1 group-hover:-translate-y-1",
+		]}
 	>
-		<Content />
+		<Tag
+			class:list={[
+				isPreview
+					? "text-base leading-tight font-bold tracking-tight sm:text-lg"
+					: "text-3xl leading-tight font-bold tracking-tighter md:text-4xl",
+			]}
+		>
+			{
+				isPreview ? (
+					<a
+						class="text-neutral-900 transition-colors duration-200 hover:underline dark:text-neutral-100"
+						href={`/notes/${note.id}/`}
+					>
+						{note.data.title}
+					</a>
+				) : (
+					<span class="text-neutral-900 dark:text-neutral-100">{note.data.title}</span>
+				)
+			}
+		</Tag>
+		<FormattedDate
+			class:list={[
+				"mt-2.5 block text-xs font-medium text-neutral-800 dark:text-neutral-300",
+			]}
+			dateTimeOptions={{
+				hour: "2-digit",
+				minute: "2-digit",
+				year: "2-digit",
+				month: "2-digit",
+				day: "2-digit",
+			}}
+			date={note.data.publishDate}
+		/>
+		<div
+			class:list={[
+				"prose prose-sm mt-4 max-w-none [&>p:last-of-type]:mb-0",
+				isPreview && "line-clamp-6",
+			]}
+		>
+			<Content />
+		</div>
 	</div>
 </article>

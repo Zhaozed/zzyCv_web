@@ -1,0 +1,38 @@
+---
+const squareRow = [...Array(9)];
+const halfRows = [...Array(6)];
+---
+<div class="absolute h-auto w-full" style="z-index:-1">
+	<div class="absolute top-0 left-0 w-1/2 bg-neutral-100 dark:bg-neutral-800">
+		<div
+			class="pointer-events-none absolute inset-0 z-30 h-full w-full bg-gradient-to-tl from-white from-50% via-transparent to-transparent dark:from-neutral-950"
+		></div>
+		<div
+			class="flex h-full w-full flex-col divide-y divide-dashed divide-neutral-300 border-t border-l border-neutral-300 dark:divide-neutral-700 dark:border-neutral-900"
+		>
+			{halfRows.map(() => (
+				<div class="relative flex w-full divide-x divide-dashed divide-neutral-300 dark:divide-neutral-700">
+					{squareRow.map(() => (
+						<div class="aspect-square w-full bg-white dark:bg-neutral-950"></div>
+					))}
+				</div>
+			))}
+		</div>
+	</div>
+	<div class="absolute top-0 right-0 w-1/2 bg-neutral-100 dark:bg-neutral-800">
+		<div
+			class="pointer-events-none absolute inset-0 z-30 h-full w-full bg-gradient-to-tr from-white from-50% via-transparent to-transparent dark:from-neutral-950"
+		></div>
+		<div
+			class="flex h-full w-full flex-col divide-y divide-dashed divide-neutral-300 border-t border-neutral-300 dark:divide-neutral-700 dark:border-neutral-900"
+		>
+			{halfRows.map(() => (
+				<div class="relative flex w-full divide-x divide-dashed divide-neutral-300 dark:divide-neutral-700">
+					{squareRow.map(() => (
+						<div class="aspect-square w-full bg-white dark:bg-neutral-950"></div>
+					))}
+				</div>
+			))}
+		</div>
+	</div>
+</div>

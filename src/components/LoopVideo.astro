@@ -1,0 +1,26 @@
+---
+interface Props {
+	src: string;
+	poster: string;
+	label: string;
+	class?: string;
+}
+const { src, poster, label, class: className = "" } = Astro.props;
+---
+
+<figure class:list={["demo-frame group", className]}>
+	<video aria-label={label} autoplay loop muted playsinline poster={poster} preload="metadata">
+		<source src={src} type="video/mp4" />
+	</video>
+	<figcaption class="demo-caption">
+		<span class="inline-block h-2 w-2 rounded-full bg-emerald-500"></span> LIVE DEMO · 静音循环
+	</figcaption>
+</figure>
+
+<script>
+	document.querySelectorAll<HTMLVideoElement>(".demo-frame video").forEach((video) => {
+		const frame = video.closest(".demo-frame");
+		frame?.addEventListener("mouseenter", () => video.pause());
+		frame?.addEventListener("mouseleave", () => video.play().catch(() => undefined));
+	});
+</script>

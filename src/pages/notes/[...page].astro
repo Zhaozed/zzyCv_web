@@ -2,6 +2,7 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 import type { GetStaticPaths, Page } from "astro";
 import { Icon } from "astro-icon/components";
+import PageHeading from "@/components/aria/PageHeading.astro";
 import Note from "@/components/note/Note.astro";
 import Pagination from "@/components/Paginator.astro";
 import PageLayout from "@/layouts/Base.astro";
@@ -15,7 +16,6 @@ export const getStaticPaths = (async ({ paginate }) => {
 
 interface Props {
 	page: Page<CollectionEntry<"note">>;
-	uniqueTags: string[];
 }
 
 const { page } = Astro.props;
@@ -42,22 +42,23 @@ const paginationProps = {
 ---
 
 <PageLayout meta={meta}>
-	<section>
-		<h1 class="title mb-12 flex items-center gap-3">
-			Notes <a class="text-accent" href="/notes/rss.xml" target="_blank">
-				<span class="sr-only">RSS feed</span>
-				<Icon aria-hidden="true" class="h-6 w-6" focusable="false" name="mdi:rss" />
+	<section class="relative z-20 mx-auto my-12 max-w-2xl px-7 lg:px-0">
+		<div class="flex items-end justify-between gap-4">
+			<PageHeading title={meta.title} />
+			<a
+				class="mb-2 shrink-0 text-neutral-400 transition-colors duration-200 hover:text-neutral-900 dark:hover:text-white"
+				href="/notes/rss.xml"
+				target="_blank"
+				aria-label="RSS feed"
+			>
+				<Icon aria-hidden="true" class="h-5 w-5" focusable="false" name="mdi:rss" />
 			</a>
-		</h1>
-		<ul class="mt-6 space-y-8 text-start">
+		</div>
+		<div class="mt-8 flex flex-col gap-5">
 			{
-				page.data.map((note) => (
-					<li class="">
-						<Note note={note} as="h2" isPreview />
-					</li>
-				))
+				page.data.map((note) => <Note note={note} isPreview />)
 			}
-		</ul>
+		</div>
 		<Pagination {...paginationProps} />
 	</section>
 </PageLayout>

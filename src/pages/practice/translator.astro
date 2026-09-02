@@ -1,0 +1,72 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+---
+
+<PageLayout
+	meta={{ title: "飞书翻译机器人", description: "面向多语种内容生产的飞书表格翻译机器人。" }}
+>
+	<a class="muted hover:text-neutral-900 dark:hover:text-white mb-10 inline-flex font-mono text-xs" href="/practice/"
+		>← 返回其他实践</a
+	>
+	<header class="max-w-4xl pb-14">
+		<p class="eyebrow">Practice · Automation</p><h1 class="display">飞书翻译机器人</h1><p
+			class="muted mt-7 max-w-3xl text-lg leading-8"
+		>
+			把市场团队反复执行的整表翻译、更新检查和术语校准，变成一次确认即可完成的自动化工作流。
+		</p>
+	</header>
+	<div class="project-card bg-white p-4 dark:bg-[#f2f2f2]">
+		<img
+			alt="飞书翻译机器人使用界面"
+			class="w-full"
+			src="/portfolio/practice/translator-guide.png"
+		/>
+	</div>
+	<section class="case-section">
+		<div><p class="number-label">01 / PROBLEM</p><h2>慢不是唯一问题</h2></div><div
+			class="case-copy"
+		>
+			<p>
+				市场团队不仅需要批量生成多语种文案，还要识别哪些行被改过、避免漏更新，并保证品牌与产品术语在不同批次中一致。
+			</p>
+		</div>
+	</section>
+	<section class="case-section">
+		<div><p class="number-label">02 / FLOW</p><h2>差异识别后再翻译</h2></div><div class="case-copy">
+			<ol class="space-y-4">
+				{
+					[
+						"授权并记录目标电子表格",
+						"比较上次版本，找出新增或更新的中文",
+						"人工确认待处理行",
+						"批量翻译并回填对应语言列",
+						"保存本次版本，作为下一轮差异基线",
+					].map((item, i) => (
+						<li class="callout !my-0">
+							<>
+								<span class="text-neutral-400 font-mono text-xs">0{i + 1}</span>
+								<p class="mt-2">{item}</p>
+							</>
+						</li>
+					))
+				}
+			</ol>
+		</div>
+	</section>
+	<section class="case-section">
+		<div><p class="number-label">03 / RESULT</p><h2>真实业务交付</h2></div><div class="case-copy">
+			<div class="grid grid-cols-2 gap-4">
+				<div class="metric">
+					<strong class="font-mono text-4xl">8</strong><p class="muted text-sm">支持语种</p>
+				</div><div class="metric">
+					<strong class="font-mono text-4xl">6万+</strong><p class="muted text-sm">累计文案</p>
+				</div>
+			</div><p class="mt-8">
+				我独立完成需求分析、方案设计和开发落地。机器人通过飞书长连接接收消息，支持检查更新、按行翻译和新增语种。
+			</p><a
+				class="button-primary mt-7"
+				href="https://github.com/Zhaozed/feishu-sheet-translator"
+				target="_blank">查看 GitHub ↗</a>
+		</div>
+	</section>
+</PageLayout>

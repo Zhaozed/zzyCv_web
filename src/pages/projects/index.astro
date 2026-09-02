@@ -1,0 +1,33 @@
+---
+import PageHeading from "@/components/aria/PageHeading.astro";
+import ProjectCard from "@/components/aria/ProjectCard.astro";
+import PageLayout from "@/layouts/Base.astro";
+---
+
+<PageLayout
+	meta={{ title: "精选项目", description: "Cortex Agent 与 DayMate：赵泽宇的 AI 产品项目案例。" }}
+>
+	<section class="relative z-20 mx-auto my-12 max-w-2xl px-7 lg:px-0">
+		<PageHeading
+			title="精选项目"
+			description="一个来自真实业务中的复杂 Agent 系统，一个来自我独立定义并实现的桌面工作代理。重点不是功能数量，而是我如何判断、设计、验证与迭代。"
+		/>
+
+		<div class="my-8 grid w-full grid-cols-1 items-stretch gap-7 sm:grid-cols-2 sm:gap-5">
+			<ProjectCard
+				name="Cortex Agent"
+				description="Agent 工具治理、记忆体系与评测架构案例。"
+				image="/portfolio/cortex/evaluation-architecture.png"
+				url="/projects/cortex-agent/"
+				tags={["ToolHub", "LiveMem", "Evaluation"]}
+			/>
+			<ProjectCard
+				name="DayMate"
+				description="常驻 macOS 的个人工作代理案例。"
+				image="/portfolio/daymate/home.png"
+				url="/projects/daymate/"
+				tags={["Desktop Agent", "Quality Gate", "Data Flywheel"]}
+			/>
+		</div>
+	</section>
+</PageLayout>

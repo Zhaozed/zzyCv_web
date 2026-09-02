@@ -1,0 +1,73 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+---
+
+<PageLayout
+	meta={{ title: "多语种意图识别评测", description: "多语种 BERT 意图模型的评测重构与数据闭环。" }}
+>
+	<a class="muted hover:text-neutral-900 dark:hover:text-white mb-10 inline-flex font-mono text-xs" href="/practice/"
+		>← 返回其他实践</a
+	>
+	<header class="max-w-4xl pb-14">
+		<p class="eyebrow">Practice · Model evaluation</p><h1 class="display">
+			多语种意图识别<br />评测体系
+		</h1><p class="muted mt-7 max-w-3xl text-lg leading-8">
+			把“跑一次准确率”重构为可定位、可修复、可回归的模型准入机制，支撑 8 个新语种进入 Cortex。
+		</p>
+	</header>
+	<section class="case-section">
+		<div><p class="number-label">01 / PROBLEM</p><h2>总体准确率不能指导迭代</h2></div><div
+			class="case-copy"
+		>
+			<p>
+				旧评测方法的问题不是没有数字，而是数字无法回答：错误集中在哪些意图、是语料问题还是模型问题、某次修复是否损伤其他语种。
+			</p>
+		</div>
+	</section>
+	<section class="case-section">
+		<div><p class="number-label">02 / LOOP</p><h2>先挖最危险的错误</h2></div><div class="case-copy">
+			<div class="grid gap-3 sm:grid-cols-3">
+				<div class="callout !my-0">
+					<span class="text-neutral-400 font-mono text-xs">01</span><p class="mt-2 font-medium">
+						高置信错分样本挖掘
+					</p>
+				</div><div class="callout !my-0">
+					<span class="text-neutral-400 font-mono text-xs">02</span><p class="mt-2 font-medium">
+						归因并修正语料
+					</p>
+				</div><div class="callout !my-0">
+					<span class="text-neutral-400 font-mono text-xs">03</span><p class="mt-2 font-medium">
+						全语种全量回归
+					</p>
+				</div>
+			</div><p class="mt-7">
+				高置信错分比低置信错误更危险：模型不仅判断错，而且“非常确定”。因此它被设置为 Badcase
+				发现的优先入口。
+			</p>
+		</div>
+	</section>
+	<section class="case-section">
+		<div><p class="number-label">03 / RESULT</p><h2>统一上线标准</h2></div><div class="case-copy">
+			<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+				<div class="metric">
+					<strong class="font-mono text-3xl">8</strong><p class="muted text-sm">新语种</p>
+				</div><div class="metric">
+					<strong class="font-mono text-3xl">4万+</strong><p class="muted text-sm">样本 / 轮</p>
+				</div><div class="metric">
+					<strong class="font-mono text-3xl">≥96%</strong><p class="muted text-sm">中英文准确率</p>
+				</div><div class="metric">
+					<strong class="font-mono text-3xl">≥93%</strong><p class="muted text-sm">小语种准确率</p>
+				</div>
+			</div><p class="mt-8">
+				单轮迭代效率提升约 2 倍。页面暂不公开公司语料、混淆矩阵和原始评测数据。
+			</p>
+		</div>
+	</section>
+	<section class="case-section">
+		<div><p class="number-label">04 / LIMIT</p><h2>材料边界</h2></div><div class="case-copy">
+			<p class="muted">
+				当前公开材料能够说明方法和结果，但缺少脱敏后的语言分布、意图混淆样例与评测报表截图。后续补充后，这一案例的可信度会显著提升。
+			</p>
+		</div>
+	</section>
+</PageLayout>

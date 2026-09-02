@@ -1,0 +1,39 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+---
+
+<PageLayout
+	meta={{ title: "Skills 与小插件", description: "赵泽宇持续整理中的 AI 产品 Skills 与小工具。" }}
+>
+	<a class="muted hover:text-neutral-900 dark:hover:text-white mb-10 inline-flex font-mono text-xs" href="/practice/"
+		>← 返回其他实践</a
+	>
+	<header class="max-w-4xl pb-14">
+		<p class="eyebrow">Practice · Build in public</p><h1 class="display">Skills 与小插件</h1><p
+			class="muted mt-7 max-w-3xl text-lg leading-8"
+		>
+			把重复的产品设计与验收工作沉淀为 Agent 可以稳定执行的流程。这个部分正在持续整理。
+		</p>
+	</header>
+	<section class="project-card grid gap-8 p-8 sm:p-12 lg:grid-cols-[1fr_auto]">
+		<div>
+			<p class="number-label">AVAILABLE NOW</p><h2 class="text-2xl font-semibold">
+				AIPM ToolHub Feature Design
+			</h2><p class="muted mt-4 max-w-2xl leading-7">
+				把用户场景和 ToolHub API 信息转化为功能设计、接口说明、失败兜底与验收标准。
+			</p>
+		</div><a
+			class="button-primary self-end"
+			href="https://github.com/Zhaozed/Loona-PMdevelopskill"
+			target="_blank">查看仓库 ↗</a>
+	</section>
+	<section
+		class="mt-6 rounded-[1.75rem] border border-dashed border-black/20 p-8 sm:p-12 dark:border-white/20"
+	>
+		<p class="number-label">NEXT</p><h2 class="text-2xl font-semibold">更多内容整理中</h2><p
+			class="muted mt-4"
+		>
+			后续将在这里补充 Skill 清单、输入输出示例、适用场景与真实使用记录。
+		</p>
+	</section>
+</PageLayout>

@@ -61,6 +61,20 @@
 }
 
 @layer base {
+	body {
+		font-family:
+			Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+			"Microsoft YaHei", sans-serif;
+	}
+
+	a {
+		transition:
+			color 180ms ease,
+			border-color 180ms ease,
+			opacity 180ms ease,
+			transform 180ms ease;
+	}
+
 	html {
 		color-scheme: light dark;
 		accent-color: var(--color-accent);
@@ -126,6 +140,186 @@
 	.title {
 		@apply text-accent-2 text-2xl font-semibold;
 	}
+
+	.nav-link[aria-current="page"],
+	.nav-link:hover {
+		color: var(--color-accent);
+	}
+	.eyebrow {
+		@apply mb-4 font-mono text-xs font-semibold tracking-[0.18em] uppercase;
+		color: var(--color-accent);
+	}
+	.display {
+		@apply text-accent-2 text-4xl leading-[1.12] font-semibold tracking-[-0.04em] sm:text-6xl;
+	}
+	.section-title {
+		@apply text-accent-2 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl;
+	}
+	.muted {
+		color: var(--color-muted);
+	}
+	.pill {
+		@apply inline-flex rounded-full border border-black/10 px-3 py-1.5 font-mono text-xs dark:border-white/15;
+	}
+	.button-primary {
+		@apply inline-flex items-center justify-center rounded-full bg-black px-5 py-3 text-sm font-semibold text-white hover:-translate-y-0.5 dark:bg-white dark:text-black;
+	}
+	.button-ghost {
+		@apply inline-flex items-center justify-center rounded-full border border-black/15 px-5 py-3 text-sm font-semibold hover:-translate-y-0.5 dark:border-white/20;
+	}
+	.project-card {
+		@apply overflow-hidden rounded-[1.75rem] border border-black/10 bg-black/[0.025] dark:border-white/10 dark:bg-white/[0.035];
+	}
+	.metric {
+		@apply border-t border-black/10 pt-3 dark:border-white/10;
+	}
+	.case-hero {
+		@apply grid gap-12 border-b border-black/10 pb-16 lg:grid-cols-[1fr_20rem] dark:border-white/10;
+	}
+	.case-meta {
+		@apply self-end rounded-3xl border border-black/10 p-6 dark:border-white/10;
+	}
+	.case-meta div {
+		@apply grid grid-cols-[6rem_1fr] gap-3 border-b border-black/10 py-3 last:border-0 dark:border-white/10;
+	}
+	.case-meta dt {
+		@apply font-mono text-xs;
+		color: var(--color-muted);
+	}
+	.case-meta dd {
+		@apply text-sm font-medium;
+	}
+	.case-section {
+		@apply grid gap-10 border-b border-black/10 py-20 lg:grid-cols-[14rem_1fr] dark:border-white/10;
+	}
+	.case-section h2 {
+		@apply text-accent-2 text-2xl font-semibold tracking-[-0.02em];
+	}
+	.case-section h3 {
+		@apply text-accent-2 mt-10 mb-3 text-lg font-semibold;
+	}
+	.case-copy {
+		@apply max-w-3xl leading-8;
+	}
+	.case-copy p + p {
+		@apply mt-5;
+	}
+	.case-copy ul {
+		@apply mt-5 space-y-3;
+	}
+	.case-copy li {
+		@apply relative ps-5;
+	}
+	.case-copy li::before {
+		content: "—";
+		@apply absolute start-0;
+		color: var(--color-muted);
+	}
+	.callout {
+		@apply my-8 rounded-3xl border border-black/10 bg-black/[0.025] p-7 dark:border-white/10 dark:bg-white/[0.035];
+	}
+	.demo-frame {
+		@apply relative overflow-hidden rounded-2xl border border-black/10 bg-[#101216] shadow-2xl shadow-black/10 dark:border-white/10;
+	}
+	.demo-frame video {
+		@apply block aspect-video w-full object-cover;
+	}
+	.demo-caption {
+		@apply absolute right-3 bottom-3 flex items-center gap-2 rounded-full bg-black/75 px-3 py-1.5 font-mono text-[10px] text-white backdrop-blur;
+	}
+	.practice-grid {
+		@apply grid gap-5 md:grid-cols-2;
+	}
+	.practice-card {
+		@apply flex min-h-64 flex-col overflow-hidden rounded-[1.75rem] border border-black/10 bg-black/[0.025] p-7 hover:-translate-y-1 hover:border-black/25 dark:border-white/10 dark:bg-white/[0.035] dark:hover:border-white/25;
+	}
+	.number-label {
+		@apply mb-3 font-mono text-xs;
+		color: var(--color-muted);
+	}
+	.hero-photo {
+		@apply relative overflow-hidden rounded-[2rem] bg-[#eee4d2];
+	}
+	.hero-photo__image {
+		@apply block aspect-video w-full object-cover object-center;
+	}
+	.hero-photo__content {
+		@apply relative z-10 p-7 text-[#22211f] sm:p-10;
+	}
+	.hero-photo__veil {
+		@apply pointer-events-none absolute inset-0 z-[1];
+		background: linear-gradient(180deg, rgba(244, 237, 223, 0) 78%, rgba(244, 237, 223, 0.78) 100%);
+	}
+	.hero-photo__eyebrow {
+		@apply mb-4 font-mono text-xs font-semibold tracking-[0.18em] text-[#bf4c34] uppercase;
+	}
+	.hero-photo__title {
+		@apply leading-[1.08] font-semibold tracking-[-0.055em];
+		font-size: clamp(1.72rem, 7.1vw, 3.75rem);
+	}
+	.hero-photo__title-line {
+		@apply block whitespace-nowrap;
+	}
+	.hero-photo__title em {
+		font-style: normal;
+		color: #bf4c34;
+	}
+	.hero-photo__intro {
+		@apply mt-6 max-w-xl text-base leading-7 text-[#5c574e];
+	}
+	.hero-photo__tags {
+		@apply mt-6 flex max-w-xl flex-wrap gap-2;
+	}
+	.hero-photo__tags span {
+		@apply rounded-full border border-black/15 bg-[#f8f1e4]/60 px-3 py-1.5 font-mono text-xs backdrop-blur-sm;
+	}
+	.hero-photo__button {
+		@apply inline-flex items-center justify-center rounded-full border border-black/25 bg-[#f8f1e4]/50 px-5 py-3 text-sm font-semibold text-[#22211f] backdrop-blur-sm hover:-translate-y-0.5 hover:bg-[#f8f1e4]/80;
+	}
+	@media (min-width: 768px) {
+		.hero-photo {
+			@apply overflow-visible rounded-none bg-transparent shadow-none;
+		}
+		.hero-photo__image {
+			@apply absolute inset-0 h-full scale-[1.015];
+			-webkit-mask-image: radial-gradient(ellipse 96% 91% at 52% 48%, #000 62%, transparent 100%);
+			mask-image: radial-gradient(ellipse 96% 91% at 52% 48%, #000 62%, transparent 100%);
+		}
+		.hero-photo__veil {
+			inset: -2rem;
+			-webkit-backdrop-filter: blur(6px) saturate(0.88);
+			backdrop-filter: blur(6px) saturate(0.88);
+			-webkit-mask-image: linear-gradient(90deg, #000 0%, #000 42%, transparent 72%);
+			mask-image: linear-gradient(90deg, #000 0%, #000 42%, transparent 72%);
+			background: linear-gradient(
+				90deg,
+				var(--color-global-bg) 0%,
+				rgba(249, 247, 242, 0.88) 12%,
+				rgba(246, 240, 228, 0.68) 38%,
+				rgba(246, 240, 228, 0.2) 66%,
+				transparent 78%
+			);
+		}
+		.hero-photo::after {
+			content: "";
+			@apply pointer-events-none absolute -inset-8 z-[2];
+			background: linear-gradient(
+				180deg,
+				var(--color-global-bg) 0%,
+				transparent 10%,
+				transparent 88%,
+				var(--color-global-bg) 100%
+			);
+			-webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 68%, #000 100%);
+			mask-image: linear-gradient(90deg, transparent 0%, #000 68%, #000 100%);
+		}
+		.hero-photo__content {
+			@apply flex min-h-[38rem] w-[58%] flex-col justify-center p-12 lg:p-16;
+		}
+		.hero-photo__title {
+			font-size: clamp(2.8rem, 4.2vw, 3.75rem);
+		}
+	}
 }
 
 @utility prose {
@@ -138,4 +332,167 @@
 	--tw-prose-links: var(--color-global-text);
 	--tw-prose-quotes: var(--color-quote);
 	--tw-prose-th-borders: #666;
+}
+
+/* ============================================================
+   Aria style overrides —— 复刻 https://github.com/miantiao-me/astro-aria
+   ============================================================ */
+@layer components {
+	/* 通用排版 */
+	.title {
+		@apply text-2xl font-bold tracking-tight;
+	}
+	.eyebrow {
+		@apply mb-4 font-mono text-xs font-semibold uppercase tracking-widest;
+		color: var(--color-muted);
+	}
+	.display {
+		@apply text-4xl leading-[1.15] font-bold tracking-tight lg:text-5xl;
+		color: var(--color-accent-2);
+	}
+	.section-title {
+		@apply text-2xl font-bold tracking-tight sm:text-3xl;
+		color: var(--color-accent-2);
+	}
+	.muted {
+		color: var(--color-muted);
+	}
+	.number-label {
+		@apply mb-3 font-mono text-xs uppercase tracking-widest;
+		color: var(--color-muted);
+	}
+	.cactus-link {
+		@apply underline decoration-neutral-300 underline-offset-2 hover:decoration-neutral-500 dark:decoration-neutral-600 dark:hover:decoration-neutral-300;
+	}
+	.pill {
+		@apply inline-flex rounded-full border border-neutral-300 px-3 py-1 font-mono text-xs dark:border-neutral-600;
+	}
+	.button-primary {
+		@apply inline-flex items-center justify-center rounded-full border border-neutral-900 bg-neutral-900 px-4 py-2 text-xs font-semibold text-neutral-100 duration-300 ease-out hover:border-neutral-700 hover:bg-white hover:text-neutral-900 dark:border-white dark:bg-white dark:text-neutral-900 dark:hover:border-neutral-300 dark:hover:bg-black dark:hover:text-white;
+	}
+	.button-ghost {
+		@apply inline-flex items-center justify-center rounded-full border border-neutral-300 bg-transparent px-4 py-2 text-xs font-semibold text-neutral-700 duration-300 ease-out hover:border-neutral-500 hover:text-neutral-900 dark:border-neutral-600 dark:text-neutral-300 dark:hover:border-neutral-400 dark:hover:text-white;
+	}
+	.metric {
+		@apply border-t border-neutral-200 pt-3 dark:border-neutral-800;
+	}
+
+	/* 案例页 */
+	.case-hero {
+		@apply grid gap-10 border-b border-dashed border-neutral-200 pb-14 dark:border-neutral-800;
+	}
+	.case-meta {
+		@apply self-end rounded-2xl border border-dashed border-neutral-300 p-6 dark:border-neutral-600;
+	}
+	.case-meta div {
+		@apply grid grid-cols-[6rem_1fr] gap-3 border-b border-dashed border-neutral-200 py-3 last:border-0 dark:border-neutral-800;
+	}
+	.case-meta dt {
+		@apply font-mono text-xs uppercase tracking-widest;
+		color: var(--color-muted);
+	}
+	.case-meta dd {
+		@apply text-sm font-medium;
+	}
+	.case-section {
+		@apply grid gap-8 border-b border-dashed border-neutral-200 py-14 lg:grid-cols-[12rem_1fr] dark:border-neutral-800;
+	}
+	.case-section h2 {
+		@apply text-2xl font-bold tracking-tight;
+		color: var(--color-accent-2);
+	}
+	.case-section h3 {
+		@apply mt-10 mb-3 text-lg font-semibold;
+		color: var(--color-accent-2);
+	}
+	.case-copy {
+		@apply max-w-2xl text-[15px] leading-8;
+		color: var(--color-muted);
+	}
+	.case-copy p + p {
+		@apply mt-5;
+	}
+	.case-copy ul {
+		@apply mt-5 space-y-3;
+	}
+	.case-copy li {
+		@apply relative ps-5;
+	}
+	.case-copy li::before {
+		content: "—";
+		@apply absolute start-0;
+		color: var(--color-muted);
+	}
+	.callout {
+		@apply my-8 rounded-2xl border border-dashed border-neutral-300 p-6 dark:border-neutral-600;
+	}
+	.demo-frame {
+		@apply relative overflow-hidden rounded-2xl border border-neutral-200 bg-[#101216] shadow-2xl shadow-black/10 dark:border-neutral-700;
+	}
+	.demo-frame video {
+		@apply block aspect-video w-full object-cover;
+	}
+	.demo-caption {
+		@apply absolute right-3 bottom-3 flex items-center gap-2 rounded-full bg-black/75 px-3 py-1.5 font-mono text-[10px] text-white backdrop-blur;
+	}
+	.practice-grid {
+		@apply grid gap-5 md:grid-cols-2;
+	}
+	.practice-card {
+		@apply flex min-h-64 flex-col rounded-2xl border border-dashed border-neutral-300 p-7 duration-300 ease-out hover:-translate-y-1 hover:border-neutral-500 dark:border-neutral-600 dark:hover:border-neutral-400;
+	}
+}
+
+/* 阴阳切换动画（复刻自 aria main.css） */
+#sun,
+#moon {
+	transform: translate3d(0, 0px, 0);
+}
+
+#darkToggle:hover #sun,
+#darkToggle:hover #moon {
+	transform: translate3d(0, 10px, 0);
+}
+
+html[data-theme="dark"] {
+	color-scheme: dark;
+}
+
+html[data-theme="dark"] #darkToggle:hover .horizon {
+	border-color: #718096;
+}
+
+.horizon .setting {
+	animation: 1s ease 0s 1 setting;
+}
+
+.horizon .rising {
+	animation: 1s ease 0s 1 rising;
+}
+
+@keyframes setting {
+	0% {
+		transform: translate3d(0, 10px, 0);
+	}
+	40% {
+		transform: translate3d(0, -2px, 0);
+	}
+	to {
+		transform: translate3d(0, 30px, 0);
+	}
+}
+
+@keyframes rising {
+	0% {
+		opacity: 0;
+		transform: translate3d(0, 30px, 0);
+	}
+	40% {
+		opacity: 1;
+		transform: translate3d(0, -2px, 0);
+	}
+	to {
+		opacity: 1;
+		transform: translate3d(0, 10px, 0);
+	}
 }
