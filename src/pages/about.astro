@@ -7,9 +7,8 @@ import PageLayout from "@/layouts/Base.astro";
 <PageLayout
 	meta={{
 		title: "关于我",
-		description: "关于赵泽宇：AI 产品经理、软件工程硕士，聚焦 Agent 产品设计与质量评测。",
-	}}
->
+		description: "关于赵泽宇：AI 产品经理、软件工程硕士，聚焦 Agent 产品设计与质量评测。"
+	}}>
 	<section class="relative z-20 mx-auto my-12 max-w-2xl px-7 lg:px-0">
 		<PageHeading
 			title="关于我"
@@ -22,8 +21,11 @@ import PageLayout from "@/layouts/Base.astro";
 			class="relative z-30 my-10 w-full rounded-xl"
 		/>
 
-		<h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-200">技术是手段，判断才是产品。</h2>
-		<div class="mt-5 space-y-4 text-sm leading-7 text-neutral-600 dark:text-neutral-400 sm:text-base lg:leading-8">
+		<h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-200">
+			技术是手段，判断才是产品。
+		</h2>
+		<div
+			class="mt-5 space-y-4 text-sm leading-7 text-neutral-600 sm:text-base lg:leading-8 dark:text-neutral-400">
 			<p>
 				我习惯先定义真实任务与成功标准，再决定模型、规则、工具和人工分别承担什么。对复杂
 				Agent，我尤其关注失败边界、可观测性和修改后的回归验证。
@@ -38,88 +40,57 @@ import PageLayout from "@/layouts/Base.astro";
 			<div class="border-l border-neutral-200 pb-10 last:border-l-0 dark:border-neutral-700">
 				<div class="relative flex flex-col justify-start pl-12">
 					<div
-						class="absolute top-0 left-0 z-40 flex h-14 w-14 -translate-x-1/2 items-center justify-center rounded-full border border-neutral-300 bg-white dark:border-neutral-700 dark:bg-neutral-950"
-					>
-						<img src="/portfolio/about/keyi-robot.svg" alt="可以科技" class="h-8 w-8 object-contain dark:invert" />
+						class="absolute top-0 left-0 z-40 flex h-14 w-14 -translate-x-1/2 items-center justify-center rounded-full border border-neutral-300 bg-white dark:border-neutral-700 dark:bg-neutral-950">
+						<img
+							src="/portfolio/about/keyi-robot.svg"
+							alt="可以科技"
+							class="h-8 w-8 object-contain dark:invert"
+						/>
 					</div>
-					<p class="text-xs uppercase tracking-widest text-neutral-400 dark:text-neutral-500">2026.04 — 至今</p>
+					<p class="text-xs tracking-widest text-neutral-400 uppercase dark:text-neutral-500">
+						2026.04 — 至今
+					</p>
 					<h3 class="my-1 text-lg font-bold dark:text-neutral-100">可以科技 · AI 产品经理实习生</h3>
 					<p class="mb-1 text-sm font-medium dark:text-neutral-300">Cortex Agent · Loona 生态</p>
 					<p class="text-sm font-light text-neutral-600 dark:text-neutral-400">
-						围绕 Loona 产品生态，负责 Cortex Agent 工具接入、ToolHub 治理、个性化记忆与模型评测，并独立交付评审工作台和翻译机器人。
+						围绕 Loona 产品生态，负责 Cortex Agent 工具接入、ToolHub
+						治理、个性化记忆与模型评测，并独立交付评审工作台和翻译机器人。
 					</p>
 				</div>
 			</div>
 			<div class="border-l border-neutral-200 pb-10 last:border-l-0 dark:border-neutral-700">
 				<div class="relative flex flex-col justify-start pl-12">
 					<div
-						class="absolute top-0 left-0 z-40 flex h-14 w-14 -translate-x-1/2 items-center justify-center rounded-full border border-neutral-300 bg-white dark:border-neutral-700 dark:bg-neutral-950"
-					>
-						<img src="/portfolio/about/ninebot-flyman.png" alt="九号公司" class="h-8 w-8 object-contain dark:invert" />
+						class="absolute top-0 left-0 z-40 flex h-14 w-14 -translate-x-1/2 items-center justify-center rounded-full border border-neutral-300 bg-white dark:border-neutral-700 dark:bg-neutral-950">
+						<img
+							src="/portfolio/about/ninebot-flyman.png"
+							alt="九号公司"
+							class="h-8 w-8 object-contain dark:invert"
+						/>
 					</div>
-					<p class="text-xs uppercase tracking-widest text-neutral-400 dark:text-neutral-500">2025.07 — 2026.01</p>
+					<p class="text-xs tracking-widest text-neutral-400 uppercase dark:text-neutral-500">
+						2025.07 — 2026.01
+					</p>
 					<h3 class="my-1 text-lg font-bold dark:text-neutral-100">九号公司 · 前端开发实习生</h3>
 					<p class="mb-1 text-sm font-medium dark:text-neutral-300">云运营与车联网平台</p>
 					<p class="text-sm font-light text-neutral-600 dark:text-neutral-400">
-						面向云运营与车联网平台，独立交付 10+ 项 B 端需求，覆盖权限体系、数据看板、长表单优化和通用组件。
+						面向云运营与车联网平台，独立交付 10+ 项 B
+						端需求，覆盖权限体系、数据看板、长表单优化和通用组件。
 					</p>
 				</div>
 			</div>
 		</div>
 
-		<h2 class="mt-12 text-2xl font-bold text-neutral-900 sm:mt-16 dark:text-neutral-200">教育</h2>
-		<div class="mt-8 grid gap-5 sm:grid-cols-2">
-			<div class="rounded-2xl border border-dashed border-neutral-300 p-6 dark:border-neutral-600">
-				<p class="font-semibold text-neutral-900 dark:text-neutral-100">Universiti Malaya</p>
-				<p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
-					软件工程 · 硕士<br />2024.03 — 2027.03
-				</p>
-			</div>
-			<div class="rounded-2xl border border-dashed border-neutral-300 p-6 dark:border-neutral-600">
-				<p class="font-semibold text-neutral-900 dark:text-neutral-100">河北经贸大学</p>
-				<p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
-					软件工程 · 本科<br />2019.09 — 2023.06
-				</p>
-			</div>
-		</div>
-
-		<h2 class="mt-12 text-2xl font-bold text-neutral-900 sm:mt-16 dark:text-neutral-200">能力与工具</h2>
-		<div class="mt-8 grid gap-7 sm:grid-cols-2">
-			<div>
-				<h3 class="text-base font-semibold text-neutral-900 dark:text-neutral-100">AI 产品与评测</h3>
-				<p class="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
-					Agent 上下文工程、记忆体系、工具治理、LLM-as-Judge、Badcase 归因、数据飞轮。
-				</p>
-			</div>
-			<div>
-				<h3 class="text-base font-semibold text-neutral-900 dark:text-neutral-100">开发落地</h3>
-				<p class="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
-					JavaScript / TypeScript、Vue、React、Next.js、Python、Rust、SQL、Git。
-				</p>
-			</div>
-			<div>
-				<h3 class="text-base font-semibold text-neutral-900 dark:text-neutral-100">产品工具</h3>
-				<p class="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
-					Figma、Claude Code、Codex、DeepSeek Harness、Coze、Vercel。
-				</p>
-			</div>
-			<div>
-				<h3 class="text-base font-semibold text-neutral-900 dark:text-neutral-100">语言</h3>
-				<p class="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-400">PTE 64，等价雅思 6.5。</p>
-			</div>
-		</div>
-
-		<h2 class="mt-16 text-2xl font-bold text-neutral-900 dark:text-neutral-200">篮球、健身，也保持长期构建。</h2>
+		<h2 class="mt-16 text-2xl font-bold text-neutral-900 dark:text-neutral-200">
+			篮球、健身，也保持长期构建。
+		</h2>
 		<div class="mt-6 flex flex-col gap-8 md:flex-row">
 			<div class="w-full md:w-1/3">
-				<img
-					src="/portfolio/about/basketball.jpg"
-					alt="赵泽宇在篮球场"
-					class="w-full rounded-xl"
-				/>
+				<img src="/portfolio/about/basketball.jpg" alt="赵泽宇在篮球场" class="w-full rounded-xl" />
 			</div>
 			<div class="flex w-full flex-col justify-center md:w-2/3">
-				<p class="text-sm leading-7 text-neutral-600 dark:text-neutral-400 sm:text-base lg:leading-8">
+				<p
+					class="text-sm leading-7 text-neutral-600 sm:text-base lg:leading-8 dark:text-neutral-400">
 					我喜欢运动和旅行。对我而言，它们和做产品相似：持续观察反馈，接受真实结果，然后调整下一次行动。
 				</p>
 				<div class="mt-6 flex flex-wrap gap-3">
