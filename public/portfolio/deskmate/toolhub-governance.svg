@@ -1,0 +1,264 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img">
+<defs>
+<pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse">
+<path d="M40 0H0V40" fill="none" stroke="rgba(231,229,228,0.05)" stroke-width="1"/>
+</pattern>
+<radialGradient id="v" cx="50%" cy="35%" r="75%">
+<stop offset="0%" stop-color="rgba(217,119,91,0.10)"/>
+<stop offset="100%" stop-color="rgba(16,18,22,0)"/>
+</radialGradient>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+<path d="M0 1 L9 5 L0 9" fill="none" stroke="rgba(231,229,228,0.22)" stroke-width="1.4"/>
+</marker>
+<marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+<path d="M0 1 L9 5 L0 9" fill="none" stroke="#D9775B" stroke-width="1.4"/>
+</marker>
+</defs>
+<rect width="1200" height="620" fill="#101216"/>
+<rect width="1200" height="620" fill="url(#v)"/>
+<rect width="1200" height="620" fill="url(#g)"/>
+<circle cx="53" cy="47" r="5" fill="#D9775B"/>
+<text x="70" y="52" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.66)">FIG.01 · BEFORE / AFTER</text>
+<text x="1152" y="52" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="22" font-weight="600" letter-spacing="0.4" text-anchor="end" fill="rgba(231,229,228,0.94)">ToolHub 工具治理</text>
+<line x1="48" y1="76" x2="1152" y2="76" stroke="rgba(231,229,228,0.14)" stroke-width="1" stroke-dasharray="4 6"/>
+<rect x="48" y="98" width="356" height="372" rx="14" fill="rgba(231,229,228,0.035)" stroke="rgba(231,229,228,0.14)" stroke-width="1.2"/>
+<text x="70" y="130" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.66)">BEFORE</text>
+<text x="70" y="160" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="19" font-weight="600" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.94)">122 个工具 · 扁平清单</text>
+<circle cx="76" cy="190" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="98" cy="190" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="120" cy="190" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="142" cy="190" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="164" cy="190" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="186" cy="190" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="208" cy="190" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="230" cy="190" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="252" cy="190" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="274" cy="190" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="296" cy="190" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="318" cy="190" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="340" cy="190" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="362" cy="190" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="76" cy="210" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="98" cy="210" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="120" cy="210" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="142" cy="210" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="164" cy="210" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="186" cy="210" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="208" cy="210" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="230" cy="210" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="252" cy="210" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="274" cy="210" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="296" cy="210" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="318" cy="210" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="340" cy="210" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="362" cy="210" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="76" cy="230" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="98" cy="230" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="120" cy="230" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="142" cy="230" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="164" cy="230" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="186" cy="230" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="208" cy="230" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="230" cy="230" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="252" cy="230" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="274" cy="230" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="296" cy="230" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="318" cy="230" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="340" cy="230" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="362" cy="230" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="76" cy="250" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="98" cy="250" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="120" cy="250" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="142" cy="250" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="164" cy="250" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="186" cy="250" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="208" cy="250" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="230" cy="250" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="252" cy="250" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="274" cy="250" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="296" cy="250" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="318" cy="250" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="340" cy="250" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="362" cy="250" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="76" cy="270" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="98" cy="270" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="120" cy="270" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="142" cy="270" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="164" cy="270" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="186" cy="270" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="208" cy="270" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="230" cy="270" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="252" cy="270" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="274" cy="270" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="296" cy="270" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="318" cy="270" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="340" cy="270" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="362" cy="270" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="76" cy="290" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="98" cy="290" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="120" cy="290" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="142" cy="290" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="164" cy="290" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="186" cy="290" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="208" cy="290" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="230" cy="290" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="252" cy="290" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="274" cy="290" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="296" cy="290" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="318" cy="290" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="340" cy="290" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="362" cy="290" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="76" cy="310" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="98" cy="310" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="120" cy="310" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="142" cy="310" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="164" cy="310" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="186" cy="310" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="208" cy="310" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="230" cy="310" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="252" cy="310" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="274" cy="310" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="296" cy="310" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="318" cy="310" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="340" cy="310" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="362" cy="310" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="76" cy="330" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="98" cy="330" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="120" cy="330" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="142" cy="330" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="164" cy="330" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="186" cy="330" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="208" cy="330" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="230" cy="330" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="252" cy="330" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="274" cy="330" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="296" cy="330" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="318" cy="330" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="340" cy="330" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="362" cy="330" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="76" cy="350" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="98" cy="350" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="120" cy="350" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="142" cy="350" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="164" cy="350" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="186" cy="350" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="208" cy="350" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="230" cy="350" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="252" cy="350" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<circle cx="274" cy="350" r="3.8" fill="rgba(231,229,228,0.30)"/>
+<line x1="70" y1="389" x2="82" y2="389" stroke="rgba(231,229,228,0.22)" stroke-width="1.2"/>
+<text x="90" y="394" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="14" font-weight="500" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.66)">全量注入 Planner 上下文</text>
+<line x1="70" y1="413" x2="82" y2="413" stroke="rgba(231,229,228,0.22)" stroke-width="1.2"/>
+<text x="90" y="418" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="14" font-weight="500" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.66)">同类能力语义重叠 → 选错工具</text>
+<line x1="70" y1="437" x2="82" y2="437" stroke="rgba(231,229,228,0.22)" stroke-width="1.2"/>
+<text x="90" y="442" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="14" font-weight="500" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.66)">新增一个 API 就多一条描述</text>
+<rect x="428" y="98" width="300" height="372" rx="14" fill="rgba(217,119,91,0.06)" stroke="#D9775B" stroke-width="1.2"/>
+<text x="450" y="130" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" letter-spacing="2.4" text-anchor="start" fill="#D9775B">GOVERNANCE</text>
+<text x="450" y="160" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="19" font-weight="600" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.94)">治理两件事</text>
+<text x="450" y="250" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" letter-spacing="2.4" text-anchor="start" fill="#D9775B">01</text>
+<text x="484" y="250" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="17" font-weight="600" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.94)">同类能力聚合</text>
+<text x="484" y="274" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="13.5" font-weight="500" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.66)">重叠 API 合成一项业务能力</text>
+<line x1="450" y1="288" x2="706" y2="288" stroke="rgba(217,119,91,0.22)" stroke-width="1"/>
+<text x="450" y="360" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" letter-spacing="2.4" text-anchor="start" fill="#D9775B">02</text>
+<text x="484" y="360" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="17" font-weight="600" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.94)">业务域动态召回</text>
+<text x="484" y="384" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="13.5" font-weight="500" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.66)">全量注入 → 按需加载</text>
+<line x1="408" y1="284" x2="422" y2="284" stroke="rgba(231,229,228,0.22)" stroke-width="1.3" marker-end="url(#ah)"/>
+<rect x="752" y="98" width="400" height="372" rx="14" fill="rgba(231,229,228,0.035)" stroke="rgba(231,229,228,0.14)" stroke-width="1.2"/>
+<text x="774" y="130" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.66)">AFTER</text>
+<text x="774" y="160" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="19" font-weight="600" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.94)">77 项能力 · 按业务域召回</text>
+<line x1="732" y1="284" x2="746" y2="284" stroke="#D9775B" stroke-width="1.3" marker-end="url(#aha)"/>
+<circle cx="784" cy="198" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="818" cy="198" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="852" cy="198" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="886" cy="198" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="920" cy="198" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="954" cy="198" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="988" cy="198" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="1022" cy="198" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="1056" cy="198" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="1090" cy="198" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="784" cy="220" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="818" cy="220" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="852" cy="220" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="886" cy="220" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="920" cy="220" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="954" cy="220" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="988" cy="220" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="1022" cy="220" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="1056" cy="220" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="1090" cy="220" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="784" cy="242" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="818" cy="242" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="852" cy="242" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="886" cy="242" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="920" cy="242" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="954" cy="242" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="988" cy="242" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="1022" cy="242" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="1056" cy="242" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="1090" cy="242" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="784" cy="264" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="818" cy="264" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="852" cy="264" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="886" cy="264" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="920" cy="264" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="954" cy="264" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="988" cy="264" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="1022" cy="264" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="1056" cy="264" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="1090" cy="264" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="784" cy="286" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="818" cy="286" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="852" cy="286" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="886" cy="286" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="920" cy="286" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="954" cy="286" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="988" cy="286" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="1022" cy="286" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="1056" cy="286" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="1090" cy="286" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="784" cy="308" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="818" cy="308" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="852" cy="308" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="886" cy="308" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="920" cy="308" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="954" cy="308" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="988" cy="308" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="1022" cy="308" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="1056" cy="308" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="1090" cy="308" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="784" cy="330" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="818" cy="330" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="852" cy="330" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="886" cy="330" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="920" cy="330" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="954" cy="330" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="988" cy="330" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="1022" cy="330" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="1056" cy="330" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="1090" cy="330" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="784" cy="352" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="818" cy="352" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="852" cy="352" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="886" cy="352" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="920" cy="352" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="954" cy="352" r="3.8" fill="#D9775B" opacity="0.72"/>
+<circle cx="988" cy="352" r="3.8" fill="#D9775B" opacity="0.72"/>
+<line x1="774" y1="413" x2="786" y2="413" stroke="#D9775B" stroke-width="1.2"/>
+<text x="794" y="418" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="14" font-weight="500" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.66)">Planner 只加载当前任务相关能力</text>
+<line x1="774" y1="437" x2="786" y2="437" stroke="#D9775B" stroke-width="1.2"/>
+<text x="794" y="442" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="14" font-weight="500" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.66)">同类能力重叠消除 → 误选下降</text>
+<rect x="48" y="490" width="352" height="100" rx="14" fill="rgba(231,229,228,0.035)" stroke="rgba(231,229,228,0.14)" stroke-width="1.2"/>
+<text x="72" y="542" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="34" font-weight="600" letter-spacing="-0.5" fill="#D9775B">122 → 77</text>
+<text x="72" y="572" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="17" font-weight="500" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.66)">工具数量 · -36.9%</text>
+<text x="72" y="596" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.44)">SCOPE</text>
+<rect x="424" y="490" width="352" height="100" rx="14" fill="rgba(231,229,228,0.035)" stroke="rgba(231,229,228,0.14)" stroke-width="1.2"/>
+<text x="448" y="542" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="34" font-weight="600" letter-spacing="-0.5" fill="#D9775B">≈40% ↓</text>
+<text x="448" y="572" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="17" font-weight="500" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.66)">单任务 Planner 累计输入 Token</text>
+<text x="448" y="596" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.44)">BEFORE / AFTER</text>
+<rect x="800" y="490" width="352" height="100" rx="14" fill="rgba(231,229,228,0.035)" stroke="rgba(231,229,228,0.14)" stroke-width="1.2"/>
+<text x="824" y="542" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="34" font-weight="600" letter-spacing="-0.5" fill="#D9775B">+4 pp</text>
+<text x="824" y="572" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="17" font-weight="500" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.66)">端到端任务成功率</text>
+<text x="824" y="596" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.44)">BEFORE / AFTER</text>
+<text x="1152" y="610" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12.5" letter-spacing="2.4" text-anchor="end" fill="rgba(231,229,228,0.44)">治理前后对照评测 · 内部数据已脱敏</text>
+</svg>

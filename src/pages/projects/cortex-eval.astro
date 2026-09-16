@@ -1,0 +1,334 @@
+---
+import CaseStudy from "@/layouts/CaseStudy.astro";
+---
+
+<CaseStudy
+	title="Cortex-Eval"
+	description="Cortex-Eval：Loona DeskMate 端到端评测与版本准入平台的 0—1 产品设计案例。"
+	eyebrow="Flagship case · 0→1 platform · 2026"
+	intro="DeskMate Agent 工具能力与任务链路持续扩展后，团队缺少可复用的验收标准与批量回归机制；我从 0 到 1 建设端到端评测与版本准入平台，把「新增能力好不好、有没有伤到存量体验」变成可判定、可回归的问题。"
+	tags={["评测体系", "LLM-as-Judge", "版本准入", "Trace 归因", "0→1"]}
+	results={[
+		{
+			value: "213",
+			label: "端到端 Case",
+			note: "覆盖 9 类核心场景 · 40 项检查规则",
+		},
+		{
+			value: "≈60% ↓",
+			label: "单轮走查周期",
+			note: "平台使用前后内部对照，非线上指标",
+		},
+	]}
+	scope="数据口径：2026.04 — 2026.06 内部评测。累计支撑 3 次版本验收，识别并推动解决 6 个阻塞级问题；平台代码已开源，原始评测数据与 Case 内容不公开。"
+	meta={[
+		{ label: "项目性质", value: "实习项目 · 可以科技 KEYi" },
+		{
+			label: "我的角色",
+			value: "产品负责人（0—1）",
+		},
+		{ label: "周期", value: "2026.04 — 2026.06" },
+		{ label: "阶段", value: "已用于 3 次版本验收" },
+		{ label: "协作", value: "独立完成信息架构与评测工作流设计" },
+		{ label: "说明", value: "平台代码已开源，评测数据与 Case 内容不公开" },
+	]}
+>
+	<section class="case-section">
+		<div><p class="number-label">01 / PROBLEM</p><h2>「跑一遍看看」给不出可复现的结论</h2></div>
+		<div class="case-copy">
+			<p class="case-lede">能力越多，走查成本越高，结论越不可信。</p>
+			<p>
+				Cortex 负责准入、路由、规划、工具编排与流式输出，任务在
+				<strong>THINK → CALL_TOOL / ASK_USER / DONE</strong> 循环中执行。一次改动会同时牵动意图解析、工具选择与
+				A2UI 展示；人工走查只覆盖少数路径、口径不一，结论无法横向比较，也无法在下个版本复现。
+			</p>
+			<div class="judgment">
+				<p class="judgment__label">我的判断</p>
+				<p>
+					我拆成三个缺口：<strong>标准缺失</strong>、<strong>回归缺失</strong>、<strong>归因缺失</strong>，分别对应
+					02—04 节。
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="case-section">
+		<div><p class="number-label">02 / STANDARD</p><h2>五层标准，判定方式各司其职</h2></div>
+		<div class="case-copy">
+			<p class="case-lede">能断言的不交给模型，模型判不了的不伪装成客观分数。</p>
+			<table class="data-table">
+				<caption>表 1 · 五层验收标准与判定分工</caption>
+				<thead>
+					<tr><th>层</th><th>判什么</th><th>判定方式</th><th>为什么这样分工</th></tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>任务理解</td><td>意图解析是否正确、缺信息是否追问</td>
+						<td>断言 + LLM Judge</td><td>标签可枚举，开放表达靠 Judge</td>
+					</tr>
+					<tr>
+						<td>工具规划</td><td>工具调对、参数精确、危险操作是否确认</td>
+						<td>确定性断言</td><td>结构化输出，可复现</td>
+					</tr>
+					<tr>
+						<td>执行结果</td><td>是否成功返回、失败与空结果是否兜底</td>
+						<td>确定性断言</td><td>有明确成败信号</td>
+					</tr>
+					<tr>
+						<td>最终回复</td><td>口播是否自然、是否覆盖全部诉求</td>
+						<td>LLM Judge + 人工复核</td><td>无确定性判据</td>
+					</tr>
+					<tr>
+						<td>A2UI 展示</td><td>卡片是否出现、字段是否齐、与回复一致</td>
+						<td>断言 + 人工抽检</td><td>字段可断言，观感需人眼</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				边界写死：工具是否被调用、参数是否精确、卡片字段是否齐，<strong>必须</strong>确定性断言；口播是否自然、回复是否覆盖全部诉求，<strong>只能</strong>
+				LLM Judge；政策与安全、Bad Case 定性，<strong>必须</strong>留人工。
+			</p>
+			<div class="decision">
+				<div class="decision__head">
+					<span class="decision__index">取舍 01</span>
+					<span class="decision__title">LLM Judge 只做初筛，不做全自动判分</span>
+				</div>
+				<dl class="decision__rows">
+					<div class="decision__row">
+						<dt>约束</dt><dd>LLM Judge 的一致性与成本有限，判分不能单独当结论。</dd>
+					</div>
+					<div class="decision__row">
+						<dt>候选方案</dt><dd>A 全自动判分；B Judge 初筛 + 阻塞级人工确认；C 全人工。</dd>
+					</div>
+					<div class="decision__row">
+						<dt>证据</dt><dd>验收标准覆盖任务理解、工具规划、执行结果、最终回复、A2UI
+						五层，其中既有可确定性断言的部分，也有必须主观判断的部分，因此明确「确定性断言 /
+						LLM Judge / 人工复核」三者分工。</dd>
+					</div>
+					<div class="decision__row">
+						<dt>选择</dt><dd><em>B</em>：Judge 只出初筛与归因线索，阻塞级结论人工确认。</dd>
+					</div>
+					<div class="decision__row">
+						<dt>代价</dt><dd>吞吐下降、单轮走查更慢。</dd>
+					</div>
+				</dl>
+			</div>
+			<p class="muted mt-7">不确定性处理：Judge 初筛不确定时有固定走向，不靠临场判断。</p>
+			<div class="flow">
+				<div class="flow__step">
+					<span>STEP 01</span><b>确定性断言</b><small>可枚举判据先给成败，不进模型</small>
+				</div>
+				<div class="flow__arrow">→</div>
+				<div class="flow__step">
+					<span>STEP 02</span><b>LLM Judge 初筛</b><small>无确定性判据的层出初筛与归因线索</small>
+				</div>
+				<div class="flow__arrow">→</div>
+				<div class="flow__step flow__step--gate">
+					<span>STEP 03</span><b>人工复核</b><small>初筛不确定或涉及安全定性时由人接手</small>
+				</div>
+				<div class="flow__arrow">→</div>
+				<div class="flow__step flow__step--gate">
+					<span>STEP 04</span><b>阻塞级门禁</b><small>定为阻塞级的问题单独成项，构成准入门禁</small>
+				</div>
+			</div>
+			<div class="judgment">
+				<p class="judgment__label">我的判断</p>
+				<p>
+					判定权按层分配，不按效率分配：走查变慢是我愿意付的代价，换来的是每条失败都能追到具体层、验收结论对研发解释得通，而不是一个无法追问的分数。
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="case-section">
+		<div><p class="number-label">03 / ASSET</p><h2>资产的价值在结构，不在数量</h2></div>
+		<div class="case-copy">
+			<p class="case-lede">
+				213 个 Case 覆盖 9 类核心场景、沉淀 40 项通用与场景专属检查规则，复用性来自每条 Case
+				自带判定与归因信息。
+			</p>
+			<div class="tile-grid">
+				<div class="tile">
+					<p class="tile__index">01</p><b>输入上下文</b><p>表达、历史与环境，可重复投喂</p>
+				</div>
+				<div class="tile">
+					<p class="tile__index">02</p><b>期望工具与参数</b><p>该调哪个工具、参数约束</p>
+				</div>
+				<div class="tile">
+					<p class="tile__index">03</p><b>断言</b><p>确定性检查，直接给成败</p>
+				</div>
+				<div class="tile">
+					<p class="tile__index">04</p><b>Judge Rubric</b><p>回复层维度，Judge 与人工共用</p>
+				</div>
+				<div class="tile">
+					<p class="tile__index">05</p><b>归因标签</b><p>绑定五层，失败可定位</p>
+				</div>
+			</div>
+			<p>
+				回流路径：评测发现的问题按归因标签定位到五层验收标准中的具体层，再进入修复复测与后续回归；这些回归项与核心链路通过率一起，构成
+				05 节的版本验收结论。
+			</p>
+			<div class="judgment">
+				<p class="judgment__label">我的判断</p>
+				<p>
+					40 项规则区分<strong>通用</strong>与<strong>场景专属</strong>：通用跨 9
+					类复用，专属只在所属场景生效。混在一起，一次改动就会引发大面积假阳性。
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="case-section">
+		<div><p class="number-label">04 / PLATFORM</p><h2>把「定位问题」做进主流程</h2></div>
+		<div class="case-copy">
+			<p class="case-lede">
+				我独立完成信息架构与工作流设计，主线是配置 → 执行 → 评判 → 对比 → 归因 → 回归。
+			</p>
+			<div class="flow">
+				<div class="flow__step">
+					<span>STEP 01</span><b>配置评测任务</b><small>选环境、版本、Case 范围</small>
+				</div>
+				<div class="flow__arrow">→</div>
+				<div class="flow__step">
+					<span>STEP 02</span><b>批量执行</b><small>采集 Trace</small>
+				</div>
+				<div class="flow__arrow">→</div>
+				<div class="flow__step flow__step--gate">
+					<span>STEP 03</span><b>结果评判</b><small>断言 + Judge，阻塞级人工确认</small>
+				</div>
+				<div class="flow__arrow">→</div>
+				<div class="flow__step">
+					<span>STEP 04</span><b>版本对比</b><small>同套 Case 比差异项</small>
+				</div>
+				<div class="flow__arrow">→</div>
+				<div class="flow__step">
+					<span>STEP 05</span><b>Trace 归因</b><small>逐层定位问题层</small>
+				</div>
+				<div class="flow__arrow">→</div>
+				<div class="flow__step flow__step--gate">
+					<span>STEP 06</span><b>问题单 / 回归</b><small>修复复测并沉淀</small>
+				</div>
+			</div>
+			<figure class="figure">
+				<img
+					src="/portfolio/cortex-eval/platform-architecture.svg"
+					alt="Cortex-Eval 评测平台信息架构与工作流示意图"
+					loading="lazy"
+				/>
+				<figcaption>图 1 · 评测平台信息架构与工作流示意</figcaption>
+			</figure>
+			<div class="tile-grid">
+				<div class="tile">
+					<p class="tile__index">姿势 01</p><b>多环境评测</b><p>同套 Case 跑不同环境与版本，输出可比结果</p>
+				</div>
+				<div class="tile">
+					<p class="tile__index">姿势 02</p><b>单 Case 调试</b><p>复现单条问题，逐层看 Trace</p>
+				</div>
+				<div class="tile">
+					<p class="tile__index">姿势 03</p><b>测试集批量回归</b><p>版本前跑全量或核心链路子集</p>
+				</div>
+			</div>
+			<div class="decision">
+				<div class="decision__head">
+					<span class="decision__index">取舍 02</span>
+					<span class="decision__title">先做单 Case 调试与版本对比，不先做报表看板</span>
+				</div>
+				<dl class="decision__rows">
+					<div class="decision__row">
+						<dt>约束</dt><dd>首要痛点是定位问题，不是看趋势。</dd>
+					</div>
+					<div class="decision__row">
+						<dt>候选方案</dt><dd>A 报表看板先行；B 调试 + 对比先行；C 只跑分出报告。</dd>
+					</div>
+					<div class="decision__row">
+						<dt>证据</dt><dd>平台需同时支持多环境评测、单 Case
+						调试、测试集批量回归三种使用姿势，并串联任务执行、结果评判、版本对比与 Trace
+						归因。</dd>
+					</div>
+					<div class="decision__row">
+						<dt>选择</dt><dd><em>B</em>：Trace 归因与版本对比进主流程。</dd>
+					</div>
+					<div class="decision__row">
+						<dt>代价</dt><dd>报表与趋势后置，长期趋势手工整理。</dd>
+					</div>
+				</dl>
+			</div>
+			<div class="judgment">
+				<p class="judgment__label">我的判断</p>
+				<p>
+					主流程只放每次版本验收都要走的动作：定位与对比是必经步骤，报表看板属事后消费，可以后置，长期趋势先手工整理。
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="case-section">
+		<div><p class="number-label">05 / GATE</p><h2>准入靠结论可解释，不靠分数</h2></div>
+		<div class="case-copy">
+			<p class="case-lede">通过率只说明这批 Case 的表现，阻塞项才是门禁。</p>
+			<p>
+				闭环：发现问题 → 归因到层 → 问题单 → 修复复测 → 纳入回归。验收结论由<strong>核心链路通过率</strong>与<strong>阻塞问题修复情况</strong>共同给出，缺一不建议准入。
+			</p>
+			<div class="stat-row">
+				<div class="metric">
+					<strong class="font-mono text-3xl">3 次</strong>
+					<p class="muted text-sm">用户价值 · 累计支撑版本验收</p>
+				</div>
+				<div class="metric">
+					<strong class="font-mono text-3xl">6 个</strong>
+					<p class="muted text-sm">AI 质量 · 识别并推动解决的阻塞级问题</p>
+				</div>
+				<div class="metric">
+					<strong class="font-mono text-3xl">≈60% ↓</strong>
+					<p class="muted text-sm">运行约束 · 单轮走查周期（内部对照，非线上指标）</p>
+				</div>
+			</div>
+			<p class="muted">
+				口径：三项均为 2026.04 — 2026.06 内部评测与版本验收记录，非线上指标。
+			</p>
+			<div class="judgment">
+				<p class="judgment__label">我的判断</p>
+				<p>
+					我没把准入写成「分数达标」：分数随 Case
+					集漂移，用它当门禁，团队会优化分数而非体验。阻塞项单列门禁，未修复不建议准入。
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="case-section">
+		<div><p class="number-label">06 / LIMIT</p><h2>能判定，还不能持续自动判定</h2></div>
+		<div class="case-copy">
+			<p class="case-lede">Judge 一致性与成本有限，评测集 ≠ 真实分布，归因仍靠人的经验。</p>
+			<table class="data-table">
+				<caption>表 2 · 已知局限与下一步</caption>
+				<thead>
+					<tr><th>局限</th><th>下一步</th></tr>
+				</thead>
+				<tbody>
+					<tr><td>Judge 一致性与成本</td><td>建校准集，抽检多轮判分</td></tr>
+					<tr><td>覆盖偏差：9 类场景 ≠ 真实分布</td><td>按线上分布重采样</td></tr>
+					<tr><td>Trace 归因依赖人工经验</td><td>沉淀归因标签与失败模式</td></tr>
+					<tr><td>A2UI 展示层断言成本高</td><td>先断言字段结构，观感人工抽检</td></tr>
+					<tr><td>回归靠人工触发</td><td>接进 CI，成为提交前门禁</td></tr>
+				</tbody>
+			</table>
+			<div class="judgment">
+				<p class="judgment__label">我的判断</p>
+				<p>
+					我把局限写在明处：Judge 需要校准、评测集不等于真实分布、归因依赖人工经验、回归靠人工触发。这决定了平台现在能支撑版本验收，还不能当提交前的自动门禁。
+				</p>
+			</div>
+			<p class="muted mt-7">
+				平台代码已开源，原始评测数据与 Case 内容不公开。
+			</p>
+			<div class="case-cta">
+				<a
+					class="button-ghost"
+					href="https://github.com/Zhaozed/cortex-eval"
+					target="_blank"
+					rel="noopener">查看 GitHub 仓库 ↗</a>
+			</div>
+		</div>
+	</section>
+</CaseStudy>

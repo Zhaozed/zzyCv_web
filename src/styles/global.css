@@ -441,6 +441,238 @@
 	.practice-card {
 		@apply flex min-h-64 flex-col rounded-2xl border border-dashed border-neutral-300 p-7 duration-300 ease-out hover:-translate-y-1 hover:border-neutral-500 dark:border-neutral-600 dark:hover:border-neutral-400;
 	}
+
+	/* ============================================================
+	   案例页统一版式 v2（精选项目 / 其他实践 共用）
+	   ============================================================ */
+
+	/* --- 概览卡：核心结果 --- */
+	.case-hero-grid {
+		@apply mt-10 grid gap-5 lg:grid-cols-[1.05fr_1fr] lg:items-stretch;
+	}
+	.case-results {
+		@apply rounded-2xl border border-dashed border-neutral-300 p-6 dark:border-neutral-600;
+	}
+	.case-results__grid {
+		@apply grid gap-5 sm:grid-cols-2;
+	}
+	.case-results__scope {
+		@apply mt-6 border-t border-dashed border-neutral-200 pt-4 font-mono text-[11px] leading-5 dark:border-neutral-800;
+		color: var(--color-muted);
+	}
+	.metric-tile strong {
+		@apply block font-mono text-3xl font-semibold tracking-tight;
+		color: var(--color-accent-2);
+	}
+	.metric-tile p {
+		@apply mt-1.5 text-sm font-medium;
+		color: var(--color-accent-2);
+	}
+	.metric-tile span {
+		@apply mt-1 block font-mono text-[10px] uppercase tracking-widest;
+		color: var(--color-muted);
+	}
+
+	/* --- 结论句（每节第一句） --- */
+	.case-lede {
+		@apply mb-6 border-s-2 ps-5 text-[17px] leading-8 font-semibold;
+		border-color: var(--color-accent);
+		color: var(--color-accent-2);
+	}
+	.case-copy strong {
+		@apply font-semibold;
+		color: var(--color-accent-2);
+	}
+
+	/* --- 我的判断 --- */
+	.judgment {
+		@apply my-8 rounded-2xl border border-dashed border-neutral-300 p-6 dark:border-neutral-600;
+	}
+	.judgment__label {
+		@apply mb-3 font-mono text-[10px] uppercase tracking-widest;
+		color: var(--color-accent);
+	}
+	.judgment p {
+		@apply text-[15px] leading-8;
+		color: var(--color-accent-2);
+	}
+	.judgment p + p {
+		@apply mt-3;
+	}
+
+	/* --- 关键取舍卡 --- */
+	.decision {
+		@apply my-8 overflow-hidden rounded-2xl border border-dashed border-neutral-300 dark:border-neutral-600;
+	}
+	.decision__head {
+		@apply flex items-baseline gap-3 border-b border-dashed border-neutral-300 px-6 py-4 dark:border-neutral-600;
+	}
+	.decision__index {
+		@apply font-mono text-[10px] tracking-widest;
+		color: var(--color-accent);
+	}
+	.decision__title {
+		@apply text-[15px] font-semibold;
+		color: var(--color-accent-2);
+	}
+	.decision__rows {
+		@apply divide-y divide-dashed divide-neutral-200 dark:divide-neutral-800;
+	}
+	.decision__row {
+		@apply grid gap-1 px-6 py-3.5 sm:grid-cols-[6.5rem_1fr] sm:gap-4;
+	}
+	.decision__row dt {
+		@apply font-mono text-[10px] uppercase tracking-widest;
+		color: var(--color-muted);
+	}
+	.decision__row dd {
+		@apply text-sm leading-7;
+		color: var(--color-accent-2);
+	}
+	.decision__row dd em {
+		@apply not-italic font-medium;
+		color: var(--color-accent);
+	}
+
+	/* --- 链路 / 流程 --- */
+	.flow {
+		@apply my-8 flex flex-wrap items-stretch gap-2;
+	}
+	.flow__step {
+		@apply flex min-w-[9.5rem] flex-1 flex-col rounded-xl border border-dashed border-neutral-300 px-4 py-3 dark:border-neutral-600;
+	}
+	.flow__step b {
+		@apply text-[13px] leading-6 font-semibold;
+		color: var(--color-accent-2);
+	}
+	.flow__step span {
+		@apply mt-0.5 font-mono text-[10px] uppercase tracking-widest;
+		color: var(--color-muted);
+	}
+	.flow__step small {
+		@apply mt-2 text-xs leading-5;
+		color: var(--color-muted);
+	}
+	.flow__step--gate {
+		@apply border-solid;
+		border-color: var(--color-accent);
+	}
+	.flow__arrow {
+		@apply self-center font-mono text-xs;
+		color: var(--color-muted);
+	}
+
+	/* --- 编号卡片网格 --- */
+	.tile-grid {
+		@apply my-8 grid gap-3 sm:grid-cols-2;
+	}
+	.tile {
+		@apply rounded-xl border border-dashed border-neutral-300 p-5 dark:border-neutral-600;
+	}
+	.tile__index {
+		@apply font-mono text-[10px] tracking-widest;
+		color: var(--color-muted);
+	}
+	.tile b {
+		@apply mt-2 block text-sm font-semibold;
+		color: var(--color-accent-2);
+	}
+	.tile p {
+		@apply mt-1.5 text-[13px] leading-6;
+		color: var(--color-muted);
+	}
+
+	/* --- 做 / 不做 --- */
+	.scope {
+		@apply my-8 grid gap-3 sm:grid-cols-2;
+	}
+	.scope__col {
+		@apply rounded-xl border border-dashed border-neutral-300 p-5 dark:border-neutral-600;
+	}
+	.scope__title {
+		@apply mb-3 font-mono text-[10px] uppercase tracking-widest;
+	}
+	.scope__col--in .scope__title {
+		color: var(--color-accent);
+	}
+	.scope__col--out .scope__title {
+		color: var(--color-muted);
+	}
+	.scope__col ul {
+		@apply space-y-2.5;
+	}
+	.scope__col li {
+		@apply relative ps-6 text-[13px] leading-6;
+		color: var(--color-accent-2);
+	}
+	.scope__col li::before {
+		@apply absolute start-0 top-0 font-mono text-[11px];
+	}
+	.scope__col--in li::before {
+		content: "IN";
+		color: var(--color-accent);
+	}
+	.scope__col--out li::before {
+		content: "OUT";
+		color: var(--color-muted);
+	}
+
+	/* --- 数据表 --- */
+	.data-table {
+		@apply my-8 w-full border-collapse text-left;
+	}
+	.data-table caption {
+		@apply mb-3 text-start font-mono text-[10px] uppercase tracking-widest;
+		color: var(--color-muted);
+	}
+	.data-table th {
+		@apply border-b border-dashed border-neutral-300 pb-2.5 font-mono text-[10px] font-normal uppercase tracking-widest dark:border-neutral-600;
+		color: var(--color-muted);
+	}
+	.data-table td {
+		@apply border-b border-dashed border-neutral-200 py-3 align-top text-[13px] leading-6 dark:border-neutral-800;
+		color: var(--color-accent-2);
+	}
+	.data-table tr:last-child td {
+		@apply border-0;
+	}
+	.data-table td:first-child {
+		@apply font-medium;
+	}
+	.data-table .num {
+		@apply font-mono;
+	}
+
+	/* --- 指标分层三列 --- */
+	.stat-row {
+		@apply my-8 grid gap-5 sm:grid-cols-3;
+	}
+
+	/* --- 图片 / 图示 --- */
+	.figure {
+		@apply my-8;
+	}
+	.figure img {
+		@apply w-full rounded-xl border border-dashed border-neutral-300 dark:border-neutral-600;
+	}
+	.figure figcaption {
+		@apply mt-3 font-mono text-[10px] uppercase tracking-widest;
+		color: var(--color-muted);
+	}
+
+	/* --- 章节内小标签 --- */
+	.chip-row {
+		@apply my-6 flex flex-wrap gap-2;
+	}
+	.chip {
+		@apply inline-flex rounded-full border border-dashed border-neutral-300 px-3 py-1 font-mono text-[10px] uppercase tracking-widest dark:border-neutral-600;
+		color: var(--color-muted);
+	}
+
+	/* --- 结尾 CTA --- */
+	.case-cta {
+		@apply mt-8 flex flex-wrap gap-3;
+	}
 }
 
 /* 阴阳切换动画（复刻自 aria main.css） */

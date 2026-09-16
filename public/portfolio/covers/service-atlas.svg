@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img">
+<defs>
+<pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse">
+<path d="M40 0H0V40" fill="none" stroke="rgba(231,229,228,0.05)" stroke-width="1"/>
+</pattern>
+<radialGradient id="v" cx="50%" cy="35%" r="75%">
+<stop offset="0%" stop-color="rgba(217,119,91,0.10)"/>
+<stop offset="100%" stop-color="rgba(16,18,22,0)"/>
+</radialGradient>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+<path d="M0 1 L9 5 L0 9" fill="none" stroke="rgba(231,229,228,0.22)" stroke-width="1.4"/>
+</marker>
+<marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+<path d="M0 1 L9 5 L0 9" fill="none" stroke="#D9775B" stroke-width="1.4"/>
+</marker>
+</defs>
+<rect width="1200" height="675" fill="#101216"/>
+<rect width="1200" height="675" fill="url(#v)"/>
+<rect width="1200" height="675" fill="url(#g)"/>
+<circle cx="69" cy="57" r="5" fill="#D9775B"/>
+<text x="82" y="62" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.66)">SERVICEATLAS</text>
+<text x="1136" y="62" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" letter-spacing="2.4" text-anchor="end" fill="rgba(231,229,228,0.44)">FLAGSHIP CASE · AI SERVICE EMAIL COPILOT</text>
+<line x1="64" y1="88" x2="1136" y2="88" stroke="rgba(231,229,228,0.14)" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="64" y="152" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="19" font-weight="500" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.66)">一封邮件的处理链路：AI 做检索与拟稿，客服保留最终确认权</text>
+<rect x="64" y="208" width="160" height="140" rx="14" fill="rgba(231,229,228,0.035)" stroke="rgba(231,229,228,0.22)" stroke-width="1.2"/>
+<text x="82" y="240" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.44)">INBOX</text>
+<text x="82" y="274" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.94)">海外售后邮件</text>
+<text x="82" y="304" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="13" fill="rgba(231,229,228,0.66)">口语化</text>
+<text x="82" y="324" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="13" fill="rgba(231,229,228,0.66)">一封多意图</text>
+<line x1="227" y1="278" x2="242.4" y2="278" stroke="rgba(231,229,228,0.22)" stroke-width="1.3" marker-end="url(#ah)"/>
+<rect x="246.4" y="208" width="160" height="140" rx="14" fill="rgba(231,229,228,0.035)" stroke="rgba(231,229,228,0.22)" stroke-width="1.2"/>
+<text x="264.4" y="240" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.44)">TRIAGE</text>
+<text x="264.4" y="274" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.94)">LLM 分诊</text>
+<text x="264.4" y="304" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="13" fill="rgba(231,229,228,0.66)">结构化 JSON</text>
+<text x="264.4" y="324" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="13" fill="rgba(231,229,228,0.66)">route / case_type</text>
+<line x1="409.4" y1="278" x2="424.79999999999995" y2="278" stroke="rgba(231,229,228,0.22)" stroke-width="1.3" marker-end="url(#ah)"/>
+<rect x="428.8" y="208" width="160" height="140" rx="14" fill="rgba(231,229,228,0.035)" stroke="rgba(231,229,228,0.22)" stroke-width="1.2"/>
+<text x="446.8" y="240" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.44)">EVIDENCE</text>
+<text x="446.8" y="274" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.94)">按需查证</text>
+<text x="446.8" y="304" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="13" fill="rgba(231,229,228,0.66)">只读工具</text>
+<text x="446.8" y="324" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="13" fill="rgba(231,229,228,0.66)">有证据才继续</text>
+<line x1="591.8" y1="278" x2="607.1999999999999" y2="278" stroke="rgba(231,229,228,0.22)" stroke-width="1.3" marker-end="url(#ah)"/>
+<rect x="611.2" y="208" width="160" height="140" rx="14" fill="rgba(231,229,228,0.035)" stroke="rgba(231,229,228,0.22)" stroke-width="1.2"/>
+<text x="629.2" y="240" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.44)">DRAFT</text>
+<text x="629.2" y="274" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.94)">英文草稿</text>
+<text x="629.2" y="304" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="13" fill="rgba(231,229,228,0.66)">带依据</text>
+<text x="629.2" y="324" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="13" fill="rgba(231,229,228,0.66)">可溯源</text>
+<line x1="774.2" y1="278" x2="789.6" y2="278" stroke="rgba(231,229,228,0.22)" stroke-width="1.3" marker-end="url(#ah)"/>
+<rect x="793.6" y="208" width="160" height="140" rx="14" fill="rgba(217,119,91,0.08)" stroke="#D9775B" stroke-width="1.2"/>
+<text x="811.6" y="240" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" letter-spacing="2.4" text-anchor="start" fill="#D9775B">HUMAN</text>
+<text x="811.6" y="274" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.94)">人工审核</text>
+<text x="811.6" y="304" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="13" fill="rgba(231,229,228,0.66)">客服可改可退可发</text>
+<line x1="956.6" y1="278" x2="972" y2="278" stroke="#D9775B" stroke-width="1.3" marker-end="url(#aha)"/>
+<rect x="976" y="208" width="160" height="140" rx="14" fill="rgba(231,229,228,0.035)" stroke="rgba(231,229,228,0.22)" stroke-width="1.2"/>
+<text x="994" y="240" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.44)">SEND</text>
+<text x="994" y="274" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="20" font-weight="600" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.94)">发送 / 归档</text>
+<text x="994" y="304" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="13" fill="rgba(231,229,228,0.66)">结果回流 Bad Case</text>
+<rect x="332.8" y="404" width="200" height="62" rx="12" fill="rgba(231,229,228,0.035)" stroke="rgba(231,229,228,0.14)" stroke-width="1.2"/>
+<text x="352.8" y="430" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.66)">LLM WIKI</text>
+<text x="352.8" y="452" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="14" font-weight="500" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.66)">政策 / SOP 知识库</text>
+<rect x="552.8" y="404" width="200" height="62" rx="12" fill="rgba(231,229,228,0.035)" stroke="rgba(231,229,228,0.14)" stroke-width="1.2"/>
+<text x="572.8" y="430" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.66)">MCP TOOLS</text>
+<text x="572.8" y="452" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="14" font-weight="500" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.66)">订单 / 物流 / 维修</text>
+<line x1="412.8" y1="400" x2="468.8" y2="354" stroke="rgba(231,229,228,0.14)" stroke-width="1.2" stroke-dasharray="5 5" marker-end="url(#ah)"/>
+<line x1="632.8" y1="400" x2="548.8" y2="354" stroke="rgba(231,229,228,0.14)" stroke-width="1.2" stroke-dasharray="5 5" marker-end="url(#ah)"/>
+<rect x="773.6" y="404" width="362" height="62" rx="12" fill="rgba(217,119,91,0.05)" stroke="rgba(217,119,91,0.45)" stroke-width="1.2"/>
+<text x="793.6" y="430" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" letter-spacing="2.4" text-anchor="start" fill="#D9775B">GATE RULES</text>
+<text x="793.6" y="452" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="14" font-weight="500" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.66)">证据不足 → 追问或转人工 · 不自动发送</text>
+<line x1="853.6" y1="400" x2="853.6" y2="354" stroke="rgba(231,229,228,0.14)" stroke-width="1.2" stroke-dasharray="5 5" marker-end="url(#ah)"/>
+<rect x="64" y="502" width="341.3333333333333" height="112" rx="14" fill="rgba(231,229,228,0.035)" stroke="rgba(231,229,228,0.14)" stroke-width="1.2"/>
+<text x="88" y="554" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="34" font-weight="600" letter-spacing="-0.5" fill="#D9775B">80%</text>
+<text x="88" y="584" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="17" font-weight="500" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.66)">回复草稿直接采纳率</text>
+<text x="88" y="608" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.44)">PILOT · SINCE 2026.08</text>
+<rect x="429.3333333333333" y="502" width="341.3333333333333" height="112" rx="14" fill="rgba(231,229,228,0.035)" stroke="rgba(231,229,228,0.14)" stroke-width="1.2"/>
+<text x="453.3333333333333" y="554" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="34" font-weight="600" letter-spacing="-0.5" fill="#D9775B">40% ↑</text>
+<text x="453.3333333333333" y="584" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="17" font-weight="500" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.66)">人均工单处理效率</text>
+<text x="453.3333333333333" y="608" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.44)">PILOT GROUP VS. BEFORE</text>
+<rect x="794.6666666666666" y="502" width="341.3333333333333" height="112" rx="14" fill="rgba(231,229,228,0.035)" stroke="rgba(231,229,228,0.14)" stroke-width="1.2"/>
+<text x="818.6666666666666" y="554" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="34" font-weight="600" letter-spacing="-0.5" fill="#D9775B">试点</text>
+<text x="818.6666666666666" y="584" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="17" font-weight="500" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.66)">小范围试点 · 人工审核门禁开启</text>
+<text x="818.6666666666666" y="608" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.44)">SINCE 2026.08</text>
+<text x="1136" y="650" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12.5" letter-spacing="2.4" text-anchor="end" fill="rgba(231,229,228,0.44)">试点期间统计 · 非全量上线结果 · 业务与客户数据已脱敏</text>
+</svg>

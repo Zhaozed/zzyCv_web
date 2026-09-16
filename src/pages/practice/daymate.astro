@@ -1,0 +1,292 @@
+---
+import LoopVideo from "@/components/LoopVideo.astro";
+import PageLayout from "@/layouts/Base.astro";
+---
+
+<PageLayout
+	meta={{
+		title: "DayMate · 常驻 macOS 的个人工作代理",
+		description:
+			"个人产品 0 → 1：把非结构化邮件转化为必读清单、可跟进待办与求职档案，独立完成产品定义、全栈开发与评测闭环。",
+	}}
+>
+	<section
+		class="relative z-20 mx-auto mt-10 max-w-4xl border-neutral-200 px-5 pb-1 md:rounded-t-2xl md:border-t md:border-r md:border-l dark:border-neutral-800"
+	>
+		<div class="pt-6 md:pt-20">
+			<a
+				class="mb-10 inline-flex font-mono text-xs text-neutral-400 duration-200 ease-out hover:text-neutral-900 dark:hover:text-white"
+				href="/practice/">← 返回其他实践</a
+			>
+			<p
+				class="mb-4 font-mono text-xs uppercase tracking-widest text-neutral-400 dark:text-neutral-500"
+			>
+				Practice · Personal product 0 → 1
+			</p>
+			<h1
+				class="max-w-3xl text-3xl leading-tight font-bold tracking-tighter md:text-4xl lg:text-5xl dark:text-neutral-100"
+			>
+				DayMate｜常驻 macOS 的个人工作代理
+			</h1>
+			<p
+				class="mt-6 max-w-3xl text-base leading-8 text-neutral-600 sm:text-lg dark:text-neutral-400"
+			>
+				信息散在多个邮箱、日历与招聘平台，关键节点容易漏。DayMate
+				把非结构化邮件转成必读清单、可跟进待办与求职档案；产品定义、全栈开发与评测闭环由我独立完成，本人自用、未商业化。
+			</p>
+			<div class="mt-6 flex flex-wrap gap-2">
+				<span
+					class="inline-flex rounded-full border border-neutral-300 px-3 py-1 font-mono text-xs dark:border-neutral-600"
+					>Agent 产品</span
+				>
+				<span
+					class="inline-flex rounded-full border border-neutral-300 px-3 py-1 font-mono text-xs dark:border-neutral-600"
+					>全栈实现</span
+				>
+				<span
+					class="inline-flex rounded-full border border-neutral-300 px-3 py-1 font-mono text-xs dark:border-neutral-600"
+					>评测门禁</span
+				>
+				<span
+					class="inline-flex rounded-full border border-neutral-300 px-3 py-1 font-mono text-xs dark:border-neutral-600"
+					>privacy-first</span
+				>
+			</div>
+		</div>
+	</section>
+
+	<div class="relative z-20 mx-auto max-w-4xl px-5 pb-20 md:px-10">
+		<LoopVideo
+			class="mt-10 md:mt-16"
+			label="DayMate 首页与必读模块演示"
+			poster="/portfolio/daymate/home.png"
+			src="/portfolio/daymate/home-demo.mp4"
+		/>
+		<p class="muted mt-4 text-sm leading-6">首页即结论：必读、晨报与待办摊在一屏。</p>
+
+		<section class="case-section">
+			<div><p class="number-label">01 / PROBLEM</p><h2>问题不是信息多，而是没有被推进</h2></div>
+			<div class="case-copy">
+				<p class="case-lede">
+					信息不会自己变成行动：筛选、判断、维护状态三步全靠人做，关键节点就漏在这里。
+				</p>
+				<p>
+					课程与签证通知、投递与面试安排分散在 Gmail、163
+					邮箱与日历，切换入口、判断轻重、记录进度全靠人。
+				</p>
+				<p class="muted mt-7">
+					口径：本页数据来自本人真实邮箱环境的自用观测与离线评测，是个人项目指标，不是线上业务数据；未商业化，无外部用户规模。
+				</p>
+				<div class="judgment">
+					<p class="judgment__label">我的判断</p>
+					<p>
+						常驻代理把判断责任收到自己这边：漏一条必读的代价高于多问一句，所以过滤门控要被反复重构。
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="case-section">
+			<div><p class="number-label">02 / PRODUCT</p><h2>产品边界收窄到六项任务</h2></div>
+			<div class="case-copy">
+				<p class="case-lede">
+					六项任务围绕同一天：必读与晨报、待办与求职追踪，以及记忆与安全门。
+				</p>
+				<div class="tile-grid">
+					<div class="tile">
+						<p class="tile__index">01</p><b>跨邮箱必读聚合</b>
+						<p>按学校 / 求职 / 日常 / 其他分组</p>
+					</div>
+					<div class="tile">
+						<p class="tile__index">02</p><b>天气与每日晨报</b>
+						<p>实时天气 + 润色，按日缓存</p>
+					</div>
+					<div class="tile">
+						<p class="tile__index">03</p><b>邮件转可管理待办</b>
+						<p>复用分类器，零额外调用</p>
+					</div>
+					<div class="tile">
+						<p class="tile__index">04</p><b>求职漏斗与时间线</b>
+						<p>六类事件串成时间线</p>
+					</div>
+					<div class="tile">
+						<p class="tile__index">05</p><b>个人记忆与草稿语气</b>
+						<p>偏好与事实逐条可改</p>
+					</div>
+					<div class="tile">
+						<p class="tile__index">06</p><b>集成、安全与审批门</b>
+						<p>凭据集中配置 + 批准门</p>
+					</div>
+				</div>
+				<p>
+					安全边界写在架构里：凭据、Provider 调用、Agent 执行与 SQLite 写入全留在 Electron
+					主进程，渲染层 sandbox 化，只走类型化 IPC。
+				</p>
+				<div class="scope">
+					<div class="scope__col scope__col--in">
+						<p class="scope__title">本次做</p>
+						<ul>
+							<li>六项任务与常驻桌面形态。</li>
+							<li>必读三层过滤。</li>
+						</ul>
+					</div>
+					<div class="scope__col scope__col--out">
+						<p class="scope__title">明确不做</p>
+						<ul>
+							<li>不做多用户。</li>
+							<li>不做云端同步。</li>
+							<li>不做未经批准的写操作。</li>
+						</ul>
+					</div>
+				</div>
+				<div class="decision">
+					<div class="decision__head">
+						<span class="decision__index">取舍 01</span>
+						<span class="decision__title">做常驻主动代理，不做聊天式问答</span>
+					</div>
+					<dl class="decision__rows">
+						<div class="decision__row"><dt>约束</dt><dd>信息分散在多邮箱与日历，关键节点容易漏。</dd></div>
+						<div class="decision__row"><dt>候选方案</dt><dd>A 聊天式问答，问了才答；B 常驻主动整理并推送必读。</dd></div>
+						<div class="decision__row"><dt>证据</dt><dd>定位是 privacy-first 的常驻工作代理；必读走三层过滤：确定性预过滤（批量、营销、验证码不进 LLM）→ LLM 分类 → <code>important || actionable</code> 出口门控。</dd></div>
+						<div class="decision__row"><dt>选择</dt><dd><em>B</em>：问答式交互不进 MVP。</dd></div>
+						<div class="decision__row"><dt>代价</dt><dd>要为「今天该看什么」的判断质量负责，噪音一旦失控就直接打扰用户。</dd></div>
+					</dl>
+				</div>
+				<div class="judgment">
+					<p class="judgment__label">我的判断</p>
+					<p>
+						能省的调用一律省：待办复用分类器、天气按日缓存。自用产品没有预算兜底，运行成本就是我的耐心。
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="case-section">
+			<div><p class="number-label">03 / APPLICATIONS</p><h2>求职漏斗：低置信不自动污染档案</h2></div>
+			<div class="case-copy">
+				<p class="case-lede">
+					从邮件识别投递、测评、笔试、面试、Offer 与复盘；置信度不够的停在
+					<code>pending</code>，由我决定是否建档。
+				</p>
+				<div class="flow">
+					<div class="flow__step"><span>STEP 01</span><b>邮件事件识别</b><small>六类节点</small></div>
+					<div class="flow__arrow">→</div>
+					<div class="flow__step flow__step--gate"><span>GATE</span><b>置信门控</b><small>低置信不建档</small></div>
+					<div class="flow__arrow">→</div>
+					<div class="flow__step"><span>STEP 02</span><b>漏斗与时间线</b><small>状态视图</small></div>
+				</div>
+				<LoopVideo
+					class="mt-2"
+					label="DayMate 求职追踪模块演示"
+					poster="/portfolio/daymate/applications.png"
+					src="/portfolio/daymate/application-demo.mp4"
+				/>
+				<p class="muted mt-4 text-sm leading-6">时间线之外还有复盘看板：KPI 卡、漏斗条与来源环图。</p>
+				<div class="judgment">
+					<p class="judgment__label">我的判断</p>
+					<p>
+						牺牲全自动的爽感换档案可信：没有第二道人工审核，档案被脏数据污染后，晨报与跟进都会失真。
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="case-section">
+			<div><p class="number-label">04 / MEMORY</p><h2>记忆必须可见、可改、可删除</h2></div>
+			<div class="case-copy">
+				<p class="case-lede">记忆不是隐藏的上下文，而是一份我能直接读、改、删的事实清单。</p>
+				<p>它保存长期偏好与可控事实，让晨报和草稿贴合我的背景与语气。</p>
+				<LoopVideo
+					class="mt-2"
+					label="DayMate 记忆模块演示"
+					poster="/portfolio/daymate/memory.png"
+					src="/portfolio/daymate/memory-demo.mp4"
+				/>
+				<p class="muted mt-4 text-sm leading-6">改一条偏好，晨报与草稿随之改变。</p>
+				<div class="judgment">
+					<p class="judgment__label">我的判断</p>
+					<p>记忆不可见就无法纠错。做成条目清单要多花时间维护，但错了能改、能删。</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="case-section">
+			<div><p class="number-label">05 / EVALUATION</p><h2>把回归评测设为提交门禁</h2></div>
+			<div class="case-copy">
+				<p class="case-lede">评测不是事后补的分数，而是每次提交前必须过的门禁：回归不过，不进主干。</p>
+				<p>
+					为六项任务定义可量化成功标准，建立功能测试集与跨功能回归集：62 条回归用例、5 类 Bad
+					Case，评测资产用 Langfuse 管理。
+				</p>
+				<div class="flow">
+					<div class="flow__step"><span>STEP 01</span><b>功能测试集</b><small>单任务验证</small></div>
+					<div class="flow__arrow">→</div>
+					<div class="flow__step"><span>STEP 02</span><b>跨功能回归集</b><small>存量不回退</small></div>
+					<div class="flow__arrow">→</div>
+					<div class="flow__step flow__step--gate"><span>GATE</span><b>提交前门禁</b><small>不过不进主干</small></div>
+				</div>
+				<div class="stat-row">
+					<div class="metric">
+						<strong class="font-mono text-3xl">27 → 1</strong
+						><p class="muted text-sm">用户价值 · 必读噪音条数</p>
+					</div>
+					<div class="metric">
+						<strong class="font-mono text-3xl">约 72% → 96%</strong
+						><p class="muted text-sm">AI 质量 · 邮件分类准确率</p>
+					</div>
+					<div class="metric">
+						<strong class="font-mono text-3xl">30+ → 0</strong
+						><p class="muted text-sm">运行约束 · 单日无效调用</p>
+					</div>
+				</div>
+				<p class="muted mt-7">
+					口径：本人真实邮箱环境自用，功能测试集 + 跨功能回归集离线评测，多轮迭代；项目未商业化，无外部用户规模数据。
+				</p>
+				<div class="decision">
+					<div class="decision__head">
+						<span class="decision__index">取舍 02</span>
+						<span class="decision__title">回归集作为提交门禁，不做手工自测</span>
+					</div>
+					<dl class="decision__rows">
+						<div class="decision__row"><dt>约束</dt><dd>一人负责产品定义与全栈开发，没有第二道把关。</dd></div>
+						<div class="decision__row"><dt>候选方案</dt><dd>A 手工自测；B 62 条回归用例 + 5 类 Bad Case 作为 GitHub 提交前门禁。</dd></div>
+						<div class="decision__row"><dt>证据</dt><dd>测试集、Rubric 与评测结果已在 Langfuse 统一管理，可批量复用。</dd></div>
+						<div class="decision__row"><dt>选择</dt><dd><em>B</em>：回归不过不进主干。</dd></div>
+						<div class="decision__row"><dt>代价</dt><dd>每次提交都要跑评测，迭代变慢。</dd></div>
+					</dl>
+				</div>
+				<div class="judgment">
+					<p class="judgment__label">我的判断</p>
+					<p>回归集的价值不在分数，而在把「我改坏了吗」变成可判定的问题。我接受提交变慢。</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="case-section">
+			<div><p class="number-label">06 / ITERATION</p><h2>两次真实迭代与当前状态</h2></div>
+			<div class="case-copy">
+				<p class="case-lede">用量数据比直觉更早发现问题：一次退役冗余例程，一次重构过滤门控。</p>
+				<p>
+					先从用量数据定位冗余例程并退役，单日 30+ 次无效调用清零；随后重构信息过滤门控，必读噪音从 27 条压到 1
+					条。两次都来自真实自用的观测，不是设想中的需求。
+				</p>
+				<p class="muted mt-7">
+					当前状态：M0–M5 与 ADR 0029 前的扩展已完成，本人自托管使用；Gmail 与 163 已启用真实
+					Provider，飞书日历保留配置入口。Releases 有 universal <code>.dmg</code>，未签名，需一次性
+					Gatekeeper 允许。
+				</p>
+				<div class="judgment">
+					<p class="judgment__label">我的判断</p>
+					<p>自己是唯一用户，反馈链路极短但没人兜底，所以我把观测、归因、重构、回归固定成流程，由数据驱动迭代。</p>
+				</div>
+				<div class="case-cta">
+					<a class="button-primary" href="https://github.com/Zhaozed/DayMate" target="_blank"
+						>查看 GitHub ↗</a
+					><a class="button-ghost" href="https://github.com/Zhaozed/DayMate/releases" target="_blank"
+						>下载 .dmg</a
+					>
+				</div>
+			</div>
+		</section>
+	</div>
+</PageLayout>

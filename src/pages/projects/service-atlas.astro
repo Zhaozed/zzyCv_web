@@ -1,0 +1,477 @@
+---
+import CaseStudy from "@/layouts/CaseStudy.astro";
+---
+
+<CaseStudy
+	title="ServiceAtlas｜海外售后邮件 AI 助手"
+	description="从 0 到 1 设计并落地海外售后邮件 AI 助手：诉求分诊、跨系统查证、带依据的英文回复草稿与人工审核门禁。"
+	eyebrow="Flagship case · 0→1 · 2026"
+	intro="帮客服把「读懂诉求 → 跨系统查证 → 写规范英文回复」压缩成一次审核：AI 负责结构化分诊、按需查证与生成带依据的草稿，客服保留最终确认权。我负责需求定义、方案设计、评测与迭代。"
+	tags={["AI 赋能专项", "Agent 工作流", "LLM Wiki 知识库", "MCP 工具查证", "人工审核门禁", "n8n"]}
+	results={[
+		{ value: "80%", label: "草稿直接采纳率", note: "试点期间统计 · 样本量待补" },
+		{ value: "40% ↑", label: "人均工单处理效率", note: "试点期间统计 · 样本量待补" },
+	]}
+	scope="数据口径：2026.08 起公司 AI 赋能专项小范围试点，指标为试点期间统计，非全量上线结果；样本量待补，当前仅标注周期。知识库与工具接入数量为建设进度。业务信息与客户数据已脱敏。"
+	meta={[
+		{ label: "项目性质", value: "公司 AI 赋能专项" },
+		{ label: "我的角色", value: "产品负责人（0→1）" },
+		{ label: "周期", value: "2026.08 — 至今" },
+		{ label: "阶段", value: "小范围试点" },
+		{ label: "协作", value: "售后专家 / 算法 / 研发" },
+		{ label: "说明", value: "内部项目 · 已脱敏" },
+	]}
+>
+	<!-- 01 问题与机会 -->
+	<section class="case-section">
+		<div>
+			<p class="number-label">01 / PROBLEM</p>
+			<h2>难点不是邮件变多，而是每封都要跨系统查证</h2>
+		</div>
+		<div class="case-copy">
+			<p class="case-lede">
+				新产品上市后海外售后邮件量上升，客服的时间没花在判断上，而是花在找信息与写规范英文回复。
+			</p>
+			<p>
+				一封邮件要经过：读懂诉求（口语化、一封多意图）→ 判断是否在政策范围内 → 查订单／物流／维修状态 → 查 SOP →
+				写英文回复。答案分散在业务系统、政策、FAQ 与邮件长线程四处。
+			</p>
+			<table class="data-table">
+				<caption>非 AI 与朴素 AI 方案的失败点</caption>
+				<thead>
+					<tr><th>方案</th><th>能解决</th><th>解决不了</th></tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>关键词搜索 / FAQ 检索</td>
+						<td>标准问题的固定答案</td>
+						<td>表述口语化、一封多意图，实时状态查不到</td>
+					</tr>
+					<tr>
+						<td>规则模板自动回复</td>
+						<td>「缺订单号」这类固定澄清</td>
+						<td>政策适用性无法穷举，误答直接触达客户</td>
+					</tr>
+					<tr>
+						<td>大模型直接生成回复</td>
+						<td>英文表达与语气</td>
+						<td>无事实来源，会编造订单号与政策条款</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				AI 的增量价值只在三处成立：<strong>结构化理解诉求</strong>、<strong>按需查证事实</strong>、<strong>生成可溯源草稿</strong>；其余留给规则和人。
+			</p>
+			<div class="judgment">
+				<p class="judgment__label">我的判断</p>
+				<p>
+					我把它定义为「客服的查证与拟稿副驾」，不是自动回复机器人：成功标准是客服敢不敢不改就发出去，而不是模型答得流畅。
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- 02 目标与边界 -->
+	<section class="case-section">
+		<div>
+			<p class="number-label">02 / SCOPE</p>
+			<h2>先做 7 类售后场景 + other 兜底，写操作一律不碰</h2>
+		</div>
+		<div class="case-copy">
+			<p class="case-lede">
+				MVP 只覆盖高频、可查证、政策相对明确的售后场景，并把「AI 能自动做什么」压到最小。
+			</p>
+			<p>
+				分诊的 <code>case_type</code> 有 8 个枚举，就是边界本身：7 类场景进入查证拟稿，<code>other</code> 兜底转人工。
+			</p>
+			<div class="chip-row">
+				<span class="chip">产品咨询</span>
+				<span class="chip">物流查询</span>
+				<span class="chip">订单取消</span>
+				<span class="chip">退货退款</span>
+				<span class="chip">维修申请</span>
+				<span class="chip">维修进度</span>
+				<span class="chip">整机或部件更换</span>
+				<span class="chip">其他 → 人工</span>
+			</div>
+			<div class="scope">
+				<div class="scope__col scope__col--in">
+					<p class="scope__title">本次做</p>
+					<ul>
+						<li>结构化分诊：场景、多意图、产品、已提供与缺失字段</li>
+						<li>Agent 只读查证订单／物流／维修状态，保留工具证据</li>
+						<li>基于分层知识库生成带来源的英文草稿</li>
+						<li>草稿、依据、待办与审核状态写入同一份记录</li>
+					</ul>
+				</div>
+				<div class="scope__col scope__col--out">
+					<p class="scope__title">明确不做</p>
+					<ul>
+						<li>模型永不发送、不取消、不退款、不提交表单</li>
+						<li>不判定退换／维修资格，政策冲突一律转人工</li>
+						<li>不自动发送三字段固定模板以外的内容</li>
+						<li>不声称已查看附件；不做英文以外语种</li>
+					</ul>
+				</div>
+			</div>
+			<div class="judgment">
+				<p class="judgment__label">我的判断</p>
+				<p>
+					「不做什么」更决定它能不能进试点：写操作与资格判定交给模型，出错代价是客诉，收益只是少点一次确认。
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- 03 方案与关键取舍 -->
+	<section class="case-section">
+		<div>
+			<p class="number-label">03 / SOLUTION</p>
+			<h2>五段链路，而不是一个端到端 Agent</h2>
+		</div>
+		<div class="case-copy">
+			<p class="case-lede">
+				链路拆成「结构化分诊 — 规则路由 — Agent 只读查证与拟稿 — 草稿校验 — 人工审核后发送」，每段都能单独评测与归因。
+			</p>
+			<div class="flow">
+				<div class="flow__step">
+					<span>STEP 01</span>
+					<b>Gmail 触发</b>
+					<small>新邮件与历史批量导入</small>
+				</div>
+				<div class="flow__arrow">→</div>
+				<div class="flow__step">
+					<span>STEP 02</span>
+					<b>入库与任务领取</b>
+					<small>去重落库并领取任务</small>
+				</div>
+				<div class="flow__arrow">→</div>
+				<div class="flow__step">
+					<span>STEP 03</span>
+					<b>上下文整理与完整性检查</b>
+					<small>汇总历史与当前邮件</small>
+				</div>
+				<div class="flow__arrow">→</div>
+				<div class="flow__step">
+					<span>STEP 04</span>
+					<b>LLM 结构化分诊</b>
+					<small>输出 route / case_type / 缺失字段</small>
+				</div>
+				<div class="flow__arrow">→</div>
+				<div class="flow__step">
+					<span>STEP 05</span>
+					<b>Agent 只读查证与拟稿</b>
+					<small>MCP 只读工具，迭代上限 8 次</small>
+				</div>
+				<div class="flow__arrow">→</div>
+				<div class="flow__step">
+					<span>STEP 06</span>
+					<b>草稿校验与证据留存</b>
+					<small>保留来源与工具证据</small>
+				</div>
+				<div class="flow__arrow">→</div>
+				<div class="flow__step">
+					<span>STEP 07</span>
+					<b>版本比对</b>
+					<small>比对版本与指纹</small>
+				</div>
+				<div class="flow__arrow">→</div>
+				<div class="flow__step">
+					<span>STEP 08</span>
+					<b>保存待审</b>
+					<small>草稿与审核状态落库</small>
+				</div>
+				<div class="flow__arrow">→</div>
+				<div class="flow__step flow__step--gate">
+					<span>GATE 09</span>
+					<b>飞书审核推送</b>
+					<small>客服编辑、驳回或通过</small>
+				</div>
+				<div class="flow__arrow">→</div>
+				<div class="flow__step flow__step--gate">
+					<span>GATE 10</span>
+					<b>领取唯一发送权</b>
+					<small>令牌领取，防重复发送</small>
+				</div>
+				<div class="flow__arrow">→</div>
+				<div class="flow__step flow__step--gate">
+					<span>GATE 11</span>
+					<b>发送前再核对</b>
+					<small>异常交恢复流程查证</small>
+				</div>
+				<div class="flow__arrow">→</div>
+				<div class="flow__step">
+					<span>STEP 12</span>
+					<b>发送 Gmail 回复</b>
+					<small>仅三字段模板可自动发送</small>
+				</div>
+				<div class="flow__arrow">→</div>
+				<div class="flow__step">
+					<span>STEP 13</span>
+					<b>记录与同步</b>
+					<small>记录并同步发送结果</small>
+				</div>
+			</div>
+			<p>
+				知识侧把 150 条 FAQ、22 篇官方支持文档与退换／维修 SOP 编译为 <strong>50+ 篇可溯源规范页</strong>；工具侧接入 Amazon、万里牛、FIXIT／瑞云等
+				<strong>7 个 MCP 服务</strong>，供 Agent 只读查证。
+			</p>
+
+			<div class="decision">
+				<div class="decision__head">
+					<span class="decision__index">取舍 01</span>
+					<span class="decision__title">分诊与拟稿拆开，不做端到端 Agent</span>
+				</div>
+				<dl class="decision__rows">
+					<div class="decision__row">
+						<dt>约束</dt>
+						<dd>要能定位问题、能按场景灰度。</dd>
+					</div>
+					<div class="decision__row">
+						<dt>候选方案</dt>
+						<dd>A 端到端单 Agent；B 分诊 + 规则路由 + 查证拟稿；C 纯规则检索。</dd>
+					</div>
+					<div class="decision__row">
+						<dt>证据</dt>
+						<dd>端到端出错分不清「没读懂」还是「查错了」。</dd>
+					</div>
+					<div class="decision__row">
+						<dt>选择</dt>
+						<dd><em>B</em>：分诊用 gpt-5-mini（轻量稳定），拟稿与 Agent 用 Gemini（长文英文更好）。</dd>
+					</div>
+					<div class="decision__row">
+						<dt>代价</dt>
+						<dd>两套提示词与中间状态要维护，延迟更高。</dd>
+					</div>
+				</dl>
+			</div>
+
+			<div class="decision">
+				<div class="decision__head">
+					<span class="decision__index">取舍 02</span>
+					<span class="decision__title">按需查证并留证据，不全量注入知识库</span>
+				</div>
+				<dl class="decision__rows">
+					<div class="decision__row">
+						<dt>约束</dt>
+						<dd>全量注入 50+ 篇规范页成本高，易混入不适用条款。</dd>
+					</div>
+					<div class="decision__row">
+						<dt>候选方案</dt>
+						<dd>A 全量注入；B 向量检索片段；C 先读索引判适用性再取整页。</dd>
+					</div>
+					<div class="decision__row">
+						<dt>证据</dt>
+						<dd>政策有产品与地区差异，片段检索易断章取义。</dd>
+					</div>
+					<div class="decision__row">
+						<dt>选择</dt>
+						<dd><em>C</em>：工具输入与结果作为证据落库，随草稿交审核台。</dd>
+					</div>
+					<div class="decision__row">
+						<dt>代价</dt>
+						<dd>迭代上限 8 次，复杂邮件可能查不全。</dd>
+					</div>
+				</dl>
+			</div>
+
+			<div class="decision">
+				<div class="decision__head">
+					<span class="decision__index">取舍 03</span>
+					<span class="decision__title">草稿 + 人工确认，仅模板澄清可自动发送</span>
+				</div>
+				<dl class="decision__rows">
+					<div class="decision__row">
+						<dt>约束</dt>
+						<dd>回复直达海外客户，涉及退款与维修资格。</dd>
+					</div>
+					<div class="decision__row">
+						<dt>候选方案</dt>
+						<dd>A 全自动回复；B 全部人工；C 草稿 + 人工确认。</dd>
+					</div>
+					<div class="decision__row">
+						<dt>证据</dt>
+						<dd>政策例外易漏限制条件；附件无真实核验手段。</dd>
+					</div>
+					<div class="decision__row">
+						<dt>选择</dt>
+						<dd><em>C</em>：自动发送仅限订单号／产品型号／问题描述三字段模板。</dd>
+					</div>
+					<div class="decision__row">
+						<dt>代价</dt>
+						<dd>客服仍需逐封确认，自动化率低于全自动。</dd>
+					</div>
+				</dl>
+			</div>
+			<div class="judgment">
+				<p class="judgment__label">我的判断</p>
+				<p>
+					这条链路里最贵的不是模型，而是「中间状态」：分诊结果、工具证据与版本指纹全部落库，才换来可评测、可回放，以及发送前拦住一次误发的能力。
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- 04 产品与交互设计 -->
+	<section class="case-section">
+		<div>
+			<p class="number-label">04 / PRODUCT</p>
+			<h2>客服看到的不是答案，而是一份可审核的工单</h2>
+		</div>
+		<div class="case-copy">
+			<p class="case-lede">
+				审核入口从飞书通知进入，草稿、依据、待办与审核状态读写同一份记录；驳回意见回流成下一轮上下文。
+			</p>
+			<table class="data-table">
+				<caption>人机分工</caption>
+				<thead>
+					<tr><th>环节</th><th>AI 负责</th><th>人负责</th></tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>分诊</td>
+						<td>识别场景、多意图与缺失字段，给出 route</td>
+						<td>校准路由边界</td>
+					</tr>
+					<tr>
+						<td>查证</td>
+						<td>只读调工具取实时状态并留证据</td>
+						<td>核对证据与结论是否一致</td>
+					</tr>
+					<tr>
+						<td>拟稿</td>
+						<td>英文草稿、待办建议与来源列表</td>
+						<td>编辑口径并决定是否通过</td>
+					</tr>
+					<tr>
+						<td>发送</td>
+						<td>仅三字段模板可自动发送，需领取唯一发送权</td>
+						<td>正式回复由人工确认</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h3>不确定性处理：能被规则判定的风险，不交给提示词</h3>
+			<p>
+				可预判的风险都前置成明确状态（<code>pending_review</code> / <code>needs_human</code> / <code>ignored</code>），而不是指望模型「别犯错」：
+			</p>
+			<div class="tile-grid">
+				<div class="tile">
+					<p class="tile__index">信息不足</p>
+					<b>只允许三字段模板追问</b>
+					<p>缺订单号／型号／问题描述时用固定模板，其余转人工。</p>
+				</div>
+				<div class="tile">
+					<p class="tile__index">无依据</p>
+					<b>没有工具证据就拒答</b>
+					<p>政策未知、冲突或工具失败即转人工。</p>
+				</div>
+				<div class="tile">
+					<p class="tile__index">附件</p>
+					<b>按未核验处理</b>
+					<p>附件只是引用，不声称已查看。</p>
+				</div>
+				<div class="tile">
+					<p class="tile__index">提示注入</p>
+					<b>外部内容一律视为数据</b>
+					<p>邮件、Wiki 与工具返回都不作指令执行。</p>
+				</div>
+			</div>
+			<div class="judgment">
+				<p class="judgment__label">我的判断</p>
+				<p>
+					门禁叠这么多层，是因为误发直接触达客户：客户已写了订单号却被模板追问、客服刚回复完 AI 又补一封，都是体验事故。宁可少自动化，也要让自动动作可解释、可回滚。
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- 05 评测与迭代 -->
+	<section class="case-section">
+		<div>
+			<p class="number-label">05 / EVALUATION</p>
+			<h2>采纳率只能事后看，能驱动迭代的是分层 Benchmark</h2>
+		</div>
+		<div class="case-copy">
+			<p class="case-lede">
+				我和售后专家定义了「什么算好回复」与「什么算采纳」，再拆成三层可观测指标，覆盖核心、边界与异常场景。
+			</p>
+			<table class="data-table">
+				<caption>三层指标与口径</caption>
+				<thead>
+					<tr><th>层次</th><th>代表指标</th><th>口径</th></tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>用户价值</td>
+						<td>草稿直接采纳率 80%；人均工单处理效率 40% ↑</td>
+						<td>试点期间统计；样本量待补，当前仅标注周期</td>
+					</tr>
+					<tr>
+						<td>AI 质量</td>
+						<td>引用可溯源（输出含 <code>used_sources</code>）；转人工比例（<code>needs_human</code> / <code>route=human</code>）；覆盖全部客户诉求</td>
+						<td>分层 Benchmark 覆盖核心／边界／异常</td>
+					</tr>
+					<tr>
+						<td>运行约束</td>
+						<td>Agent 迭代上限 8 次；上下文上限 80000 字符；单封成本与延迟</td>
+						<td>结构性约束可观测；成本、延迟与样本量待补</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				迭代闭环是「工单回流 → Bad Case 归因 → 方案迭代 → 离线回归 → 灰度验证」；最常见的改动不是换模型，而是把模糊口径写成可溯源规范页，或给自动动作加一道门禁。
+			</p>
+			<div class="judgment">
+				<p class="judgment__label">我的判断</p>
+				<p>
+					评测集若只含核心场景会系统性高估真实表现：附件、政策冲突、多轮线程在真实邮件里必然出现，所以我把边界与异常纳入分层 Benchmark。转人工比例也不当负向指标：该转时转对，比强行作答更有价值。
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- 06 结果与复盘 -->
+	<section class="case-section">
+		<div>
+			<p class="number-label">06 / RESULT</p>
+			<h2>试点验证了链路，也暴露了边界</h2>
+		</div>
+		<div class="case-copy">
+			<p class="case-lede">
+				试点期间草稿直接采纳率 80%、人均工单处理效率提升 40% ↑，客服的工作从「找信息 + 写英文」转为「审核与补充」。
+			</p>
+			<div class="stat-row">
+				<div class="metric">
+					<strong class="font-mono text-3xl">80%</strong>
+					<p class="muted text-sm">用户价值 · 草稿直接采纳率（试点期间）</p>
+				</div>
+				<div class="metric">
+					<strong class="font-mono text-3xl">40% ↑</strong>
+					<p class="muted text-sm">用户价值 · 人均工单处理效率（试点期间）</p>
+				</div>
+				<div class="metric">
+					<strong class="font-mono text-3xl">8 次</strong>
+					<p class="muted text-sm">运行约束 · Agent 单次迭代上限</p>
+				</div>
+			</div>
+			<h3>还没解决的</h3>
+			<ul>
+				<li>附件无法真实核验，含附件邮件仍全部转人工。</li>
+				<li>政策冲突与资格判定仍由人决定，AI 只标出冲突点。</li>
+				<li>自动发送仅限三字段模板；样本量与周期有限，指标不代表全量效果。</li>
+			</ul>
+			<h3>下一步</h3>
+			<p>
+				把附件解析接成真实工具、按线上分布重采样评测集、把采纳率拆到场景级归因，再逐步扩大自动处理范围。
+			</p>
+			<div class="judgment">
+				<p class="judgment__label">我的判断</p>
+				<p>
+					这一版真正的产出不是 80%，而是一套能持续判定的机制：每段可评测、每份草稿有证据、每次自动动作有门禁。指标会随场景分布变化，机制不会。
+				</p>
+			</div>
+			<p class="muted mt-7">内部专项，不公开仓库与客户数据；指标均为试点期间统计，已脱敏。</p>
+		</div>
+	</section>
+</CaseStudy>
