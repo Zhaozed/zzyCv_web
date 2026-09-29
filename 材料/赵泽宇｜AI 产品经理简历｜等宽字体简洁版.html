@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="赵泽宇 - AI 产品经理简历">
+  <title>赵泽宇｜AI 产品经理简历｜等宽字体简洁版</title>
+  <style>
+    :root {
+      --ink: #202b36;
+      --body: #46505a;
+      --muted: #77818b;
+      --accent: #284f67;
+      --line: #dde3e8;
+      --font: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #edf0f2;
+      color: var(--body);
+      font-family: var(--font);
+      font-size: 8.3pt;
+      line-height: 1.48;
+      -webkit-font-smoothing: antialiased;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .resume {
+      width: 210mm;
+      height: 297mm;
+      margin: 9mm auto;
+      padding: 7mm 12mm 11mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: white;
+      box-shadow: 0 8px 40px #2030400c, 0 1px 3px #2030400a;
+    }
+
+    .resume>* {
+      flex-shrink: 0;
+    }
+
+    .header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 21mm;
+      gap: 8mm;
+      align-items: center;
+      margin-bottom: 2.4mm;
+    }
+
+    .header-spacer {
+      display: none;
+    }
+
+    .identity {
+      min-width: 0;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 21pt;
+      font-weight: 650;
+      letter-spacing: 1pt;
+      line-height: 1.15;
+    }
+
+    .target {
+      margin: 2mm 0 2.2mm;
+      color: var(--accent);
+      font-size: 9pt;
+      font-weight: 500;
+      letter-spacing: .3pt;
+    }
+
+    .contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.1mm 3.6mm;
+      max-width: 145mm;
+      color: #64717c;
+      font-size: 7pt;
+      line-height: 1.5;
+    }
+
+    .contact a,
+    .contact-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 1mm;
+      white-space: nowrap;
+    }
+
+    .contact-icon {
+      width: 2.5mm;
+      height: 2.5mm;
+      object-fit: contain;
+      opacity: .58;
+    }
+
+    .portrait-wrap {
+      width: 21mm;
+    }
+
+    .portrait {
+      display: block;
+      width: 21mm;
+      height: 25mm;
+      object-fit: cover;
+      object-position: 50% 18%;
+      border-radius: 1mm;
+    }
+
+    .summary {
+      margin: 0 0 2.7mm;
+      padding: 2mm 0 0;
+      border-top: 1px solid var(--line);
+      color: #5c6670;
+      font-size: 7.7pt;
+      line-height: 1.55;
+    }
+
+    .section {
+      margin: 0 0 2.8mm;
+    }
+
+    .section:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 3mm;
+      margin: 0 0 1.8mm;
+      color: var(--accent);
+      font-size: 10.5pt;
+      font-weight: 650;
+      letter-spacing: 1.2pt;
+      line-height: 1.3;
+    }
+
+    .section-title::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      background: var(--line);
+    }
+
+    .education-item {
+      margin-bottom: 1.1mm;
+    }
+
+    .education-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .education-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 49mm 29mm;
+      gap: 4mm;
+      align-items: baseline;
+    }
+
+    .education-school {
+      color: var(--ink);
+      font-size: 8.7pt;
+      font-weight: 600;
+    }
+
+    .education-degree,
+    .entry-degree {
+      color: #606d79;
+      font-size: 7.5pt;
+      white-space: nowrap;
+    }
+
+    .education-date,
+    .entry-date,
+    .project-date {
+      color: var(--muted);
+      font-size: 7.1pt;
+      font-weight: 400;
+      white-space: nowrap;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: .1pt;
+    }
+
+    .entry {
+      margin: 0 0 3.2mm;
+      break-inside: avoid;
+    }
+
+    .entry:last-child {
+      margin-bottom: 0;
+    }
+
+    .entry-head {
+      padding: 1mm 0 1.2mm;
+      border-bottom: 1px solid #dce3e8;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 3mm;
+      align-items: center;
+    }
+
+    .entry-brand {
+      display: flex;
+      align-items: center;
+      gap: 1.7mm;
+      min-width: 0;
+    }
+
+    .entry-degree {
+      margin-left: 1mm;
+    }
+
+    .company-logo-box {
+      display: inline-flex;
+      width: 4.8mm;
+      height: 4.8mm;
+      flex: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .company-logo {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .company-overview {
+      margin: .9mm 0 0;
+      font-size: 8pt;
+      color: #606d79;
+      line-height: 1.45;
+    }
+
+    .project {
+      margin-top: 2.8mm;
+    }
+
+    .project+.project {
+      margin-top: 3.2mm;
+    }
+
+    .entry-name {
+      color: var(--ink);
+      font-size: 9.2pt;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    .workstream {
+      display: flex;
+      align-items: baseline;
+      gap: 2.5mm;
+      min-width: 0;
+      margin: 0 0 1.2mm;
+      line-height: 1.4;
+    }
+
+    .workstream strong {
+      min-width: 0;
+      color: var(--ink);
+      font-size: 8.6pt;
+      font-weight: 500;
+    }
+
+    .project-name {
+      font-size: 9.6pt;
+      font-weight: 650;
+      color: var(--accent);
+    }
+
+    .project-description {
+      color: #495862;
+      font-size: 8.4pt;
+      font-weight: 500;
+    }
+
+    .project-date {
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .project-source {
+      display: inline-flex;
+      align-items: center;
+      gap: .8mm;
+      flex-shrink: 0;
+      color: var(--accent);
+      font-size: 6.9pt;
+      line-height: 1.3;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .workstream--linked {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+    }
+
+    .workstream--linked .project-source {
+      justify-self: center;
+    }
+
+    .workstream--linked .project-date {
+      margin-left: 0;
+    }
+
+    .project-source svg {
+      width: 2.5mm;
+      height: 2.5mm;
+      align-self: center;
+      fill: currentColor;
+    }
+
+    .project .intro {
+      margin: 0;
+      color: #6b747c;
+      font-size: 7.9pt;
+      line-height: 1.5;
+    }
+
+    .sub-label {
+      margin: .6mm 0 .3mm;
+      color: #5c6874;
+      font-size: 7.6pt;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .bullets {
+      margin: .5mm 0 0;
+      padding-left: 3.4mm;
+    }
+
+    .project .bullets {
+      margin-top: 1.2mm;
+    }
+
+    .bullets li {
+      padding-left: .25mm;
+      margin: 0 0 1.1mm;
+      font-size: 8.2pt;
+      line-height: 1.52;
+    }
+
+    .bullets li:last-child {
+      margin-bottom: 0;
+    }
+
+    .bullets li::marker {
+      color: #8b9aa7;
+      font-size: .75em;
+    }
+
+    .lead {
+      color: #344550;
+      font-weight: 600;
+    }
+
+    .metric {
+      color: #234e69;
+      font-weight: 650;
+    }
+
+    .skill-row {
+      display: grid;
+      grid-template-columns: 25mm minmax(0, 1fr);
+      gap: 2mm;
+      margin-bottom: .7mm;
+      font-size: 7.7pt;
+      line-height: 1.45;
+    }
+
+    .skill-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .skill-label {
+      color: #394b59;
+      font-weight: 600;
+    }
+
+    .skill-value {
+      color: #606d79;
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    @media print {
+
+      html,
+      body {
+        width: 210mm;
+        height: 297mm;
+        background: #fff;
+      }
+
+      .resume {
+        margin: 0;
+        box-shadow: none;
+      }
+    }
+
+    @media screen and (max-width: 800px) {
+      body {
+        background: white;
+      }
+
+      .resume {
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+        margin: 0;
+        padding: 7mm 5mm;
+        box-shadow: none;
+      }
+
+      .header {
+        gap: 4mm;
+      }
+
+      .contact {
+        gap: 1mm 3mm;
+      }
+
+      .education-head {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 1mm 3mm;
+      }
+
+      .education-degree {
+        grid-column: 1;
+        grid-row: 2;
+      }
+
+      .education-date {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      .entry-brand {
+        flex-wrap: wrap;
+        gap: 1mm;
+      }
+
+      .entry-degree {
+        margin-left: 0;
+      }
+
+      .workstream {
+        flex-wrap: wrap;
+        gap: 1mm 2mm;
+      }
+
+      .workstream strong {
+        flex: 1 1 auto;
+      }
+
+      .workstream--linked {
+        display: flex;
+      }
+
+      .workstream--linked strong {
+        flex-basis: 100%;
+      }
+
+      .workstream--linked .project-date {
+        margin-left: auto;
+      }
+
+      .project-date {
+        margin-left: auto;
+      }
+    }
+
+    .section--skills .skill-row {
+      display: grid;
+      grid-template-columns: 7em minmax(0, 1fr);
+      column-gap: 1em;
+      align-items: start;
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+
+    .section--skills .skill-label {
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .section--skills .skill-value {
+      min-width: 0;
+      overflow-wrap: break-word;
+    }
+
+    .section--skills .skill-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .section--skills .nowrap {
+      white-space: nowrap;
+    }
+  </style>
+</head>
+
+<body>
+  <article class="resume">
+    <header class="header">
+      <div class="header-spacer" aria-hidden="true"></div>
+      <div class="identity">
+        <h1>赵泽宇</h1>
+        <p class="target">27 届硕士｜求职意向：AI 产品经理</p>
+        <div class="contact">
+          <a href="tel:+8618032098113"><img class="contact-icon" src="./赵泽宇｜AI 产品经理简历｜等宽字体简洁版_files/phone.svg"
+              alt="">180 3209 8113</a>
+          <a href="mailto:18032098113@163.com"><img class="contact-icon" src="./赵泽宇｜AI 产品经理简历｜等宽字体简洁版_files/mail.svg"
+              alt="">18032098113@163.com</a>
+          <a href="https://github.com/Zhaozed"><img class="contact-icon" src="./赵泽宇｜AI 产品经理简历｜等宽字体简洁版_files/github.svg"
+              alt="">作品集：github.com/Zhaozed</a>
+          <span class="contact-meta">政治面貌：中共党员</span>
+        </div>
+      </div>
+      <div class="portrait-wrap">
+        <img class="portrait" src="./赵泽宇｜AI 产品经理简历｜等宽字体简洁版_files/portrait.jpg" alt="赵泽宇证件照">
+      </div>
+    </header>
+
+    <p class="summary">具备软件开发背景的 AI 产品经理，聚焦 Agent 产品设计与评测，推动 AI
+      能力在实际业务场景中落地。具备从需求定义、方案设计到产品验证的实践经验，能将业务要求转化为可执行的评测标准，并借助编程能力独立完成原型与工具落地。</p>
+    <section class="section">
+      <h2 class="section-title">教育背景</h2>
+
+      <div class="education-item">
+        <div class="education-head">
+          <div class="education-school">Universiti Malaya（QS 56）</div>
+          <div class="education-degree">软件工程｜硕士</div>
+          <div class="education-date">2024.03 - 2027.03</div>
+        </div>
+
+      </div>
+
+      <div class="education-item">
+        <div class="education-head">
+          <div class="education-school">河北经贸大学</div>
+          <div class="education-degree">软件工程｜本科</div>
+          <div class="education-date">2019.09 - 2023.06</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">实习与项目经历</h2>
+
+      <!-- 1. 可以科技 -->
+      <article class="entry">
+        <div class="entry-head">
+          <div class="entry-brand">
+            <span class="company-logo-box">
+              <img class="company-logo keyi" src="./赵泽宇｜AI 产品经理简历｜等宽字体简洁版_files/keyi-robot.svg" alt="KEYi Robot Logo">
+            </span>
+            <div class="entry-name">可以科技（KEYi，具身 AI 硬件厂商）｜AI 产品经理（实习）</div>
+          </div>
+          <div class="entry-date">2026.05 - 至今</div>
+        </div>
+
+        <p class="company-overview">参与 Loona 桌面机器人 Agent 的功能规划、交互设计与体验优化；主导 Agent 评测平台及评测体系从 0 到 1 设计与交付；搭建团队自用的飞书多语种翻译机器人。</p>
+
+        <!-- 项目 1.1：Cortex-Agent -->
+        <div class="project">
+          <div class="workstream">
+            <strong>
+              <span class="project-name">Cortex-Agent</span>
+              <span class="project-description">｜桌面具身 Agent</span>
+            </strong>
+            <span class="project-date">2026.05—至今</span>
+          </div>
+
+          <p class="intro">
+            可以科技 Loona 桌面机器人的 Agent 运行时，面向办公辅助与陪伴场景，支持语音交互与主动任务执行；基于 ReAct 架构完成任务路由、规划、工具编排与输出门控。
+          </p>
+
+          <ul class="bullets">
+            <li>
+              <strong class="lead">工具治理与效果优化：</strong>
+              针对 122 个工具全量注入引发的上下文膨胀与模型误选，主导设计“同类能力聚合＋业务域路由＋按需动态挂载”分层调度方案，推动 ToolHub 目录精简至 <strong class="metric">77 个</strong>；在基准评测集下，Planner 单轮输入 Token 降低约 <strong class="metric">30%</strong>，基准用例成功率由 <strong class="metric">91.2% 提升至 97.8%</strong>（124 → 133/136）。
+            </li>
+
+            <li>
+              <strong class="lead">主动服务设计与闭环：</strong>
+              主导<strong>晨间智能简报（Daily Brief）</strong>等核心主动服务落地；针对现场多轮 ReAct 等待过长痛点，设计“并发预查＋场景化记忆过滤”方案，将端到端时延压至 <strong class="metric">4~5s</strong>；通过建立“门禁·质检·验证”三层闭环，持续收敛 Bad Case，保障晨报核心信息的准确生成。
+            </li>
+
+            <li>
+              <strong class="lead">办公能力接入与标准化：</strong>
+              负责 Gmail、Outlook 邮件／日程等 <strong class="metric">5 项核心办公工具</strong>的功能设计与交付，确立<strong>“高危操作必确认、缺参必反问”</strong>等交互防错红线；沉淀覆盖场景标准、权限边界与异常兜底的 <strong class="metric">6 步标准接入 SOP</strong>，并将接入规范封装为可复用的 PRD Skill。
+            </li>
+          </ul>
+        </div>
+
+        <!-- 项目 1.2：Cortex-Eval -->
+        <div class="project">
+          <div class="workstream workstream--linked">
+            <strong>
+              <span class="project-name">Cortex-Eval</span>
+              <span class="project-description">｜Cortex-Agent 评测与版本验收平台（0—1）</span>
+            </strong>
+            <a class="project-source"
+              href="https://github.com/Zhaozed/cortex-eval" target="_blank" rel="noopener noreferrer"
+              aria-label="查看 Cortex-Eval 的 GitHub 仓库" title="github.com/Zhaozed/cortex-eval">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 .75a11.25 11.25 0 0 0-3.56 21.92c.56.1.77-.24.77-.54v-2.1c-3.13.68-3.8-1.33-3.8-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.03-.7.08-.69.08-.69 1.14.08 1.74 1.17 1.74 1.17 1.01 1.73 2.65 1.23 3.3.94.1-.73.4-1.23.72-1.51-2.5-.28-5.13-1.25-5.13-5.56 0-1.23.44-2.23 1.16-3.01-.12-.28-.5-1.43.11-2.98 0 0 .95-.3 3.1 1.15a10.8 10.8 0 0 1 5.64 0c2.15-1.45 3.09-1.15 3.09-1.15.62 1.55.23 2.7.12 2.98.72.78 1.15 1.78 1.15 3.01 0 4.32-2.63 5.27-5.14 5.55.4.35.76 1.03.76 2.08v3.1c0 .3.2.65.78.54A11.25 11.25 0 0 0 12 .75Z" />
+              </svg>github.com/Zhaozed/cortex-eval
+            </a>
+            <span class="project-date">2026.06—2026.08</span>
+          </div>
+          <p class="intro">
+            为 Cortex-Agent 配套建设的评测与版本验收平台，解决人工走查效率低、执行过程检查不足及存量能力回归难等问题；主导产品规划、评测体系设计与平台落地。
+          </p>
+
+          <ul class="bullets">
+            <li>
+              <strong class="lead">产品规划与平台交付：</strong>
+              拆解 Langfuse、Promptfoo 在评测与扩展能力上的差异，结合 Cortex 执行接口与产品验收需求，定义平台边界与核心模块；基于 Codex 独立完成从方案设计到产品交付，落地多环境批跑、单 Case 调试、版本对比、A2UI 渲染及 MCP 辅助的 Bad Case 归因能力。
+            </li>
+
+            <li>
+              <strong class="lead">评测规范与资产建设：</strong>
+              建立覆盖路由、工具编排、发声与安全等 <strong class="metric">6 维评测矩阵</strong>；围绕日程、邮件等 <strong class="metric">9 类核心场景</strong>，沉淀 <strong class="metric">30+ 项检查规则</strong>与回归基线；结合 JEV、代码断言和 LLM 裁判，分别核验结构化规则、确定性要求与开放语义，识别存量能力退化。
+            </li>
+
+            <li>
+              <strong class="lead">综合成果：</strong>
+              建立起“评测发现—归因修复—复测验证—回归集更新”的质量闭环；累计支撑 <strong class="metric">3 次版本验收</strong>，识别并推动解决 <strong class="metric">5 个阻塞级问题</strong>，单轮走查周期<strong class="metric">缩短约 60%</strong>。
+            </li>
+          </ul>
+
+        </div>
+
+      </article>
+
+      <!-- 2. DayMate 个人项目 -->
+      <article class="entry">
+        <div class="entry-head">
+          <div class="entry-brand">
+            <span class="project-name" style="font-size: 9.2pt; color: var(--ink);">DayMate</span>
+            <span class="project-description">｜桌面端个人工作代理（独立全栈开发 · 开源）</span>
+            <a class="project-source" href="https://github.com/Zhaozed/DayMate" target="_blank" rel="noopener noreferrer" style="margin-left: 2mm;">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .75a11.25 11.25 0 0 0-3.56 21.92c.56.1.77-.24.77-.54v-2.1c-3.13.68-3.8-1.33-3.8-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.03-.7.08-.69.08-.69 1.14.08 1.74 1.17 1.74 1.17 1.01 1.73 2.65 1.23 3.3.94.1-.73.4-1.23.72-1.51-2.5-.28-5.13-1.25-5.13-5.56 0-1.23.44-2.23 1.16-3.01-.12-.28-.5-1.43.11-2.98 0 0 .95-.3 3.1 1.15a10.8 10.8 0 0 1 5.64 0c2.15-1.45 3.09-1.15 3.09-1.15.62 1.55.23 2.7.12 2.98.72.78 1.15 1.78 1.15 3.01 0 4.32-2.63 5.27-5.14 5.55.4.35.76 1.03.76 2.08v3.1c0 .3.2.65.78.54A11.25 11.25 0 0 0 12 .75Z"/></svg>
+              github.com/Zhaozed/DayMate
+            </a>
+          </div>
+          <div class="entry-date">2026.02 - 2026.04</div>
+        </div>
+
+        <p class="company-overview">针对海外求学（毕业进度、导师沟通）及校招求职信息分散多处的痛点，独立开发常驻桌面的个人工作代理，将邮件非结构化内容自动转化为待办清单、求职进展看板与面试资料。已自用并开源。</p>
+
+        <ul class="bullets">
+          <li>
+            <strong class="lead">岗位归并与人机协同：</strong>
+            针对招聘邮件来源分散、同公司多岗位等情况，设计“多级匹配＋置信度校验”归并策略；建立缺参刹车机制，在缺失 JD 等关键信息时阻断自动流转并引导人工补全，岗位归并准确率达 <strong class="metric">94%</strong>，缺损信息拦截唤起率达 <strong class="metric">100%</strong>。
+          </li>
+          <li>
+            <strong class="lead">资料生成与事实控制：</strong>
+            串联企业调研、岗位匹配与高频考点梳理，基于固定 HTML 模板约束输出形态；设计来源引用溯源与事实核验规则，强制模型仅依据真实邮件与个人简历生成内容，杜绝胡编乱造，实现核心事实零幻觉，面试资料直接可用率达 <strong class="metric">85% 以上</strong>。
+          </li>
+        </ul>
+      </article>
+
+      <!-- 3. 九号公司 -->
+      <article class="entry">
+        <div class="entry-head">
+          <div class="entry-brand">
+            <span class="company-logo-box"><img class="company-logo ninebot"
+                src="./赵泽宇｜AI 产品经理简历｜等宽字体简洁版_files/ninebot-flyman.png" alt="Ninebot 小飞人 Logo"></span>
+            <div class="entry-name">九号公司（零极创新事业部）｜前端研发（实习）</div>
+          </div>
+          <div class="entry-date">2025.07 - 2026.01</div>
+        </div>
+        <p class="company-overview">参与九号云运营平台、车联网平台建设，承担 B 端业务模块的需求评审、前端开发与上线交付。</p>
+        <ul class="bullets">
+          <li>
+            <strong class="lead">B 端研发交付与全栈协作：</strong>
+            围绕消息推送、设备看板等核心场景，负责 RBAC 权限控制、长表单虚拟列表优化与通用组件封装等前端交付；协同后端与测试完成全流程联调验收，独立交付 <span class="metric">10+</span> 项需求并闭环 <span class="metric">15+</span> 个缺陷，沉淀扎实的工程实现与产研协同底色。
+          </li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="section section--skills">
+      <h2 class="section-title">专业技能</h2>
+
+      <div class="skill-row">
+        <div class="skill-label">AI 产品设计</div>
+        <div class="skill-value">
+          具备 Prompt Engineering、Agent 方案设计与评测体系搭建经验，能结合模型能力边界设计任务路由、工具调用与人机协同（HITL）机制，构建评测集并制定 <span class="nowrap">LLM
+            Judge</span> 评分标准与版本验收规则。
+        </div>
+      </div>
+
+      <div class="skill-row">
+        <div class="skill-label">AI 工具应用</div>
+        <div class="skill-value">
+          深度使用 Codex、Claude Code 辅助开发与日常工作，将高频任务的操作流程与质量要求封装为团队可复用的 Skill。
+        </div>
+      </div>
+
+      <div class="skill-row">
+        <div class="skill-label">开发与数据</div>
+        <div class="skill-value">
+          熟悉 JavaScript / TypeScript 及前端开发生态，可快速搭建交互原型、验证功能方案；熟练使用 Python、SQL 进行数据处理与分析。
+        </div>
+      </div>
+
+      <div class="skill-row">
+        <div class="skill-label">英语水平</div>
+        <div class="skill-value">PTE Academic 64 分（等价雅思6.5）</div>
+      </div>
+    </section>
+  </article>
+
+
+</body>
+
+</html>
