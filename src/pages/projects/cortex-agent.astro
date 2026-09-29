@@ -1,0 +1,305 @@
+---
+import ProactiveService from "@/components/cortex/ProactiveService.astro";
+import ProjectClosing from "@/components/cortex/ProjectClosing.astro";
+import ToolhubGovernance from "@/components/cortex/ToolhubGovernance.astro";
+import PageLayout from "@/layouts/Base.astro";
+
+import "@/styles/cortex-agent.css";
+import "@/styles/cortex-toolhub.css";
+import "@/styles/cortex-proactive.css";
+import "@/styles/cortex-closing.css";
+
+const initiatives = [
+	{
+		isCore: true,
+		badge: "核心攻坚 01 · 运行时架构",
+		title: "ToolHub 成本与调度确定性治理",
+		contextLabel: "核心挑战",
+		context: "122 个工具全量注入导致 1.5万 Token 描述膨胀与模型选择幻觉超时",
+		action: "主导「同类能力聚合 + 业务域路由 + 按需动态挂载」分层调度方案",
+		metrics: [
+			{ val: "122 → 77", label: "工具目录聚合精简" },
+			{ val: "≈30% ↓", label: "Planner 单轮 Token" },
+			{ val: "91.2% → 97.8%", label: "基准用例成功率 (124→133/136)" }
+		],
+		anchor: "#toolhub"
+	},
+	{
+		isCore: true,
+		badge: "核心攻坚 02 · 主动智能闭环",
+		title: "DeskMate Daily Brief · 晨间智能工作简报",
+		contextLabel: "核心挑战",
+		context: "现场多轮 ReAct 时延过长、离线预生成算力空转滞后、通用记忆高噪混杂",
+		action: "原型实验论证并推行「代码并发预查 + 场景化记忆剪枝」，构建三层质量闭环",
+		metrics: [
+			{ val: "实测 4~5s", label: "端到端交互时延" },
+			{ val: "1.5万 → 1,200", label: "记忆输入 Token" },
+			{ val: "三层闭环", label: "门禁 · 质检 · 验证" }
+		],
+		anchor: "#proactive"
+	},
+	{
+		isCore: false,
+		badge: "能力落地 03 · 办公生态接入",
+		title: "5 项核心办公应用落地与标准接入 SOP",
+		contextLabel: "业务目标",
+		context: "从 0 到 1 拓展机器人办公能力，确立高危防错红线与 6 步标准接入规范",
+		action: "主导 5 项办公工具从协议设计到落地闭环，确立「高危必确认、缺参必反问」交互红线与 SOP",
+		metrics: [
+			{ val: "5 项", label: "高频办公能力落地" },
+			{ val: "3 条", label: "产品交互防错红线" },
+			{ val: "6 步", label: "标准接入 SOP" }
+		],
+		anchor: "#onboarding"
+	},
+	{
+		isCore: false,
+		badge: "交付提效 04 · 协作基础设施",
+		title: "多模态交互评审工作台 (Web Mock 工具)",
+		contextLabel: "协作价值",
+		context: "语音、表情、动作与卡片交织，突破静态原型限制，对齐多模态时序节奏",
+		action: "自研前端可播放评审工具，支持关键帧暂停批注与理想链路配置导出交付",
+		metrics: [
+			{ val: "前端 Mock", label: "交互评审工具" },
+			{ val: "帧级", label: "多模态时序协同" },
+			{ val: "JSON 导出", label: "标准配置交付" }
+		],
+		anchor: "#workbench"
+	}
+];
+
+const navigation = [
+	{ id: "overview", num: "TOP", label: "项目概览" },
+	{ id: "toolhub", num: "01", label: "Toolhub治理" },
+	{ id: "proactive", num: "02", label: "主动服务" },
+	{ id: "onboarding", num: "03", label: "工具接入与 SOP" },
+	{ id: "workbench", num: "04", label: "交互评审工作台" },
+	{ id: "retrospective", num: "05", label: "项目复盘" }
+];
+---
+
+<PageLayout
+	meta={{
+		title: "Cortex-Agent · 桌面 AI 机器人生产力进化",
+		description:
+			"可以科技 Loona 桌面 AI 机器人项目：ToolHub 工具治理、DeskMate Daily Brief 晨间智能简报体系，以及办公能力接入与交互评审工作台。"
+	}}>
+	<article class="cortex-case">
+		<!-- 桌面端侧边目录 -->
+		<aside class="ca-sidebar" aria-label="页内目录">
+			<nav class="ca-nav" aria-label="项目章节导航">
+				<p>本页目录</p>
+				{
+					navigation.map(item => (
+						<a href={`#${item.id}`} aria-current={item.id === "overview" ? "location" : undefined}>
+							<span>{item.num}</span>
+							{item.label}
+						</a>
+					))
+				}
+			</nav>
+		</aside>
+
+		<!-- 移动端浮动目录 -->
+		<details class="ca-mobile-toc">
+			<summary>本页目录 <span aria-hidden="true">≡</span></summary>
+			<nav aria-label="移动端项目章节导航">
+				{
+					navigation.map(item => (
+						<a href={`#${item.id}`} aria-current={item.id === "overview" ? "location" : undefined}>
+							<span>{item.num}</span>
+							{item.label}
+						</a>
+					))
+				}
+			</nav>
+		</details>
+
+		<!-- Hero Section & Executive Scorecard -->
+		<header class="ca-hero" id="overview" data-case-section>
+			<a class="ca-back" href="/projects/">← 返回精选项目</a>
+			<p class="ca-eyebrow"><span aria-hidden="true"></span> 可以科技 KEYi · AI 产品经理实习项目</p>
+			<h1>Cortex-Agent<span class="ca-title-dot" aria-hidden="true">.</span></h1>
+			<p class="ca-subtitle">让桌面伴侣机器人，迈向具身办公生产力 Agent</p>
+			<p class="ca-intro ca-reading">
+				Loona DeskMate 将 iPhone
+				与可转动底座结合，通过语音、表情和动作与用户多模态互动。Cortex-Agent 是其中的 Agent
+				运行时，连接邮件、日历与项目协作工具，支持信息检索、任务规划与主动简报交付。
+			</p>
+
+			<!-- PM 职责与项目信息条 -->
+			<div class="ca-role-strip">
+				<div class="ca-role-col">
+					<strong>我的角色</strong>
+					<span>AI 产品经理 · 负责 Toolhub、主动服务及相关基础设施</span>
+				</div>
+				<div class="ca-role-col">
+					<strong>项目周期</strong>
+					<span>2026.04 — 至今</span>
+				</div>
+				<div class="ca-role-col">
+					<strong>协作团队</strong>
+					<span>产品负责人、Agent研发、客户端、测试</span>
+				</div>
+			</div>
+
+			<!-- 核心看点：主要工作与成果看板 -->
+			<div class="ca-initiatives-wrap ca-reveal">
+				<div class="ca-initiatives-head">
+					<h3><span>EXECUTIVE SCORECARD</span>主要工作与成果总览 (Major Initiatives)</h3>
+					<p>
+						以「运行时架构治理」与「主动服务闭环」为双核主驱动，配套办公生态接入与评审工具赋能。
+					</p>
+				</div>
+				<div class="ca-initiatives-grid">
+					{
+						initiatives.map(item => (
+							<div class:list={["ca-init-card", "ca-reveal", { "is-core": item.isCore }]}>
+								<div class="ca-init-top">
+									<div class="ca-init-badge-row">
+										<span class="ca-init-badge">{item.badge}</span>
+										{item.isCore && <span class="ca-core-tag">双核驱动</span>}
+									</div>
+									<h4>{item.title}</h4>
+								</div>
+								<div class="ca-init-body">
+									<p class="ca-init-pain">
+										<strong>{item.contextLabel}：</strong>
+										{item.context}
+									</p>
+									<p class="ca-init-action">
+										<strong>PM 核心动作：</strong>
+										{item.action}
+									</p>
+								</div>
+								<div class="ca-init-metrics">
+									{item.metrics.map(m => (
+										<div class="ca-init-m-col">
+											<strong>{m.val}</strong>
+											<span>{m.label}</span>
+										</div>
+									))}
+								</div>
+								<a class="ca-init-link" href={item.anchor}>
+									查看详细设计 <span>↓</span>
+								</a>
+							</div>
+						))
+					}
+				</div>
+			</div>
+		</header>
+
+		<!-- 01 Toolhub：ToolHub -->
+		<section class="ca-section" id="toolhub" data-case-section aria-labelledby="toolhub-heading">
+			<header class="ca-section-head">
+				<p class="ca-kicker"><span>01</span> 核心攻坚 · 运行时架构</p>
+				<h2 id="toolhub-heading">ToolHub 治理：从全量注入到分层按需挂载</h2>
+			</header>
+			<ToolhubGovernance />
+		</section>
+
+		<!-- 02 主动服务设计与评测闭环 -->
+		<ProactiveService />
+
+		<!-- 03 交付资产 & 04 项目复盘 -->
+		<ProjectClosing />
+	</article>
+</PageLayout>
+
+<script>
+	const links = [...document.querySelectorAll<HTMLAnchorElement>(".ca-nav a, .ca-mobile-toc a")];
+	const sections = [...document.querySelectorAll<HTMLElement>("[data-case-section]")];
+	let scheduled = false;
+	function updateNavigation() {
+		const anchor = 128;
+		const active =
+			sections.filter(section => section.getBoundingClientRect().top <= anchor).at(-1) ??
+			sections[0];
+		for (const link of links) {
+			if (link.hash === `#${active?.id}`) link.setAttribute("aria-current", "location");
+			else link.removeAttribute("aria-current");
+		}
+		scheduled = false;
+	}
+	window.addEventListener(
+		"scroll",
+		() => {
+			if (!scheduled) {
+				scheduled = true;
+				requestAnimationFrame(updateNavigation);
+			}
+		},
+		{ passive: true }
+	);
+	window.addEventListener("resize", updateNavigation);
+	updateNavigation();
+
+	const mobileToc = document.querySelector<HTMLDetailsElement>(".ca-mobile-toc");
+	for (const link of links)
+		link.addEventListener("click", () => {
+			if (mobileToc) mobileToc.open = false;
+		});
+	document.addEventListener("keydown", event => {
+		if (event.key === "Escape" && mobileToc?.open) {
+			mobileToc.open = false;
+			mobileToc.querySelector("summary")?.focus();
+		}
+	});
+	document.addEventListener("click", event => {
+		if (mobileToc?.open && event.target instanceof Node && !mobileToc.contains(event.target))
+			mobileToc.open = false;
+	});
+
+	// 高级滚动进入动画 (Scroll Reveal Observer)
+	const reveals = document.querySelectorAll(".ca-reveal");
+	if ("IntersectionObserver" in window) {
+		const revealObserver = new IntersectionObserver(
+			(entries, observer) => {
+				entries.forEach((entry, idx) => {
+					if (entry.isIntersecting) {
+						// 稍微错开微小延迟，营造高质感入场
+						setTimeout(
+							() => {
+								entry.target.classList.add("is-revealed");
+							},
+							(idx % 4) * 60
+						);
+						observer.unobserve(entry.target);
+					}
+				});
+			},
+			{ threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+		);
+		reveals.forEach(el => revealObserver.observe(el));
+	} else {
+		reveals.forEach(el => el.classList.add("is-revealed"));
+	}
+
+	// 动态对比进度条触发 (Animated Progress Bars)
+	const barFills = document.querySelectorAll<HTMLElement>(".th-bar-fill");
+	if ("IntersectionObserver" in window) {
+		const barObserver = new IntersectionObserver(
+			(entries, obs) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						const el = entry.target as HTMLElement;
+						const targetWidth = el.getAttribute("data-target-w");
+						if (targetWidth) {
+							el.style.width = targetWidth;
+						}
+						obs.unobserve(el);
+					}
+				});
+			},
+			{ threshold: 0.2 }
+		);
+
+		barFills.forEach(bar => {
+			const initialW = bar.style.width || "100%";
+			bar.setAttribute("data-target-w", initialW);
+			bar.style.width = "0%";
+			barObserver.observe(bar);
+		});
+	}
+</script>

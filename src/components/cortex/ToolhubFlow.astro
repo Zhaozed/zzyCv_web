@@ -1,0 +1,182 @@
+---
+import { formatToken, toolhubStages, toolhubTask } from "@/data/cortex-toolhub";
+
+const flows = (["before", "after"] as const).map((phase) => ({
+	phase,
+	title:
+		phase === "before"
+			? "Router 只分任务，Planner 面对全量工具"
+			: "Router 先筛工具，Planner 按需加载",
+	nodes: [
+		{
+			id: "task",
+			name: "用户任务",
+			brief: "Notion 文档检索",
+			title: "同一个用户目标",
+			description: toolhubTask,
+			tokens: null,
+		},
+		...toolhubStages.slice(0, 2).map((stage) => ({
+			id: stage.id,
+			name: stage.name,
+			brief:
+				stage.id === "router"
+					? phase === "before"
+						? "仅判断任务类型"
+						: "判断类型 + 预选工具"
+					: `${stage[phase].schema} 个 Schema · 调用搜索`,
+			title:
+				stage.id === "router"
+					? phase === "before"
+						? "路由存在，但不承担工具筛选"
+						: "将第一轮工具选择前移到 Router"
+					: "第一次规划：选择并调用搜索工具",
+			description: stage[phase].action,
+			tokens: stage[phase],
+		})),
+		{
+			id: "execution",
+			name: "工具执行",
+			brief: "返回 20 条文档信息",
+			title: "执行 Notion 文档搜索",
+			description:
+				"搜索工具返回 20 条文档信息，结果进入第二次 Planner 调用。工具执行不是额外一轮模型规划，不在表中另计模型 Token。",
+			tokens: null,
+		},
+		{
+			id: toolhubStages[2].id,
+			name: toolhubStages[2].name,
+			brief: `${toolhubStages[2][phase].schema} 个 Schema · 生成回复`,
+			title: "第二次规划：读取结果并回复",
+			description: toolhubStages[2][phase].action,
+			tokens: toolhubStages[2][phase],
+		},
+	],
+}));
+---
+
+<div class="th-flows">
+	<p class="th-interaction-hint">
+		<span aria-hidden="true">↳</span> 点击流程节点，在下方查看执行内容与 Token 明细
+	</p>
+	{
+		flows.map(({ phase, title, nodes }) => (
+			<section
+				class:list={["th-flow", { "th-flow--after": phase === "after" }]}
+				data-toolhub-flow
+				aria-labelledby={`flow-${phase}-heading`}
+			>
+				<header class="th-flow-heading">
+					<>
+						<span>{phase === "before" ? "BEFORE / 治理前" : "AFTER / 治理后"}</span>
+						<h4 id={`flow-${phase}-heading`}>{title}</h4>
+						<p>
+							{phase === "before"
+								? "全量工具目录：122 个"
+								: "聚合工具目录：77 个 · 本例按需加载：7 个"}
+						</p>
+					</>
+				</header>
+				<div
+					class="th-flow-path"
+					role="tablist"
+					aria-label={`治理${phase === "before" ? "前" : "后"}任务执行节点`}
+				>
+					{nodes.map((node, i) => (
+						<button
+							type="button"
+							role="tab"
+							id={`flow-${phase}-${node.id}`}
+							aria-controls={`detail-${phase}-${node.id}`}
+							aria-selected={i === 1 ? "true" : "false"}
+							tabindex={i === 1 ? 0 : -1}
+						>
+							<span class="th-node-index">0{i + 1}</span>
+							<strong>{node.name}</strong>
+							<span class="th-node-brief">{node.brief}</span>
+						</button>
+					))}
+				</div>
+				<div class="th-flow-details">
+					{nodes.map((node, i) => (
+						<div
+							role="tabpanel"
+							id={`detail-${phase}-${node.id}`}
+							aria-labelledby={`flow-${phase}-${node.id}`}
+							hidden={i !== 1}
+							tabindex="0"
+						>
+							<div class="th-detail-copy">
+								<span class="th-detail-label">
+									节点 0{i + 1} / {node.name}
+								</span>
+								<h5>{node.title}</h5>
+								<p>{node.description}</p>
+							</div>
+							{node.tokens && (
+								<dl class="th-node-tokens">
+									<div>
+										<dt>输入 Token</dt>
+										<dd>{formatToken(node.tokens.input)}</dd>
+									</div>
+									<div>
+										<dt>输出 Token</dt>
+										<dd>{formatToken(node.tokens.output)}</dd>
+									</div>
+									<div>
+										<dt>注入 Schema</dt>
+										<dd>
+											{node.tokens.schema}
+											<small> 个</small>
+										</dd>
+									</div>
+								</dl>
+							)}
+						</div>
+					))}
+				</div>
+			</section>
+		))
+	}
+	<p class="ca-caption">
+		以上以本次 Notion 任务为例：1 次路由、2 次规划。77 是聚合后的工具目录数量，7 是本例每轮 Planner
+		注入的 Schema 数；Router 中的工具目录属于提示词，不计入 Schema 数。
+	</p>
+</div>
+<script>
+	for (const flow of document.querySelectorAll<HTMLElement>("[data-toolhub-flow]")) {
+		const tabs = [...flow.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+		const panels = [...flow.querySelectorAll<HTMLElement>('[role="tabpanel"]')];
+		function select(tab: HTMLButtonElement) {
+			for (const item of tabs) {
+				item.setAttribute("aria-selected", String(item === tab));
+				item.tabIndex = item === tab ? 0 : -1;
+			}
+			for (const panel of panels) panel.hidden = panel.id !== tab.getAttribute("aria-controls");
+		}
+		for (const [index, tab] of tabs.entries()) {
+			tab.addEventListener("click", () => {
+				select(tab);
+				if (window.matchMedia("(max-width: 600px)").matches) {
+					const panel = panels.find((item) => !item.hidden);
+					panel?.scrollIntoView({ block: "nearest", behavior: "instant" });
+				}
+			});
+			tab.addEventListener("keydown", (event) => {
+				let next = index;
+				if (["ArrowRight", "ArrowDown"].includes(event.key)) next = (index + 1) % tabs.length;
+				else if (["ArrowLeft", "ArrowUp"].includes(event.key))
+					next = (index + tabs.length - 1) % tabs.length;
+				else if (event.key === "Home") next = 0;
+				else if (event.key === "End") next = tabs.length - 1;
+				else return;
+				event.preventDefault();
+				const target = tabs[next];
+				if (target) {
+					select(target);
+					target.focus();
+				}
+			});
+		}
+	}
+</script>

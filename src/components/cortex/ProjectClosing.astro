@@ -1,0 +1,428 @@
+---
+const applications = [
+	{ name: "Gmail", category: "邮件", icon: "vg_gmail" },
+	{ name: "Outlook Mail", category: "邮件", icon: "vg_outlook-mail" },
+	{ name: "Todo", category: "待办", icon: "vg_microsoft-todo" },
+	{ name: "Calendar", category: "日历", icon: "vg_outlook-calendar" },
+	{ name: "ClickUp", category: "项目协作", icon: "vg_clickup" }
+];
+
+const coreDesignDecisions = [
+	{
+		tag: "PRINCIPLE 01",
+		title: "高危动作必确认，日常查询不打扰",
+		desc: "坚持体验与安全分级：查邮件、看日程等只读操作静默完成，保障交互流畅度；发邮件、删日程等具备外部影响的操作，确认由执行引擎强制拦截，模型不能绕过，绝不依赖大模型概率性的自主判断。"
+	},
+	{
+		tag: "PRINCIPLE 02",
+		title: "关键信息有出处，绝不擅自脑补",
+		desc: "用户口语表达往往简短模糊。确立产品防错红线：收件人、会议时间等核心参数必须在上下文中有据可查；只要关键信息缺失，必须主动反问对齐，严禁模型凭空脑补发错人或订错时间。"
+	},
+	{
+		tag: "PRINCIPLE 03",
+		title: "失败原因说人话，绝不盲目报喜",
+		desc: "遇到账号未授权、权限过期或时段冲突时，严禁模型掩盖错误虚假汇报“已搞定”；必须把真实阻断原因翻译成清晰的人话，并直接给出可操作的下一步指引（如一键前往授权绑定）。"
+	}
+];
+
+const sopSteps = [
+	{
+		step: "01",
+		title: "能力定义与权限分级",
+		text: "梳理工具在桌面场景下的使用频度，严格界定「只读操作」与「高危写操作」权限，形成首期支持的功能边界与数据字典。",
+		tag: "功能定义"
+	},
+	{
+		step: "02",
+		title: "安全确认与拦截机制",
+		text: "凡涉及发送、修改、删除等不可撤回的操作，定义专属交互确认卡与二次核对机制，杜绝 AI 自主决策越权执行。",
+		tag: "安全红线"
+	},
+	{
+		step: "03",
+		title: "意图理解与追问策略",
+		text: "设计用户在口语模糊、参数缺失时的对话引导策略；制定反问对齐规则，严禁模型在信息不足时擅自猜测。",
+		tag: "交互策略"
+	},
+	{
+		step: "04",
+		title: "界面卡片与状态设计",
+		text: "设计「执行中、待确认、成功完成、异常失败」四类界面卡片展示规范，确保信息布局简洁、关键结果一目了然。",
+		tag: "界面呈现"
+	},
+	{
+		step: "05",
+		title: "多语言与交互文案规范",
+		text: "统一系统与用户的对话语气，全面抽离中英双语提示语，确保错误提示与确认话术克制、礼貌且不产生歧义。",
+		tag: "文案规范"
+	},
+	{
+		step: "06",
+		title: "场景验收与用例回归",
+		text: "穷举覆盖正常办理、缺参追问、账号未绑定、用户中途取消等极端分支，将实测缺陷沉淀为团队标准测试集。",
+		tag: "体验验收"
+	}
+];
+
+const workbench = [
+	{
+		title: "多模态时序动态播放",
+		text: "按预设 Case 动态模拟用户输入、处理等待时延、语音口播节奏与卡片弹出时序，核对先后等待关系。",
+		output: "可播放的动态时序链路"
+	},
+	{
+		title: "关键帧暂停与批注",
+		text: "在任一关键时序节点暂停或快进，将文案表述、卡片字段或节奏体验问题直接标记在对应时间帧。",
+		output: "帧级批注与整链评审意见"
+	},
+	{
+		title: "理想链路一键导出",
+		text: "完成文案与时序调优后，一键导出规范的理想链路 JSON 配置文件，无缝交付研发作为联调依据。",
+		output: "理想链路 JSON 标准配置"
+	}
+];
+
+const reflections = [
+	{
+		title: "确定性归系统，提炼性归模型：划清 Agent 的安全边界",
+		text: "Agent 的自主权必须与任务风险严格挂钩。大模型擅长的是语义理解与信息提炼，而权限拦截、参数校验与执行确认必须交给确定性的规则与代码。AI PM 的核心职责是划清人、模型与工程的分工红线，在成功率、响应时延与推理成本之间做出可量化的取舍。"
+	},
+	{
+		title: "主动智能的最高优先级，是保护用户的稀缺注意力",
+		text: "真正高级的主动服务，不是看模型能多频繁地蹦出来，而是能否真正减少用户的认知负荷。信息保真只是及格线，时序过滤、场景剪枝与极简呈现，共同决定了推送是“贴心助手”还是“噪音打扰”。将用户注意力视为最宝贵的稀缺资源，始终为用户保留拒绝与打断的掌控权。"
+	},
+	{
+		title: "离线评测保底线，真实使用验证价值：建立持续迭代的质量闭环",
+		text: "一次单点回答正确不代表系统稳定，通过了离线测试也不代表用户真正受益。质量验证需要沿输入、调度到输出端到端归因，用回归集筑牢防劣化防线；价值验证则需要结合行为遥测指标与真实反馈，让暴露的用户痛点精准转化为修复动作并沉淀为发版门禁。"
+	}
+];
+---
+
+<!-- Section 03: 办公能力接入与标准化 SOP -->
+<section
+	class="ca-section ca-closing cl-integrations"
+	id="onboarding"
+	data-case-section
+	aria-labelledby="onboarding-heading">
+	<header class="ca-section-head">
+		<p class="ca-kicker"><span>03</span> 办公能力接入 · 生态落地</p>
+		<h2 id="onboarding-heading">办公能力接入：5 项核心办公应用落地与标准接入 SOP</h2>
+		<p class="ca-copy">
+			给桌面机器人接入真实办公能力，最大的挑战不是打通接口，而是让用户真正放心把工作交给它。发错一封邮件、订错一场会议都会瞬间摧毁信任。我负责
+			5
+			项核心办公能力的需求定义与交互设计，制定「高危必确认、缺参必反问、异常说人话」的产品红线，并将经验沉淀为覆盖需求到验收的
+			6 步标准接入 SOP。
+		</p>
+	</header>
+
+	<div class="cl-asset-block ca-reveal">
+		<div class="cl-asset-head">
+			<span class="cl-asset-tag">接入生态 / PROVIDER ECOSYSTEM</span>
+			<h3>负责 5 项核心办公应用能力接入与落地</h3>
+			<p class="ca-copy">
+				负责 Gmail、Outlook 邮件/日历、Microsoft Todo、ClickUp 等 5
+				项高频办公能力的需求定义、接口映射与上线验收，推动机器人从陪伴对话真正迈向办公办事场景。
+			</p>
+		</div>
+
+		<!-- 5 大办公应用 Logo 条 -->
+		<ul class="cl-apps" aria-label="接入的五个办公应用">
+			{
+				applications.map(app => (
+					<li>
+						<span class="cl-app-logo" aria-hidden="true">
+							<img
+								src={`/portfolio/cortex-agent/a2ui-runtime/icons/${app.icon}.svg`}
+								width="40"
+								height="40"
+								alt=""
+								loading="lazy"
+							/>
+						</span>
+						<div class="cl-app-label">
+							<strong>{app.name}</strong>
+							<span>{app.category}</span>
+						</div>
+					</li>
+				))
+			}
+		</ul>
+
+		<!-- 核心产品原则：AI 办事的交互红线与边界 -->
+		<div class="cl-grilling-box ca-reveal">
+			<div class="cl-grilling-head">
+				<h4><span>产品交互规范</span>给 AI 办事立规矩 · 3 条核心设计原则</h4>
+				<p class="ca-copy">
+					连通接口容易，但让用户放心把工作交给 AI
+					很难。发错一封邮件或订错一场会议都会摧毁信任。我主导确立了 3
+					条人机协作原则，在「操作丝滑」与「安全可控」之间守住边界。
+				</p>
+			</div>
+			<div class="cl-grilling-grid">
+				{
+					coreDesignDecisions.map(p => (
+						<div class="cl-grilling-item">
+							<span class="cl-grilling-tag">{p.tag}</span>
+							<strong>{p.title}</strong>
+							<p>{p.desc}</p>
+						</div>
+					))
+				}
+			</div>
+		</div>
+
+		<!-- 典型场景设计与测试案例：Outlook 日程「跨时区创建」 -->
+		<div class="cl-case-box ca-reveal">
+			<div class="cl-case-head">
+				<div class="cl-case-kicker-row">
+					<span class="cl-case-tag">典型场景设计与测试 / SCENARIO DESIGN</span>
+					<span class="cl-case-badge">场景推演与防错</span>
+				</div>
+				<h4>Outlook 日程「跨时区创建」：从口语指令到确定性闭环</h4>
+				<p class="ca-copy">
+					真实场景下用户的一句口语指令，背后隐藏着时区错位、日程撞车与误触外部通知三重风险。看 PM
+					如何通过交互规则化险为夷。
+				</p>
+			</div>
+
+			<div class="cl-case-grid">
+				<!-- Card 01: 原始输入 -->
+				<div class="cl-case-card">
+					<div class="cl-case-card-head">
+						<span class="cl-case-step-num">01</span>
+						<strong>用户的真实口语指令</strong>
+					</div>
+					<div class="cl-case-quote">“帮我订明天下午两点和北美团队的对齐会”</div>
+					<p class="cl-case-desc">
+						看似简短，但若涉及向外部参会人发送会议邀请，一旦时间订错不仅造成打扰，还会产生额外的沟通与重新对齐成本。
+					</p>
+				</div>
+
+				<!-- Card 02: 边界隐患 -->
+				<div class="cl-case-card">
+					<div class="cl-case-card-head">
+						<span class="cl-case-step-num">02</span>
+						<strong>推演发现的 3 大产品陷阱</strong>
+					</div>
+					<ul class="cl-case-list">
+						<li>
+							<strong>时区相差 13 小时（以美东冬令时 EST 为例）：</strong>若对接美东团队 (UTC-5)，北京时间下午 14:00 对应的美东时间为同日凌晨 01:00，对方正值深夜；若 AI 默认按本地建会，会议完全错位。
+						</li>
+						<li>
+							<strong>隐式日程撞车：</strong>目标时段用户很可能已有既定安排，盲目创建会造成日程冲突与重叠。
+						</li>
+						<li>
+							<strong>触达外部参与者风险：</strong>创建日程伴随正式日历邀请，错误操作会产生额外沟通成本。
+						</li>
+					</ul>
+				</div>
+
+				<!-- Card 03: PM 关键设计决策 (跨列卡片) -->
+				<div class="cl-case-card cl-case-card--decisions">
+					<div class="cl-case-card-head">
+						<span class="cl-case-step-num">03</span>
+						<strong>我的 3 项产品交互决断</strong>
+					</div>
+					<div class="cl-case-decision-grid">
+						<div class="cl-case-subcard">
+							<span class="cl-case-subtag">时区模糊必须主动反问</span>
+							<p>
+								未指明参会人所在具体城市或时区时，约束 AI 必须反问确认（如“请问是美东时间还是北京时间”），严禁擅自脑补。
+							</p>
+						</div>
+						<div class="cl-case-subcard">
+							<span class="cl-case-subtag">双时区对照与引擎强制拦截</span>
+							<p>
+								涉及外部邀请，确认由执行引擎强制拦截，模型不能绕过；弹卡醒目双轨对照「北京 14:00 vs 美东 01:00 (同日凌晨)」，把时差直接暴露在用户眼前。
+							</p>
+						</div>
+						<div class="cl-case-subcard">
+							<span class="cl-case-subtag">日程冲突醒目预警</span>
+							<p>
+								检测到已有既定安排时，卡片标红提示“与已有日程冲突”，交由用户决定是改期还是坚持创建，绝不静默覆盖。
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Card 04: 验收证据 -->
+				<div class="cl-case-card">
+					<div class="cl-case-card-head">
+						<span class="cl-case-step-num">04</span>
+						<strong>典型用例离线测试验证</strong>
+					</div>
+					<p class="cl-case-desc">
+						针对跨时区换算、夏令时边界、时段冲突与模糊表达，建立 12 组离线测试用例：
+					</p>
+					<div class="cl-case-metrics">
+						<div class="cl-case-metric-item">
+							<span class="val">12 组</span>
+							<span class="lbl">测试用例均触发确认</span>
+						</div>
+						<div class="cl-case-metric-item">
+							<span class="val">0 例</span>
+							<span class="lbl">未经确认的静默代办</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- Card 05: 纳入 SOP -->
+				<div class="cl-case-card">
+					<div class="cl-case-card-head">
+						<span class="cl-case-step-num">05</span>
+						<strong>沉淀为团队标准红线</strong>
+					</div>
+					<p class="cl-case-desc">
+						不再把问题当成单点补丁，而是将排障经验固化为全团队的通用设计红线：
+					</p>
+					<ul class="cl-case-sop-links">
+						<li>
+							<strong>固化安全红线：</strong>涉及外发邀请等产生外部影响的操作，确认由执行引擎强制拦截，模型不能绕过。
+						</li>
+						<li>
+							<strong>固化交互规范：</strong>涉及时区、敏感人选等关键参数，信息不足必须触发反问对齐。
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!-- 6 步标准接入 SOP 矩阵 -->
+		<div class="cl-sop-section ca-reveal">
+			<div class="cl-asset-head">
+				<span class="cl-asset-tag">标准 SOP / INTAKE STANDARD</span>
+				<h3>沉淀 6 步标准化能力接入 SOP</h3>
+				<p class="ca-copy">
+					从散装对接走向标准化交付：将经验固化为覆盖「功能定义 → 安全红线 → 交互策略 → 界面呈现 →
+					文案规范 → 体验验收」的 6 步产品流程，让后续新能力接入有据可依。
+				</p>
+			</div>
+
+			<div class="cl-sop-grid">
+				{
+					sopSteps.map(item => (
+						<div class="cl-sop-card">
+							<div class="cl-sop-top">
+								<span class="cl-sop-num">{item.step}</span>
+								<span class="cl-sop-tag">{item.tag}</span>
+							</div>
+							<h4>{item.title}</h4>
+							<p>{item.text}</p>
+						</div>
+					))
+				}
+			</div>
+
+			<div class="cl-sop-footnote">
+				<strong>* 成果复用说明：</strong>该接入 SOP
+				覆盖了从需求定义到体验验收的完整产品链路，成为团队后续扩展工具能力的统一工作标准，指导了后续
+				10+ 项工具接口的高效落地，大幅降低了跨职能沟通成本与边界遗漏风险。
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Section 04: 交付提效 · 多模态交互评审工作台 -->
+<section
+	class="ca-section ca-closing cl-workbench-block"
+	id="workbench"
+	data-case-section
+	aria-labelledby="workbench-heading">
+	<header class="ca-section-head">
+		<p class="ca-kicker"><span>04</span> 基础设施 · 交付提效</p>
+		<h2 id="workbench-heading">多模态交互评审工作台 (Web Mock 工具)</h2>
+		<p class="ca-copy">
+			基于 Web 的前端交互评审工具（Mock 多模态时序，非端侧固件代码）。针对具身 Agent 涉及语音、表情、动作与卡片在传统静态原型中无法评审时序节奏的痛点，0→1 搭建可播放的动态交互评审工作台，支持关键帧暂停批注与理想链路配置导出交付。
+		</p>
+	</header>
+
+	<!-- 资产：Agent 交互评审工作台 -->
+	<div class="cl-asset-block ca-reveal">
+		<div class="cl-asset-head">
+			<span class="cl-asset-tag">提效工具 / REVIEW WORKBENCH</span>
+			<h3>Agent 多模态交互评审工作台 (Web Mock)</h3>
+			<p class="ca-copy">
+				传统静态原型无法评审语音、表情、动作、等待时延与 A2UI
+				卡片交织的时序节奏。我主导需求定义、交互设计并完成前端实现，构建首个支持动态播放与关键帧批注的评审工作台。
+			</p>
+		</div>
+
+		<figure class="ca-video" id="workbench-demo">
+			<div class="ca-video-heading">
+				<span class="ca-kicker">工作台演示</span>
+				<span>预设 Case · Mock 评审工具（非端侧代码）</span>
+			</div>
+			<video
+				controls
+				muted
+				playsinline
+				preload="none"
+				poster="/portfolio/practice/review-workbench.png"
+				aria-label="基于预设 Case 的 Agent 交互评审工作台录屏">
+				<source src="/portfolio/practice/review-workbench-demo.mp4" type="video/mp4" />
+				你的浏览器不支持视频播放，可在下方打开演示文件。
+			</video>
+			<figcaption>
+				演示的是多模态预设时序交互，用于对齐产品与研发评审。手动播放，默认静音。
+			</figcaption>
+		</figure>
+
+		<div class="cl-cards cl-workbench-cards">
+			{
+				workbench.map((item, i) => (
+					<article>
+						<span class="cl-step-number">0{i + 1}</span>
+						<h3>{item.title}</h3>
+						<p>{item.text}</p>
+						<small>{item.output}</small>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<!-- Section 05: 深度复盘 · AI PM 认知沉淀 -->
+<section
+	class="ca-section ca-closing cl-retro-section"
+	id="retrospective"
+	data-case-section
+	aria-labelledby="retro-heading">
+	<header class="ca-section-head">
+		<p class="ca-kicker"><span>05</span> 项目复盘 · 认知沉淀</p>
+		<h2 id="retro-heading">项目复盘：三条 AI PM 核心思考</h2>
+		<p class="ca-copy">
+			在桌面机器人落地真实办公能力的实践中，沉淀关于工具治理、主动交互与质量闭环的三项产品思考。
+		</p>
+	</header>
+
+	<div class="cl-asset-block ca-retro ca-reveal">
+		<div class="cl-asset-head">
+			<span class="cl-asset-tag">项目复盘 / RETROSPECTIVE</span>
+			<h3>这段经历沉淀的三条 AI PM 核心思考</h3>
+		</div>
+
+		<ol class="cl-retro-list">
+			{
+				reflections.map((item, i) => (
+					<li>
+						<span class="cl-retro-number" aria-hidden="true">
+							0{i + 1}
+						</span>
+						<div>
+							<h3>{item.title}</h3>
+							<p>{item.text}</p>
+						</div>
+					</li>
+				))
+			}
+		</ol>
+
+		<div class="ca-resources">
+			<p class="ca-kicker">继续探索作品集</p>
+			<a href="/projects/cortex-eval/">Cortex-Eval 评测平台 <span>↗</span></a>
+			<a href="/practice/daymate/">DayMate 个人工作代理 <span>↗</span></a>
+			<a href="/practice/">探索其他实践 <span>→</span></a>
+		</div>
+	</div>
+</section>

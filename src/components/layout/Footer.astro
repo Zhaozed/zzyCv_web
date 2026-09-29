@@ -5,21 +5,23 @@ import { siteConfig } from "@/site.config";
 const year = new Date().getFullYear();
 ---
 
-<section
-	class="mt-20 border-t border-neutral-200 bg-white text-gray-700 dark:border-neutral-800 dark:bg-neutral-950"
+<footer
+	class="relative z-40 mt-auto border-t border-neutral-200 bg-white text-gray-700 dark:border-neutral-800 dark:bg-neutral-950"
 >
-	<div class="mx-auto flex max-w-7xl flex-col items-center px-7 py-8 sm:flex-row">
+	<div class="mx-auto flex max-w-7xl flex-col items-center px-7 py-5 sm:flex-row sm:py-6">
 		<Logo />
 		<p
 			class="mt-4 text-sm text-neutral-700 dark:text-neutral-100 sm:mt-0 sm:ml-4 sm:border-l sm:border-neutral-300 sm:pl-4 dark:sm:border-neutral-700"
 		>
 			© {year} {siteConfig.author} · AI 产品经理
 		</p>
-		<span class="mt-4 inline-flex justify-center space-x-5 sm:mt-0 sm:ml-auto sm:justify-start">
+		<div class="mt-4 inline-flex items-center space-x-5 sm:mt-0 sm:ml-auto">
 			<a
 				href="https://github.com/Zhaozed"
 				target="_blank"
-				class="text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+				rel="noopener noreferrer"
+				title="GitHub 个人主页"
+				class="text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
 			>
 				<span class="sr-only">GitHub</span>
 				<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"
@@ -30,31 +32,55 @@ const year = new Date().getFullYear();
 					></path></svg
 				>
 			</a>
-			<a
-				href="mailto:18032098113@163.com"
-				class="text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
-			>
-				<span class="sr-only">Email</span>
-				<svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"
-					><path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
-					></path></svg
+
+			<div class="relative inline-flex items-center">
+				<a
+					href="mailto:18032098113@163.com"
+					id="footer-email-btn"
+					title="点击发送邮件或复制地址 (18032098113@163.com)"
+					aria-label="Email: 18032098113@163.com"
+					class="cursor-pointer text-neutral-500 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
 				>
-			</a>
-			<a
-				href="/rss.xml"
-				target="_blank"
-				class="text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
-			>
-				<span class="sr-only">RSS</span>
-				<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"
-					><path
-						d="M6.18 15.64a2.18 2.18 0 01-.89 3.82 2.18 2.18 0 01-.89-3.82 2.18 2.18 0 011.78 0zM2 4.27v3.22c8.7 0 15.75 7.05 15.75 15.75h3.22C21 12.08 12.92 4.27 2 4.27zm0 6.46v3.22c5.1 0 9.23 4.13 9.23 9.23h3.22c0-6.88-5.57-12.45-12.45-12.45z"
-					></path></svg
+					<span class="sr-only">Email: 18032098113@163.com</span>
+					<svg
+						class="h-6 w-6"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="1.5"
+						viewBox="0 0 24 24"
+						aria-hidden="true"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+						></path>
+					</svg>
+				</a>
+				<span
+					id="email-toast"
+					class="pointer-events-none absolute -top-9 right-0 z-50 whitespace-nowrap rounded-md bg-neutral-900 px-2.5 py-1 text-xs font-medium text-white shadow-lg opacity-0 transition-opacity duration-200 dark:bg-white dark:text-neutral-900"
 				>
-			</a>
-		</span>
+					已复制邮箱: 18032098113@163.com
+				</span>
+			</div>
+		</div>
 	</div>
-</section>
+</footer>
+
+<script>
+	const emailBtn = document.getElementById("footer-email-btn");
+	const emailToast = document.getElementById("email-toast");
+	if (emailBtn) {
+		emailBtn.addEventListener("click", () => {
+			navigator.clipboard.writeText("18032098113@163.com").then(() => {
+				if (emailToast) {
+					emailToast.classList.remove("opacity-0");
+					setTimeout(() => {
+						emailToast.classList.add("opacity-0");
+					}, 2000);
+				}
+			});
+		});
+	}
+</script>

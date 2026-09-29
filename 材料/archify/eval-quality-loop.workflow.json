@@ -1,0 +1,285 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "图 2 · 评测质量闭环：一次问题如何走到验收",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "backend": {
+          "label": "运行与分析环节"
+        },
+        "database": {
+          "label": "证据与回归资产"
+        },
+        "security": {
+          "label": "人工复核门禁"
+        },
+        "frontend": {
+          "label": "闭环累计成效"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "pm",
+      "label": "产品经理 · 分析与推动"
+    },
+    {
+      "id": "platform",
+      "label": "评测平台 · 提供证据与回归资产"
+    },
+    {
+      "id": "dev",
+      "label": "研发 · 确认与修复"
+    }
+  ],
+  "phases": [
+    {
+      "id": "p_find",
+      "label": "① 评测发现",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "p_fix",
+      "label": "② 归因修复",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "p_verify",
+      "label": "③ 复测验证",
+      "fromCol": 4,
+      "toCol": 4
+    },
+    {
+      "id": "p_regress",
+      "label": "④ 回归集更新",
+      "fromCol": 5,
+      "toCol": 5,
+      "variant": "dashed"
+    }
+  ],
+  "semanticChecks": {
+    "allowedTerminals": [
+      "outcome"
+    ],
+    "requiredEdges": [
+      {
+        "from": "gate",
+        "to": "regression"
+      }
+    ],
+    "requiredPaths": [
+      {
+        "from": "eval_judge",
+        "to": "outcome"
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "eval_judge",
+      "lane": "platform",
+      "col": 0,
+      "type": "backend",
+      "label": "批量评测 + 规则判定",
+      "sublabel": "失败 Case/检查项 · 执行完成≠验收通过",
+      "width": 168,
+      "height": 56
+    },
+    {
+      "id": "evidence",
+      "lane": "platform",
+      "col": 1,
+      "type": "database",
+      "label": "平台证据",
+      "sublabel": "执行 Trace · 工具返回 · A2UI 展示",
+      "width": 152,
+      "height": 56
+    },
+    {
+      "id": "attribution",
+      "lane": "pm",
+      "col": 2,
+      "type": "backend",
+      "label": "归因分析",
+      "sublabel": "MCP 辅助形成排查线索 · 状态：推测待验证",
+      "width": 176,
+      "height": 56
+    },
+    {
+      "id": "fix",
+      "lane": "dev",
+      "col": 3,
+      "type": "backend",
+      "label": "研发修复",
+      "sublabel": "负责模块研发确认与实施 · 按线索改动",
+      "width": 160,
+      "height": 56
+    },
+    {
+      "id": "retest",
+      "lane": "platform",
+      "col": 4,
+      "type": "backend",
+      "label": "复测验证",
+      "sublabel": "同 Case 重跑 · 版本对比 · 问题消失且无退化",
+      "width": 188,
+      "height": 56
+    },
+    {
+      "id": "gate",
+      "lane": "pm",
+      "col": 4,
+      "type": "security",
+      "label": "人工复核门禁",
+      "sublabel": "复核通过才计入验收 · gate",
+      "width": 140,
+      "height": 56
+    },
+    {
+      "id": "regression",
+      "lane": "platform",
+      "col": 5,
+      "type": "database",
+      "label": "回归集更新",
+      "sublabel": "问题 Case 沉淀进回归集 · 支撑后续版本验收",
+      "width": 182,
+      "height": 56
+    },
+    {
+      "id": "outcome",
+      "lane": "pm",
+      "col": 5,
+      "type": "frontend",
+      "label": "累计支撑 3 次版本验收",
+      "sublabel": "识别并推动解决 6 个阻塞级问题",
+      "width": 152,
+      "height": 56
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_judge_evidence",
+      "from": "eval_judge",
+      "to": "evidence",
+      "label": "失败项取证",
+      "variant": "default"
+    },
+    {
+      "id": "e_evidence_attr",
+      "from": "evidence",
+      "to": "attribution",
+      "label": "证据交产品分析",
+      "variant": "emphasis"
+    },
+    {
+      "id": "e_attr_fix",
+      "from": "attribution",
+      "to": "fix",
+      "label": "线索交研发确认",
+      "variant": "default",
+      "toSide": "left"
+    },
+    {
+      "id": "e_fix_retest",
+      "from": "fix",
+      "to": "retest",
+      "label": "修复后重跑",
+      "variant": "emphasis",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "e_retest_gate",
+      "from": "retest",
+      "to": "gate",
+      "label": "对比结果送复核",
+      "variant": "security"
+    },
+    {
+      "id": "e_gate_regression",
+      "from": "gate",
+      "to": "regression",
+      "label": "通过后沉淀 Case",
+      "variant": "default"
+    },
+    {
+      "id": "e_regression_outcome",
+      "from": "regression",
+      "to": "outcome",
+      "label": "闭环累计成效",
+      "variant": "emphasis"
+    },
+    {
+      "id": "e_loop_back",
+      "from": "regression",
+      "to": "eval_judge",
+      "label": "回归集用于下一版本验收",
+      "variant": "dashed",
+      "role": "return",
+      "fromSide": "bottom",
+      "toSide": "left",
+      "via": [
+        [
+          911,
+          410
+        ],
+        [
+          24,
+          410
+        ],
+        [
+          24,
+          243
+        ]
+      ],
+      "labelDx": -168
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "角色分工",
+      "items": [
+        "平台提供证据：执行 Trace、工具返回、A2UI 展示",
+        "产品经理分析与推动：MCP 辅助归因、复测对比、人工复核门禁",
+        "研发修复：由负责模块的研发确认并实施改动"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "闭环判定口径",
+      "items": [
+        "执行完成不等于验收通过：由检查规则判定失败 Case 与失败检查项",
+        "归因结论状态为「推测待验证」，必须经复测确认",
+        "同一 Case 重跑 + 版本对比，确认问题消失且无退化",
+        "问题 Case 沉淀进回归集，支撑后续版本验收"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "累计成效",
+      "items": [
+        "累计支撑 3 次版本验收",
+        "识别并推动解决 6 个阻塞级问题"
+      ]
+    }
+  ],
+  "mainPath": [
+    "eval_judge",
+    "evidence",
+    "attribution",
+    "fix",
+    "retest",
+    "gate",
+    "regression",
+    "outcome"
+  ]
+}

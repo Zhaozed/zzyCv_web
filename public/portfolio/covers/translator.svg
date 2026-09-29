@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">飞书多语种自动化翻译机器人</title>
+  <desc id="desc">飞书蓝绿色系封面，展示长连接差异比对、多语种批量调用与一键回填生产力工具。</desc>
+  <defs>
+    <filter id="translatorShadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#1E3A8A" flood-opacity=".15"/>
+    </filter>
+    <linearGradient id="transBg" x1="0" y1="0" x2="1200" y2="675" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#EFF6FF"/>
+      <stop offset="100%" stop-color="#DBEAFE"/>
+    </linearGradient>
+    <linearGradient id="sheetCard" x1="0" y1="0" x2="420" y2="440" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F8FAFC"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 背景底色 -->
+  <rect width="1200" height="675" fill="url(#transBg)"/>
+
+  <!-- 右侧背景光晕 -->
+  <circle cx="890" cy="335" r="280" fill="#BFDBFE" fill-opacity=".45"/>
+  <circle cx="890" cy="335" r="200" fill="#93C5FD" fill-opacity=".3"/>
+
+  <!-- 左侧项目信息排版 -->
+  <g font-family="Arial, Helvetica, -apple-system, sans-serif">
+    <rect x="72" y="65" width="14" height="14" fill="#2563EB"/>
+    <text x="101" y="79" font-size="17" letter-spacing="3" fill="#64748B" font-weight="600">FULLSTACK TOOL / 05</text>
+    <text x="68" y="240" font-size="92" font-weight="700" letter-spacing="-4" fill="#1E293B">Sheet</text>
+    <text x="68" y="340" font-size="92" font-weight="700" letter-spacing="-4" fill="#1E293B">Translator<tspan fill="#3B82F6">.</tspan></text>
+    <text x="74" y="420" font-family="'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="28" letter-spacing="1" fill="#475569" font-weight="500">飞书多语种自动化翻译机器人</text>
+    <text x="74" y="580" font-size="16" letter-spacing="2.5" fill="#64748B">DIFF · BATCH TRANSLATE · 8 LANGUAGES</text>
+  </g>
+
+  <!-- 右侧视觉中心：飞书多维表格与自动化流水线卡片 -->
+  <g transform="translate(680, 115)" filter="url(#translatorShadow)">
+    <rect width="420" height="440" rx="16" fill="url(#sheetCard)" stroke="#BFDBFE" stroke-width="2"/>
+
+    <!-- 顶部状态栏 -->
+    <rect x="24" y="24" width="130" height="28" rx="14" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1.5"/>
+    <circle cx="38" cy="38" r="5" fill="#2563EB"/>
+    <text x="50" y="43" font-family="'PingFang SC', sans-serif" font-size="13" font-weight="600" fill="#1D4ED8">飞书开放平台长连接</text>
+
+    <rect x="290" y="24" width="106" height="28" rx="14" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1.5"/>
+    <text x="306" y="43" font-family="'PingFang SC', sans-serif" font-size="12" font-weight="700" fill="#047857">提效 80%+</text>
+
+    <!-- 飞书表格模拟数据行 -->
+    <g transform="translate(24, 76)">
+      <!-- 表头 -->
+      <rect width="372" height="34" rx="6" fill="#F1F5F9"/>
+      <text x="14" y="22" font-family="'PingFang SC', sans-serif" font-size="12" font-weight="600" fill="#64748B">源中文文本</text>
+      <text x="140" y="22" font-family="'PingFang SC', sans-serif" font-size="12" font-weight="600" fill="#64748B">目标多语种矩阵</text>
+      <text x="290" y="22" font-family="'PingFang SC', sans-serif" font-size="12" font-weight="600" fill="#64748B">回填状态</text>
+
+      <!-- 行 1 -->
+      <rect y="44" width="372" height="48" rx="6" fill="#FFFFFF" stroke="#E2E8F0"/>
+      <text x="14" y="73" font-family="'PingFang SC', sans-serif" font-size="13" font-weight="600" fill="#1E293B">开启语音交互模式</text>
+      <text x="140" y="73" font-family="Arial, sans-serif" font-size="12" fill="#475569">EN · JA · DE · FR · ES</text>
+      <rect x="290" y="56" width="68" height="24" rx="12" fill="#ECFDF5"/>
+      <text x="304" y="72" font-family="'PingFang SC', sans-serif" font-size="11" font-weight="700" fill="#059669">已同步</text>
+
+      <!-- 行 2 -->
+      <rect y="100" width="372" height="48" rx="6" fill="#FFFFFF" stroke="#E2E8F0"/>
+      <text x="14" y="129" font-family="'PingFang SC', sans-serif" font-size="13" font-weight="600" fill="#1E293B">电量不足，请及时充电</text>
+      <text x="140" y="129" font-family="Arial, sans-serif" font-size="12" fill="#475569">EN · JA · DE · FR · ES</text>
+      <rect x="290" y="112" width="68" height="24" rx="12" fill="#ECFDF5"/>
+      <text x="304" y="128" font-family="'PingFang SC', sans-serif" font-size="11" font-weight="700" fill="#059669">已同步</text>
+
+      <!-- 行 3 -->
+      <rect y="156" width="372" height="48" rx="6" fill="#EFF6FF" stroke="#BFDBFE"/>
+      <text x="14" y="185" font-family="'PingFang SC', sans-serif" font-size="13" font-weight="600" fill="#1E293B">检测到新增版本文案</text>
+      <text x="140" y="185" font-family="'PingFang SC', sans-serif" font-size="12" fill="#2563EB">正在流式批量翻译...</text>
+      <rect x="290" y="168" width="68" height="24" rx="12" fill="#DBEAFE"/>
+      <text x="304" y="184" font-family="'PingFang SC', sans-serif" font-size="11" font-weight="700" fill="#1D4ED8">处理中</text>
+    </g>
+
+    <!-- 底部成效汇总条 -->
+    <g transform="translate(24, 304)">
+      <rect width="372" height="110" rx="10" fill="#1E293B"/>
+      <text x="20" y="34" font-family="'PingFang SC', sans-serif" font-size="13" font-weight="600" fill="#FFFFFF">全栈自主设计与代码交付</text>
+      <text x="20" y="58" font-family="Arial, sans-serif" font-size="12" fill="#94A3B8">Node.js · 飞书开放平台 · LLM 结构化输出</text>
+      <line x1="20" y1="72" x2="352" y2="72" stroke="#334155"/>
+      <text x="20" y="94" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#38BDF8">60,000+ 文案 · 8 语种矩阵 · 0 漏译</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,339 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "ToolHub 工具治理前后对比",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "before",
+        "label": "治理前 · 全量注入",
+        "focus": [
+          "user-before",
+          "runtime-before",
+          "toolhub-before",
+          "planner-before",
+          "tool-exec",
+          "output-gate"
+        ],
+        "note": "ToolHub 把 122 个工具 Schema 全量注入 Planner 上下文。"
+      },
+      {
+        "id": "after",
+        "label": "治理后 · 按需加载",
+        "focus": [
+          "user-after",
+          "runtime-after",
+          "domain-router",
+          "toolhub-after",
+          "planner-after",
+          "tool-exec",
+          "output-gate"
+        ],
+        "note": "先按任务识别业务域，再按需加载聚合后的 77 个能力。"
+      },
+      {
+        "id": "actions",
+        "label": "三项治理动作",
+        "focus": [
+          "toolhub-before",
+          "domain-router",
+          "toolhub-after"
+        ],
+        "note": "同类能力聚合 + 业务域路由 + 按需动态召回。"
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "user-before",
+      "type": "external",
+      "label": "用户请求",
+      "sublabel": "语音交互",
+      "pos": [
+        40,
+        176
+      ],
+      "size": [
+        120,
+        66
+      ]
+    },
+    {
+      "id": "runtime-before",
+      "type": "cloud",
+      "label": "Cortex Runtime",
+      "sublabel": "准入 / 路由",
+      "pos": [
+        230,
+        176
+      ],
+      "size": [
+        150,
+        66
+      ]
+    },
+    {
+      "id": "toolhub-before",
+      "type": "database",
+      "label": "ToolHub · 122 个工具 Schema",
+      "sublabel": "全量注入 · Planner 上下文",
+      "tag": "治理前",
+      "pos": [
+        430,
+        40
+      ],
+      "size": [
+        210,
+        66
+      ]
+    },
+    {
+      "id": "planner-before",
+      "type": "backend",
+      "label": "Planner",
+      "sublabel": "ReAct 循环",
+      "pos": [
+        450,
+        176
+      ],
+      "size": [
+        170,
+        66
+      ]
+    },
+    {
+      "id": "user-after",
+      "type": "external",
+      "label": "用户请求",
+      "sublabel": "语音交互",
+      "pos": [
+        40,
+        336
+      ],
+      "size": [
+        120,
+        66
+      ]
+    },
+    {
+      "id": "runtime-after",
+      "type": "cloud",
+      "label": "Cortex Runtime",
+      "sublabel": "准入 / 路由",
+      "pos": [
+        230,
+        336
+      ],
+      "size": [
+        150,
+        66
+      ]
+    },
+    {
+      "id": "domain-router",
+      "type": "backend",
+      "label": "业务域路由",
+      "sublabel": "按任务识别业务域",
+      "tag": "治理新增",
+      "pos": [
+        430,
+        336
+      ],
+      "size": [
+        140,
+        66
+      ]
+    },
+    {
+      "id": "toolhub-after",
+      "type": "database",
+      "label": "ToolHub · 77 个聚合能力",
+      "sublabel": "按需加载 · 保留平台差异",
+      "tag": "治理后",
+      "pos": [
+        640,
+        336
+      ],
+      "size": [
+        210,
+        66
+      ]
+    },
+    {
+      "id": "planner-after",
+      "type": "backend",
+      "label": "Planner",
+      "sublabel": "ReAct 循环",
+      "pos": [
+        920,
+        336
+      ],
+      "size": [
+        140,
+        66
+      ]
+    },
+    {
+      "id": "tool-exec",
+      "type": "external",
+      "label": "工具执行",
+      "sublabel": "Gmail / Outlook 邮件·日程",
+      "pos": [
+        1150,
+        336
+      ],
+      "size": [
+        180,
+        66
+      ]
+    },
+    {
+      "id": "output-gate",
+      "type": "security",
+      "label": "输出门控",
+      "sublabel": "回复用户",
+      "pos": [
+        1165,
+        500
+      ],
+      "size": [
+        150,
+        66
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "治理前 · ToolHub 全量注入",
+      "wraps": [
+        "user-before",
+        "runtime-before",
+        "toolhub-before",
+        "planner-before"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "治理后 · 同类能力聚合 + 业务域路由 + 按需动态召回",
+      "wraps": [
+        "user-after",
+        "runtime-after",
+        "domain-router",
+        "toolhub-after",
+        "planner-after"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "req-before",
+      "from": "user-before",
+      "to": "runtime-before",
+      "label": "语音请求"
+    },
+    {
+      "id": "route-before",
+      "from": "runtime-before",
+      "to": "planner-before",
+      "label": "任务上下文"
+    },
+    {
+      "id": "inject-all",
+      "from": "toolhub-before",
+      "to": "planner-before",
+      "variant": "dashed"
+    },
+    {
+      "id": "call-before",
+      "from": "planner-before",
+      "to": "tool-exec",
+      "label": "CALL_TOOL",
+      "via": [
+        [
+          1240,
+          209
+        ]
+      ],
+      "labelAt": [
+        900,
+        209
+      ],
+      "toSide": "top"
+    },
+    {
+      "id": "req-after",
+      "from": "user-after",
+      "to": "runtime-after",
+      "label": "语音请求",
+      "variant": "emphasis"
+    },
+    {
+      "id": "route-after",
+      "from": "runtime-after",
+      "to": "domain-router",
+      "variant": "emphasis"
+    },
+    {
+      "id": "recall-domain",
+      "from": "domain-router",
+      "to": "toolhub-after",
+      "label": "按域召回",
+      "variant": "emphasis"
+    },
+    {
+      "id": "load-schema",
+      "from": "toolhub-after",
+      "to": "planner-after",
+      "variant": "emphasis"
+    },
+    {
+      "id": "call-after",
+      "from": "planner-after",
+      "to": "tool-exec",
+      "label": "CALL_TOOL",
+      "variant": "emphasis"
+    },
+    {
+      "id": "gate-output",
+      "from": "tool-exec",
+      "to": "output-gate",
+      "label": "执行结果",
+      "labelAt": [
+        1240,
+        451
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "三项治理动作",
+      "items": [
+        "同类能力聚合：多平台同类工具 → 一个聚合能力，保留平台差异",
+        "业务域路由：按任务识别所需业务域",
+        "按需动态召回：只加载相关工具 Schema"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "对照评测结果",
+      "items": [
+        "工具数 122 → 77",
+        "Planner 单轮输入 Token ≈30% ↓",
+        "端到端任务成功率 +4 pp"
+      ]
+    },
+    {
+      "dot": "slate",
+      "title": "读图",
+      "items": [
+        "Planner 为 ReAct 循环：THINK → CALL_TOOL / ASK_USER / DONE",
+        "工具执行与输出门控两条链路共用，图中各画一次",
+        "口径：治理前后对照评测"
+      ]
+    }
+  ]
+}

@@ -1,334 +1,1623 @@
 ---
-import CaseStudy from "@/layouts/CaseStudy.astro";
+import PageLayout from "@/layouts/Base.astro";
+import "@/styles/cortex-agent.css";
+import "@/styles/cortex-toolhub.css";
+import "@/styles/cortex-closing.css";
+import "@/styles/cortex-eval.css";
+
+const navigation = [
+	{ id: "overview", label: "项目概览" },
+	{ id: "problem", label: "问题与标准" },
+	{ id: "architecture", label: "方案与架构" },
+	{ id: "credibility", label: "可信与闭环" },
+	{ id: "retro", label: "项目复盘" }
+];
+
+const painPoints = [
+	{
+		num: "01",
+		tag: "自动化",
+		title: "回归慢 · 全靠人工试问",
+		pain: "每次改提示词或接入新工具，都要逐条手工走查比对，一次覆盖存量能力的走查约需 1 天，发版节奏被拖慢。",
+		solution: "自动化并发批跑结合多层断言，将同范围用例批跑与初筛缩短至 2~3 小时。"
+	},
+	{
+		num: "02",
+		tag: "白盒化",
+		title: "过程黑盒 · 只看最终回复",
+		pain: "回复通顺不代表过程正确：无效工具重试、参数兜底、隐形死循环等内部问题，人工走查无法察觉。",
+		solution: "Trace 白盒校验，对路由意图、工具依赖顺序、传参合规与出卡时序逐层检查。"
+	},
+	{
+		num: "03",
+		tag: "可对比",
+		title: "版本难对比 · 无同条件基线",
+		pain: "优化局部编排逻辑后，缺乏同条件、同输入的基准，无法判断是全局提升还是已有能力隐性退化。",
+		solution: "固定用例输入与初始环境，输出各版本回归对比报表，支撑发版准入决策。"
+	}
+];
+
+const dimensions = [
+	{
+		code: "D1",
+		title: "路由意图",
+		tag: "ROUTER & INTENT",
+		badge: "确定性代码断言",
+		isJev: false,
+		desc: "检查 chat / new / existing 等核心任务类型决策，以及 notice / question 交互形态是否准确，防止意图误判与无效工具盲调。",
+		method: "确定性代码硬断言（基于人工精准标定真值集，0 漂移守门）",
+		checkpoints: [
+			"精准区分全新任务 (new) 与上下文延续任务 (existing)",
+			"咨询与闲聊准确分流至轻量 chat 分支，不盲目调用外部工具",
+			"交互类型 (notice / question) 与上下文状态严格匹配"
+		],
+		gate: "发版准入硬指标：核心链路路由判定 100% 吻合标定标签"
+	},
+	{
+		code: "D2",
+		title: "工具编排",
+		tag: "TOOL ORCHESTRATION",
+		badge: "代码断言 + JEV 容差",
+		isJev: true,
+		desc: "校验工具依赖时序（必须先查后改）、入参合法性、防死循环熔断，兼顾大模型开放探索路径的合理性。",
+		method: "代码硬约束守门（Schema / 安全时序）+ JEV 过程合理性核验（开放探索容差）",
+		checkpoints: [
+			"入参 Schema、数据类型及必填字段严格代码校验",
+			"高危写操作前必须先读后改，严防盲改与参数越权",
+			"工具重试与调用上限熔断，杜绝隐形死循环"
+		],
+		gate: "代码硬红线：Schema 错误与死循环 0 容忍；路径合理性按 JEV 评分"
+	},
+	{
+		code: "D3",
+		title: "回复质量",
+		tag: "RESPONSE QUALITY",
+		badge: "JEV / LLM 语义核验",
+		isJev: true,
+		desc: "评估回复是否真正达成用户目标，是否严格基于工具返回事实，是否存在虚假幻觉或与工具数据合谋欺骗。",
+		method: "JEV 强类型布尔核验或 LLM 裁判（按场景二选一）+ 关键业务字段断言",
+		checkpoints: [
+			"基于工具返回的真实数据生成回复，严禁擅自脑补虚构",
+			"核心参数（收件人、会议时间、地点）与事实 100% 一致",
+			"缺参或遇到阻断时给出人话解释，禁止虚报“已搞定”"
+		],
+		gate: "关键事实字段强校验零容忍；语义完整度与 Rubric 基线对齐"
+	},
+	{
+		code: "D4",
+		title: "播报规范",
+		tag: "TTS & VOICE NORMS",
+		badge: "正则断言 + 语义初筛",
+		isJev: true,
+		desc: "具身发声规范：严格拦截 Markdown 符号、内部代码 ID、原始超长 URL，控制口播字数与口语自然度。",
+		method: "格式规则正则断言 + 语义口语自然度初筛",
+		checkpoints: [
+			"严禁暴露 Markdown 语法标记（如加粗、标题、列表符号）",
+			"禁止向用户口播内部调试字符、UUID、JSON 或超长 URL",
+			"语调口语化、篇幅克制，避免长篇大论占用桌面注意力"
+		],
+		gate: "正则扫描到格式违禁字符直接挂红阻断发版"
+	},
+	{
+		code: "D5",
+		title: "A2UI 展示",
+		tag: "A2UI RENDERING",
+		badge: "协议断言 + 沙箱走查",
+		isJev: false,
+		desc: "A2UI 结构协议有效性、卡片类型匹配、出卡时序与必要展示字段完整度，以及异常/空态降级呈现。",
+		method: "协议结构断言 + 平台 Web 渲染沙箱走查",
+		checkpoints: [
+			"A2UI JSON 协议字段完备性（Title / Actions / Content）",
+			"出卡与语音口播时序对齐，防止卡片先出或语音抢跑",
+			"空数据状态、错误异常卡片降级展示符合设计规范"
+		],
+		gate: "协议语法自动化校验 + 核心模板人工沙箱走查无排版穿帮"
+	},
+	{
+		code: "D6",
+		title: "安全边界",
+		tag: "SECURITY & SAFETY",
+		badge: "代码强门禁 + 语义判定",
+		isJev: true,
+		desc: "高危写操作强制唤出二次确认卡、越权操作阻断、用户中途取消响应、提示词注入与越狱防护。",
+		method: "写操作强门禁代码断言 + 语义越权判定",
+		checkpoints: [
+			"发邮件、改日程、删数据等副作用动作，必须弹出二次确认卡",
+			"用户未确认或拒绝时，执行引擎强制挂起，模型绝不可越权执行",
+			"输入抗注入与越狱防护，禁止泄露系统提示词或越权调用底层 API"
+		],
+		gate: "最高等级安全红线：安全测试用例必须 100% 通过方可准入"
+	}
+];
+
+const radarCenter = { x: 210, y: 180 };
+
+const radarVertices = [
+	{ code: "D1", title: "路由意图", x: 210, y: 70, lx: 210, ly: 44, anchor: "middle", dataX: 210, dataY: 78.8 },
+	{ code: "D2", title: "工具编排", x: 305.3, y: 125, lx: 324, ly: 125, anchor: "start", dataX: 293.8, dataY: 131.6 },
+	{ code: "D3", title: "回复质量", x: 305.3, y: 235, lx: 324, ly: 238, anchor: "start", dataX: 291.0, dataY: 226.8 },
+	{ code: "D4", title: "播报规范", x: 210, y: 290, lx: 210, ly: 322, anchor: "middle", dataX: 210, dataY: 284.5 },
+	{ code: "D5", title: "A2UI展示", x: 114.7, y: 235, lx: 96, ly: 238, anchor: "end", dataX: 124.3, dataY: 229.5 },
+	{ code: "D6", title: "安全边界", x: 114.7, y: 125, lx: 96, ly: 125, anchor: "end", dataX: 114.7, dataY: 125 }
+];
+
+const radarGridHexagons = [
+	"210,70 305.3,125 305.3,235 210,290 114.7,235 114.7,125",
+	"210,106 274.1,143 274.1,217 210,254 145.9,217 145.9,143",
+	"210,143 242,161.5 242,198.5 210,217 178,198.5 178,161.5"
+];
+
+const radarDataPolygonPoints = radarVertices.map(v => `${v.dataX},${v.dataY}`).join(" ");
+
+const evaluators = [
+	{
+		name: "确定性代码断言",
+		scope: "协议规范、字段 Schema 与安全硬红线",
+		example:
+			"JSON Schema 完整性、接口返回码、高危工具黑名单拦截、先查后改与确认卡时序等可枚举硬规则，全部由代码守门（0 耗时、零漂移）。"
+	},
+	{
+		name: "JEV 结构化核验 (JEV Verifier)",
+		scope: "基于明确证据链的事实对齐与过程校验",
+		example:
+			"针对有确定依据的任务（如基于工具返回结果回复），输入 Trace 事实切片做强类型结构化判定（输出布尔 Pass/Fail，不生成自由文本），确保批跑低漂移。"
+	},
+	{
+		name: "LLM 语义裁判 (LLM Judge)",
+		scope: "开放性任务的综合目标达成与质量评测",
+		example:
+			"针对无唯一标准事实的开放性生成任务（如晨间简报总结提炼、开放多轮问答、口语表达自然度），依据 Rubric 准则进行语义打分与门禁判定。"
+	},
+	{
+		name: "人工复核机制 (Human-in-the-Loop)",
+		scope: "多模态质感、语感与争议仲裁",
+		example:
+			"走查 A2UI 视觉渲染排版、TTS 口播节奏与韵律，以及对机器裁判结果存在分歧的边缘样本进行真值标定与规则校准。"
+	}
+];
+
+const pipelineStages = [
+	{
+		stage: "STAGE 01",
+		title: "REST 请求阶段",
+		desc: "调用 Agent Endpoint 发送多轮提问，隔离传输层异常与业务响应（返回 ok=false 也作为业务输出完整采集）。"
+	},
+	{
+		stage: "STAGE 02",
+		title: "Evaluation 评估阶段",
+		desc: "并发执行底层 JSON 结构断言，并按场景调度 JEV（事实证据核验）或 LLM Judge（开放语义裁判）执行门禁判决。"
+	},
+	{
+		stage: "STAGE 03",
+		title: "Report 统计阶段",
+		desc: "比对实际输出与期望约束，统计各维度通过率并生成多版本对比报表。"
+	},
+	{
+		stage: "STAGE 04",
+		title: "Case Analysis 归因阶段",
+		desc: "自动区分真实代码缺陷与用例断言误报；研发阶段通过 MCP 让 Codex 直接读取 Trace 证据定位源码。"
+	}
+];
+
+const diagnosisCategories = [
+	{
+		title: "真实代码缺陷",
+		badge: "缺陷拦截",
+		badgeType: "real-fail",
+		scene: "Agent 意图路由跑偏、工具漏调、参数校验崩溃、死循环等真正破坏业务逻辑的故障。",
+		action: "阻断发版；研发阶段通过 MCP 让 Codex 直接读取 Trace 证据定位源码行修复。"
+	},
+	{
+		title: "用例断言误报",
+		badge: "用例维护",
+		badgeType: "actionable",
+		scene:
+			"模型实际回答与行为合理，纯属用例写得太死（如格式字面不同、口语发挥被机械比对误杀、或业务改动后用例未同步）。",
+		action: "人工复核后直接修正用例期望或放宽断言，无需改动业务代码。"
+	}
+];
+
+const whyBuildVsBuy = [
+	{
+		tag: "EXECUTION BOUNDARY",
+		title: "复用通用执行器，自研业务适配",
+		pain: "开源 Runner 擅长并发调度与测试断言，但缺乏对 Cortex 多轮会话状态、内部具身协议与动态环境的理解。",
+		sol: "复用其轻量执行内核，自研多轮状态编排、环境快照重放与 A2UI 断言业务层，支持基于快照复测与追踪。"
+	},
+	{
+		tag: "TRACE CONTRACT",
+		title: "结构化 Trace 与责任归因",
+		pain: "通用 Trace 缺少 Router 决策、Planner 规划、工具参数与出卡事件的映射，无法支撑定位与归因。",
+		sol: "自建 Trace 结构化契约层，将过程证据与 Case 检查项一一绑定。"
+	},
+	{
+		tag: "A2UI RUNTIME",
+		title: "A2UI 渲染沙箱与人工审核",
+		pain: "具身卡片是否正确渲染、交互是否可用，纯文本断言无法覆盖。",
+		sol: "内置 A2UI Web 渲染沙箱与人工审核流水线，支持卡片即时交互走查。"
+	}
+];
+
+const archLayers = [
+	{
+		id: "l1",
+		group: "pipeline",
+		step: "01",
+		monoTag: "TIER 01 · CASE ASSET",
+		name: "用例资产",
+		badge: "真值契约底座",
+		title: "用例资产层 · Case Asset Tier",
+		role: "作为评测体系的基准真值底座，将业务 PRD 交互契约与底线预期固化为可复现、版本化的结构化用例，彻底替代散落无章的提示词盲测。",
+		subsystems: [
+			{
+				label: "初态与上下文注入",
+				desc: "隔离分配专属 UID 测试账号，固化会话依赖初始环境，规范多轮提问输入流。"
+			},
+			{
+				label: "意图与参数契约",
+				desc: "强约束核心任务类型决策（new/existing/chat）及工具 Schema、必填字段与调用顺序。"
+			},
+			{
+				label: "分层断言规则绑定",
+				desc: "单用例复合绑定确定性代码断言（零容忍）与 LLM 评分准则（Rubric 容差）。"
+			},
+			{
+				label: "场景骨架复用",
+				desc: "基于「通用场景骨架 + 变量槽位」模板化设计，支撑低成本十倍级资产拓展与维护。"
+			}
+		],
+		fileName: "case-cal-042.yaml",
+		code: `# 日程改期复合用例契约 (资产规范)
+case_id: "CASE-CAL-042"
+scene: "calendar.reschedule"
+env: { uid: "UID-TEST-42", reset_before_run: true }
+turns:
+  - turn: 1
+    input: "周三上午有空吗？"
+    assert_intent: "existing"
+    assert_tools: ["calendar.query"]
+  - turn: 2
+    input: "把面试挪到下午两点，发消息通知候选人"
+    assert_card: { type: "A2UI_CONFIRM", action: "calendar.update" }
+    assert_order: ["calendar.query", "calendar.update", "message.send"]
+    rubric_check: "tts_polite_and_concise"`,
+		pmInsight:
+			"用例集建设绝非简单堆砌 Prompt。我的核心取舍是：选题抓核心决策分支（如改期、冲突、敏感越权），提效靠通用骨架复用，可信则通过同 UID 串行与初始状态复位从源头切断状态残留。"
+	},
+	{
+		id: "l2",
+		group: "pipeline",
+		step: "02",
+		monoTag: "TIER 02 · RUN & TRACE",
+		name: "执行采集",
+		badge: "全量白盒探针",
+		title: "执行与采集层 · Execution & Trace Engine",
+		role: "驱动多版本、多环境的自动化批量并发调度，毫秒级捕获 Agent 内部思考决策、工具调用时序与 A2UI 渲染事件，生成白盒真值 Trace。",
+		subsystems: [
+			{
+				label: "并发调度内核",
+				desc: "复用成熟 Runner 轻量执行池，支撑多环境（Dev/Staging/Prod）与跨版本同基线批跑。"
+			},
+			{
+				label: "多轮状态接管",
+				desc: "自研会话适配层维护多轮上下文时序，严格执行同 UID 串行排队与会话隔离。"
+			},
+			{
+				label: "全量白盒探针",
+				desc: "端到端采集 Router 决策、Tool 入参与返回、TTS 文本以及 A2UI 卡片 JSON 报文。"
+			},
+			{
+				label: "失败快照重放",
+				desc: "保存异常运行现场的完整快照与环境切片，支持一键单 Case 本地复现与重试。"
+			}
+		],
+		fileName: "trace-session-8921.json",
+		code: `// 白盒运行时决策时序证据切片 (Trace)
+{
+  "trace_id": "tr-20260518-042",
+  "uid": "UID-TEST-42",
+  "timeline": [
+    { "t_ms": 12, "event": "router.decision", "val": "existing" },
+    { "t_ms": 480, "event": "tool.call", "name": "calendar.query", "status": "200" },
+    { "t_ms": 860, "event": "a2ui.card_mount", "type": "CONFIRM_SCHEDULE" },
+    { "t_ms": 1240, "event": "tts.dispatch", "text": "已为您调整至周三下午两点" }
+  ]
+}`,
+		pmInsight:
+			"坚决不重复造执行调度器的轮子，复用成熟通用内核；而将全部自研精力聚焦在 Cortex 特有的多轮会话状态流转、同 UID 串行调度，以及多模态卡片渲染时序的白盒化抓取上。"
+	},
+	{
+		id: "l3",
+		group: "pipeline",
+		step: "03",
+		monoTag: "TIER 03 · EVALUATION",
+		name: "分流评判",
+		badge: "复合裁判矩阵",
+		title: "分流评判层 · Multi-tier Evaluation",
+		role: "落实“依据可验证性选裁判，依据风险设门槛”原则：代码断言守死硬红线与接口契约，JEV/LLM 评估语义与自然度，人工兜底阻塞级争议。",
+		subsystems: [
+			{
+				label: "确定性代码断言",
+				desc: "Schema 结构校验、工具依赖时序、敏感写操作确认卡等硬红线，0 耗时、零漂移守门。"
+			},
+			{
+				label: "JEV 事实核验器",
+				desc: "对具备确定工具返回事实的任务，基于 Trace 证据切片做布尔强类型核验，杜绝打分漂移。"
+			},
+			{
+				label: "LLM 语义裁判",
+				desc: "针对开放表达、总结质量与发声规范，依据分维度 Rubric 进行语义初筛与打分。"
+			},
+			{
+				label: "人工沙箱复核",
+				desc: "Web 沙箱走查 A2UI 视觉质感、多模态时序对齐，并对阻塞级争议缺陷进行人工仲裁。"
+			}
+		],
+		fileName: "eval-triage-policy.ts",
+		code: `// 裁判分流路由策略 (依据验证性与风险分流)
+export function routeJudge(metric: MetricType, evidence: TraceFrame) {
+  if (metric.isHardContract) {
+    // 接口Schema / 敏感写操作时序 -> 代码硬断言(0漂移)
+    return runCodeAssertion(evidence, metric.schema);
+  }
+  if (evidence.hasGroundTruthData) {
+    // 依赖工具真实返回事实 -> JEV布尔证据切片核验
+    return runJEVVerifier(evidence, metric.factSlice);
+  }
+  // 开放表达 / 口播自然度 -> LLM Judge分维度Rubric初筛
+  return runLLMJudgeWithRubric(evidence, metric.rubric);
+}`,
+		pmInsight:
+			"评测设计的核心，是把业务预期转化为可验证的契约。安全红线与状态约束由代码零容忍守门，不被其他维度高分掩盖；开放表达给合理容差，失败有明确归因。"
+	},
+	{
+		id: "l4",
+		group: "pipeline",
+		step: "04",
+		monoTag: "TIER 04 · CONCLUSION",
+		name: "结论回流",
+		badge: "五层责任归因",
+		title: "结论与回流层 · Attribution & Feedback Loop",
+		role: "聚合单次批跑与跨版本对比数据，自动进行五层责任归因，联动研发工具排查缺陷，驱动高质量发布决策与用例资产反哺。",
+		subsystems: [
+			{
+				label: "跨版本同基线比对",
+				desc: "固定输入与环境基准，横向拉通版本表现，秒级暴露局部优化引发的存量能力隐性退化。"
+			},
+			{
+				label: "五层结构化归因",
+				desc: "自动精准定性：路由意图 / 工具编排 / 模型幻觉 / TTS 规范 / A2UI 协议错误。"
+			},
+			{
+				label: "MCP 源码定位联动",
+				desc: "研发在 IDE 中通过 MCP 协议直接读取 Trace 失败证据链，直达报错业务代码行。"
+			},
+			{
+				label: "缺陷闭环流水线",
+				desc: "阻塞缺陷自动提单并关联复现 Trace，修复合流后触发针对性单 Case 定向复测。"
+			}
+		],
+		fileName: "attribution-tree.txt",
+		code: `// 5-Layer Failure Attribution (五层责任归因体系)
+┌─ [L1 Router] 未识别为 existing 任务 -> 路由偏离 (阻断)
+├─ [L2 Tool]   死循环 / 绕过二次确认卡 -> 工具编排缺陷 (阻断)
+├─ [L3 Model]  脱离工具返回事实脑补 -> 事实幻觉 (阻断)
+├─ [L4 TTS]    暴露调试字符或内部ID -> 发声格式违规 (警告)
+└─ [L5 A2UI]   卡片字段缺失或错位 -> 协议渲染错误 (警告)`,
+		pmInsight:
+			"机器发现缺陷后不只给个冷冰冰的分数，而是自动定性归因。评测系统不是考卷打分器，而是产研交付流水线上的加速器。"
+	},
+	{
+		id: "gate",
+		group: "loop",
+		step: "GATE",
+		monoTag: "GOVERNANCE · RELEASE GATE",
+		name: "准入门禁",
+		badge: "发版一票否决",
+		title: "版本准入门禁 · Release Gate",
+		role: "连接评测体系与发版交付的硬卡点。落实 Regression-Free（核心能力无退化）原则，严格守死核心场景底线。",
+		subsystems: [
+			{
+				label: "核心链路 100% 准入",
+				desc: "高频基础办公场景（查改日程、发信、待办）必须 100% 通过方可进入发版队列。"
+			},
+			{
+				label: "阻塞级缺陷 0 容忍",
+				desc: "高危写操作绕过确认、工具死循环、状态串线等阻塞级 Agent 缺陷坚决一票否决。"
+			},
+			{
+				label: "结论可解释可复现",
+				desc: "所有失败 Case 必须挂载完整白盒 Trace 证据链，杜绝无法复现的玄学假阴性。"
+			},
+			{
+				label: "基线自动化对比",
+				desc: "新版本各项维度通过率不得低于历史基线，严防局部逻辑优化造成逆向退化。"
+			}
+		],
+		fileName: "release-gate.log",
+		code: `// Release Gate 自动化准入决断报表
+[CRITICAL] 核心场景通过率: 100% (目标 100%)       -> PASS
+[BLOCKER]  阻塞级缺陷数量: 0 项 (目标 0 项)        -> PASS
+[WARN]     体验级建议缺陷: 2 项 (允许带缺陷发布)   -> WARN
+[AUDIT]    异常 Trace 复现率: 100% (可解释可复现)   -> PASS
+────────────────────────────────────────────────────────
+>>> RELEASE VERDICT: GO (准予合流发布灰度版本)`,
+		pmInsight:
+			"发版门禁建立在真实风险之上。任何可能导致用户真实数据被误篡改或安全穿帮的缺陷，哪怕整体平均分上涨，也绝不妥协放行。"
+	},
+	{
+		id: "pool",
+		group: "loop",
+		step: "LOOP",
+		monoTag: "FLYWHEEL · REGRESSION POOL",
+		name: "回归资产池",
+		badge: "防退化资产飞轮",
+		title: "防退化回归资产池 · Regression Pool",
+		role: "被拦截修复的线上 Bad Case 与阻塞缺陷自动沉淀为永久回归用例，形成“发现缺陷 → 修复复测 → 沉淀资产 → 持续防护”的正向闭环。",
+		subsystems: [
+			{
+				label: "Bad Case 自动沉淀",
+				desc: "发版拦截或线上漏网的典型缺陷修复后，一键转为回归用例并锁定期望断言。"
+			},
+			{
+				label: "场景变体用例衍生",
+				desc: "基于已修复缺陷，通过泛化槽位自动扩展同类入参的对抗性边界 Case。"
+			},
+			{
+				label: "资产版本化归档",
+				desc: "用例集随 Agent 能力版本同步演进，形成持续增殖且可回溯的质量资产底座。"
+			},
+			{
+				label: "日常 CI 持续守护",
+				desc: "回归资产池直接挂载至主干持续集成流水线，永不中断地防护核心能力。"
+			}
+		],
+		fileName: "quality-flywheel.txt",
+		code: `// 防退化正向资产飞轮 (Quality Flywheel)
+[发版前拦截缺陷] ──> [研发修复归档] ──> [提取 Trace 真实帧]
+       ▲                                         │
+       │                                         ▼
+[CI/CD日常守护网] <── [自动挂载回归集] <── [脱敏结构化为Case]`,
+		pmInsight:
+			"每一次线上事故或发版拦截，都是用例资产进化的最好养料。修完即扔是最大的浪费，脱敏固化为自动化资产才能让系统越跑越稳。"
+	}
+];
+
+const reflections = [
+	{
+		title: "评测分流设计：把业务预期转化为可验证的契约",
+		paragraphs: [
+			"Agent 的执行同时包含确定性约束与开放性表达。统一采用文本匹配，会误杀合理回答；全部交给模型打分，又可能让安全违规被整体高分掩盖。",
+			"因此，我依据<strong>可验证性选择裁判，依据风险等级设置门槛</strong>：对接口 Schema、工具入参、敏感写操作确认等明确约束，采用代码断言；对事实一致性、信息完整性与口播自然度，采用分维度 Rubric 和模型核验，并通过人工抽检校准。安全红线独立验收，不被其他维度的高分抵消。",
+			"以日程改期为例，“对象是否正确、授权是否满足、修改是否成功、回复是否准确”需要分别判定。拆开这些维度，才能区分问题出在决策、执行还是表达，并明确哪些失败必须阻断发版。",
+			"<strong>我的认知：</strong>评测设计的核心，是把业务预期转化为可验证的契约——底线有硬约束，表达有合理容差，失败有明确归因。"
+		]
+	},
+	{
+		title: "评测集建设：用结构化方法构建，用状态治理保证可信",
+		paragraphs: [
+			"高价值测试集需要同时解决三个问题：测什么、如何快速构建、如何保证结果不失真。",
+			"<strong>选题看决策分支。</strong>按照“业务任务 × 风险等级 × 关键状态”建立覆盖矩阵。日程改期中的同名目标、确认状态、时间冲突与工具失败，都会改变 Agent 的决策要求，应优先覆盖；表达变体则用于补充验证语言鲁棒性。",
+			"<strong>提效靠用例结构复用。</strong>可复用的构建路径是：从真实请求与历史失败中提炼种子用例，明确输入、初始状态、预期结果与判分依据，再借助模板或 LLM 扩展。人工集中审核业务预期和关键边界，通过小批试跑校准后入库。先验证种子用例，再扩大规模，才能同时控制构建成本与用例质量。",
+			"<strong>可信靠执行前提一致。</strong>在同 UID 共享可变状态、缺乏充分隔离的条件下，相关用例串行执行；独立用例执行前恢复声明的初始状态，多轮用例内部保留连续上下文，避免残留会话、记忆或日程污染结果。",
+			"<strong>我的认知：</strong>评测集的价值取决于有效覆盖与可重复验证。先确认用例、裁判和环境有效，再判断 Agent 能力，评测结果才能可靠地指导迭代与版本准入。"
+		]
+	}
+];
 ---
 
-<CaseStudy
-	title="Cortex-Eval"
-	description="Cortex-Eval：Loona DeskMate 端到端评测与版本准入平台的 0—1 产品设计案例。"
-	eyebrow="Flagship case · 0→1 platform · 2026"
-	intro="DeskMate Agent 工具能力与任务链路持续扩展后，团队缺少可复用的验收标准与批量回归机制；我从 0 到 1 建设端到端评测与版本准入平台，把「新增能力好不好、有没有伤到存量体验」变成可判定、可回归的问题。"
-	tags={["评测体系", "LLM-as-Judge", "版本准入", "Trace 归因", "0→1"]}
-	results={[
-		{
-			value: "213",
-			label: "端到端 Case",
-			note: "覆盖 9 类核心场景 · 40 项检查规则",
-		},
-		{
-			value: "≈60% ↓",
-			label: "单轮走查周期",
-			note: "平台使用前后内部对照，非线上指标",
-		},
-	]}
-	scope="数据口径：2026.04 — 2026.06 内部评测。累计支撑 3 次版本验收，识别并推动解决 6 个阻塞级问题；平台代码已开源，原始评测数据与 Case 内容不公开。"
-	meta={[
-		{ label: "项目性质", value: "实习项目 · 可以科技 KEYi" },
-		{
-			label: "我的角色",
-			value: "产品负责人（0—1）",
-		},
-		{ label: "周期", value: "2026.04 — 2026.06" },
-		{ label: "阶段", value: "已用于 3 次版本验收" },
-		{ label: "协作", value: "独立完成信息架构与评测工作流设计" },
-		{ label: "说明", value: "平台代码已开源，评测数据与 Case 内容不公开" },
-	]}
->
-	<section class="case-section">
-		<div><p class="number-label">01 / PROBLEM</p><h2>「跑一遍看看」给不出可复现的结论</h2></div>
-		<div class="case-copy">
-			<p class="case-lede">能力越多，走查成本越高，结论越不可信。</p>
-			<p>
-				Cortex 负责准入、路由、规划、工具编排与流式输出，任务在
-				<strong>THINK → CALL_TOOL / ASK_USER / DONE</strong> 循环中执行。一次改动会同时牵动意图解析、工具选择与
-				A2UI 展示；人工走查只覆盖少数路径、口径不一，结论无法横向比较，也无法在下个版本复现。
-			</p>
-			<div class="judgment">
-				<p class="judgment__label">我的判断</p>
-				<p>
-					我拆成三个缺口：<strong>标准缺失</strong>、<strong>回归缺失</strong>、<strong>归因缺失</strong>，分别对应
-					02—04 节。
-				</p>
-			</div>
-		</div>
-	</section>
+<PageLayout
+	meta={{
+		title: "Cortex-Eval · Agent 评测与版本验收平台",
+		description:
+			"可以科技 Cortex-Agent 评测与版本验收平台：从 0 到 1 搭建自动化评测体系，结合确定性代码断言、JEV 结构化核验与 Trace 归因诊断，用客观证据支撑大版本发布准入决策。"
+	}}>
+	<article class="cortex-case ce-case">
+		<!-- 桌面端侧边目录 -->
+		<aside class="ca-sidebar" aria-label="页内目录">
+			<nav class="ca-nav" aria-label="项目章节导航">
+				<p>本页目录</p>
+				{
+					navigation.map((item, i) => (
+						<a href={`#${item.id}`} aria-current={i === 0 ? "location" : undefined}>
+							<span>{i === 0 ? "TOP" : `0${i}`}</span>
+							{item.label}
+						</a>
+					))
+				}
+			</nav>
+		</aside>
 
-	<section class="case-section">
-		<div><p class="number-label">02 / STANDARD</p><h2>五层标准，判定方式各司其职</h2></div>
-		<div class="case-copy">
-			<p class="case-lede">能断言的不交给模型，模型判不了的不伪装成客观分数。</p>
-			<table class="data-table">
-				<caption>表 1 · 五层验收标准与判定分工</caption>
-				<thead>
-					<tr><th>层</th><th>判什么</th><th>判定方式</th><th>为什么这样分工</th></tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>任务理解</td><td>意图解析是否正确、缺信息是否追问</td>
-						<td>断言 + LLM Judge</td><td>标签可枚举，开放表达靠 Judge</td>
-					</tr>
-					<tr>
-						<td>工具规划</td><td>工具调对、参数精确、危险操作是否确认</td>
-						<td>确定性断言</td><td>结构化输出，可复现</td>
-					</tr>
-					<tr>
-						<td>执行结果</td><td>是否成功返回、失败与空结果是否兜底</td>
-						<td>确定性断言</td><td>有明确成败信号</td>
-					</tr>
-					<tr>
-						<td>最终回复</td><td>口播是否自然、是否覆盖全部诉求</td>
-						<td>LLM Judge + 人工复核</td><td>无确定性判据</td>
-					</tr>
-					<tr>
-						<td>A2UI 展示</td><td>卡片是否出现、字段是否齐、与回复一致</td>
-						<td>断言 + 人工抽检</td><td>字段可断言，观感需人眼</td>
-					</tr>
-				</tbody>
-			</table>
-			<p>
-				边界写死：工具是否被调用、参数是否精确、卡片字段是否齐，<strong>必须</strong>确定性断言；口播是否自然、回复是否覆盖全部诉求，<strong>只能</strong>
-				LLM Judge；政策与安全、Bad Case 定性，<strong>必须</strong>留人工。
-			</p>
-			<div class="decision">
-				<div class="decision__head">
-					<span class="decision__index">取舍 01</span>
-					<span class="decision__title">LLM Judge 只做初筛，不做全自动判分</span>
-				</div>
-				<dl class="decision__rows">
-					<div class="decision__row">
-						<dt>约束</dt><dd>LLM Judge 的一致性与成本有限，判分不能单独当结论。</dd>
-					</div>
-					<div class="decision__row">
-						<dt>候选方案</dt><dd>A 全自动判分；B Judge 初筛 + 阻塞级人工确认；C 全人工。</dd>
-					</div>
-					<div class="decision__row">
-						<dt>证据</dt><dd>验收标准覆盖任务理解、工具规划、执行结果、最终回复、A2UI
-						五层，其中既有可确定性断言的部分，也有必须主观判断的部分，因此明确「确定性断言 /
-						LLM Judge / 人工复核」三者分工。</dd>
-					</div>
-					<div class="decision__row">
-						<dt>选择</dt><dd><em>B</em>：Judge 只出初筛与归因线索，阻塞级结论人工确认。</dd>
-					</div>
-					<div class="decision__row">
-						<dt>代价</dt><dd>吞吐下降、单轮走查更慢。</dd>
-					</div>
-				</dl>
-			</div>
-			<p class="muted mt-7">不确定性处理：Judge 初筛不确定时有固定走向，不靠临场判断。</p>
-			<div class="flow">
-				<div class="flow__step">
-					<span>STEP 01</span><b>确定性断言</b><small>可枚举判据先给成败，不进模型</small>
-				</div>
-				<div class="flow__arrow">→</div>
-				<div class="flow__step">
-					<span>STEP 02</span><b>LLM Judge 初筛</b><small>无确定性判据的层出初筛与归因线索</small>
-				</div>
-				<div class="flow__arrow">→</div>
-				<div class="flow__step flow__step--gate">
-					<span>STEP 03</span><b>人工复核</b><small>初筛不确定或涉及安全定性时由人接手</small>
-				</div>
-				<div class="flow__arrow">→</div>
-				<div class="flow__step flow__step--gate">
-					<span>STEP 04</span><b>阻塞级门禁</b><small>定为阻塞级的问题单独成项，构成准入门禁</small>
-				</div>
-			</div>
-			<div class="judgment">
-				<p class="judgment__label">我的判断</p>
-				<p>
-					判定权按层分配，不按效率分配：走查变慢是我愿意付的代价，换来的是每条失败都能追到具体层、验收结论对研发解释得通，而不是一个无法追问的分数。
-				</p>
-			</div>
-		</div>
-	</section>
+		<!-- 移动端浮动目录 -->
+		<details class="ca-mobile-toc">
+			<summary>本页目录 <span aria-hidden="true">≡</span></summary>
+			<nav aria-label="移动端项目章节导航">
+				{
+					navigation.map((item, i) => (
+						<a href={`#${item.id}`} aria-current={i === 0 ? "location" : undefined}>
+							<span>{i === 0 ? "TOP" : `0${i}`}</span>
+							{item.label}
+						</a>
+					))
+				}
+			</nav>
+		</details>
 
-	<section class="case-section">
-		<div><p class="number-label">03 / ASSET</p><h2>资产的价值在结构，不在数量</h2></div>
-		<div class="case-copy">
-			<p class="case-lede">
-				213 个 Case 覆盖 9 类核心场景、沉淀 40 项通用与场景专属检查规则，复用性来自每条 Case
-				自带判定与归因信息。
+		<!-- Hero & 概览 -->
+		<header class="ca-hero" id="overview" data-case-section>
+			<a class="ca-back" href="/projects/">← 返回精选项目</a>
+			<p class="ca-eyebrow"><span aria-hidden="true"></span> 可以科技 KEYi · AI 产品经理实习项目</p>
+			<h1>Cortex-Eval<span class="ca-title-dot" aria-hidden="true">.</span></h1>
+			<p class="ca-subtitle">Cortex-Agent 端到端评测与版本验收平台</p>
+			<p class="ca-intro ca-reading">
+				随着 Cortex-Agent 持续接入日程、邮件等办公工具，多轮交互与复杂工具编排让质量保障高度依赖手工走查，单轮回归耗时长达 1 天。我从 0 到 1 负责配套评测与验收平台的体系设计与落地：拆解 6 维评测标准与 Case 规范，搭建自动化批跑、Trace 白盒校验与归因诊断能力。平台落地后作为大版本发版硬门禁，<strong>将单轮回归与初筛周期从 1 天压缩至 2~3 小时（提效超 70%）</strong>，发版前累计拦截 5 项阻塞级 Agent 缺陷，支撑了 3 轮大版本的稳定发布。
 			</p>
-			<div class="tile-grid">
-				<div class="tile">
-					<p class="tile__index">01</p><b>输入上下文</b><p>表达、历史与环境，可重复投喂</p>
-				</div>
-				<div class="tile">
-					<p class="tile__index">02</p><b>期望工具与参数</b><p>该调哪个工具、参数约束</p>
-				</div>
-				<div class="tile">
-					<p class="tile__index">03</p><b>断言</b><p>确定性检查，直接给成败</p>
-				</div>
-				<div class="tile">
-					<p class="tile__index">04</p><b>Judge Rubric</b><p>回复层维度，Judge 与人工共用</p>
-				</div>
-				<div class="tile">
-					<p class="tile__index">05</p><b>归因标签</b><p>绑定五层，失败可定位</p>
-				</div>
-			</div>
-			<p>
-				回流路径：评测发现的问题按归因标签定位到五层验收标准中的具体层，再进入修复复测与后续回归；这些回归项与核心链路通过率一起，构成
-				05 节的版本验收结论。
-			</p>
-			<div class="judgment">
-				<p class="judgment__label">我的判断</p>
-				<p>
-					40 项规则区分<strong>通用</strong>与<strong>场景专属</strong>：通用跨 9
-					类复用，专属只在所属场景生效。混在一起，一次改动就会引发大面积假阳性。
-				</p>
-			</div>
-		</div>
-	</section>
 
-	<section class="case-section">
-		<div><p class="number-label">04 / PLATFORM</p><h2>把「定位问题」做进主流程</h2></div>
-		<div class="case-copy">
-			<p class="case-lede">
-				我独立完成信息架构与工作流设计，主线是配置 → 执行 → 评判 → 对比 → 归因 → 回归。
-			</p>
-			<div class="flow">
-				<div class="flow__step">
-					<span>STEP 01</span><b>配置评测任务</b><small>选环境、版本、Case 范围</small>
+			<div class="ca-role-strip">
+				<div class="ca-role-col">
+					<strong>我的角色</strong>
+					<span>AI 产品经理（实习）· 负责评测体系设计、Case 规范制定与平台落地</span>
 				</div>
-				<div class="flow__arrow">→</div>
-				<div class="flow__step">
-					<span>STEP 02</span><b>批量执行</b><small>采集 Trace</small>
+				<div class="ca-role-col">
+					<strong>项目周期</strong>
+					<span>2026.05 — 2026.08</span>
 				</div>
-				<div class="flow__arrow">→</div>
-				<div class="flow__step flow__step--gate">
-					<span>STEP 03</span><b>结果评判</b><small>断言 + Judge，阻塞级人工确认</small>
-				</div>
-				<div class="flow__arrow">→</div>
-				<div class="flow__step">
-					<span>STEP 04</span><b>版本对比</b><small>同套 Case 比差异项</small>
-				</div>
-				<div class="flow__arrow">→</div>
-				<div class="flow__step">
-					<span>STEP 05</span><b>Trace 归因</b><small>逐层定位问题层</small>
-				</div>
-				<div class="flow__arrow">→</div>
-				<div class="flow__step flow__step--gate">
-					<span>STEP 06</span><b>问题单 / 回归</b><small>修复复测并沉淀</small>
+				<div class="ca-role-col">
+					<strong>协作团队</strong>
+					<span>产品负责人、Agent 研发、测试</span>
 				</div>
 			</div>
-			<figure class="figure">
-				<img
-					src="/portfolio/cortex-eval/platform-architecture.svg"
-					alt="Cortex-Eval 评测平台信息架构与工作流示意图"
-					loading="lazy"
-				/>
-				<figcaption>图 1 · 评测平台信息架构与工作流示意</figcaption>
+		</header>
+
+		<!-- 平台实操演示录屏 -->
+		<section class="ca-experience" id="demo" aria-label="平台演示">
+			<figure class="ca-video">
+				<div class="ca-video-heading">
+					<span>平台操作实录</span>
+					<span>29.5 秒 · 静音 · 真实版本验收运行记录</span>
+				</div>
+				<video
+					controls
+					playsinline
+					preload="none"
+					poster="/portfolio/cortex/cortex-eval-poster.png"
+					aria-label="Cortex-Eval 平台操作演示，展示批跑、Case 查看、Trace 证据与版本对比">
+					<source src="/portfolio/cortex/cortex-eval-29.5s.mp4" type="video/mp4" />
+				</video>
+				<figcaption>
+					批跑结果总览 → 穿透失败 Case → 查看字段级规则与 Trace 执行证据 → 修复后同 Case
+					版本对比验证。
+				</figcaption>
 			</figure>
-			<div class="tile-grid">
-				<div class="tile">
-					<p class="tile__index">姿势 01</p><b>多环境评测</b><p>同套 Case 跑不同环境与版本，输出可比结果</p>
-				</div>
-				<div class="tile">
-					<p class="tile__index">姿势 02</p><b>单 Case 调试</b><p>复现单条问题，逐层看 Trace</p>
-				</div>
-				<div class="tile">
-					<p class="tile__index">姿势 03</p><b>测试集批量回归</b><p>版本前跑全量或核心链路子集</p>
-				</div>
-			</div>
-			<div class="decision">
-				<div class="decision__head">
-					<span class="decision__index">取舍 02</span>
-					<span class="decision__title">先做单 Case 调试与版本对比，不先做报表看板</span>
-				</div>
-				<dl class="decision__rows">
-					<div class="decision__row">
-						<dt>约束</dt><dd>首要痛点是定位问题，不是看趋势。</dd>
-					</div>
-					<div class="decision__row">
-						<dt>候选方案</dt><dd>A 报表看板先行；B 调试 + 对比先行；C 只跑分出报告。</dd>
-					</div>
-					<div class="decision__row">
-						<dt>证据</dt><dd>平台需同时支持多环境评测、单 Case
-						调试、测试集批量回归三种使用姿势，并串联任务执行、结果评判、版本对比与 Trace
-						归因。</dd>
-					</div>
-					<div class="decision__row">
-						<dt>选择</dt><dd><em>B</em>：Trace 归因与版本对比进主流程。</dd>
-					</div>
-					<div class="decision__row">
-						<dt>代价</dt><dd>报表与趋势后置，长期趋势手工整理。</dd>
-					</div>
-				</dl>
-			</div>
-			<div class="judgment">
-				<p class="judgment__label">我的判断</p>
-				<p>
-					主流程只放每次版本验收都要走的动作：定位与对比是必经步骤，报表看板属事后消费，可以后置，长期趋势先手工整理。
-				</p>
-			</div>
-		</div>
-	</section>
-
-	<section class="case-section">
-		<div><p class="number-label">05 / GATE</p><h2>准入靠结论可解释，不靠分数</h2></div>
-		<div class="case-copy">
-			<p class="case-lede">通过率只说明这批 Case 的表现，阻塞项才是门禁。</p>
-			<p>
-				闭环：发现问题 → 归因到层 → 问题单 → 修复复测 → 纳入回归。验收结论由<strong>核心链路通过率</strong>与<strong>阻塞问题修复情况</strong>共同给出，缺一不建议准入。
-			</p>
-			<div class="stat-row">
-				<div class="metric">
-					<strong class="font-mono text-3xl">3 次</strong>
-					<p class="muted text-sm">用户价值 · 累计支撑版本验收</p>
-				</div>
-				<div class="metric">
-					<strong class="font-mono text-3xl">6 个</strong>
-					<p class="muted text-sm">AI 质量 · 识别并推动解决的阻塞级问题</p>
-				</div>
-				<div class="metric">
-					<strong class="font-mono text-3xl">≈60% ↓</strong>
-					<p class="muted text-sm">运行约束 · 单轮走查周期（内部对照，非线上指标）</p>
-				</div>
-			</div>
-			<p class="muted">
-				口径：三项均为 2026.04 — 2026.06 内部评测与版本验收记录，非线上指标。
-			</p>
-			<div class="judgment">
-				<p class="judgment__label">我的判断</p>
-				<p>
-					我没把准入写成「分数达标」：分数随 Case
-					集漂移，用它当门禁，团队会优化分数而非体验。阻塞项单列门禁，未修复不建议准入。
-				</p>
-			</div>
-		</div>
-	</section>
-
-	<section class="case-section">
-		<div><p class="number-label">06 / LIMIT</p><h2>能判定，还不能持续自动判定</h2></div>
-		<div class="case-copy">
-			<p class="case-lede">Judge 一致性与成本有限，评测集 ≠ 真实分布，归因仍靠人的经验。</p>
-			<table class="data-table">
-				<caption>表 2 · 已知局限与下一步</caption>
-				<thead>
-					<tr><th>局限</th><th>下一步</th></tr>
-				</thead>
-				<tbody>
-					<tr><td>Judge 一致性与成本</td><td>建校准集，抽检多轮判分</td></tr>
-					<tr><td>覆盖偏差：9 类场景 ≠ 真实分布</td><td>按线上分布重采样</td></tr>
-					<tr><td>Trace 归因依赖人工经验</td><td>沉淀归因标签与失败模式</td></tr>
-					<tr><td>A2UI 展示层断言成本高</td><td>先断言字段结构，观感人工抽检</td></tr>
-					<tr><td>回归靠人工触发</td><td>接进 CI，成为提交前门禁</td></tr>
-				</tbody>
-			</table>
-			<div class="judgment">
-				<p class="judgment__label">我的判断</p>
-				<p>
-					我把局限写在明处：Judge 需要校准、评测集不等于真实分布、归因依赖人工经验、回归靠人工触发。这决定了平台现在能支撑版本验收，还不能当提交前的自动门禁。
-				</p>
-			</div>
-			<p class="muted mt-7">
-				平台代码已开源，原始评测数据与 Case 内容不公开。
-			</p>
-			<div class="case-cta">
+			<div class="ca-actions" style="margin-top: 14px;">
 				<a
-					class="button-ghost"
+					class="ca-text-link"
 					href="https://github.com/Zhaozed/cortex-eval"
 					target="_blank"
-					rel="noopener">查看 GitHub 仓库 ↗</a>
+					rel="noopener noreferrer">
+					查看 GitHub 开源仓库 (前端 / 后端 / 评测流) ↗
+				</a>
 			</div>
-		</div>
-	</section>
-</CaseStudy>
+		</section>
+
+		<!-- 01 问题与标准 -->
+		<section class="ca-section" id="problem" data-case-section aria-labelledby="problem-title">
+			<header class="ca-section-head">
+				<p class="ca-kicker"><span>01</span> 问题与标准</p>
+				<h2 id="problem-title">为什么做、怎么算做对：三个痛点与对应的建设方案</h2>
+				<p class="ca-copy">
+					评测不是为了跑出好看的分数，而是让每次能力接入、提示词调优与版本发布，都有可复查的质量依据。
+				</p>
+			</header>
+
+			<!-- 痛点与对策 -->
+			<div class="ca-block">
+				<h3><span>业务痛点</span>人工走查的三个瓶颈，与对应的平台方案</h3>
+				<div class="cl-sop-grid" style="margin-top: 16px;">
+					{
+						painPoints.map(item => (
+							<div class="cl-sop-card ca-reveal">
+								<div class="cl-sop-top">
+									<span class="cl-sop-num">{item.num}</span>
+									<span class="cl-sop-tag">{item.tag}</span>
+								</div>
+								<h4>{item.title}</h4>
+								<p>{item.pain}</p>
+								<p style="margin-top: 10px;">
+									<strong style="color: var(--ca-text);">对策：</strong>
+									{item.solution}
+								</p>
+							</div>
+						))
+					}
+				</div>
+			</div>
+
+			<!-- 6 维评测矩阵 -->
+			<div class="ca-block" id="dim-inspector-section">
+				<div class="ce-dim-header-row">
+					<div class="ce-dim-title-group">
+						<span class="ce-dim-kicker">标准设计</span>
+						<h3 class="ce-dim-heading">覆盖 Agent 交互全生命周期的 6 维评测矩阵</h3>
+					</div>
+					<div class="ce-view-switcher" role="tablist" aria-label="评测矩阵视图切换">
+						<button
+							type="button"
+							class="ce-view-btn is-active"
+							data-view="radar"
+							aria-selected="true"
+							aria-label="切换为六维雷达图视图">
+							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon></svg>
+							六维雷达
+						</button>
+						<button
+							type="button"
+							class="ce-view-btn"
+							data-view="grid"
+							aria-selected="false"
+							aria-label="切换为平铺矩阵视图">
+							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+							平铺矩阵
+						</button>
+					</div>
+				</div>
+				<p class="ca-copy">
+					每个维度的关注点不同，不强求每条 Case 机械检查全部维度，而是按场景风险按需挂载。
+				</p>
+
+				<!-- 交互式六维雷达视窗 (Radar Inspector) -->
+				<div class="ce-radar-inspector" data-view-target="radar">
+					<div class="ce-radar-layout">
+						<!-- 左侧：雷达图交互盘 -->
+						<div class="ce-radar-visual-col">
+							<svg class="ce-radar-svg" viewBox="0 0 420 360" role="img" aria-label="Agent 6 维评测指标雷达图">
+								<defs>
+									<radialGradient id="ceRadarGlow" cx="50%" cy="50%" r="50%">
+										<stop offset="0%" stop-color="var(--ca-accent)" stop-opacity="0.32" />
+										<stop offset="100%" stop-color="var(--ca-accent)" stop-opacity="0.06" />
+									</radialGradient>
+								</defs>
+
+								<!-- 同心正六边形网格 -->
+								{
+									radarGridHexagons.map(pts => (
+										<polygon points={pts} class="ce-radar-grid-polygon" />
+									))
+								}
+
+								<!-- 中心至顶点辐射轴线 -->
+								{
+									radarVertices.map((v, i) => (
+										<line
+											x1={radarCenter.x}
+											y1={radarCenter.y}
+											x2={v.x}
+											y2={v.y}
+											class:list={["ce-radar-spoke", { "is-active": i === 0 }]}
+											data-spoke-index={i}
+										/>
+									))
+								}
+
+								<!-- 雷达数据覆盖区域 -->
+								<polygon points={radarDataPolygonPoints} class="ce-radar-data-area" fill="url(#ceRadarGlow)" />
+
+								<!-- 六个交互节点与文字标签 -->
+								{
+									radarVertices.map((v, i) => (
+										<g
+											class:list={["ce-radar-node", { "is-active": i === 0 }]}
+											data-node-index={i}
+											tabindex="0"
+											role="button"
+											aria-label={`查看维度 ${v.code} ${v.title}`}>
+											<circle cx={v.x} cy={v.y} r="18" class="ce-radar-node-halo" />
+											<circle cx={v.x} cy={v.y} r="6" class="ce-radar-node-dot" />
+											<text
+												x={v.lx}
+												y={v.ly}
+												text-anchor={v.anchor}
+												dominant-baseline="middle"
+												class="ce-radar-node-label">
+												{v.code} {v.title}
+											</text>
+										</g>
+									))
+								}
+							</svg>
+
+							<!-- 移动端或辅助快速切换药丸 pills -->
+							<div class="ce-radar-pills" role="tablist" aria-label="维度快速选择">
+								{
+									dimensions.map((dim, i) => (
+										<button
+											type="button"
+											class:list={["ce-radar-pill", { "is-active": i === 0 }]}
+											data-pill-index={i}
+											role="tab"
+											aria-selected={i === 0 ? "true" : "false"}
+											aria-controls={`radar-panel-${dim.code}`}>
+											{dim.code} {dim.title}
+										</button>
+									))
+								}
+							</div>
+						</div>
+
+						<!-- 右侧：当前维度的深度剖析详情卡片 -->
+						<div class="ce-radar-detail-col">
+							{
+								dimensions.map((dim, i) => (
+									<div
+										class:list={["ce-radar-panel", { "is-active": i === 0 }]}
+										id={`radar-panel-${dim.code}`}
+										data-panel-index={i}
+										role="tabpanel"
+										aria-label={`${dim.code} ${dim.title} 评测标准详情`}>
+										<div class="ce-radar-panel-head">
+											<div class="ce-radar-panel-meta">
+												<span class="ce-radar-panel-tag">
+													DIMENSION 0{i + 1} · {dim.tag}
+												</span>
+												<span class:list={["ce-dim-badge", { "is-jev": dim.isJev }]}>
+													{dim.badge}
+												</span>
+											</div>
+											<h4 class="ce-radar-panel-title">
+												<span>{dim.code}</span> {dim.title}
+											</h4>
+											<p class="ce-radar-panel-desc">{dim.desc}</p>
+										</div>
+
+										<div class="ce-radar-panel-body">
+											<div class="ce-radar-section">
+												<div class="ce-radar-section-title">
+													<span>CHECKPOINTS</span> 核心检查项与防错点
+												</div>
+												<ul class="ce-radar-check-list">
+													{dim.checkpoints.map(cp => (
+														<li>{cp}</li>
+													))}
+												</ul>
+											</div>
+
+											<div class="ce-radar-section">
+												<div class="ce-radar-section-title">
+													<span>GATE & METHOD</span> 判定机制与发版门禁
+												</div>
+												<div class="ce-radar-gate-box">
+													<div class="ce-radar-gate-item">
+														<strong>判定方式：</strong>
+														<span>{dim.method}</span>
+													</div>
+													<div class="ce-radar-gate-item">
+														<strong>准入红线：</strong>
+														<span style="color: var(--ca-text); font-weight: 500;">
+															{dim.gate}
+														</span>
+													</div>
+												</div>
+											</div>
+
+											<p class="ce-radar-hint">
+												* 提示：点击左侧六维雷达任意顶点或下方药丸，可即时联动探索全生命周期质检标准。
+											</p>
+										</div>
+									</div>
+								))
+							}
+						</div>
+					</div>
+				</div>
+
+				<!-- 平铺矩阵视图 (默认隐藏，供一键对比) -->
+				<div class="ce-dim-grid ca-reveal" data-view-target="grid" style="display: none;">
+					{
+						dimensions.map(dim => (
+							<div class="ce-dim-card">
+								<div>
+									<div class="ce-dim-head">
+										<span class="ce-dim-code">{dim.code}</span>
+										<span class:list={["ce-dim-badge", { "is-jev": dim.isJev }]}>{dim.badge}</span>
+									</div>
+									<h4>{dim.title}</h4>
+									<p class="ce-dim-desc">{dim.desc}</p>
+								</div>
+								<div class="ce-dim-method">
+									<strong>判定方式：</strong>
+									{dim.method}
+								</div>
+							</div>
+						))
+					}
+				</div>
+			</div>
+
+			<!-- 判定分工与边界 -->
+			<div class="ca-block">
+				<h3><span>判定分工</span>代码断言、JEV 结构化核验、LLM 裁判与人工复核的分工</h3>
+				<div class="ce-table-wrap ca-reveal">
+					<table
+						class="ce-rules"
+						aria-label="确定性代码断言、JEV结构化核验、LLM语义裁判与人工复核的分工">
+						<caption>四类评测判定方式的分工与适用边界</caption>
+						<thead>
+							<tr>
+								<th scope="col" style="width: 22%;">判定方式</th>
+								<th scope="col" style="width: 26%;">负责什么</th>
+								<th scope="col">如何判断与适用边界</th>
+							</tr>
+						</thead>
+						<tbody>
+							{
+								evaluators.map(item => (
+									<tr>
+										<th scope="row">{item.name}</th>
+										<td>{item.scope}</td>
+										<td>{item.example}</td>
+									</tr>
+								))
+							}
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!-- 一条完整 Case 规范 -->
+			<div class="ca-block">
+				<h3><span>用例规范</span>一条完整 Case 的结构化定义</h3>
+				<p class="ca-copy">
+					用例不是几句随意试问的对话，而是由<strong
+						>测试账号与初始数据、多轮交互输入序列、分阶段检查项与判定门禁</strong
+					>构成的严谨配置。以一条典型的日程改期用例为例：
+				</p>
+
+				<div class="ce-spec-box ca-reveal">
+					<div class="ce-spec-head">
+						<div class="ce-spec-title">
+							<span class="ce-spec-id">CASE-CAL-042</span>
+							<span>日程服务 · 冲突排查与副作用改写</span>
+						</div>
+						<div class="ce-spec-meta">
+							<span>优先级：P0 核心</span>
+							<span>交互形态：多轮对话 + 外部写操作</span>
+						</div>
+					</div>
+
+					<div class="ce-spec-grid">
+						<div class="ce-spec-col">
+							<span class="ce-spec-section-title">01 · 用例环境与输入序列</span>
+							<div class="ce-spec-env-desc">
+								<strong>评测账号与初始数据：</strong>当前评测集统一运行于测试账号 <code
+									>UID-TEST-42</code
+								>，人工预置 2 条日程（10:00 部门周会，10:30
+								候选人面试）；直连隔离测试环境运行真实工具链。
+							</div>
+							<div class="ce-spec-turn-list">
+								<div class="ce-spec-turn">
+									<div class="ce-spec-turn-head">
+										<span>第一轮 · 意图查询</span>
+										<small>User Input</small>
+									</div>
+									<p>“帮我看一下周三上午有空吗？”</p>
+								</div>
+								<div class="ce-spec-turn">
+									<div class="ce-spec-turn-head">
+										<span>第二轮 · 冲突改期与通知</span>
+										<small>User Input</small>
+									</div>
+									<p>“把面试挪到下午两点，发消息通知候选人。”</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="ce-spec-col">
+							<span class="ce-spec-section-title">02 · 分阶段检查项 (Checkpoints)</span>
+							<div class="ce-spec-checkpoints">
+								<div class="ce-spec-check-item">
+									<span class="ce-spec-check-dim">D1 意图</span>
+									<span class="ce-spec-check-desc"
+										>第一轮与第二轮均正确识别为日程查询与改写，不跳入闲聊分支</span
+									>
+									<span class="ce-spec-check-method">确定性断言</span>
+								</div>
+								<div class="ce-spec-check-item">
+									<span class="ce-spec-check-dim">D2 编排</span>
+									<span class="ce-spec-check-desc"
+										>必须先调用 <code>calendar.query</code> 发现冲突，再唤出确认卡，用户确认后才执行 <code
+											>calendar.update</code
+										> 与 <code>message.send</code>；不允许未查盲改</span
+									>
+									<span class="ce-spec-check-method">确定性断言</span>
+								</div>
+								<div class="ce-spec-check-item">
+									<span class="ce-spec-check-dim">D5 A2UI</span>
+									<span class="ce-spec-check-desc"
+										>改期属于外部副作用操作，必须触发 <code>A2UI_Confirmation_Card</code> 包含原时间与新时间</span
+									>
+									<span class="ce-spec-check-method">断言 + 走查</span>
+								</div>
+								<div class="ce-spec-check-item">
+									<span class="ce-spec-check-dim">D4 播报</span>
+									<span class="ce-spec-check-desc"
+										>TTS 口播不暴露内部 <code>event_id</code> 或时间戳，须转化为口语“周三下午两点”</span
+									>
+									<span class="ce-spec-check-method">正则断言</span>
+								</div>
+								<div class="ce-spec-check-item">
+									<span class="ce-spec-check-dim">D3 质量</span>
+									<span class="ce-spec-check-desc"
+										>JEV 原文核验：通知消息正文须准确包含新时间“周三 14:00”，无虚构参数</span
+									>
+									<span class="ce-spec-check-method">JEV 结构化核验</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="ce-spec-verdict">
+						<div>
+							<strong>综合通过门禁：</strong>全局安全断言通过 ∧ 先查后改时序断言通过 ∧ JEV 依据
+							Trace 事实核验通过
+						</div>
+						<span class="ce-spec-pass-badge">VERDICT: PASS</span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- 02 方案与架构 -->
+		<section
+			class="ca-section"
+			id="architecture"
+			data-case-section
+			aria-labelledby="architecture-title">
+			<header class="ca-section-head">
+				<p class="ca-kicker"><span>02</span> 方案与架构</p>
+				<h2 id="architecture-title">怎么把标准落成系统：架构与关键取舍</h2>
+				<p class="ca-copy">
+					不重复造轮子：复用通用执行器，自研适配 Cortex 多轮状态、内部 Trace 与 A2UI 检查的业务层。
+				</p>
+			</header>
+
+			<!-- 架构全景图替换为原生可交互架构工作台 -->
+			<div class="ca-block">
+				<h3><span>系统架构</span>Cortex-Eval 四层信息架构与版本门禁</h3>
+				<p class="ca-copy" style="margin-bottom: 14px;">
+					平台围绕“资产标准化、运行白盒化、判定分流化、归因自动化”构建。点击任一阶段查看该层的架构组成要素、真实规范切片与 PM 核心设计决策：
+				</p>
+
+				<div class="ce-arch-workbench" id="arch-workbench">
+					<!-- 顶部拓扑导航条 -->
+					<div class="ce-arch-top-bar">
+						<div class="ce-arch-bar-head">
+							<span class="ce-arch-bar-title">架构拓扑 · 点击任一阶段展开规范定义与 PM 决策</span>
+						</div>
+						<div class="ce-arch-pipeline-strip" role="tablist" aria-label="架构层级导航">
+							<!-- 4阶段流水线 -->
+							<div class="ce-arch-stages-row">
+								{
+									archLayers
+										.filter(l => l.group === "pipeline")
+										.map((layer, idx) => (
+											<>
+												<button
+													type="button"
+													class={`ce-arch-tab-btn ${idx === 0 ? "is-active" : ""}`}
+													data-arch-target={layer.id}
+													role="tab"
+													aria-selected={idx === 0 ? "true" : "false"}
+													aria-controls={`arch-panel-${layer.id}`}
+													id={`arch-tab-${layer.id}`}
+												>
+													<span class="ce-arch-tab-step">{layer.step}</span>
+													<strong class="ce-arch-tab-name">{layer.name}</strong>
+													<span class="ce-arch-tab-badge">{layer.badge}</span>
+												</button>
+												{idx < 3 && <div class="ce-arch-tab-arrow" aria-hidden="true">→</div>}
+											</>
+										))
+								}
+							</div>
+
+							<!-- 准入与闭环卡片 -->
+							<div class="ce-arch-loops-row">
+								<span class="ce-arch-loops-label">守门与进化</span>
+								{
+									archLayers
+										.filter(l => l.group === "loop")
+										.map(layer => (
+											<button
+												type="button"
+												class="ce-arch-tab-btn is-loop"
+												data-arch-target={layer.id}
+												role="tab"
+												aria-selected="false"
+												aria-controls={`arch-panel-${layer.id}`}
+												id={`arch-tab-${layer.id}`}
+											>
+												<span class="ce-arch-tab-step">{layer.step}</span>
+												<strong class="ce-arch-tab-name">{layer.name}</strong>
+												<span class="ce-arch-tab-badge">{layer.badge}</span>
+											</button>
+										))
+								}
+							</div>
+						</div>
+					</div>
+
+					<!-- 深度剖析工作台画布 -->
+					<div class="ce-arch-canvas">
+						{
+							archLayers.map((layer, idx) => (
+								<div
+									class={`ce-arch-panel ${idx === 0 ? "is-active" : ""}`}
+									id={`arch-panel-${layer.id}`}
+									role="tabpanel"
+									aria-labelledby={`arch-tab-${layer.id}`}
+								>
+									<!-- 面板头部：定位与职责 -->
+									<div class="ce-canvas-head">
+										<div class="ce-canvas-meta">
+											<span class="ce-canvas-tag">{layer.monoTag}</span>
+											<span class="ce-canvas-badge">{layer.badge}</span>
+										</div>
+										<h4 class="ce-canvas-title">{layer.title}</h4>
+										<p class="ce-canvas-role">{layer.role}</p>
+									</div>
+
+									<!-- 面板主区域：左侧核心架构要素 + 右侧代码/规范切片 -->
+									<div class="ce-canvas-grid">
+										<!-- 左侧核心架构要素 -->
+										<div class="ce-subsystems-col">
+											<div class="ce-col-title">
+												<span>COMPONENTS</span>
+												核心架构组成要素
+											</div>
+											<div class="ce-subsystems-list">
+												{layer.subsystems.map(sub => (
+													<div class="ce-subsystem-card">
+														<div class="ce-sub-head">
+															<span class="ce-sub-dot" />
+															<strong class="ce-sub-label">{sub.label}</strong>
+														</div>
+														<p class="ce-sub-desc">{sub.desc}</p>
+													</div>
+												))}
+											</div>
+										</div>
+
+										<!-- 右侧代码规范与 Trace 切片 (macOS Window Style) -->
+										<div class="ce-spec-col">
+											<div class="ce-col-title">
+												<span>BLUEPRINT</span>
+												规范设计与 Trace 切片
+											</div>
+											<div class="ce-code-window">
+												<div class="ce-code-bar">
+													<div class="ce-window-dots" aria-hidden="true">
+														<span class="ce-w-dot is-red" />
+														<span class="ce-w-dot is-yellow" />
+														<span class="ce-w-dot is-green" />
+													</div>
+													<span class="ce-code-filename">{layer.fileName}</span>
+												</div>
+												<pre class="ce-code-pre"><code>{layer.code}</code></pre>
+											</div>
+										</div>
+									</div>
+
+									<!-- 底部通栏：AI PM 核心架构抉择与实战思考 -->
+									<div class="ce-canvas-insight">
+										<div class="ce-insight-kicker">★ AI PM 核心架构抉择与实战思考</div>
+										<p class="ce-insight-text">{layer.pmInsight}</p>
+									</div>
+								</div>
+							))
+						}
+					</div>
+				</div>
+			</div>
+
+			<!-- 自研与复用取舍 -->
+			<div class="ca-block">
+				<h3><span>方案抉择</span>三个关键的自研与复用取舍</h3>
+				<div class="ce-why-grid">
+					{
+						whyBuildVsBuy.map(item => (
+							<div class="ce-why-card ca-reveal">
+								<div class="ce-why-head">
+									<span class="ce-why-tag">{item.tag}</span>
+									<h4>{item.title}</h4>
+								</div>
+								<div class="ce-why-body">
+									<p>{item.pain}</p>
+									<div class="ce-why-sol">
+										<strong>决策：</strong>
+										{item.sol}
+									</div>
+								</div>
+							</div>
+						))
+					}
+				</div>
+				<p class="ca-caption">
+					* 工程实现：复用 Promptfoo 执行内核作为底层 Runner（任务调度与并发池），自研 Fastify +
+					SQLite 业务适配层、Trace 结构化契约层与 Web 操作台。
+				</p>
+			</div>
+
+			<!-- 折叠：流水线与执行流转 -->
+			<details class="ce-fold">
+				<summary>展开：四阶段执行流水线与单 Case 流转记录（示意）</summary>
+				<div class="ce-fold-body">
+					<div class="ce-pipeline-grid">
+						{
+							pipelineStages.map(stage => (
+								<div class="ce-pipe-card ca-reveal">
+									<span class="ce-pipe-stage">{stage.stage}</span>
+									<div class="ce-pipe-title">{stage.title}</div>
+									<p class="ce-pipe-desc">{stage.desc}</p>
+								</div>
+							))
+						}
+					</div>
+
+					<div class="ce-exec-record" style="margin-top: 20px;">
+						<h4>
+							<span>EXECUTION STREAM · CASE-CAL-042（示意流转）</span>
+						</h4>
+						<div class="ce-exec-stream">
+							<div class="ce-exec-step">
+								<span class="ce-exec-step-tag">01 SETUP</span>
+								<div class="ce-exec-step-body">
+									<strong>用例加载与会话就绪：</strong>加载评测集所属测试账号 <code
+										>UID-TEST-42</code
+									>，启动独立测试会话（人工已提前准备好该账号下的日程测试数据）。
+								</div>
+							</div>
+							<div class="ce-exec-step">
+								<span class="ce-exec-step-tag">02 EXECUTE</span>
+								<div class="ce-exec-step-body">
+									<strong>顺序执行两轮交互并记录 Trace：</strong><br />
+									• 第一轮：注入输入「周三上午有空吗」，Agent 识别意图命中 <code
+										>calendar.query</code
+									> 查得冲突并回复；<br />
+									• 第二轮：注入输入「把面试挪到下午两点，发消息通知候选人」，Agent 弹出 A2UI 确认卡，模拟确认后依次调用
+									<code>calendar.update</code> 与 <code>message.send</code>。全过程保存运行时
+									Trace。
+								</div>
+							</div>
+							<div class="ce-exec-step">
+								<span class="ce-exec-step-tag">03 EVALUATE</span>
+								<div class="ce-exec-step-body">
+									<strong>规则断言与事实核验：</strong
+									>执行确定性代码断言（校验时序是否先查后改、确认卡入参是否完整、是否拦截内部
+									ID，全部通过）；并通过 JEV 核验通知文案与日程真实数据是否一致。
+								</div>
+							</div>
+							<div class="ce-exec-step">
+								<span class="ce-exec-step-tag">04 REPORT</span>
+								<div class="ce-exec-step-body">
+									<strong>结果归档与版本对比：</strong>将评测结果与 Trace
+									存入评测库，与基线版本比对各项通过率；若出现退化或新增失败，自动标记责任模块。
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</details>
+		</section>
+
+		<!-- 03 可信与闭环 -->
+		<section
+			class="ca-section"
+			id="credibility"
+			data-case-section
+			aria-labelledby="credibility-title">
+			<header class="ca-section-head">
+				<p class="ca-kicker"><span>03</span> 可信与闭环</p>
+				<h2 id="credibility-title">失败来自 Agent 还是评测系统？可信性攻坚与真实缺陷闭环</h2>
+				<p class="ca-copy">
+					评测结论要支撑发版决策，必须先证明评测本身可信：环境无污染、归因有依据、处置有闭环。
+				</p>
+			</header>
+
+			<!-- 状态污染攻坚 -->
+			<div class="ca-block">
+				<h3>
+					<span>环境可信</span>批跑状态残留：同 UID
+					评测集内，为何绝不能盲目并发？会话残留为何导致评测失真？
+				</h3>
+				<p class="ca-copy">
+					平台初期批跑的<strong>评测失真率极高，批跑结论严重不可信</strong
+					>（多次批跑结果随机跳变、大量假阴性误报）。排查 Trace 发现两个核心工程硬伤：<strong
+						>其一，一批评测集通常共用同一个专属测试账号（UID），若盲目开并发，多条 Case 同时读写同一
+						UID 的日历与状态，必然引发数据覆盖与死锁；其二，即便改为串行，若上一条 Case
+						的会话状态与任务记忆未清理，下一条 Case 执行时 Router
+						就会误把全新任务判为“既有任务延续（existing）”，默认沿用上一条结果</strong
+					>。即便最终回答看似完成，但因路由断言（期望 new）和工具调用时序规则挂红，且 Trace
+					混入前序帧严重乱套，造成了极高的评测失真。
+				</p>
+
+				<div class="ce-trace-compare">
+					<div class="ce-trace-box is-tainted ca-reveal">
+						<div class="ce-trace-head">
+							<h5>未隔离 · 会话残留误判为 existing</h5>
+							<span class="ce-trace-badge is-tainted">TAINTED · FAIL</span>
+						</div>
+						<pre
+							class="ce-trace-pre"><code>// CASE-CAL-043（排在 042 改期用例之后，同属于该评测账号）
+User: "周三上午安排一个电话会"
+Router 决策: task_type = "existing"  // 受到 042 上下文残留影响，误判为既有任务！
+Planner: 默认沿用上一用例上下文，跳过全局排查直接处理
+断言失败: [FAIL] D1 路由期望 new 实际为 existing；Trace 混入前序会话帧</code></pre>
+						<p class="ce-trace-note">
+							<strong>根因：</strong>同 UID 批跑未切断会话状态，前序 Case 状态残留导致 Router 误判为 <code
+								>existing</code
+							>，Trace 乱套且导致断言规则误判。
+						</p>
+					</div>
+
+					<div class="ce-trace-box is-isolated ca-reveal">
+						<div class="ce-trace-head">
+							<h5>隔离后 · 用例级会话重置（Clean Session）</h5>
+							<span class="ce-trace-badge is-isolated">ISOLATED · PASS</span>
+						</div>
+						<pre
+							class="ce-trace-pre"><code>// CASE-CAL-043（启动时重置 Session，切断上下文残留）
+User: "周三上午安排一个电话会"
+Router 决策: task_type = "new"  // 干净上下文，准确识别为全新意图
+Agent -&gt; calendar_query(&#123; date: "2026-09-30" &#125;)
+Planner: 正常检索可用时段并创建日程
+断言通过: [PASS] D1 路由正确，调用时序合规，Trace 独立洁净</code></pre>
+						<p class="ce-trace-note">
+							<strong>治理：</strong>同 UID 批跑强制采用<strong
+								>严格串行排队调度（杜绝并发写冲突）</strong
+							>，并在每条 Case 启动时做<strong>用例级会话清理与上下文重置（Clean Session）</strong
+							>，确保每条 Case 独立路由与断言。
+						</p>
+					</div>
+				</div>
+
+				<div class="ce-jev-summary" style="margin-top: 16px;">
+					<strong>治理成效：</strong>通过“同 UID 严格串行调度 +
+					用例级会话清理”组合拳，彻底解决了数据并发踩踏、路由误判为 existing 及 Trace
+					串扰问题，消除了大量假阴性误报。
+				</div>
+			</div>
+
+			<!-- 智能归因 -->
+			<div class="ca-block">
+				<h3><span>归因闭环</span>失败不等于代码 Bug：真实缺陷与断言误报分流</h3>
+				<p class="ca-copy">
+					自动化测试断言挂红后，如果全当成代码 Bug
+					扔给研发，会造成严重的人力浪费与报警疲劳。实际上很多失败并不是代码写错了，平台会自动比对报错字段差异，将失败清晰分流为真实代码缺陷与用例规则误报两大类：
+				</p>
+
+				<div class="ce-table-wrap ca-reveal">
+					<table class="ce-rules" aria-label="失败用例归因与针对性处置">
+						<caption>失败用例的两类归因与针对性处置</caption>
+						<thead>
+							<tr>
+								<th scope="col" style="width: 22%;">归因类型</th>
+								<th scope="col" style="width: 44%;">典型场景</th>
+								<th scope="col">处置方式</th>
+							</tr>
+						</thead>
+						<tbody>
+							{
+								diagnosisCategories.map(cat => (
+									<tr>
+										<th scope="row">
+											{cat.title}
+											<span
+												class:list={[
+													"ce-diag-badge",
+													{
+														"is-real-fail": cat.badgeType === "real-fail",
+														"is-actionable": cat.badgeType === "actionable"
+													}
+												]}
+												style="margin-left: 6px;">
+												{cat.badge}
+											</span>
+										</th>
+										<td>{cat.scene}</td>
+										<td>{cat.action}</td>
+									</tr>
+								))
+							}
+						</tbody>
+					</table>
+				</div>
+
+				<div class="ce-jev-summary" style="margin-top: 16px;">
+					<strong>研发闭环提效：</strong
+					>非代码缺陷（如用例期望过严、格式容差缺失）由人工复核后直接修改用例配置，无需改动业务代码；针对真实代码缺陷，平台提供
+					<strong>MCP 协议接口</strong>，研发可让 <strong> Codex </strong>直接读取失败 Case 的 Trace
+					快照与断言 Diff，<strong>穿透定位至源码文件与逻辑行</strong
+					>，实现从“评测报警”到“源码修复”的高效闭环。
+				</div>
+			</div>
+
+			<!-- 真实缺陷闭环 -->
+			<div class="ca-block">
+				<h3><span>真实闭环案例</span>已上线的主动任务能力，Agent 却在闲聊中反向拆台</h3>
+				<p class="ca-copy">
+					主动任务功能上线后的自动化回归中，系统报警：测试用例提问“那你有什么样的主动任务功能体验？”，Agent
+					竟然公开拆台：“别被那些宣传词忽悠了，我可没那种突然跳出来抢你手机的‘主动’超能力……最好的配合就是你下指令，我来执行”。
+				</p>
+				<dl class="ce-case-study ca-reveal">
+					<div>
+						<dt>现场</dt>
+						<dd>
+							<strong>User：</strong>“那你有什么样的主动任务功能体验？”<br />
+							<strong>Agent：</strong
+							>“别被那些宣传词忽悠了，我可没那种突然跳出来抢你手机的‘主动’超能力。我的‘主动’其实是随叫随到的靠谱。你想查日程、看邮件、找餐厅或者记个提醒，我都能立刻帮你搞定并同步到你的设备上。剩下的就是靠你随时喊我，毕竟最好的配合就是你下指令，我来执行，简单直接。”<br
+							/>
+							<strong>报警：</strong><code>Case-Proactive-018</code> 自动化断言标红：回复内容直接否定产品已上线的主动任务能力。
+						</dd>
+					</div>
+					<div>
+						<dt>定位</dt>
+						<dd>
+							穿透 Trace 发现请求命中了轻量 Chat 分支。<strong>产品判断：</strong
+							>该提问属于能力咨询与泛交流，路由走 Chat 分支不触发工具是符合预期的；<strong
+								>根因在于：</strong
+							>Chat 分支的 System Prompt
+							认知仍停留在纯被动对话助手，未同步更新已上线的主动任务能力画像，导致大模型自由发挥时直接反向拆台。
+						</dd>
+					</div>
+					<div>
+						<dt>修复</dt>
+						<dd>
+							在 Chat 分支 System Prompt
+							中补齐机器人真实的主动任务能力定义（如晨间简报、主动日程提醒等）与正向交互引导；严守架构边界，无需为纯咨询强行改写路由或引入多余工具。
+						</dd>
+					</div>
+					<div>
+						<dt>验证</dt>
+						<dd>
+							重新执行用例复测：确认模型准确正面介绍了主动任务能力，同时没有触发冗余工具调用，测试顺利通过。
+						</dd>
+					</div>
+					<div>
+						<dt>入库</dt>
+						<dd>
+							扩充“指令执行”与“能力咨询”的对比用例集并固化为发版门禁，防止后续模型微调或 Prompt
+							调整时认知再次隐性退化。
+						</dd>
+					</div>
+				</dl>
+			</div>
+		</section>
+
+		<!-- 04 项目复盘 · 认知沉淀 -->
+		<section
+			class="ca-section ca-closing cl-retro-section"
+			id="retro"
+			data-case-section
+			aria-labelledby="retro-heading">
+			<header class="ca-section-head">
+				<p class="ca-kicker"><span>04</span> 项目复盘 · 认知沉淀</p>
+				<h2 id="retro-heading">项目复盘：两项 AI PM 核心思考</h2>
+				<p class="ca-copy">
+					从 0 到 1 落地 Agent 评测与版本验收平台的实践中，沉淀关于裁判分流选择与高保真评测集工程化构建的深层认知。
+				</p>
+			</header>
+
+			<div class="cl-asset-block ca-retro ca-reveal">
+				<div class="cl-asset-head">
+					<span class="cl-asset-tag">项目复盘 / RETROSPECTIVE</span>
+					<h3>这段经历沉淀的两项 AI PM 核心思考</h3>
+				</div>
+
+				<ol class="cl-retro-list">
+					{
+						reflections.map((item, i) => (
+							<li>
+								<span class="cl-retro-number" aria-hidden="true">
+									0{i + 1}
+								</span>
+								<div>
+									<h3>{item.title}</h3>
+									{item.paragraphs.map(p => (
+										<p set:html={p} />
+									))}
+								</div>
+							</li>
+						))
+					}
+				</ol>
+
+				<div class="ca-resources">
+					<p class="ca-kicker">继续探索作品集</p>
+					<a href="/projects/cortex-agent/">Cortex-Agent 生产力进化 <span>→</span></a>
+					<a
+						href="https://github.com/Zhaozed/cortex-eval"
+						target="_blank"
+						rel="noopener noreferrer">
+						查看 GitHub 仓库 <span>↗</span>
+					</a>
+					<a href="/projects/">返回精选项目 <span>→</span></a>
+				</div>
+			</div>
+		</section>
+	</article>
+</PageLayout>
+
+<script>
+	const page = document.querySelector(".ce-case");
+	const links = [
+		...(page?.querySelectorAll<HTMLAnchorElement>(".ca-nav a, .ca-mobile-toc a") ?? [])
+	];
+	const sections = [...(page?.querySelectorAll<HTMLElement>("[data-case-section]") ?? [])];
+	const mobileToc = page?.querySelector<HTMLDetailsElement>(".ca-mobile-toc");
+	let scheduled = false;
+	function updateNavigation() {
+		const anchor = 128;
+		const active =
+			sections.filter(section => section.getBoundingClientRect().top <= anchor).at(-1) ??
+			sections[0];
+		for (const link of links) {
+			if (link.hash === `#${active?.id}`) link.setAttribute("aria-current", "location");
+			else link.removeAttribute("aria-current");
+		}
+		scheduled = false;
+	}
+	window.addEventListener(
+		"scroll",
+		() => {
+			if (!scheduled) {
+				scheduled = true;
+				requestAnimationFrame(updateNavigation);
+			}
+		},
+		{ passive: true }
+	);
+	window.addEventListener("resize", updateNavigation);
+	updateNavigation();
+	for (const link of links)
+		link.addEventListener("click", () => {
+			if (mobileToc) mobileToc.open = false;
+		});
+	document.addEventListener("keydown", event => {
+		if (event.key === "Escape" && mobileToc?.open) {
+			mobileToc.open = false;
+			mobileToc.querySelector("summary")?.focus();
+		}
+	});
+	document.addEventListener("click", event => {
+		if (mobileToc?.open && event.target instanceof Node && !mobileToc.contains(event.target))
+			mobileToc.open = false;
+	});
+
+	// 6 维雷达图互动与视图切换逻辑
+	const radarSection = document.getElementById("dim-inspector-section");
+	if (radarSection) {
+		const nodes = radarSection.querySelectorAll<HTMLElement>("[data-node-index]");
+		const spokes = radarSection.querySelectorAll<SVGLineElement>("[data-spoke-index]");
+		const pills = radarSection.querySelectorAll<HTMLButtonElement>("[data-pill-index]");
+		const panels = radarSection.querySelectorAll<HTMLElement>("[data-panel-index]");
+		const viewBtns = radarSection.querySelectorAll<HTMLButtonElement>(".ce-view-btn");
+		const radarView = radarSection.querySelector<HTMLElement>('[data-view-target="radar"]');
+		const gridView = radarSection.querySelector<HTMLElement>('[data-view-target="grid"]');
+
+		function selectDimension(index: number) {
+			nodes.forEach(n => {
+				const isActive = Number(n.dataset.nodeIndex) === index;
+				n.classList.toggle("is-active", isActive);
+			});
+			spokes.forEach(s => {
+				const isActive = Number(s.dataset.spokeIndex) === index;
+				s.classList.toggle("is-active", isActive);
+			});
+			pills.forEach(p => {
+				const isActive = Number(p.dataset.pillIndex) === index;
+				p.classList.toggle("is-active", isActive);
+				p.setAttribute("aria-selected", isActive ? "true" : "false");
+			});
+			panels.forEach(p => {
+				const isActive = Number(p.dataset.panelIndex) === index;
+				p.classList.toggle("is-active", isActive);
+			});
+		}
+
+		nodes.forEach(node => {
+			node.addEventListener("click", () => {
+				const idx = Number(node.dataset.nodeIndex);
+				if (!isNaN(idx)) selectDimension(idx);
+			});
+			node.addEventListener("keydown", (e: KeyboardEvent) => {
+				if (e.key === "Enter" || e.key === " ") {
+					e.preventDefault();
+					const idx = Number(node.dataset.nodeIndex);
+					if (!isNaN(idx)) selectDimension(idx);
+				}
+			});
+		});
+
+		pills.forEach(pill => {
+			pill.addEventListener("click", () => {
+				const idx = Number(pill.dataset.pillIndex);
+				if (!isNaN(idx)) selectDimension(idx);
+			});
+		});
+
+		viewBtns.forEach(btn => {
+			btn.addEventListener("click", () => {
+				const view = btn.dataset.view;
+				viewBtns.forEach(b => {
+					const isActive = b === btn;
+					b.classList.toggle("is-active", isActive);
+					b.setAttribute("aria-selected", isActive ? "true" : "false");
+				});
+				if (view === "grid") {
+					if (radarView) radarView.style.display = "none";
+					if (gridView) gridView.style.display = "grid";
+				} else {
+					if (radarView) radarView.style.display = "block";
+					if (gridView) gridView.style.display = "none";
+				}
+			});
+		});
+	}
+
+	// 架构工作台交互逻辑 (Architecture Workbench)
+	const archWorkbench = document.getElementById("arch-workbench");
+	if (archWorkbench) {
+		const tabBtns = archWorkbench.querySelectorAll<HTMLButtonElement>("[data-arch-target]");
+		const panels = archWorkbench.querySelectorAll<HTMLElement>(".ce-arch-panel");
+
+		function selectArchTab(targetId: string) {
+			tabBtns.forEach(btn => {
+				const isActive = btn.dataset.archTarget === targetId;
+				btn.classList.toggle("is-active", isActive);
+				btn.setAttribute("aria-selected", isActive ? "true" : "false");
+			});
+			panels.forEach(panel => {
+				const isActive = panel.id === `arch-panel-${targetId}`;
+				panel.classList.toggle("is-active", isActive);
+			});
+		}
+
+		tabBtns.forEach(btn => {
+			btn.addEventListener("click", () => {
+				const target = btn.dataset.archTarget;
+				if (target) selectArchTab(target);
+			});
+			btn.addEventListener("keydown", (e: KeyboardEvent) => {
+				if (e.key === "Enter" || e.key === " ") {
+					e.preventDefault();
+					const target = btn.dataset.archTarget;
+					if (target) selectArchTab(target);
+				}
+			});
+		});
+	}
+
+	// 高级滚动进入动画 (Scroll Reveal Observer)
+	const reveals = document.querySelectorAll(".ca-reveal");
+	if ("IntersectionObserver" in window) {
+		const revealObserver = new IntersectionObserver(
+			(entries, observer) => {
+				entries.forEach((entry, idx) => {
+					if (entry.isIntersecting) {
+						setTimeout(
+							() => {
+								entry.target.classList.add("is-revealed");
+							},
+							(idx % 4) * 60
+						);
+						observer.unobserve(entry.target);
+					}
+				});
+			},
+			{ threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+		);
+		reveals.forEach(el => revealObserver.observe(el));
+	} else {
+		reveals.forEach(el => el.classList.add("is-revealed"));
+	}
+</script>

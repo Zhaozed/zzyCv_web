@@ -3,6 +3,8 @@ import PageLayout from "@/layouts/Base.astro";
 
 interface Props {
 	title: string;
+	/** 主标题下方的副标题（一句话定位，可选） */
+	subtitle?: string;
 	description: string;
 	eyebrow: string;
 	intro: string;
@@ -17,6 +19,7 @@ interface Props {
 }
 const {
 	title,
+	subtitle,
 	description,
 	eyebrow,
 	intro,
@@ -39,7 +42,7 @@ const {
 				href={backHref}>{backLabel}</a
 			>
 			<p
-				class="mb-4 font-mono text-xs uppercase tracking-widest text-neutral-400 dark:text-neutral-500"
+				class="mb-4 font-mono text-xs tracking-widest text-neutral-400 uppercase dark:text-neutral-500"
 			>
 				{eyebrow}
 			</p>
@@ -48,6 +51,13 @@ const {
 			>
 				{title}
 			</h1>
+			{
+				subtitle && (
+					<p class="mt-4 max-w-3xl text-lg font-medium tracking-tight text-neutral-500 sm:text-xl dark:text-neutral-400">
+						{subtitle}
+					</p>
+				)
+			}
 			<p
 				class="mt-6 max-w-3xl text-base leading-8 text-neutral-600 sm:text-lg dark:text-neutral-400"
 			>
@@ -67,13 +77,27 @@ const {
 				{
 					results.length > 0 && (
 						<div class="case-results">
-							<p class="number-label !mb-5">核心结果 / Key results</p>
-							<div class="case-results__grid">
-								{results.map((item) => (
+							<div class="case-results__head">
+								<p class="number-label">核心结果 / Key results</p>
+								<span class="case-results__count">
+									{String(results.length).padStart(2, "0")} ITEMS
+								</span>
+							</div>
+							<div
+								class={`case-results__grid ${
+									results.length >= 4
+										? "case-results__grid--cols-4"
+										: results.length === 3
+											? "case-results__grid--cols-3"
+											: ""
+								}`}
+							>
+								{results.map((item, i) => (
 									<div class="metric-tile">
+										<span class="metric-tile__index">{String(i + 1).padStart(2, "0")}</span>
 										<strong>{item.value}</strong>
 										<p>{item.label}</p>
-										{item.note && <span>{item.note}</span>}
+										{item.note && <span class="metric-tile__note">{item.note}</span>}
 									</div>
 								))}
 							</div>

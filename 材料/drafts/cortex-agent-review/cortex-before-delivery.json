@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "deliver",
+  "type": "architecture",
+  "input": "/Users/joey/项目/astro-theme-cactus/材料/archify/toolhub-before.architecture.json",
+  "output": "/Users/joey/项目/astro-theme-cactus/public/portfolio/cortex-agent/toolhub-before.html",
+  "specification": {
+    "sha256": "b320381e1dc5b3136520febcb315e5d751f31f6877e77b631cc21c792db24819",
+    "bytes": 1689
+  },
+  "artifact": {
+    "sha256": "22e88bd40fcd636c7a2d48ab63aac4e93020f9587b05f9e70aa647ac93efc875",
+    "bytes": 698949
+  },
+  "validation": {
+    "checksPassed": 9,
+    "checkCount": 9,
+    "compositionProfile": "showcase",
+    "compositionStatus": "pass",
+    "errors": 0,
+    "warnings": 0
+  }
+}

@@ -1,0 +1,856 @@
+{
+  "source_tool_name": "meeting_brief",
+  "messages": [
+    {
+      "version": "v0.9",
+      "createSurface": {
+        "surfaceId": "portfolio-meeting-brief",
+        "catalogId": "https://loona.dm/catalog/v1"
+      }
+    },
+    {
+      "version": "v0.9",
+      "updateComponents": {
+        "surfaceId": "portfolio-meeting-brief",
+        "components": [
+          {
+            "id": "root",
+            "component": "Carousel",
+            "cardWidth": 400,
+            "autoHeight": true,
+            "currentIndex": {
+              "path": "/idx"
+            },
+            "children": [
+              "c0_root",
+              "c1_root",
+              "c2_root"
+            ]
+          },
+          {
+            "id": "c0_root",
+            "component": "Card",
+            "width": 400,
+            "minWidth": 400,
+            "maxWidth": 400,
+            "maxHeight": 360,
+            "padding": 12,
+            "radius": 24,
+            "borderWidth": 0,
+            "background": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20preserveAspectRatio%3D%22none%22%20width%3D%22400%22%20height%3D%22360%22%20viewBox%3D%220%200%20400%20360%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22a2uiGradientStroke%22%20x1%3D%2250%25%22%20y1%3D%22100%25%22%20x2%3D%2250%25%22%20y2%3D%220%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgb(255%2C255%2C255)%22%20stop-opacity%3D%220.1%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgb(255%2C255%2C255)%22%20stop-opacity%3D%220.3%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20x%3D%220.5%22%20y%3D%220.5%22%20width%3D%22399%22%20height%3D%22359%22%20rx%3D%2223.5%22%20ry%3D%2223.5%22%20fill%3D%22none%22%20stroke%3D%22url(%23a2uiGradientStroke)%22%20stroke-width%3D%221%22%20vector-effect%3D%22non-scaling-stroke%22%2F%3E%3C%2Fsvg%3E\") center / 100% 100% no-repeat, linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))",
+            "overflowHidden": true,
+            "child": "c0_layout"
+          },
+          {
+            "id": "c0_layout",
+            "component": "Column",
+            "width": 376,
+            "gap": 10,
+            "children": [
+              "c0_header",
+              "c0_divider",
+              "c0_content"
+            ]
+          },
+          {
+            "id": "c0_header",
+            "component": "Row",
+            "width": 376,
+            "height": 32,
+            "gap": 8,
+            "align": "center",
+            "children": [
+              "c0_icon",
+              "c0_titleArea"
+            ]
+          },
+          {
+            "id": "c0_icon",
+            "component": "RiveAnim",
+            "file": "calendar_circle_checkmark",
+            "width": 32,
+            "height": 32
+          },
+          {
+            "id": "c0_titleArea",
+            "component": "List",
+            "direction": "vertical",
+            "weight": 1,
+            "maxHeight": 32,
+            "overflowY": "auto",
+            "overflowX": "hidden",
+            "children": [
+              "c0_title"
+            ]
+          },
+          {
+            "id": "c0_title",
+            "component": "Text",
+            "text": {
+              "path": "/meeting0/computed/title"
+            },
+            "fontSize": 18,
+            "lineHeight": 22,
+            "fontWeight": 700,
+            "color": "#ffffff"
+          },
+          {
+            "id": "c0_divider",
+            "component": "Spacer",
+            "width": 376,
+            "height": 1,
+            "backgroundColor": "rgba(255,255,255,0.30)"
+          },
+          {
+            "id": "c0_content",
+            "component": "List",
+            "direction": "vertical",
+            "width": 376,
+            "maxHeight": 283,
+            "overflowX": "hidden",
+            "overflowY": "auto",
+            "gap": 10,
+            "children": [
+              "c0_agendaArea",
+              "c0_meta",
+              "c0_briefLabel",
+              "c0_briefCard"
+            ]
+          },
+          {
+            "id": "c0_agendaArea",
+            "component": "List",
+            "direction": "vertical",
+            "width": 376,
+            "maxHeight": 54,
+            "overflowY": "auto",
+            "overflowX": "hidden",
+            "gap": 4,
+            "children": [
+              "c0_agenda"
+            ]
+          },
+          {
+            "id": "c0_agenda",
+            "component": "Text",
+            "text": {
+              "path": "/meeting0/computed/agenda"
+            },
+            "fontSize": 14,
+            "lineHeight": 18,
+            "fontWeight": 400,
+            "color": "#ffffff"
+          },
+          {
+            "id": "c0_meta",
+            "component": "Grid",
+            "columns": 2,
+            "width": 376,
+            "gap": 8,
+            "children": [
+              "c0_timeArea",
+              "c0_locationArea"
+            ]
+          },
+          {
+            "id": "c0_timeArea",
+            "component": "List",
+            "direction": "horizontal",
+            "width": 184,
+            "maxHeight": 18,
+            "children": [
+              "c0_timeRow"
+            ],
+            "height": 18
+          },
+          {
+            "id": "c0_timeRow",
+            "component": "Row",
+            "gap": 8,
+            "align": "center",
+            "children": [
+              "c0_timeIcon",
+              "c0_time"
+            ]
+          },
+          {
+            "id": "c0_timeIcon",
+            "component": "Icon",
+            "name": "vg_clock",
+            "size": 12,
+            "color": "rgba(255,255,255,0.8)"
+          },
+          {
+            "id": "c0_time",
+            "component": "Text",
+            "text": {
+              "path": "/meeting0/computed/timeLabel"
+            },
+            "fontSize": 14,
+            "lineHeight": 18,
+            "fontWeight": 400,
+            "color": "#ffffff",
+            "noWrap": true,
+            "maxWidth": 512
+          },
+          {
+            "id": "c0_locationArea",
+            "component": "List",
+            "direction": "vertical",
+            "width": 184,
+            "maxHeight": 36,
+            "overflowY": "auto",
+            "overflowX": "hidden",
+            "children": [
+              "c0_locationRow"
+            ]
+          },
+          {
+            "id": "c0_locationRow",
+            "component": "Row",
+            "width": 184,
+            "gap": 8,
+            "align": "start",
+            "children": [
+              "c0_locationIconBox",
+              "c0_location"
+            ]
+          },
+          {
+            "id": "c0_locationIconBox",
+            "component": "Row",
+            "width": 12,
+            "height": 18,
+            "align": "center",
+            "justify": "center",
+            "gap": 0,
+            "children": [
+              "c0_locationIcon"
+            ]
+          },
+          {
+            "id": "c0_locationIcon",
+            "component": "Icon",
+            "name": "vg_pin",
+            "size": 12,
+            "color": "rgba(255,255,255,0.8)"
+          },
+          {
+            "id": "c0_location",
+            "component": "Text",
+            "text": {
+              "path": "/meeting0/computed/location"
+            },
+            "fontSize": 14,
+            "lineHeight": 18,
+            "fontWeight": 400,
+            "color": "#ffffff",
+            "weight": 1
+          },
+          {
+            "id": "c0_briefLabel",
+            "component": "Text",
+            "text": {
+              "path": "/meeting0/computed/cardLabel"
+            },
+            "fontSize": 16,
+            "lineHeight": 22,
+            "fontWeight": 700,
+            "color": "#ffaa00"
+          },
+          {
+            "id": "c0_briefCard",
+            "component": "Card",
+            "width": 376,
+            "padding": 8,
+            "radius": 16,
+            "background": "linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1))",
+            "child": "c0_briefCardInfo"
+          },
+          {
+            "id": "c0_briefCardInfo",
+            "component": "Column",
+            "width": 360,
+            "gap": 8,
+            "children": [
+              "c0_briefScroll"
+            ]
+          },
+          {
+            "id": "c0_briefScroll",
+            "component": "List",
+            "direction": "vertical",
+            "width": 360,
+            "maxHeight": 137,
+            "overflowY": "auto",
+            "overflowX": "hidden",
+            "gap": 10,
+            "children": [
+              "c0_summary"
+            ]
+          },
+          {
+            "id": "c0_summary",
+            "component": "Text",
+            "text": {
+              "path": "/meeting0/computed/summary"
+            },
+            "fontSize": 14,
+            "lineHeight": 18,
+            "fontWeight": 400,
+            "color": "#ffffff",
+            "width": 360
+          },
+          {
+            "id": "c1_root",
+            "component": "Card",
+            "width": 400,
+            "minWidth": 400,
+            "maxWidth": 400,
+            "maxHeight": 360,
+            "padding": 12,
+            "radius": 24,
+            "borderWidth": 0,
+            "background": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20preserveAspectRatio%3D%22none%22%20width%3D%22400%22%20height%3D%22360%22%20viewBox%3D%220%200%20400%20360%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22a2uiGradientStroke%22%20x1%3D%2250%25%22%20y1%3D%22100%25%22%20x2%3D%2250%25%22%20y2%3D%220%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgb(255%2C255%2C255)%22%20stop-opacity%3D%220.1%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgb(255%2C255%2C255)%22%20stop-opacity%3D%220.3%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20x%3D%220.5%22%20y%3D%220.5%22%20width%3D%22399%22%20height%3D%22359%22%20rx%3D%2223.5%22%20ry%3D%2223.5%22%20fill%3D%22none%22%20stroke%3D%22url(%23a2uiGradientStroke)%22%20stroke-width%3D%221%22%20vector-effect%3D%22non-scaling-stroke%22%2F%3E%3C%2Fsvg%3E\") center / 100% 100% no-repeat, linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))",
+            "overflowHidden": true,
+            "child": "c1_layout"
+          },
+          {
+            "id": "c1_layout",
+            "component": "Column",
+            "width": 376,
+            "gap": 10,
+            "children": [
+              "c1_header",
+              "c1_divider",
+              "c1_content"
+            ]
+          },
+          {
+            "id": "c1_header",
+            "component": "Row",
+            "width": 376,
+            "height": 32,
+            "gap": 8,
+            "align": "center",
+            "children": [
+              "c1_icon",
+              "c1_titleArea"
+            ]
+          },
+          {
+            "id": "c1_icon",
+            "component": "RiveAnim",
+            "file": "people_and_doc",
+            "width": 32,
+            "height": 32
+          },
+          {
+            "id": "c1_titleArea",
+            "component": "List",
+            "direction": "vertical",
+            "weight": 1,
+            "maxHeight": 32,
+            "overflowY": "auto",
+            "overflowX": "hidden",
+            "children": [
+              "c1_title"
+            ]
+          },
+          {
+            "id": "c1_title",
+            "component": "Text",
+            "text": {
+              "path": "/meeting1/computed/cardLabel"
+            },
+            "fontSize": 18,
+            "lineHeight": 22,
+            "fontWeight": 700,
+            "color": "#ffffff"
+          },
+          {
+            "id": "c1_divider",
+            "component": "Spacer",
+            "width": 376,
+            "height": 1,
+            "backgroundColor": "rgba(255,255,255,0.30)"
+          },
+          {
+            "id": "c1_content",
+            "component": "List",
+            "direction": "vertical",
+            "width": 376,
+            "maxHeight": 283,
+            "overflowX": "hidden",
+            "overflowY": "auto",
+            "gap": 10,
+            "children": [
+              "c1_people"
+            ]
+          },
+          {
+            "id": "c1_people",
+            "component": "List",
+            "direction": "vertical",
+            "width": 376,
+            "gap": 10,
+            "children": {
+              "componentId": "c1_person",
+              "path": "/meeting1/computed/people"
+            }
+          },
+          {
+            "id": "c1_person",
+            "component": "Card",
+            "width": 376,
+            "padding": 8,
+            "radius": 16,
+            "background": "linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1))",
+            "child": "c1_personLayout"
+          },
+          {
+            "id": "c1_personLayout",
+            "component": "Column",
+            "width": 360,
+            "gap": 8,
+            "children": [
+              "c1_personRow"
+            ]
+          },
+          {
+            "id": "c1_personRow",
+            "component": "Row",
+            "width": 360,
+            "gap": 10,
+            "align": "start",
+            "children": [
+              "c1_avatar",
+              "c1_personInfo"
+            ]
+          },
+          {
+            "id": "c1_avatar",
+            "component": "Avatar",
+            "type": "default",
+            "size": "medium",
+            "badge": false
+          },
+          {
+            "id": "c1_personInfo",
+            "component": "Column",
+            "weight": 1,
+            "gap": 4,
+            "children": [
+              "c1_name",
+              "c1_email",
+              "c1_background"
+            ]
+          },
+          {
+            "id": "c1_name",
+            "component": "Text",
+            "text": {
+              "path": "name"
+            },
+            "fontSize": 16,
+            "lineHeight": 22,
+            "fontWeight": 700,
+            "color": "#ffffff"
+          },
+          {
+            "id": "c1_email",
+            "component": "Text",
+            "text": {
+              "path": "emailDisplay"
+            },
+            "fontSize": 12,
+            "lineHeight": 14,
+            "fontWeight": 400,
+            "color": "rgba(255,255,255,0.8)"
+          },
+          {
+            "id": "c1_background",
+            "component": "Text",
+            "text": {
+              "path": "background"
+            },
+            "fontSize": 12,
+            "lineHeight": 16,
+            "fontWeight": 400,
+            "color": "rgba(255,255,255,0.8)",
+            "maxLines": 2
+          },
+          {
+            "id": "c2_root",
+            "component": "Card",
+            "width": 400,
+            "minWidth": 400,
+            "maxWidth": 400,
+            "maxHeight": 360,
+            "padding": 12,
+            "radius": 24,
+            "borderWidth": 0,
+            "background": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20preserveAspectRatio%3D%22none%22%20width%3D%22400%22%20height%3D%22360%22%20viewBox%3D%220%200%20400%20360%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22a2uiGradientStroke%22%20x1%3D%2250%25%22%20y1%3D%22100%25%22%20x2%3D%2250%25%22%20y2%3D%220%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgb(255%2C255%2C255)%22%20stop-opacity%3D%220.1%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgb(255%2C255%2C255)%22%20stop-opacity%3D%220.3%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20x%3D%220.5%22%20y%3D%220.5%22%20width%3D%22399%22%20height%3D%22359%22%20rx%3D%2223.5%22%20ry%3D%2223.5%22%20fill%3D%22none%22%20stroke%3D%22url(%23a2uiGradientStroke)%22%20stroke-width%3D%221%22%20vector-effect%3D%22non-scaling-stroke%22%2F%3E%3C%2Fsvg%3E\") center / 100% 100% no-repeat, linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))",
+            "overflowHidden": true,
+            "child": "c2_layout"
+          },
+          {
+            "id": "c2_layout",
+            "component": "Column",
+            "width": 376,
+            "gap": 10,
+            "children": [
+              "c2_header",
+              "c2_divider",
+              "c2_content"
+            ]
+          },
+          {
+            "id": "c2_header",
+            "component": "Row",
+            "width": 376,
+            "height": 32,
+            "gap": 8,
+            "align": "center",
+            "children": [
+              "c2_icon",
+              "c2_titleArea"
+            ]
+          },
+          {
+            "id": "c2_icon",
+            "component": "RiveAnim",
+            "file": "tools",
+            "viewModel": "ViewModel1",
+            "viewModelInputs": {
+              "toolsName": "commonTask",
+              "toolsActions": "none"
+            },
+            "width": 32,
+            "height": 32
+          },
+          {
+            "id": "c2_titleArea",
+            "component": "List",
+            "direction": "vertical",
+            "weight": 1,
+            "maxHeight": 32,
+            "overflowY": "auto",
+            "overflowX": "hidden",
+            "children": [
+              "c2_title"
+            ]
+          },
+          {
+            "id": "c2_title",
+            "component": "Text",
+            "text": {
+              "path": "/meeting2/computed/cardLabel"
+            },
+            "fontSize": 18,
+            "lineHeight": 22,
+            "fontWeight": 700,
+            "color": "#ffffff"
+          },
+          {
+            "id": "c2_divider",
+            "component": "Spacer",
+            "width": 376,
+            "height": 1,
+            "backgroundColor": "rgba(255,255,255,0.30)"
+          },
+          {
+            "id": "c2_content",
+            "component": "List",
+            "direction": "vertical",
+            "width": 376,
+            "maxHeight": 283,
+            "overflowX": "hidden",
+            "overflowY": "auto",
+            "gap": 10,
+            "children": [
+              "c2_items"
+            ]
+          },
+          {
+            "id": "c2_items",
+            "component": "List",
+            "direction": "vertical",
+            "width": 376,
+            "gap": 10,
+            "children": {
+              "componentId": "c2_item",
+              "path": "/meeting2/computed/suggestions"
+            }
+          },
+          {
+            "id": "c2_item",
+            "component": "Card",
+            "width": 376,
+            "padding": 8,
+            "radius": 16,
+            "background": "linear-gradient(90deg, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 5px, transparent 5px), linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1))",
+            "child": "c2_itemInfo"
+          },
+          {
+            "id": "c2_itemInfo",
+            "component": "Column",
+            "width": 360,
+            "gap": 8,
+            "children": [
+              "c2_itemRow"
+            ]
+          },
+          {
+            "id": "c2_itemRow",
+            "component": "Row",
+            "width": 360,
+            "gap": 8,
+            "align": "start",
+            "children": [
+              "c2_itemNumber",
+              "c2_itemText"
+            ]
+          },
+          {
+            "id": "c2_itemNumber",
+            "component": "Badge",
+            "text": {
+              "path": "number"
+            },
+            "height": 20,
+            "minWidth": 20,
+            "radius": 10,
+            "color": "rgba(255,255,255,0.2)",
+            "fontSize": 12,
+            "fontWeight": 400,
+            "textColor": "#ffffff",
+            "width": 20,
+            "paddingX": 0,
+            "paddingY": 0
+          },
+          {
+            "id": "c2_itemText",
+            "component": "Text",
+            "text": {
+              "path": "text"
+            },
+            "fontSize": 16,
+            "lineHeight": 22,
+            "fontWeight": 400,
+            "color": "#ffffff",
+            "weight": 1
+          }
+        ]
+      }
+    },
+    {
+      "version": "v0.9",
+      "updateDataModel": {
+        "surfaceId": "portfolio-meeting-brief",
+        "path": "/",
+        "value": {
+          "idx": 0,
+          "cards": [
+            {
+              "computed": {
+                "cardType": "brief",
+                "title": "客户试点评审",
+                "cardLabel": "会前简报",
+                "pageLabel": "1 / 3",
+                "timeDisplay": "2026-09-06 10:00–11:00 (UTC+08:00)",
+                "location": "总部 A301 · 线上同步",
+                "summary": "本次评审需要明确试点的成功标准与数据边界。先对齐 20 个核心案例，再确认脱敏、访问权限和双方准备时间；范围未明确前，暂不承诺扩大接入。",
+                "people": [],
+                "suggestions": [],
+                "sections": [],
+                "agenda": "确认试点范围、数据接入边界和验收标准。请参会人带上当前案例清单。",
+                "agendaLabel": "日历备注",
+                "timeLabel": "09-06 10:00-11:00"
+              },
+              "render": {},
+              "action_context": {}
+            },
+            {
+              "computed": {
+                "cardType": "attendees",
+                "title": "客户试点评审",
+                "cardLabel": "参会人",
+                "pageLabel": "2 / 3",
+                "timeDisplay": "",
+                "location": "",
+                "summary": "",
+                "people": [
+                  {
+                    "name": "参会人 A",
+                    "initial": "A",
+                    "badge": "外部",
+                    "role": "客户项目负责人",
+                    "background": "希望先用 20 个核心案例验证试点价值。",
+                    "emailDisplay": "邮箱已隐藏"
+                  },
+                  {
+                    "name": "参会人 B",
+                    "initial": "B",
+                    "badge": "内部",
+                    "role": "产品负责人",
+                    "background": "负责整理案例清单和验收标准。",
+                    "emailDisplay": "邮箱已隐藏"
+                  },
+                  {
+                    "name": "参会人 C",
+                    "initial": "C",
+                    "badge": "外部",
+                    "role": "安全评估负责人",
+                    "background": "需要先确认脱敏方式和数据访问权限。",
+                    "emailDisplay": "邮箱已隐藏"
+                  }
+                ],
+                "suggestions": [],
+                "sections": [],
+                "agenda": "",
+                "agendaLabel": "",
+                "timeLabel": ""
+              },
+              "render": {},
+              "action_context": {}
+            },
+            {
+              "computed": {
+                "cardType": "prep",
+                "title": "客户试点评审",
+                "cardLabel": "会前准备",
+                "pageLabel": "3 / 3",
+                "timeDisplay": "",
+                "location": "",
+                "summary": "",
+                "people": [],
+                "suggestions": [
+                  {
+                    "number": "1",
+                    "text": "核对双方准备的 20 个核心案例是否覆盖试点目标。"
+                  },
+                  {
+                    "number": "2",
+                    "text": "确认数据脱敏方式、访问范围及责任人。"
+                  },
+                  {
+                    "number": "3",
+                    "text": "明确本轮验收标准与下一次反馈时间。"
+                  }
+                ],
+                "sections": [],
+                "agenda": "",
+                "agendaLabel": "",
+                "timeLabel": ""
+              },
+              "render": {},
+              "action_context": {}
+            }
+          ],
+          "meeting0": {
+            "computed": {
+              "cardType": "brief",
+              "title": "客户试点评审",
+              "cardLabel": "会前简报",
+              "pageLabel": "1 / 3",
+              "timeDisplay": "2026-09-06 10:00–11:00 (UTC+08:00)",
+              "location": "总部 A301 · 线上同步",
+              "summary": "本次评审需要明确试点的成功标准与数据边界。先对齐 20 个核心案例，再确认脱敏、访问权限和双方准备时间；范围未明确前，暂不承诺扩大接入。",
+              "people": [],
+              "suggestions": [],
+              "sections": [],
+              "agenda": "确认试点范围、数据接入边界和验收标准。请参会人带上当前案例清单。",
+              "agendaLabel": "日历备注",
+              "timeLabel": "09-06 10:00-11:00"
+            },
+            "render": {},
+            "action_context": {}
+          },
+          "meeting1": {
+            "computed": {
+              "cardType": "attendees",
+              "title": "客户试点评审",
+              "cardLabel": "参会人",
+              "pageLabel": "2 / 3",
+              "timeDisplay": "",
+              "location": "",
+              "summary": "",
+              "people": [
+                {
+                  "name": "参会人 A",
+                  "initial": "A",
+                  "badge": "外部",
+                  "role": "客户项目负责人",
+                  "background": "希望先用 20 个核心案例验证试点价值。",
+                  "emailDisplay": "邮箱已隐藏"
+                },
+                {
+                  "name": "参会人 B",
+                  "initial": "B",
+                  "badge": "内部",
+                  "role": "产品负责人",
+                  "background": "负责整理案例清单和验收标准。",
+                  "emailDisplay": "邮箱已隐藏"
+                },
+                {
+                  "name": "参会人 C",
+                  "initial": "C",
+                  "badge": "外部",
+                  "role": "安全评估负责人",
+                  "background": "需要先确认脱敏方式和数据访问权限。",
+                  "emailDisplay": "邮箱已隐藏"
+                }
+              ],
+              "suggestions": [],
+              "sections": [],
+              "agenda": "",
+              "agendaLabel": "",
+              "timeLabel": ""
+            },
+            "render": {},
+            "action_context": {}
+          },
+          "meeting2": {
+            "computed": {
+              "cardType": "prep",
+              "title": "客户试点评审",
+              "cardLabel": "会前准备",
+              "pageLabel": "3 / 3",
+              "timeDisplay": "",
+              "location": "",
+              "summary": "",
+              "people": [],
+              "suggestions": [
+                {
+                  "number": "1",
+                  "text": "核对双方准备的 20 个核心案例是否覆盖试点目标。"
+                },
+                {
+                  "number": "2",
+                  "text": "确认数据脱敏方式、访问范围及责任人。"
+                },
+                {
+                  "number": "3",
+                  "text": "明确本轮验收标准与下一次反馈时间。"
+                }
+              ],
+              "sections": [],
+              "agenda": "",
+              "agendaLabel": "",
+              "timeLabel": ""
+            },
+            "render": {},
+            "action_context": {}
+          },
+          "_chip": {
+            "label": "Meeting Brief",
+            "actionLabel": "details",
+            "status": "success",
+            "icon": "shapes_bubbling_up"
+          }
+        }
+      }
+    }
+  ]
+}

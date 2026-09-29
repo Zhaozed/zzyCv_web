@@ -1,0 +1,1491 @@
+{
+  "source": "LoonaDM/RubyAR strings + resources/a2ui-web icons/rives — synced by scripts/sync-loona-resources.py",
+  "i18n_keys": [
+    "qr_Invalid_qr_code",
+    "qr_scan_qr_code_on_computer",
+    "rb_api_cancel_request",
+    "rb_api_download_file_error",
+    "rb_api_invalidURL",
+    "rb_api_json_error",
+    "rb_api_login_unauthorized",
+    "rb_api_notoken",
+    "rb_api_request_error",
+    "rb_api_request_timeout",
+    "rb_api_unauthorized",
+    "rb_api_upload_file_error",
+    "rb_attach_tip",
+    "rb_auth_account_channel_issue",
+    "rb_auth_account_disabled",
+    "rb_auth_account_error_detail",
+    "rb_auth_account_normal",
+    "rb_auth_account_receive_issue",
+    "rb_auth_account_send_issue",
+    "rb_auth_accounts_title",
+    "rb_auth_add_new_app_account",
+    "rb_auth_add_other_account",
+    "rb_auth_airtable",
+    "rb_auth_airtable_tips",
+    "rb_auth_ble_gosetting",
+    "rb_auth_camera_mic_tips",
+    "rb_auth_chatwork",
+    "rb_auth_chatwork_tips",
+    "rb_auth_clickup",
+    "rb_auth_clickup_tips",
+    "rb_auth_connect",
+    "rb_auth_connect_other",
+    "rb_auth_connected",
+    "rb_auth_connected_accounts",
+    "rb_auth_disconnect",
+    "rb_auth_disconnect_account",
+    "rb_auth_error",
+    "rb_auth_gmail",
+    "rb_auth_gmail_tips",
+    "rb_auth_google_docs",
+    "rb_auth_google_docs_tips",
+    "rb_auth_google_drive",
+    "rb_auth_google_drive_tips",
+    "rb_auth_google_sheets",
+    "rb_auth_google_sheets_tips",
+    "rb_auth_google_slides",
+    "rb_auth_google_slides_tips",
+    "rb_auth_goole_calendar",
+    "rb_auth_goole_calendar_tips",
+    "rb_auth_goole_contact",
+    "rb_auth_goole_contact_tips",
+    "rb_auth_goole_slack",
+    "rb_auth_goole_slack_tips",
+    "rb_auth_line",
+    "rb_auth_line_tips",
+    "rb_auth_linear",
+    "rb_auth_linear_tips",
+    "rb_auth_lineworks_mail",
+    "rb_auth_lineworks_mail_tips",
+    "rb_auth_manage_connected_accounts",
+    "rb_auth_microsoft_todo",
+    "rb_auth_microsoft_todo_tips",
+    "rb_auth_multiple_issues_detected",
+    "rb_auth_no_connected_accounts",
+    "rb_auth_not_connected",
+    "rb_auth_notion",
+    "rb_auth_notion_tips",
+    "rb_auth_onedrive",
+    "rb_auth_onedrive_tips",
+    "rb_auth_onenote",
+    "rb_auth_onenote_tips",
+    "rb_auth_outlook",
+    "rb_auth_outlook_calendar",
+    "rb_auth_outlook_calendar_tips",
+    "rb_auth_outlook_contacts",
+    "rb_auth_outlook_contacts_tips",
+    "rb_auth_outlook_tips",
+    "rb_auth_repair",
+    "rb_auth_teams",
+    "rb_auth_teams_tips",
+    "rb_auth_title",
+    "rb_automatically_synced_computer",
+    "rb_automatically_synchronized",
+    "rb_back",
+    "rb_ble_disconnect",
+    "rb_ble_disconnect_try",
+    "rb_bt_binded",
+    "rb_bt_connected",
+    "rb_bt_error_try",
+    "rb_bt_goconnect",
+    "rb_bt_gosetbluetooth",
+    "rb_bt_nowwake",
+    "rb_bt_set_next",
+    "rb_bt_set_shortcut",
+    "rb_bt_set_start",
+    "rb_bt_set_success",
+    "rb_bt_setble_light",
+    "rb_bt_setsuccess_tips",
+    "rb_bt_shortcut_tips1",
+    "rb_bt_shortcut_tips1_linght",
+    "rb_bt_shortcut_tips2",
+    "rb_bt_shortcut_tips3",
+    "rb_bt_success",
+    "rb_bt_success_tips",
+    "rb_bt_title1",
+    "rb_bt_title1_tips",
+    "rb_bt_title2",
+    "rb_bt_title2_tips",
+    "rb_camerashot",
+    "rb_cancel",
+    "rb_checking_net",
+    "rb_clipBoard_cancel",
+    "rb_clipBoard_deskmate_on_mac",
+    "rb_clipboard_authorizing_description",
+    "rb_clipboard_authorizing_title",
+    "rb_clipboard_confirmation",
+    "rb_clipboard_connecting",
+    "rb_clipboard_connection_failed",
+    "rb_clipboard_empty",
+    "rb_clipboard_noqrcode",
+    "rb_clipboard_success_description",
+    "rb_clipboard_success_title",
+    "rb_clpboard",
+    "rb_cn_completed_subtitle",
+    "rb_cn_completed_title",
+    "rb_cn_connect_subtitle",
+    "rb_cn_connect_title",
+    "rb_cn_content_connecting",
+    "rb_cn_error_btn1",
+    "rb_cn_error_btn2",
+    "rb_cn_error_btn3",
+    "rb_cn_error_subtitle",
+    "rb_cn_error_tips1",
+    "rb_cn_error_tips2",
+    "rb_cn_error_tips2_linght",
+    "rb_cn_error_tips3",
+    "rb_cn_error_title",
+    "rb_cn_nofound_btn1",
+    "rb_cn_nofound_btn2",
+    "rb_cn_nofound_btn3",
+    "rb_cn_nofound_subtitle",
+    "rb_cn_nofound_tips1",
+    "rb_cn_nofound_tips2",
+    "rb_cn_nofound_tips3",
+    "rb_cn_nofound_title",
+    "rb_cn_scan_binded",
+    "rb_cn_scan_subtitle",
+    "rb_cn_scan_title",
+    "rb_cn_search_subtitle",
+    "rb_cn_search_title",
+    "rb_cn_start_connect",
+    "rb_completed",
+    "rb_confirm",
+    "rb_connect_device",
+    "rb_connecting",
+    "rb_copy_content_from_computer",
+    "rb_dm_copy",
+    "rb_dm_newversion",
+    "rb_dm_sn",
+    "rb_email_lg",
+    "rb_enable_realtime_sync_on_desktop_login",
+    "rb_error_timeout",
+    "rb_error_unknown",
+    "rb_guide_cn_subtitle1",
+    "rb_guide_cn_subtitle2",
+    "rb_guide_cn_subtitle3",
+    "rb_guide_cn_subtitle4",
+    "rb_guide_cn_title1",
+    "rb_guide_cn_title2",
+    "rb_guide_cn_title3",
+    "rb_guide_cn_title4",
+    "rb_guide_interaction",
+    "rb_guide_notNow",
+    "rb_keyboard_hidde",
+    "rb_lan",
+    "rb_lan_change_subtitle",
+    "rb_lan_change_title",
+    "rb_lg_agree_privacy_tips",
+    "rb_lg_agree_tips",
+    "rb_lg_apple",
+    "rb_lg_code_error",
+    "rb_lg_code_sended",
+    "rb_lg_confirm",
+    "rb_lg_confirm_password",
+    "rb_lg_dmname",
+    "rb_lg_email",
+    "rb_lg_email_format",
+    "rb_lg_email_register",
+    "rb_lg_first_userpassword",
+    "rb_lg_forgot",
+    "rb_lg_fullemail",
+    "rb_lg_gologin",
+    "rb_lg_google",
+    "rb_lg_goregister",
+    "rb_lg_hello",
+    "rb_lg_hello_login",
+    "rb_lg_input_code",
+    "rb_lg_input_email",
+    "rb_lg_input_email_password",
+    "rb_lg_input_new_email",
+    "rb_lg_input_password",
+    "rb_lg_input_register_email",
+    "rb_lg_login",
+    "rb_lg_login_error_try",
+    "rb_lg_login_success",
+    "rb_lg_next",
+    "rb_lg_no_code",
+    "rb_lg_nodouble_send",
+    "rb_lg_passwor_tips3",
+    "rb_lg_passwor_tips4",
+    "rb_lg_passwor_tips5",
+    "rb_lg_password_setting",
+    "rb_lg_password_tips1",
+    "rb_lg_password_tips2",
+    "rb_lg_privacy",
+    "rb_lg_register_success",
+    "rb_lg_resend",
+    "rb_lg_reset_password",
+    "rb_lg_reset_success",
+    "rb_lg_sendcode_tips",
+    "rb_lg_terms",
+    "rb_lg_verification_email",
+    "rb_lg_verify",
+    "rb_log_computer_client",
+    "rb_login_desktop_account_to_sync_loona_in_real_time",
+    "rb_loona_handles_desktop_tasks",
+    "rb_next",
+    "rb_pclink_feature_coming_soon",
+    "rb_pclink_lan_connected",
+    "rb_pclink_network_connected",
+    "rb_pclink_pc_offline",
+    "rb_pclink_send_each",
+    "rb_pclink_tip_connect_copy",
+    "rb_pclink_tip_connect_drag_file",
+    "rb_pclink_tip_connect_record_trace",
+    "rb_pclink_tip_connect_screenshot",
+    "rb_pclink_tip_connect_select",
+    "rb_pclink_tip_disconnect_refresh",
+    "rb_pf_create",
+    "rb_pf_face_center",
+    "rb_pf_face_error_tips",
+    "rb_pf_face_left",
+    "rb_pf_face_remember",
+    "rb_pf_face_remember_try",
+    "rb_pf_face_right",
+    "rb_pf_face_step1",
+    "rb_pf_face_step1_line2",
+    "rb_pf_face_step1_tips",
+    "rb_pf_face_success",
+    "rb_pf_generating",
+    "rb_pf_info_extraInfo",
+    "rb_pf_info_extraInfo_tips",
+    "rb_pf_info_job",
+    "rb_pf_info_job_tips",
+    "rb_pf_info_name",
+    "rb_pf_info_name_tips",
+    "rb_pf_info_step3",
+    "rb_pf_info_step3_empty",
+    "rb_pf_info_step3_job_toolong",
+    "rb_pf_info_step3_line2",
+    "rb_pf_info_step3_name_toolong",
+    "rb_pf_info_step3_other_toolong",
+    "rb_pf_info_step3_save",
+    "rb_pf_know_you",
+    "rb_pf_next",
+    "rb_pf_save_error",
+    "rb_pf_update",
+    "rb_pf_update_must",
+    "rb_pf_update_subtitle_tips",
+    "rb_pf_update_title",
+    "rb_pf_update_title_tips",
+    "rb_pf_voice_auth_error",
+    "rb_pf_voice_call",
+    "rb_pf_voice_completed",
+    "rb_pf_voice_empty",
+    "rb_pf_voice_error1",
+    "rb_pf_voice_error2",
+    "rb_pf_voice_error3",
+    "rb_pf_voice_error4",
+    "rb_pf_voice_error5",
+    "rb_pf_voice_remember",
+    "rb_pf_voice_step2",
+    "rb_pf_voice_step2_line2",
+    "rb_pf_voice_step2_tips",
+    "rb_pf_voice_success",
+    "rb_pf_voice_talk_tips",
+    "rb_plese_input",
+    "rb_pms_album",
+    "rb_pms_album_tips",
+    "rb_pms_allow_title",
+    "rb_pms_bluetooth",
+    "rb_pms_bluetooth_tips",
+    "rb_pms_camera",
+    "rb_pms_camera_tips",
+    "rb_pms_cancel_title",
+    "rb_pms_localNetwork",
+    "rb_pms_localNetwork_tips",
+    "rb_pms_location",
+    "rb_pms_location_tips",
+    "rb_pms_location_turnoff",
+    "rb_pms_mic",
+    "rb_pms_mic_tips",
+    "rb_pms_open_title",
+    "rb_pms_subTitle",
+    "rb_pms_title",
+    "rb_scan_qr",
+    "rb_send",
+    "rb_set_app_language",
+    "rb_set_application_manager",
+    "rb_set_appupdate",
+    "rb_set_appupdate_tips",
+    "rb_set_appupdate_urlerror",
+    "rb_set_auto_wakeup",
+    "rb_set_books",
+    "rb_set_checkbox",
+    "rb_set_device",
+    "rb_set_diamond",
+    "rb_set_feedback",
+    "rb_set_feedback_error",
+    "rb_set_feedback_ok",
+    "rb_set_feedback_placeholder",
+    "rb_set_feedback_subtitle",
+    "rb_set_firmware_version",
+    "rb_set_help",
+    "rb_set_lan_ar",
+    "rb_set_lan_de",
+    "rb_set_lan_en",
+    "rb_set_lan_es",
+    "rb_set_lan_fr",
+    "rb_set_lan_it",
+    "rb_set_lan_ja",
+    "rb_set_lan_ko",
+    "rb_set_lan_nl",
+    "rb_set_lan_pl",
+    "rb_set_lan_pt",
+    "rb_set_lan_ru",
+    "rb_set_lan_sv",
+    "rb_set_lan_th",
+    "rb_set_lan_tr",
+    "rb_set_lan_zh",
+    "rb_set_lan_zh-hant",
+    "rb_set_lan_zh-hant-tw",
+    "rb_set_lastversion",
+    "rb_set_logout",
+    "rb_set_pclink",
+    "rb_set_people",
+    "rb_set_policy",
+    "rb_set_privacy",
+    "rb_set_question",
+    "rb_set_system",
+    "rb_set_updatepassword",
+    "rb_set_users",
+    "rb_set_vip_free",
+    "rb_setting",
+    "rb_skipset",
+    "rb_successfully_connected",
+    "rb_tips",
+    "rb_try",
+    "rb_up_dis_reconnect",
+    "rb_up_dis_retry",
+    "rb_up_disconnect",
+    "rb_up_disconnect_tips",
+    "rb_up_download_error",
+    "rb_up_error_try",
+    "rb_up_goconnect",
+    "rb_up_net_error",
+    "rb_up_no_disconnect",
+    "rb_up_skipupdate",
+    "rb_up_success",
+    "rb_up_success_jump",
+    "rb_up_tips",
+    "rb_up_update_tips0",
+    "rb_up_updatenow",
+    "rb_up_version",
+    "rb_user_ablum",
+    "rb_user_album_error1",
+    "rb_user_album_error2",
+    "rb_user_camera",
+    "rb_user_camera_error1",
+    "rb_user_camera_error2",
+    "rb_user_cancel_notification",
+    "rb_user_copyed",
+    "rb_user_delete",
+    "rb_user_delete_error",
+    "rb_user_delete_now",
+    "rb_user_delete_skip",
+    "rb_user_delete_tips",
+    "rb_user_deviceId",
+    "rb_user_deviceId_error",
+    "rb_user_id",
+    "rb_user_name",
+    "rb_user_name_format",
+    "rb_user_nobind",
+    "rb_user_notification_tips",
+    "rb_user_open_notification",
+    "rb_user_open_notification_title",
+    "rb_user_open_notification_title_tips",
+    "rb_view",
+    "rb_wakeup_will",
+    "rb_wo_konwn",
+    "rb_ws_timeout_title",
+    "sm_rb_automatically_synchronized",
+    "sm_rb_pclink_feature_coming_soon",
+    "sm_rb_pclink_lan_connected",
+    "sm_rb_pclink_network_connected",
+    "sm_rb_pclink_tip_connect_drag_file",
+    "sm_rb_pclink_tip_connect_record_trace",
+    "sm_rb_pclink_tip_connect_screenshot",
+    "sm_rb_pclink_tip_connect_select",
+    "sm_rb_pclink_tip_disconnect_auto_connect",
+    "sm_rb_pclink_tip_disconnect_same_account",
+    "sm_rb_pclink_tip_disconnect_same_network",
+    "sm_rb_pclink_tip_disconnect_sync_file",
+    "smd_rb_pclink_tip_disconnect_auto_connect",
+    "smd_rb_pclink_tip_disconnect_network_status",
+    "smd_rb_pclink_tip_disconnect_same_account",
+    "smd_rb_pclink_tip_disconnect_same_network"
+  ],
+  "locales": [
+    {
+      "code": "ar",
+      "direction": "rtl"
+    },
+    {
+      "code": "de",
+      "direction": "ltr"
+    },
+    {
+      "code": "en",
+      "direction": "ltr"
+    },
+    {
+      "code": "es",
+      "direction": "ltr"
+    },
+    {
+      "code": "fr",
+      "direction": "ltr"
+    },
+    {
+      "code": "it",
+      "direction": "ltr"
+    },
+    {
+      "code": "ja",
+      "direction": "ltr"
+    },
+    {
+      "code": "ko",
+      "direction": "ltr"
+    },
+    {
+      "code": "nl",
+      "direction": "ltr"
+    },
+    {
+      "code": "pl",
+      "direction": "ltr"
+    },
+    {
+      "code": "pt",
+      "direction": "ltr"
+    },
+    {
+      "code": "ru",
+      "direction": "ltr"
+    },
+    {
+      "code": "sv",
+      "direction": "ltr"
+    },
+    {
+      "code": "th",
+      "direction": "ltr"
+    },
+    {
+      "code": "tr",
+      "direction": "ltr"
+    },
+    {
+      "code": "zh-Hans",
+      "direction": "ltr"
+    },
+    {
+      "code": "zh-Hant",
+      "direction": "ltr"
+    },
+    {
+      "code": "zh-Hant-TW",
+      "direction": "ltr"
+    }
+  ],
+  "icons": [
+    {
+      "name": "icon_file",
+      "format": "svg"
+    },
+    {
+      "name": "icon_file-excel",
+      "format": "svg"
+    },
+    {
+      "name": "icon_file-img",
+      "format": "svg"
+    },
+    {
+      "name": "icon_file-pdf",
+      "format": "svg"
+    },
+    {
+      "name": "icon_file-ppt",
+      "format": "svg"
+    },
+    {
+      "name": "icon_file-word",
+      "format": "svg"
+    },
+    {
+      "name": "icon_tempate",
+      "format": "svg"
+    },
+    {
+      "name": "vg_arrow-2-down",
+      "format": "svg"
+    },
+    {
+      "name": "vg_arrow-2-left",
+      "format": "svg"
+    },
+    {
+      "name": "vg_arrow-2-right",
+      "format": "svg"
+    },
+    {
+      "name": "vg_arrow-2-up",
+      "format": "svg"
+    },
+    {
+      "name": "vg_arrow-down",
+      "format": "svg"
+    },
+    {
+      "name": "vg_arrow-down-circle",
+      "format": "svg"
+    },
+    {
+      "name": "vg_arrow-down-circle-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_arrow-left",
+      "format": "svg"
+    },
+    {
+      "name": "vg_arrow-left-circle",
+      "format": "svg"
+    },
+    {
+      "name": "vg_arrow-left-circle-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_arrow-loop-ccw-circle",
+      "format": "svg"
+    },
+    {
+      "name": "vg_arrow-loop-ccw-runway",
+      "format": "svg"
+    },
+    {
+      "name": "vg_arrow-loop-cw-circle",
+      "format": "svg"
+    },
+    {
+      "name": "vg_arrow-loop-cw-runway",
+      "format": "svg"
+    },
+    {
+      "name": "vg_arrow-right",
+      "format": "svg"
+    },
+    {
+      "name": "vg_arrow-right-circle",
+      "format": "svg"
+    },
+    {
+      "name": "vg_arrow-right-circle-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_arrow-turn-left",
+      "format": "svg"
+    },
+    {
+      "name": "vg_arrow-turn-right",
+      "format": "svg"
+    },
+    {
+      "name": "vg_arrow-up",
+      "format": "svg"
+    },
+    {
+      "name": "vg_arrow-up-circle",
+      "format": "svg"
+    },
+    {
+      "name": "vg_arrow-up-circle-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_bell",
+      "format": "svg"
+    },
+    {
+      "name": "vg_bell-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_blowing_dust",
+      "format": "svg"
+    },
+    {
+      "name": "vg_blub",
+      "format": "svg"
+    },
+    {
+      "name": "vg_blub-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_books",
+      "format": "svg"
+    },
+    {
+      "name": "vg_books-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_books-pages",
+      "format": "svg"
+    },
+    {
+      "name": "vg_books-pages-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_breeze",
+      "format": "svg"
+    },
+    {
+      "name": "vg_calendar",
+      "format": "svg"
+    },
+    {
+      "name": "vg_calendar-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_camera",
+      "format": "svg"
+    },
+    {
+      "name": "vg_camera-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_chain",
+      "format": "svg"
+    },
+    {
+      "name": "vg_chain-pc",
+      "format": "svg"
+    },
+    {
+      "name": "vg_chain_break",
+      "format": "svg"
+    },
+    {
+      "name": "vg_checkmark",
+      "format": "svg"
+    },
+    {
+      "name": "vg_checkmark-circle",
+      "format": "svg"
+    },
+    {
+      "name": "vg_checkmark-circle-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_circle",
+      "format": "svg"
+    },
+    {
+      "name": "vg_clear_night",
+      "format": "svg"
+    },
+    {
+      "name": "vg_clickup",
+      "format": "svg"
+    },
+    {
+      "name": "vg_clipboard",
+      "format": "svg"
+    },
+    {
+      "name": "vg_clipboard-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_clock",
+      "format": "svg"
+    },
+    {
+      "name": "vg_clock-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_cloudy",
+      "format": "svg"
+    },
+    {
+      "name": "vg_copy",
+      "format": "svg"
+    },
+    {
+      "name": "vg_copy-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_crown",
+      "format": "svg"
+    },
+    {
+      "name": "vg_crown-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_cube",
+      "format": "svg"
+    },
+    {
+      "name": "vg_cube-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_database",
+      "format": "svg"
+    },
+    {
+      "name": "vg_database-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_diamond",
+      "format": "svg"
+    },
+    {
+      "name": "vg_diamond-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_download",
+      "format": "svg"
+    },
+    {
+      "name": "vg_earth",
+      "format": "svg"
+    },
+    {
+      "name": "vg_earth-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_earth-magnifyingGlass",
+      "format": "svg"
+    },
+    {
+      "name": "vg_earth-magnifyingGlass-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_envelope-fly-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_evelope",
+      "format": "svg"
+    },
+    {
+      "name": "vg_evelope-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_evelope-fly",
+      "format": "svg"
+    },
+    {
+      "name": "vg_exclamationmark",
+      "format": "svg"
+    },
+    {
+      "name": "vg_exclamationmark-circle",
+      "format": "svg"
+    },
+    {
+      "name": "vg_exclamationmark-circle-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_exclamationmark-triangle",
+      "format": "svg"
+    },
+    {
+      "name": "vg_exclamationmark-triangle-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_eye",
+      "format": "svg"
+    },
+    {
+      "name": "vg_eye-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_eye-slash",
+      "format": "svg"
+    },
+    {
+      "name": "vg_eye-slash-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_face-front",
+      "format": "svg"
+    },
+    {
+      "name": "vg_face-front-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_face-left",
+      "format": "svg"
+    },
+    {
+      "name": "vg_face-left-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_face-right",
+      "format": "svg"
+    },
+    {
+      "name": "vg_face-right-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_feishu",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-PowerPoint",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-PowerPoint-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-csv",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-csv-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-drive-other",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-drive-other-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-excel",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-excel-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-google-docs",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-google-docs-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-json",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-json-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-markdown",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-markdown-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-page",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-page-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-pdf",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-pdf-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-picture",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-picture-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-sheets",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-sheets-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-slides",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-slides-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-text",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-text-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-video",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-video-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-word",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-word-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-zip",
+      "format": "svg"
+    },
+    {
+      "name": "vg_file-zip-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_filter",
+      "format": "svg"
+    },
+    {
+      "name": "vg_floating_dust",
+      "format": "svg"
+    },
+    {
+      "name": "vg_fog",
+      "format": "svg"
+    },
+    {
+      "name": "vg_folder-drive",
+      "format": "svg"
+    },
+    {
+      "name": "vg_folder-drive-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_freezing_rain",
+      "format": "svg"
+    },
+    {
+      "name": "vg_gale",
+      "format": "svg"
+    },
+    {
+      "name": "vg_gear",
+      "format": "svg"
+    },
+    {
+      "name": "vg_gear-2",
+      "format": "svg"
+    },
+    {
+      "name": "vg_gear-2-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_gear-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_gmail",
+      "format": "svg"
+    },
+    {
+      "name": "vg_google-calendar",
+      "format": "svg"
+    },
+    {
+      "name": "vg_google-contact",
+      "format": "svg"
+    },
+    {
+      "name": "vg_google-drive",
+      "format": "svg"
+    },
+    {
+      "name": "vg_google-map",
+      "format": "svg"
+    },
+    {
+      "name": "vg_group",
+      "format": "svg"
+    },
+    {
+      "name": "vg_hail",
+      "format": "svg"
+    },
+    {
+      "name": "vg_haze",
+      "format": "svg"
+    },
+    {
+      "name": "vg_heavy_rain",
+      "format": "svg"
+    },
+    {
+      "name": "vg_heavy_snow",
+      "format": "svg"
+    },
+    {
+      "name": "vg_hurricane",
+      "format": "svg"
+    },
+    {
+      "name": "vg_infomark",
+      "format": "svg"
+    },
+    {
+      "name": "vg_infomark-circle",
+      "format": "svg"
+    },
+    {
+      "name": "vg_infomark-circle-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_ios-calendar",
+      "format": "svg"
+    },
+    {
+      "name": "vg_ios-reminders",
+      "format": "svg"
+    },
+    {
+      "name": "vg_key",
+      "format": "svg"
+    },
+    {
+      "name": "vg_knife-fork",
+      "format": "svg"
+    },
+    {
+      "name": "vg_light_rain",
+      "format": "svg"
+    },
+    {
+      "name": "vg_light_snow",
+      "format": "svg"
+    },
+    {
+      "name": "vg_lighting-cicle",
+      "format": "svg"
+    },
+    {
+      "name": "vg_lighting-cicle-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_loading",
+      "format": "svg"
+    },
+    {
+      "name": "vg_magnifying-glass-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_magnifyingGlass",
+      "format": "svg"
+    },
+    {
+      "name": "vg_menu",
+      "format": "svg"
+    },
+    {
+      "name": "vg_menu-checkbox",
+      "format": "svg"
+    },
+    {
+      "name": "vg_mic",
+      "format": "svg"
+    },
+    {
+      "name": "vg_mic-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_microsoft-365",
+      "format": "svg"
+    },
+    {
+      "name": "vg_microsoft-teams",
+      "format": "svg"
+    },
+    {
+      "name": "vg_microsoft-todo",
+      "format": "svg"
+    },
+    {
+      "name": "vg_mist",
+      "format": "svg"
+    },
+    {
+      "name": "vg_moderate_rain",
+      "format": "svg"
+    },
+    {
+      "name": "vg_moderate_snow",
+      "format": "svg"
+    },
+    {
+      "name": "vg_more",
+      "format": "svg"
+    },
+    {
+      "name": "vg_notion",
+      "format": "svg"
+    },
+    {
+      "name": "vg_organization",
+      "format": "svg"
+    },
+    {
+      "name": "vg_outlook-calendar",
+      "format": "svg"
+    },
+    {
+      "name": "vg_outlook-mail",
+      "format": "svg"
+    },
+    {
+      "name": "vg_outlook-people",
+      "format": "svg"
+    },
+    {
+      "name": "vg_overcast",
+      "format": "svg"
+    },
+    {
+      "name": "vg_pencil-write",
+      "format": "svg"
+    },
+    {
+      "name": "vg_people",
+      "format": "svg"
+    },
+    {
+      "name": "vg_people-doc",
+      "format": "svg"
+    },
+    {
+      "name": "vg_people-doc-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_people-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_people-gear",
+      "format": "svg"
+    },
+    {
+      "name": "vg_people-gear-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_people-position",
+      "format": "svg"
+    },
+    {
+      "name": "vg_phone",
+      "format": "svg"
+    },
+    {
+      "name": "vg_phone-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_pin",
+      "format": "svg"
+    },
+    {
+      "name": "vg_pin-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_plusmark",
+      "format": "svg"
+    },
+    {
+      "name": "vg_plusmark-circle",
+      "format": "svg"
+    },
+    {
+      "name": "vg_plusmark-circle-1",
+      "format": "svg"
+    },
+    {
+      "name": "vg_questionmark",
+      "format": "svg"
+    },
+    {
+      "name": "vg_questionmark-circle",
+      "format": "svg"
+    },
+    {
+      "name": "vg_questionmark-circle-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_rain_shower",
+      "format": "svg"
+    },
+    {
+      "name": "vg_rainstorm",
+      "format": "svg"
+    },
+    {
+      "name": "vg_ruby",
+      "format": "svg"
+    },
+    {
+      "name": "vg_ruby-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_ruby-gear",
+      "format": "svg"
+    },
+    {
+      "name": "vg_ruby-gear-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_sandstorm",
+      "format": "svg"
+    },
+    {
+      "name": "vg_scan",
+      "format": "svg"
+    },
+    {
+      "name": "vg_shield",
+      "format": "svg"
+    },
+    {
+      "name": "vg_shield-checkmark",
+      "format": "svg"
+    },
+    {
+      "name": "vg_shield-checkmark-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_shield-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_slack",
+      "format": "svg"
+    },
+    {
+      "name": "vg_sleet",
+      "format": "svg"
+    },
+    {
+      "name": "vg_snow_shower",
+      "format": "svg"
+    },
+    {
+      "name": "vg_snowstorm",
+      "format": "svg"
+    },
+    {
+      "name": "vg_square-arrow-down",
+      "format": "svg"
+    },
+    {
+      "name": "vg_square-arrow-left",
+      "format": "svg"
+    },
+    {
+      "name": "vg_square-arrow-right",
+      "format": "svg"
+    },
+    {
+      "name": "vg_square-arrow-up",
+      "format": "svg"
+    },
+    {
+      "name": "vg_star",
+      "format": "svg"
+    },
+    {
+      "name": "vg_star-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_star-half",
+      "format": "svg"
+    },
+    {
+      "name": "vg_strong_wind",
+      "format": "svg"
+    },
+    {
+      "name": "vg_sunny",
+      "format": "svg"
+    },
+    {
+      "name": "vg_sunrise",
+      "format": "svg"
+    },
+    {
+      "name": "vg_sunset",
+      "format": "svg"
+    },
+    {
+      "name": "vg_thunder_shower",
+      "format": "svg"
+    },
+    {
+      "name": "vg_thunderstorm",
+      "format": "svg"
+    },
+    {
+      "name": "vg_tornado",
+      "format": "svg"
+    },
+    {
+      "name": "vg_trashbin",
+      "format": "svg"
+    },
+    {
+      "name": "vg_usb-a-port",
+      "format": "svg"
+    },
+    {
+      "name": "vg_usb-c-port",
+      "format": "svg"
+    },
+    {
+      "name": "vg_xmark",
+      "format": "svg"
+    },
+    {
+      "name": "vg_xmark-circle",
+      "format": "svg"
+    },
+    {
+      "name": "vg_xmark-circle-fill",
+      "format": "svg"
+    },
+    {
+      "name": "vg_zoom",
+      "format": "svg"
+    }
+  ],
+  "rives": [
+    "calendar_circle_checkmark",
+    "calendar_looking",
+    "calendar_pen_drawing",
+    "calendar_triangle_exclamationmark",
+    "camera_flickering_looping",
+    "chain-linked",
+    "circle_checkmark",
+    "circle_checkmark_and_clipboard",
+    "circle_plusmark",
+    "circle_questionmark",
+    "circle_xmark",
+    "clipboard_and_questionmark",
+    "clipboard_and_sandglass_looping",
+    "clipboard_todo",
+    "clock_changing",
+    "connect_status",
+    "file_moving_looping",
+    "globe_and_clock_to_exclamationmark",
+    "globe_looking",
+    "globe_looking_food",
+    "knife_and_fork",
+    "loading_spin_ccw",
+    "mail_scroll_looping",
+    "mail_scroll_once",
+    "paperplane_fly_once",
+    "people_and_doc",
+    "shapes_bubbling_up",
+    "square_split_once",
+    "tools",
+    "tools_google_calendar",
+    "tools_googledrive",
+    "tools_googledrive_checkmark",
+    "tools_googledrive_circle_plusmark",
+    "tools_googledrive_duplicate",
+    "tools_googledrive_file_move_once",
+    "tools_googledrive_trashbin_throw_once",
+    "tools_ios_calendar",
+    "tools_ios_calendar_circle_checkmark",
+    "tools_ios_calendar_circle_plusmark",
+    "tools_ios_calendar_trashbin_throw_once",
+    "tools_ios_reminders",
+    "tools_ios_reminders_circle_checkmark",
+    "tools_ios_reminders_circle_plusmark",
+    "tools_ios_reminders_trashbin_throw_once",
+    "tools_microsoft_mail",
+    "tools_microsoft_teams",
+    "tools_notion",
+    "tools_notion_checkmark",
+    "tools_notion_circle_plusmark",
+    "tools_notion_duplicate",
+    "tools_notion_file_move_once",
+    "tools_notion_trashbin_throw_once",
+    "tools_slack",
+    "tools_slack_checkmark",
+    "tools_slack_paperplane_fly_once",
+    "tools_slack_people",
+    "tools_zoom",
+    "tools_zoom_circle_checkmark",
+    "tools_zoom_circle_plusmark",
+    "tools_zoom_trashbin_throw_once",
+    "trashbin_throw_once",
+    "weather_changing",
+    "weather_checkmark"
+  ]
+}

@@ -1,0 +1,231 @@
+---
+import {
+	formatToken,
+	inputReduction,
+	toolhubStages,
+	toolhubTask,
+	toolhubTotals,
+} from "@/data/cortex-toolhub";
+
+const saving = toolhubTotals.before.input - toolhubTotals.after.input;
+---
+
+<div class="ca-block th-governance">
+	<div class="th-intro-block">
+		<h3><span>问题背景与矛盾</span>从线上日志发现：工具越多，Agent 越容易超时</h3>
+		<p class="ca-copy">
+			随着桌面机器人接入的办公应用增多，可用工具迅速膨胀至 122 个。观测线上日志发现：<strong>122 个工具的全量描述每轮都被注入 Planner，仅 Schema 描述就占用 15,000+ Token</strong>。更严重的是，多平台间同类工具（如 Google 日历 vs Outlook 日历、Notion 检索 vs 本地检索）语义高度重叠，导致模型频繁发生「工具选择幻觉」与重复误调用，最终引发超时、任务失败。
+		</p>
+		<p class="ca-ownership">
+			<strong>我的职责：</strong>主导本次运行时治理的产品方案设计，定义能力聚合粒度与调度协议，协同研发落地 Router 预选机制，并通过 136 条覆盖全量工具的基准用例验证成本与成功率收益。
+		</p>
+	</div>
+
+	<!-- 方案取舍决策卡 -->
+	<div class="th-strategy-section ca-reveal">
+		<h4><span>方案权衡</span>工具按什么粒度聚合？在参数复杂与选择困惑间寻找平衡</h4>
+		<div class="th-strategy-grid">
+			<div class="th-strat-card">
+				<div class="th-strat-head">
+					<span class="th-strat-tag">方案 A</span>
+					<h5>按平台独立封装大工具</h5>
+				</div>
+				<p class="th-strat-desc">一个平台对应一个或一组工具，直接保留底层 API 原始结构。</p>
+				<div class="th-strat-tradeoff">
+					<p><strong class="th-strat-tradeoff-bold">致命缺陷：</strong>增删改查（CRUD）混在一起，Schema 极度臃肿复杂、多态嵌套难以规范定义；导致模型选参和必填项判断难度陡增，传参错误与入参校验失败频发。</p>
+				</div>
+			</div>
+
+			<div class="th-strat-card">
+				<div class="th-strat-head">
+					<span class="th-strat-tag">方案 B</span>
+					<h5>按业务域合并粗粒度工具</h5>
+				</div>
+				<p class="th-strat-desc">邮件、日历各收归为一个巨型工具，通过内部 action/method 参数做分支调度。</p>
+				<div class="th-strat-tradeoff">
+					<p><strong class="th-strat-tradeoff-bold">代价：</strong>虽然减少了工具名数量，但选工具变成了复杂的内部方法与参数嵌套选择，依然加重模型推理负担。</p>
+				</div>
+			</div>
+
+			<div class="th-strat-card is-adopted">
+				<div class="th-strat-head">
+					<span class="th-strat-tag is-badge">采用方案</span>
+					<h5>能力语义抽象 + Router 快筛动态挂载</h5>
+				</div>
+				<p class="th-strat-desc">将跨平台同类能力拆解为原子语义工具（如 calendar.create、calendar.query）；由 Router 在提示词目录中轻量快筛，仅向 Planner 挂载命中的具体 Schema。</p>
+				<div class="th-strat-tradeoff">
+					<p><strong class="th-strat-tradeoff-bold">收益：</strong>每个工具 Schema 纯粹单一、入参零歧义，同时为 Planner 减少 70%+ 无关上下文干扰。</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 核心视觉流程图：运行时调度架构对比 -->
+	<div class="th-architecture-box ca-reveal">
+		<div class="th-arch-header">
+			<h4><span>调度架构对比</span>全量平铺注入 vs 分层按需挂载</h4>
+			<p class="ca-copy">将工具选择前移至轻量 Router，Planner 摆脱全量负担，实现轻装规划。</p>
+		</div>
+
+		<div class="th-pipeline-compare">
+			<!-- 治理前链路 -->
+			<div class="th-pipeline-card is-before">
+				<div class="th-pipe-badge">治理前 · 全量静态平铺</div>
+				<div class="th-pipe-nodes">
+					<div class="th-p-node">
+						<span class="th-p-step">01</span>
+						<strong class="th-p-title">用户请求</strong>
+						<small>检索 Notion 文档</small>
+					</div>
+					<div class="th-p-arrow">↓</div>
+					<div class="th-p-node is-heavy">
+						<span class="th-p-step">02</span>
+						<strong class="th-p-title">Planner 第一轮规划</strong>
+						<div class="th-p-pill is-danger">挂载 122 个工具 Schema · 当轮总输入约 43k Token</div>
+						<small>同类工具干扰严重，易选错重复试错</small>
+					</div>
+					<div class="th-p-arrow">↓</div>
+					<div class="th-p-node is-heavy">
+						<span class="th-p-step">03</span>
+						<strong class="th-p-title">Planner 第二轮回复</strong>
+						<div class="th-p-pill is-danger">仍挂载 122 个工具 Schema · 当轮总输入约 47k Token</div>
+						<small>历史记录堆积，上下文爆炸超限</small>
+					</div>
+				</div>
+				<div class="th-pipe-summary">
+					<span>总输入 Token 膨胀至 <strong class="th-pipe-highlight">97,979</strong></span>
+					<span class="th-status-badge is-bad">超时率高 · 工具幻觉频繁</span>
+				</div>
+			</div>
+
+			<!-- 治理后链路 -->
+			<div class="th-pipeline-card is-after">
+				<div class="th-pipe-badge is-highlight">治理后 · Router 预选 + 动态按需挂载</div>
+				<div class="th-pipe-nodes">
+					<div class="th-p-node">
+						<span class="th-p-step">01</span>
+						<strong class="th-p-title">用户请求</strong>
+						<small>检索 Notion 文档</small>
+					</div>
+					<div class="th-p-arrow">↓</div>
+					<div class="th-p-node is-router">
+						<span class="th-p-step">02</span>
+						<strong class="th-p-title">Quick Router 语义快筛</strong>
+						<div class="th-p-pill is-success">目录在 Prompt 中，注入 0 个 Schema</div>
+						<small>Flash Lite 快筛判定当前仅需文档检索</small>
+					</div>
+					<div class="th-p-arrow">↓</div>
+					<div class="th-p-node is-light">
+						<span class="th-p-step">03</span>
+						<strong class="th-p-title">Planner 按需轻装规划</strong>
+						<div class="th-p-pill is-success">仅挂载 7 个工具 Schema · 当轮总输入约 19k Token</div>
+						<small>候选范围缩减 94%，该用例正确命中目标工具</small>
+					</div>
+				</div>
+				<div class="th-pipe-summary">
+					<span>总输入 Token 降至 <strong class="th-pipe-highlight">52,801</strong></span>
+					<span class="th-status-badge is-good">成功率 91.2%→97.8% · 该 Case 输入 Token 节省 46.1%</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 治理成效指标条 -->
+	<div class="th-results-panel ca-reveal">
+		<div class="th-result-stats">
+			<div class="th-res-col">
+				<span class="th-res-label">运行时工具目录</span>
+				<strong class="th-res-num">122 → 77<small> 个</small></strong>
+				<span class="th-res-sub">能力聚合减少 36.9% 重复工具</span>
+			</div>
+			<div class="th-res-col is-accent">
+				<span class="th-res-label">Planner 单轮输入 Token</span>
+				<strong class="th-res-num">≈30% ↓</strong>
+				<span class="th-res-sub">122 个工具 Schema 缩减为按需注入 7~10 个</span>
+			</div>
+			<div class="th-res-col is-accent">
+				<span class="th-res-label">全工具基准用例成功率</span>
+				<strong class="th-res-num">91.2% → 97.8%</strong>
+				<span class="th-res-sub">136 条用例覆盖全部工具，成功数由 124 升至 133 条（+6.6 个百分点）</span>
+			</div>
+		</div>
+
+		<!-- 典型任务 Token 节省看板与折叠审计抽屉 -->
+		<div class="th-case-preview">
+			<div class="th-case-header">
+				<div class="th-case-meta">
+					<span class="th-case-tag">典型验证 Case</span>
+					<p class="th-case-task">“{toolhubTask}”</p>
+				</div>
+				<div class="th-case-saving">
+					<span class="th-case-saving-label">本任务输入 Token 下降</span>
+					<strong class="th-case-saving-val">−{inputReduction}%</strong>
+					<small>净减少 {formatToken(saving)} Token</small>
+				</div>
+			</div>
+
+			<!-- 对比进度条 -->
+			<div class="th-bar-compare">
+				<div class="th-bar-row">
+					<span class="th-bar-label">治理前 (全量注入)</span>
+					<div class="th-bar-track">
+						<div class="th-bar-fill is-before" style="width: 100%;"></div>
+					</div>
+					<span class="th-bar-num">{formatToken(toolhubTotals.before.input)}</span>
+				</div>
+				<div class="th-bar-row">
+					<span class="th-bar-label">治理后 (按需挂载)</span>
+					<div class="th-bar-track">
+						<div class="th-bar-fill is-after" style={`width: ${(toolhubTotals.after.input / toolhubTotals.before.input) * 100}%;`}></div>
+					</div>
+					<span class="th-bar-num is-highlight">{formatToken(toolhubTotals.after.input)}</span>
+				</div>
+			</div>
+
+			<!-- 折叠式阶段审计数据 -->
+			<details class="th-audit-details">
+				<summary>展开查看该用例各阶段模型调用与 Token 审计清单<span class="be-details-toggle" aria-hidden="true">＋</span></summary>
+				<div class="th-audit-content">
+					<table class="be-table th-audit-table">
+						<thead>
+							<tr>
+								<th scope="col">阶段 / 模型</th>
+								<th scope="col">挂载 Schema 数 (前 → 后)</th>
+								<th scope="col">输入 Token (前)</th>
+								<th scope="col">输入 Token (后)</th>
+								<th scope="col">变化与归因</th>
+							</tr>
+						</thead>
+						<tbody>
+							{
+								toolhubStages.map((stage) => {
+									const diff = stage.after.input - stage.before.input;
+									return (
+										<tr>
+											<th scope="row">
+												<strong>{stage.name}</strong>
+												<small class="th-model-tag">{stage.model}</small>
+											</th>
+											<td>{stage.before.schema} → <strong>{stage.after.schema}</strong></td>
+											<td>{formatToken(stage.before.input)}</td>
+											<td class="th-after-num">{formatToken(stage.after.input)}</td>
+											<td>
+												<span class:list={["th-diff-badge", { "is-down": diff < 0, "is-up": diff > 0 }]}>
+													{diff > 0 ? `+${formatToken(diff)}` : formatToken(diff)}
+												</span>
+												<small class="th-diff-note">{stage.after.action}</small>
+											</td>
+										</tr>
+									);
+								})
+							}
+						</tbody>
+					</table>
+					<p class="th-audit-note">
+						* 审计说明：Router 增加 1,658 Token 用于承载工具目录的文本快筛；而在随后的两轮 Planner 规划中，分别减少 23,418 与 23,418 Token，任务整体净削减 45,178 Token (-46.1%)。
+					</p>
+				</div>
+			</details>
+		</div>
+	</div>
+</div>

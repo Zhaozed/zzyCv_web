@@ -1,0 +1,121 @@
+
+> astro-cactus@8.2.0 build /Users/joey/项目/astro-theme-cactus
+> astro build
+
+11:24:40 [content] Syncing content
+11:24:40 [content] Synced content
+11:24:40 [types] Generated 208ms
+11:24:40 [build] output: "static"
+11:24:40 [build] mode: "static"
+11:24:40 [build] directory: /Users/joey/项目/astro-theme-cactus/dist/
+11:24:40 [build] Collecting build info...
+11:24:40 [build] ✓ Completed in 251ms.
+11:24:40 [build] Building static entrypoints...
+11:24:40 [vite] ✓ built in 516ms
+11:24:41 [vite] ✓ built in 227ms
+11:24:41 [build] Rearranging server assets...
+
+ generating static routes 
+11:24:41   ├─ /404.html (+6ms) 
+11:24:41   ├─ /about/index.html (+2ms) 
+11:24:41   ├─ /notes/rss.xml (+16ms) 
+11:24:41   ├─ /notes/index.html (+3ms) 
+11:24:41   ├─ /notes/welcome/index.html (+1ms) 
+11:24:41   ├─ /og-image/markdown-elements.pngFound cached OG image for: A post of Markdown elements
+ (+1ms) 
+11:24:41   ├─ /og-image/markdown-elements/admonitions.pngFound cached OG image for: Markdown Admonitions
+ (+1ms) 
+11:24:41   ├─ /og-image/testing/cover-image.pngFound cached OG image for: Example Cover Image
+ (+1ms) 
+11:24:41   ├─ /og-image/testing/long-title.pngFound cached OG image for: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id
+ (+1ms) 
+11:24:41   ├─ /og-image/webmentions.pngFound cached OG image for: Adding Webmentions to Astro Cactus
+ (+1ms) 
+11:24:41   ├─ /posts/index.html (+1ms) 
+11:24:41   ├─ /posts/markdown-elements/index.htmlNo Webmentions cache found
+No webmention api token specified in .env
+ (+3ms) 
+11:24:41   ├─ /posts/markdown-elements/admonitions/index.html (+1ms) 
+11:24:41   ├─ /posts/testing/cover-image/index.html (+1ms) 
+11:24:41   ├─ /posts/testing/long-title/index.html (+1ms) 
+11:24:41   ├─ /posts/testing/social-image/index.html (+1ms) 
+11:24:41   ├─ /posts/webmentions/index.html (+1ms) 
+11:24:41   ├─ /practice/daymate/index.html (+1ms) 
+11:24:41   ├─ /practice/multilingual-evaluation/index.html (+1ms) 
+11:24:41   ├─ /practice/review-workbench/index.html (+1ms) 
+11:24:41   ├─ /practice/skills/index.html (+1ms) 
+11:24:41   ├─ /practice/translator/index.html (+1ms) 
+11:24:41   ├─ /practice/index.html (+1ms) 
+11:24:41   ├─ /projects/cortex-agent/index.html (+2ms) 
+11:24:41   ├─ /projects/cortex-eval/index.html (+1ms) 
+11:24:41   ├─ /projects/index.html (+1ms) 
+11:24:41   ├─ /rss.xml (+1ms) 
+11:24:41   ├─ /tags/markdown/index.html (+1ms) 
+11:24:41   ├─ /tags/admonitions/index.html (+0ms) 
+11:24:41   ├─ /tags/webmentions/index.html (+0ms) 
+11:24:41   ├─ /tags/astro/index.html (+0ms) 
+11:24:41   ├─ /tags/social/index.html (+0ms) 
+11:24:41   ├─ /tags/test/index.html (+1ms) 
+11:24:41   ├─ /tags/image/index.html (+0ms) 
+11:24:41   ├─ /tags/example/index.html (+0ms) 
+11:24:41   ├─ /tags/blog/index.html (+0ms) 
+11:24:41   ├─ /tags/index.html (+1ms) 
+11:24:41   ├─ /index.html (+1ms) 
+11:24:41 ✓ Completed in 137ms.
+
+ generating optimized images 
+11:24:41   ▶ /_astro/cover.CXyjlGn__Z18iidP.webp (reused cache entry) (+0ms) (1/7)
+11:24:41   ▶ /_astro/logo.Njau-rsP_Zoplig.webp (reused cache entry) (+1ms) (2/7)
+11:24:41   ▶ /_astro/cover.CXyjlGn__Z1utHA.webp (reused cache entry) (+0ms) (3/7)
+11:24:41   ▶ /_astro/cover.CXyjlGn__ZyYoSR.webp (reused cache entry) (+0ms) (4/7)
+11:24:41   ▶ /_astro/cover.CXyjlGn__Z1TUnmk.webp (reused cache entry) (+0ms) (5/7)
+11:24:41   ▶ /_astro/cover.CXyjlGn__XvLuS.webp (reused cache entry) (+0ms) (6/7)
+11:24:41   ▶ /_astro/cover.CXyjlGn__ZxhNtG.webp (reused cache entry) (+1ms) (7/7)
+11:24:41 ✓ Completed in 3ms.
+
+11:24:41 [build] ✓ Completed in 906ms.
+11:24:41 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`
+[32mastro-robots-txt:[0m `robots.txt` is created.
+
+astro-webmanifest: 
+        The icon(public/icon.svg) provided is not square.
+        The generated icons will be square and for the best results it's recommend to provide a square icon.
+        
+
+[32mastro-webmanifest:[0m `manifest.webmanifest` is created.
+
+11:24:41 [build] 31 page(s) built in 1.21s
+11:24:41 [build] Complete!
+
+> astro-cactus@8.2.0 postbuild /Users/joey/项目/astro-theme-cactus
+> pagefind --site dist
+
+
+Running Pagefind v1.5.2 (Extended)
+Running from: "/Users/joey/项目/astro-theme-cactus"
+Source:       "dist"
+Output:       "dist/pagefind"
+
+[Walking source directory]
+Found 37 files matching **/*.{html}
+
+[Parsing files]
+Found a data-pagefind-body element on the site.
+↳ Ignoring pages without this tag.
+
+[Reading languages]
+Discovered 1 language: zh-cn
+
+[Building search indexes]
+Total: 
+  Indexed 1 language
+  Indexed 8 pages
+  Indexed 651 words
+  Indexed 1 filter
+  Indexed 0 sorts
+Note: Pagefind doesn't support stemming for the language zh-cn. 
+Search will still work, but will not match across root words.
+Note: Pagefind doesn't support stemming for the language zh-cn. 
+Search will still work, but will not match across root words.
+
+Finished in 0.124 seconds

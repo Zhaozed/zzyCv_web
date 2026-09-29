@@ -1,0 +1,278 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "主动服务关键事项覆盖率评测与 Bad Case 迭代闭环",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "database": {
+          "label": "评测数据资产"
+        },
+        "backend": {
+          "label": "运行与判定环节"
+        },
+        "security": {
+          "label": "人工确认门禁"
+        },
+        "frontend": {
+          "label": "评测结果指标"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "eval",
+      "label": "离线评测 · 46 条场景用例"
+    },
+    {
+      "id": "run",
+      "label": "主动服务运行 · Mental Offload"
+    },
+    {
+      "id": "loop",
+      "label": "Bad Case 归因与迭代",
+      "variant": "exception"
+    }
+  ],
+  "phases": [
+    {
+      "id": "p_measure",
+      "label": "评测",
+      "fromCol": 0,
+      "toCol": 2
+    },
+    {
+      "id": "p_attribute",
+      "label": "归因",
+      "fromCol": 3,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "p_iterate",
+      "label": "迭代复测",
+      "fromCol": 4,
+      "toCol": 5,
+      "variant": "dashed"
+    }
+  ],
+  "mainPath": [
+    "cases",
+    "gt",
+    "diff",
+    "attribute",
+    "change",
+    "retest",
+    "coverage"
+  ],
+  "semanticChecks": {
+    "allowedRoots": [
+      "cases"
+    ],
+    "allowedTerminals": [
+      "coverage"
+    ],
+    "requiredEdges": [
+      {
+        "from": "retest",
+        "to": "coverage"
+      }
+    ],
+    "requiredPaths": [
+      {
+        "from": "cases",
+        "to": "coverage"
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "cases",
+      "lane": "eval",
+      "col": 0,
+      "type": "database",
+      "label": "场景用例集",
+      "sublabel": "46 条 · 离线评测",
+      "tag": "会议 / 工作汇报",
+      "width": 112
+    },
+    {
+      "id": "gt",
+      "lane": "eval",
+      "col": 1,
+      "type": "database",
+      "label": "关键事项 GT",
+      "sublabel": "应覆盖事项基线",
+      "width": 100
+    },
+    {
+      "id": "diff",
+      "lane": "eval",
+      "col": 2,
+      "type": "backend",
+      "label": "逐项比对",
+      "sublabel": "覆盖 / 遗漏",
+      "tag": "失真 / 无依据新增",
+      "width": 124
+    },
+    {
+      "id": "coverage",
+      "lane": "eval",
+      "col": 5,
+      "type": "frontend",
+      "label": "关键事项覆盖率",
+      "sublabel": "60% → 87%",
+      "tag": "5 轮迭代",
+      "width": 112
+    },
+    {
+      "id": "output",
+      "lane": "run",
+      "col": 1,
+      "type": "backend",
+      "label": "主动服务运行",
+      "sublabel": "会议 / 工作汇报",
+      "tag": "Mental Offload",
+      "width": 116
+    },
+    {
+      "id": "attribute",
+      "lane": "loop",
+      "col": 3,
+      "type": "backend",
+      "label": "Bad Case 归因",
+      "sublabel": "服务触发条件 / 信息范围",
+      "tag": "内容结构 / 后续操作",
+      "width": 132
+    },
+    {
+      "id": "change",
+      "lane": "loop",
+      "col": 4,
+      "type": "backend",
+      "label": "方案改动",
+      "sublabel": "按归因结论调整",
+      "width": 104
+    },
+    {
+      "id": "retest",
+      "lane": "loop",
+      "col": 5,
+      "type": "security",
+      "label": "复测确认",
+      "sublabel": "同批 46 条用例",
+      "tag": "人工确认门禁",
+      "width": 112
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_case_gt",
+      "from": "cases",
+      "to": "gt",
+      "label": "逐条标注",
+      "variant": "default"
+    },
+    {
+      "id": "e_case_run",
+      "from": "cases",
+      "to": "output",
+      "label": "同批输入",
+      "variant": "dashed",
+      "role": "branch",
+      "route": "drop"
+    },
+    {
+      "id": "e_gt_diff",
+      "from": "gt",
+      "to": "diff",
+      "label": "判定基线",
+      "variant": "default"
+    },
+    {
+      "id": "e_run_diff",
+      "from": "output",
+      "to": "diff",
+      "label": "Agent 实际输出",
+      "variant": "emphasis"
+    },
+    {
+      "id": "e_diff_attr",
+      "from": "diff",
+      "to": "attribute",
+      "label": "Bad Case",
+      "variant": "dashed",
+      "role": "error"
+    },
+    {
+      "id": "e_attr_change",
+      "from": "attribute",
+      "to": "change",
+      "label": "按维度定位",
+      "variant": "default"
+    },
+    {
+      "id": "e_change_retest",
+      "from": "change",
+      "to": "retest",
+      "label": "提交复测",
+      "variant": "security"
+    },
+    {
+      "id": "e_retest_cov",
+      "from": "retest",
+      "to": "coverage",
+      "label": "确认通过",
+      "variant": "emphasis",
+      "role": "main",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "e_retest_attr",
+      "from": "retest",
+      "to": "attribute",
+      "label": "未通过 · 下一轮",
+      "variant": "dashed",
+      "role": "return",
+      "fromSide": "bottom",
+      "toSide": "bottom",
+      "route": "bottom-channel"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "评测口径",
+      "items": [
+        "样本：46 条场景用例，覆盖会议与工作汇报两类主动服务",
+        "判定：逐项比对，区分覆盖 / 遗漏 / 失真 / 无依据新增",
+        "结果：5 轮 Bad Case 迭代后关键事项覆盖率 60% → 87%",
+        "口径：离线场景用例评测"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "归因四维度",
+      "items": [
+        "服务触发条件：主动服务在什么情况下发起",
+        "信息范围：本次可用的记忆与上下文边界",
+        "内容结构：关键事项的组织与排序",
+        "后续操作：用户可执行的下一步"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "范围边界",
+      "items": [
+        "该指标衡量对可用输入的组织与覆盖，不代表用户实际有用率",
+        "推送时机与打扰程度效果需另行验证",
+        "GT 若基于本次提供给 Agent 的记忆 / 上下文，评测范围不外延到上游信息提取质量"
+      ]
+    }
+  ]
+}

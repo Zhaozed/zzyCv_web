@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "治理后 · 聚合与按需加载",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "viewBox": [
+      1080,
+      350
+    ],
+    "legend": {
+      "mode": "hidden"
+    }
+  },
+  "components": [
+    {
+      "id": "task-scoped",
+      "type": "external",
+      "label": "用户任务",
+      "sublabel": "用户意图",
+      "pos": [
+        24,
+        138
+      ],
+      "size": [
+        176,
+        76
+      ]
+    },
+    {
+      "id": "domain-scoped",
+      "type": "backend",
+      "label": "业务域识别",
+      "sublabel": "确定所需工具域",
+      "pos": [
+        238,
+        138
+      ],
+      "size": [
+        176,
+        76
+      ]
+    },
+    {
+      "id": "schema-scoped",
+      "type": "database",
+      "label": "按需加载 Schema",
+      "sublabel": "聚合目录 · 77 个工具",
+      "pos": [
+        452,
+        138
+      ],
+      "size": [
+        176,
+        76
+      ]
+    },
+    {
+      "id": "plan-scoped",
+      "type": "backend",
+      "label": "Planner",
+      "sublabel": "相关工具范围内规划",
+      "pos": [
+        666,
+        138
+      ],
+      "size": [
+        176,
+        76
+      ]
+    },
+    {
+      "id": "execute-scoped",
+      "type": "external",
+      "label": "工具执行",
+      "sublabel": "选择并调用工具",
+      "pos": [
+        880,
+        138
+      ],
+      "size": [
+        176,
+        76
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "task-scoped-to-domain-scoped",
+      "from": "task-scoped",
+      "to": "domain-scoped",
+      "variant": "emphasis"
+    },
+    {
+      "id": "domain-scoped-to-schema-scoped",
+      "from": "domain-scoped",
+      "to": "schema-scoped",
+      "variant": "emphasis"
+    },
+    {
+      "id": "schema-scoped-to-plan-scoped",
+      "from": "schema-scoped",
+      "to": "plan-scoped",
+      "variant": "emphasis"
+    },
+    {
+      "id": "plan-scoped-to-execute-scoped",
+      "from": "plan-scoped",
+      "to": "execute-scoped",
+      "variant": "default"
+    }
+  ]
+}

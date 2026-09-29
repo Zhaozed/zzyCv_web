@@ -1,48 +1,6 @@
 ---
 import Button from "@/components/aria/Button.astro";
-import PostLoopCard from "@/components/aria/PostLoopCard.astro";
-import ProjectCard from "@/components/aria/ProjectCard.astro";
-import Separator from "@/components/aria/Separator.astro";
 import PageLayout from "@/layouts/Base.astro";
-
-const practiceItems = [
-	{
-		label: "01 / 个人产品 0→1",
-		title: "DayMate｜macOS 个人工作代理",
-		desc: "把非结构化邮件推进为必读清单、可跟进待办与求职档案，独立完成产品定义、全栈开发与评测闭环。",
-		href: "/practice/daymate/",
-		meta: "62 条回归用例 · 自用未上架"
-	},
-	{
-		label: "02 / 原型与评审",
-		title: "Cortex Agent 评审工作台",
-		desc: "把语音、卡片和 Agent 决策编排成可播放的理想链路，让跨团队评审从读文档变成看体验。",
-		href: "/practice/review-workbench/",
-		meta: "支撑 10+ 个需求"
-	},
-	{
-		label: "03 / 业务自动化",
-		title: "飞书翻译机器人",
-		desc: "识别表格增量内容，批量翻译并回填多语言列，同时维护术语一致性。",
-		href: "/practice/translator/",
-		meta: "8 语种 · 6万+ 文案"
-	},
-	{
-		label: "04 / 模型评测",
-		title: "多语种意图识别评测",
-		desc: "从高置信错分样本出发，建立语料修正、全量回归和模型准入闭环。",
-		href: "/practice/multilingual-evaluation/",
-		meta: "4万+ 样本 / 轮"
-	},
-	{
-		label: "05 / 工具沉淀",
-		title: "Skills 与小插件",
-		desc: "把重复的产品分析、工具接入与验收工作沉淀为可复用的 Agent 工作流。",
-		href: "/practice/skills/",
-		meta: "持续整理中"
-	}
-];
-
 ---
 
 <PageLayout
@@ -50,42 +8,102 @@ const practiceItems = [
 		title: "Home",
 		description: "赵泽宇的 AI 产品经理作品集，关注 Agent 产品设计与质量评测。"
 	}}>
-	<div class="relative z-20 mx-auto mt-16 w-full max-w-4xl px-7 md:mt-24 lg:mt-32 xl:px-0">
-		<div class="flex flex-col items-center md:flex-row">
+	<div
+		class="relative z-20 mx-auto my-auto flex w-full max-w-4xl flex-1 items-center px-7 py-8 md:py-12 xl:px-0">
+		<div class="flex w-full flex-col items-center md:flex-row">
 			<div class="relative w-full md:w-1/2">
-				<h1 class="mb-5 text-4xl leading-tight font-bold md:text-4xl lg:text-6xl dark:text-white">
+				<h1 class="mb-3 text-4xl leading-tight font-bold md:text-4xl lg:text-5xl dark:text-white">
 					Hi, I'm Zeyu.
 				</h1>
-				<p class="mb-6 text-base text-neutral-600 dark:text-neutral-400">
-					具备软件开发背景的 AI 产品经理，聚焦 Agent&nbsp;<br class="hidden lg:block" />产品设计与评测，推动
-					AI 能力在真实业务场景落地。
+				<p class="mb-4 text-lg font-semibold text-neutral-900 sm:text-xl dark:text-neutral-100">
+					做 AI 产品，也记录一路上的思考。
 				</p>
-				<p class="mb-2 font-semibold text-neutral-800 dark:text-neutral-200">我能帮你搞定：</p>
-				<ul
-					class="list-inside list-disc space-y-[3px] py-2 text-sm text-neutral-500 dark:text-neutral-400">
-					<li>Agent 产品架构与能力接入设计</li>
-					<li>工具治理、记忆体系与主动服务</li>
-					<li>评测集设计、LLM Judge 与 Bad Case 闭环</li>
-					<li>高保真原型、评审与开发落地</li>
-				</ul>
-				<div class="mt-5 flex flex-wrap gap-3">
-					<Button link="/projects/" text="查看精选项目" />
+				<p class="mb-8 text-sm leading-relaxed text-neutral-600 sm:text-base dark:text-neutral-400">
+					正在学习 AI 产品设计，关注 Agent 的应用与体验。<br />
+					这里记录我的项目尝试、学习笔记，以及实践中的收获与思考。
+				</p>
+				<div class="flex flex-wrap gap-4">
+					<Button link="/projects/" text="查看项目" />
 					<Button link="/portfolio/docs/zhaozeyu-resume.pdf" text="下载简历" variant="outline" />
 				</div>
 			</div>
 			<div
-				class="relative mt-10 hidden w-full justify-end md:mt-0 md:flex md:w-1/2 md:translate-y-4 md:pl-10 xl:translate-y-0">
-				<div class="relative z-50 w-full">
+				class="relative mx-auto mt-12 flex w-full max-w-[320px] justify-end sm:max-w-[360px] md:mx-0 md:mt-0 md:w-1/2 md:max-w-none md:translate-y-4 md:pl-10 xl:translate-y-0">
+				<div class="relative z-30 w-full">
+					<!-- 左侧招手小手掌（回归原位，周期性自主招手动效，可点击打开工作之余相册） -->
 					<div
-						class="absolute top-0 bottom-0 z-40 h-16 w-16 -translate-x-6 -translate-y-1/2 rounded-full lg:top-auto lg:-translate-y-[330px]">
-						<span
-							class="relative z-20 flex h-full w-full items-center justify-center rounded-full border-8 border-white bg-neutral-100 text-2xl dark:border-neutral-950 dark:bg-neutral-900">
+						class="group absolute top-0 bottom-0 z-40 h-16 w-16 -translate-x-6 -translate-y-1/2 rounded-full lg:top-auto lg:-translate-y-[330px]">
+						<button
+							id="open-album-btn-hand"
+							type="button"
+							class="relative z-20 flex h-full w-full cursor-pointer items-center justify-center rounded-full border-8 border-white bg-neutral-100 text-2xl shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:shadow-md focus:outline-none dark:border-neutral-950 dark:bg-neutral-900"
+							aria-label="查看生活相册：工作之余"
+							title="点击查看工作之余">
 							<span
-								class="flex h-full w-full items-center justify-center rounded-full border border-dashed border-neutral-300 bg-white dark:border-neutral-700 dark:bg-neutral-950"
-								>👋</span
-							>
-						</span>
+								class="flex h-full w-full items-center justify-center rounded-full border border-dashed border-neutral-300 bg-white transition-all duration-300 dark:border-neutral-700 dark:bg-neutral-950">
+								<!-- 自主招手微动画：没事自动挥挥手打招呼 -->
+								<span class="animate-idle-wave inline-block transform-gpu text-2xl select-none">
+									👋
+								</span>
+							</span>
+						</button>
 					</div>
+
+					<!-- 右侧统一生活相册卡片入口：两张微倾斜错落叠放的照片卡片 + 右下角黑底小 ↗ 图标 -->
+					<div class="absolute top-10 -right-2 z-40 sm:top-12 sm:-right-4 lg:top-14">
+						<button
+							id="open-album-btn"
+							type="button"
+							class="group relative flex cursor-pointer transition-transform duration-200 select-none focus:outline-none"
+							aria-label="查看生活相册：工作之余"
+							title="点击查看工作之余">
+							<!-- 卡片堆叠容器 -->
+							<div
+								class="relative h-[76px] w-[58px] transition-transform duration-300 ease-out group-hover:scale-105 sm:h-[84px] sm:w-[64px]">
+								<!-- 底层照片卡片（向左微倾斜） -->
+								<div
+									class="absolute inset-0 -rotate-6 rounded-xl border border-neutral-200/80 bg-white p-1 shadow-md transition-all duration-300 ease-out group-hover:-translate-x-1.5 group-hover:-translate-y-0.5 group-hover:-rotate-12 dark:border-neutral-800 dark:bg-neutral-900">
+									<img
+										src="/portfolio/about/bromo-dji.jpg"
+										alt="布罗莫火山航拍全景"
+										class="h-full w-full rounded-lg object-cover object-center select-none"
+										loading="eager"
+									/>
+								</div>
+
+								<!-- 顶层照片卡片（向右微倾斜，带右下角小 ↗ 标，采用绿色衣服旅行照作为相册封面） -->
+								<div
+									class="relative z-10 h-full w-full rotate-3 rounded-xl border border-neutral-200/90 bg-white p-1 shadow-lg transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:rotate-6 dark:border-neutral-800 dark:bg-neutral-900">
+									<img
+										src="/portfolio/about/bromo-hike.jpg"
+										alt="绿色衣服旅行照封面"
+										class="h-full w-full rounded-lg object-cover object-center select-none"
+										loading="eager"
+									/>
+									<!-- 右下角黑色小圆圈 ↗ 图标 -->
+									<div
+										class="absolute -right-1 -bottom-1 flex h-5 w-5 items-center justify-center rounded-full bg-neutral-900 text-white shadow-sm ring-2 ring-white transition-transform duration-200 group-hover:scale-110 dark:bg-white dark:text-neutral-900 dark:ring-neutral-900">
+										<svg
+											class="h-2.5 w-2.5"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="currentColor"
+											stroke-width="2.6">
+											<path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"
+											></path>
+										</svg>
+									</div>
+								</div>
+							</div>
+
+							<!-- 悬浮微提示胶囊：鼠标悬浮时优雅显示「工作之余 📷」 -->
+							<div
+								class="pointer-events-none absolute -bottom-7 left-1/2 -translate-x-1/2 rounded-full border border-neutral-200/90 bg-white/95 px-2.5 py-0.5 text-[11px] font-medium whitespace-nowrap text-neutral-700 opacity-0 shadow-sm backdrop-blur-xs transition-all duration-200 group-hover:-translate-y-0.5 group-hover:opacity-100 dark:border-neutral-800 dark:bg-neutral-900/95 dark:text-neutral-200">
+								工作之余 📷
+							</div>
+						</button>
+					</div>
+
 					<div class="relative z-30 px-10">
 						<img
 							src="/portfolio/about/chatgpt-home.png"
@@ -103,76 +121,563 @@ const practiceItems = [
 		</div>
 	</div>
 
-	<div class="relative z-20 mx-auto max-w-4xl px-7 lg:px-0">
-		<Separator text="精选项目" />
-
-		<h2 class="text-2xl leading-10 font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
-			精选项目
-		</h2>
-		<p class="mb-6 text-base text-neutral-600 dark:text-neutral-400">
-			三个项目分别回答三个问题：Agent 能力怎么接进来并治理好、质量怎么被判定与准入、AI 怎么在真实业务里被人信任。
-		</p>
-		<div class="mt-7 grid w-full grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
-			<ProjectCard
-				name="Loona DeskMate"
-				description="办公能力接入、ToolHub 工具治理与主动场景设计"
-				image="/portfolio/covers/deskmate.svg"
-				url="/projects/deskmate/"
-				tags={["Tool Intake", "ToolHub", "Mental Offload"]}
-			/>
-			<ProjectCard
-				name="Cortex-Eval"
-				description="Agent 端到端评测与版本准入平台（0→1）"
-				image="/portfolio/covers/cortex-eval.svg"
-				url="/projects/cortex-eval/"
-				tags={["Benchmark", "LLM Judge", "Release Gate"]}
-			/>
-			<ProjectCard
-				name="ServiceAtlas"
-				description="海外售后邮件 AI 助手：分诊、查证、拟稿与人工审核"
-				image="/portfolio/covers/service-atlas.svg"
-				url="/projects/service-atlas/"
-				tags={["Agent Workflow", "RAG", "MCP"]}
-			/>
+	<!-- 生活相册浮层：宽幅卡片，居中悬浮于视口前方，完整保留视频与风景画面 -->
+	<div
+		id="album-overlay"
+		class="pointer-events-none fixed inset-0 z-50 flex hidden items-center justify-center p-4 opacity-0 transition-opacity duration-300 sm:p-6"
+		role="dialog"
+		aria-modal="true"
+		aria-labelledby="album-modal-title">
+		<!-- 背景轻微压暗与毛玻璃 -->
+		<div
+			id="album-backdrop"
+			class="absolute inset-0 cursor-pointer bg-neutral-950/45 backdrop-blur-[3px] transition-opacity duration-300">
 		</div>
 
-		<Separator text="其他实践" />
+		<!-- 居中宽幅视口容器 -->
+		<div
+			class="pointer-events-none relative z-10 mx-auto flex h-full w-full max-w-2xl items-center justify-center">
+			<div
+				id="album-card"
+				class="pointer-events-auto relative flex w-full max-w-[560px] scale-95 flex-col overflow-hidden rounded-[26px] border border-neutral-200/90 bg-[#FAF9F5] opacity-0 shadow-2xl shadow-neutral-950/25 transition-all duration-300 sm:max-w-[600px] dark:border-neutral-800 dark:bg-neutral-900">
+				<!-- 顶部导航条 -->
+				<div class="flex items-center justify-between px-4 pt-3.5 pb-2.5">
+					<div class="flex items-center gap-1.5">
+						<span class="text-sm select-none">👋</span>
+						<span
+							id="album-modal-title"
+							class="text-xs font-semibold tracking-wide text-neutral-800 dark:text-neutral-200"
+							>工作之余</span
+						>
+						<span class="font-mono text-[10px] text-neutral-400 dark:text-neutral-500"
+							>/ Off the Clock</span
+						>
+					</div>
+					<div class="flex items-center gap-2">
+						<span
+							id="album-counter"
+							class="font-mono text-[11px] text-neutral-400 dark:text-neutral-500">1 / 6</span
+						>
+						<button
+							id="close-album-btn"
+							type="button"
+							class="flex h-6 w-6 cursor-pointer items-center justify-center rounded-full text-neutral-400 transition-colors hover:bg-neutral-200/60 hover:text-neutral-700 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
+							aria-label="关闭相册">
+							<svg
+								class="h-3.5 w-3.5"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								stroke-width="2">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"
+								></path>
+							</svg>
+						</button>
+					</div>
+				</div>
 
-		<div class="flex w-full flex-col items-stretch gap-5">
-			{
-				practiceItems.map(item => (
-					<PostLoopCard
-						title={item.title}
-						description={item.desc}
-						href={item.href}
-						label={item.label}
-						meta={item.meta}
-					/>
-				))
-			}
-		</div>
+				<!-- 中间大照片展示区（宽幅视角，契合 16:9 视频与横向风景，完整保留画面中的人物与投篮动作） -->
+				<div
+					id="photo-viewport"
+					class="relative mx-3.5 aspect-[16/10] overflow-hidden rounded-2xl bg-neutral-950 select-none sm:mx-4 sm:aspect-[16/9.5]">
+					<!-- 照片与视频列表 -->
+					<div id="slides-container" class="relative h-full w-full">
+						<!-- Slide 0：第一个 — 篮球实况视频（完整呈现左侧投篮人物赵泽宇、防守队员、篮筐与入网全程，零裁切） -->
+						<div
+							class="slide absolute inset-0 opacity-100 transition-opacity duration-300"
+							data-index="0">
+							<video
+								id="basketball-video"
+								src="/portfolio/about/basketball-motion.mp4"
+								poster="/portfolio/about/basketball-poster.jpg"
+								autoplay
+								loop
+								muted
+								playsinline
+								preload="auto"
+								class="h-full w-full cursor-pointer bg-black/95 object-contain"></video>
+							<!-- 实况微胶囊标签 -->
+							<div
+								class="pointer-events-none absolute top-3 left-3 flex items-center gap-1.5 rounded-full bg-black/55 px-2.5 py-1 text-[10px] font-medium text-white/95 shadow-sm backdrop-blur-md">
+								<span class="relative flex h-1.5 w-1.5">
+									<span
+										class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"
+									></span>
+									<span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+								</span>
+								<span>LIVE · 球场实况</span>
+							</div>
+							<!-- 播放/暂停悬浮控制按钮 -->
+							<button
+								id="basketball-video-toggle"
+								type="button"
+								class="absolute right-3 bottom-3 z-20 flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-black/55 text-white/95 backdrop-blur-md transition-all hover:scale-105 hover:bg-black/75 active:scale-95"
+								aria-label="播放或暂停视频"
+								title="播放 / 暂停">
+								<svg
+									id="video-icon-pause"
+									class="h-3.5 w-3.5"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+									stroke-width="2.5">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M10 9v6m4-6v6"></path>
+								</svg>
+								<svg
+									id="video-icon-play"
+									class="hidden h-3.5 w-3.5"
+									fill="currentColor"
+									viewBox="0 0 24 24">
+									<path d="M8 5v14l11-7z"></path>
+								</svg>
+							</button>
+						</div>
 
-		<Separator text="关于我" />
+						<!-- Slide 1：第二个 — 绿色衣服旅行（布罗莫火山山脊与破晓云海） -->
+						<div
+							class="slide pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300"
+							data-index="1">
+							<img
+								src="/portfolio/about/bromo-hike.jpg"
+								alt="布罗莫火山山脊与破晓云海"
+								class="h-full w-full object-cover object-center"
+								loading="lazy"
+							/>
+						</div>
 
-		<div class="flex flex-col items-start justify-start gap-8 py-4 md:flex-row md:space-x-12">
-			<div class="w-full md:w-1/2">
-				<h2
-					class="text-2xl leading-10 font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
-					产品判断之外，<br />我也负责把它做出来。
-				</h2>
-			</div>
-			<div class="w-full md:w-1/2">
-				<p class="text-base leading-8 text-neutral-600 dark:text-neutral-400">
-					软件工程硕士，具备 AI
-					产品设计、评测与开发落地经验。我习惯从真实任务定义成功标准，再用原型、代码和数据把判断验证清楚。
-				</p>
-				<div class="mt-6 flex flex-wrap gap-3">
-					<Button link="/about/" text="关于我 →" />
-					<Button link="mailto:18032098113@163.com" text="联系我" variant="outline" />
+						<!-- Slide 2：布罗莫火山航拍全景与云海（DJI NEO 2） -->
+						<div
+							class="slide pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300"
+							data-index="2">
+							<img
+								src="/portfolio/about/bromo-dji.jpg"
+								alt="布罗莫火山航拍全景与云海"
+								class="h-full w-full object-cover object-center"
+								loading="lazy"
+							/>
+						</div>
+
+						<!-- Slide 3：澄澈水下浮潜 -->
+						<div
+							class="slide pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300"
+							data-index="3">
+							<img
+								src="/portfolio/about/snorkeling.jpg"
+								alt="澄澈深海浮潜"
+								class="h-full w-full object-cover object-center"
+								loading="lazy"
+							/>
+						</div>
+
+						<!-- Slide 4：暮光海钓（横屏海钓） -->
+						<div
+							class="slide pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300"
+							data-index="4">
+							<img
+								src="/portfolio/about/beach-fishing.jpg"
+								alt="暮光沙滩横屏海钓"
+								class="h-full w-full object-cover object-center"
+								loading="lazy"
+							/>
+						</div>
+
+						<!-- Slide 5：吉隆坡双子塔夜景（放最后） -->
+						<div
+							class="slide pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300"
+							data-index="5">
+							<img
+								src="/portfolio/about/kl-night.jpg"
+								alt="吉隆坡双子塔天际线夜景"
+								class="h-full w-full object-cover object-center"
+								loading="lazy"
+							/>
+						</div>
+					</div>
+
+					<!-- 左右切换悬浮箭头 -->
+					<button
+						id="prev-slide-btn"
+						type="button"
+						class="absolute top-1/2 left-2.5 z-10 flex h-7 w-7 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-md transition-all hover:scale-105 hover:bg-black/60 active:scale-95"
+						aria-label="上一张">
+						<svg
+							class="h-4 w-4"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							stroke-width="2.2">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
+						</svg>
+					</button>
+					<button
+						id="next-slide-btn"
+						type="button"
+						class="absolute top-1/2 right-2.5 z-10 flex h-7 w-7 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-md transition-all hover:scale-105 hover:bg-black/60 active:scale-95"
+						aria-label="下一张">
+						<svg
+							class="h-4 w-4"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+							stroke-width="2.2">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+						</svg>
+					</button>
+				</div>
+
+				<!-- 底部文案与指示点（紧凑精炼，无多余留白） -->
+				<div class="px-4 pt-2 pb-2.5">
+					<!-- 动态文案容器 -->
+					<div id="slide-text-container" class="transition-opacity duration-200">
+						<span
+							id="slide-tag"
+							class="text-[11px] font-semibold text-neutral-800 dark:text-neutral-200">
+							🏀 喜欢运动 · 热爱篮球
+						</span>
+					</div>
+
+					<!-- 底部指示小圆点 -->
+					<div class="mt-2 flex items-center justify-center gap-1.5">
+						<button
+							type="button"
+							class="indicator-dot h-1.5 w-5 cursor-pointer rounded-full bg-neutral-900 transition-all duration-300 dark:bg-white"
+							data-target="0"
+							aria-label="切换到第 1 张"></button>
+						<button
+							type="button"
+							class="indicator-dot h-1.5 w-1.5 cursor-pointer rounded-full bg-neutral-300 transition-all duration-300 hover:bg-neutral-400 dark:bg-neutral-700 dark:hover:bg-neutral-600"
+							data-target="1"
+							aria-label="切换到第 2 张"></button>
+						<button
+							type="button"
+							class="indicator-dot h-1.5 w-1.5 cursor-pointer rounded-full bg-neutral-300 transition-all duration-300 hover:bg-neutral-400 dark:bg-neutral-700 dark:hover:bg-neutral-600"
+							data-target="2"
+							aria-label="切换到第 3 张"></button>
+						<button
+							type="button"
+							class="indicator-dot h-1.5 w-1.5 cursor-pointer rounded-full bg-neutral-300 transition-all duration-300 hover:bg-neutral-400 dark:bg-neutral-700 dark:hover:bg-neutral-600"
+							data-target="3"
+							aria-label="切换到第 4 张"></button>
+						<button
+							type="button"
+							class="indicator-dot h-1.5 w-1.5 cursor-pointer rounded-full bg-neutral-300 transition-all duration-300 hover:bg-neutral-400 dark:bg-neutral-700 dark:hover:bg-neutral-600"
+							data-target="4"
+							aria-label="切换到第 5 张"></button>
+						<button
+							type="button"
+							class="indicator-dot h-1.5 w-1.5 cursor-pointer rounded-full bg-neutral-300 transition-all duration-300 hover:bg-neutral-400 dark:bg-neutral-700 dark:hover:bg-neutral-600"
+							data-target="5"
+							aria-label="切换到第 6 张"></button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="pb-10"></div>
+	<script>
+		const slidesData = [
+			{ tag: "🏀 喜欢运动 · 热爱篮球" },
+			{ tag: "生活中的我 📷" },
+			{ tag: "生活中的我 📷" },
+			{ tag: "生活中的我 📷" },
+			{ tag: "生活中的我 📷" },
+			{ tag: "生活中的我 📷" }
+		];
+
+		let currentIndex = 0;
+		let isOpen = false;
+
+		const openBtn = document.getElementById("open-album-btn");
+		const openHandBtn = document.getElementById("open-album-btn-hand");
+		const closeBtn = document.getElementById("close-album-btn");
+		const overlay = document.getElementById("album-overlay");
+		const backdrop = document.getElementById("album-backdrop");
+		const card = document.getElementById("album-card");
+		const counter = document.getElementById("album-counter");
+		const slideTag = document.getElementById("slide-tag");
+		const textContainer = document.getElementById("slide-text-container");
+		const prevBtn = document.getElementById("prev-slide-btn");
+		const nextBtn = document.getElementById("next-slide-btn");
+		const dots = document.querySelectorAll(".indicator-dot");
+		const slides = document.querySelectorAll(".slide");
+		const photoViewport = document.getElementById("photo-viewport");
+		const basketballVideo = document.getElementById("basketball-video") as HTMLVideoElement | null;
+		const videoToggleBtn = document.getElementById("basketball-video-toggle");
+		const videoIconPlay = document.getElementById("video-icon-play");
+		const videoIconPause = document.getElementById("video-icon-pause");
+
+		function updateVideoPlayback() {
+			if (!basketballVideo) return;
+			// 篮球视频处于 Slide 0
+			if (isOpen && currentIndex === 0) {
+				basketballVideo.play().catch(() => {});
+				if (videoIconPlay && videoIconPause) {
+					videoIconPlay.classList.add("hidden");
+					videoIconPause.classList.remove("hidden");
+				}
+			} else {
+				basketballVideo.pause();
+			}
+		}
+
+		function toggleVideoPlayback(e?: Event) {
+			if (e) e.stopPropagation();
+			if (!basketballVideo) return;
+			if (basketballVideo.paused) {
+				basketballVideo.play().catch(() => {});
+				if (videoIconPlay && videoIconPause) {
+					videoIconPlay.classList.add("hidden");
+					videoIconPause.classList.remove("hidden");
+				}
+			} else {
+				basketballVideo.pause();
+				if (videoIconPlay && videoIconPause) {
+					videoIconPlay.classList.remove("hidden");
+					videoIconPause.classList.add("hidden");
+				}
+			}
+		}
+
+		function openAlbum() {
+			if (isOpen) return;
+			if (openBtn) openBtn.classList.add("scale-95");
+			if (openHandBtn) openHandBtn.classList.add("scale-95");
+
+			setTimeout(() => {
+				if (openBtn) openBtn.classList.remove("scale-95");
+				if (openHandBtn) openHandBtn.classList.remove("scale-95");
+				isOpen = true;
+				if (overlay && card) {
+					overlay.classList.remove("hidden");
+					// 强制回流以确保 transition 生效
+					void overlay.offsetWidth;
+					overlay.classList.remove("pointer-events-none", "opacity-0");
+					overlay.classList.add("pointer-events-auto", "opacity-100");
+					card.classList.remove("scale-95", "opacity-0");
+					card.classList.add("scale-100", "opacity-100");
+					document.body.style.overflow = "hidden";
+					updateVideoPlayback();
+				}
+			}, 120);
+		}
+
+		function closeAlbum() {
+			if (!isOpen) return;
+			isOpen = false;
+			updateVideoPlayback();
+			if (overlay && card) {
+				card.classList.remove("scale-100", "opacity-100");
+				card.classList.add("scale-95", "opacity-0");
+				overlay.classList.remove("pointer-events-auto", "opacity-100");
+				overlay.classList.add("pointer-events-none", "opacity-0");
+				document.body.style.overflow = "";
+				setTimeout(() => {
+					if (!isOpen) {
+						overlay.classList.add("hidden");
+					}
+				}, 300);
+			}
+		}
+
+		function updateSlide(newIndex: number) {
+			currentIndex = (newIndex + slidesData.length) % slidesData.length;
+
+			// 更新照片显示
+			slides.forEach((slide, idx) => {
+				if (idx === currentIndex) {
+					slide.classList.remove("opacity-0", "pointer-events-none");
+					slide.classList.add("opacity-100");
+				} else {
+					slide.classList.remove("opacity-100");
+					slide.classList.add("opacity-0", "pointer-events-none");
+				}
+			});
+
+			updateVideoPlayback();
+
+			// 更新文本
+			if (textContainer && slideTag) {
+				textContainer.classList.add("opacity-40");
+				setTimeout(() => {
+					slideTag.textContent = slidesData[currentIndex].tag;
+					textContainer.classList.remove("opacity-40");
+				}, 100);
+			}
+
+			// 更新计数
+			if (counter) {
+				counter.textContent = `${currentIndex + 1} / ${slidesData.length}`;
+			}
+
+			// 更新指示点
+			dots.forEach((dot, idx) => {
+				if (idx === currentIndex) {
+					dot.classList.remove("w-1.5", "bg-neutral-300", "dark:bg-neutral-700");
+					dot.classList.add("w-5", "bg-neutral-900", "dark:bg-white");
+				} else {
+					dot.classList.remove("w-5", "bg-neutral-900", "dark:bg-white");
+					dot.classList.add("w-1.5", "bg-neutral-300", "dark:bg-neutral-700");
+				}
+			});
+		}
+
+		// 事件监听绑定
+		openBtn?.addEventListener("click", openAlbum);
+		openHandBtn?.addEventListener("click", openAlbum);
+		closeBtn?.addEventListener("click", closeAlbum);
+		backdrop?.addEventListener("click", closeAlbum);
+		videoToggleBtn?.addEventListener("click", toggleVideoPlayback);
+		basketballVideo?.addEventListener("click", toggleVideoPlayback);
+
+		prevBtn?.addEventListener("click", e => {
+			e.stopPropagation();
+			updateSlide(currentIndex - 1);
+		});
+
+		nextBtn?.addEventListener("click", e => {
+			e.stopPropagation();
+			updateSlide(currentIndex + 1);
+		});
+
+		dots.forEach(dot => {
+			dot.addEventListener("click", e => {
+				e.stopPropagation();
+				const target = Number(dot.getAttribute("data-target") || 0);
+				updateSlide(target);
+			});
+		});
+
+		// 键盘导航
+		window.addEventListener("keydown", e => {
+			if (!isOpen) return;
+			if (e.key === "Escape") {
+				closeAlbum();
+			} else if (e.key === "ArrowLeft") {
+				updateSlide(currentIndex - 1);
+			} else if (e.key === "ArrowRight") {
+				updateSlide(currentIndex + 1);
+			}
+		});
+
+		// 触摸滑动支持
+		let touchStartX = 0;
+		let touchStartY = 0;
+
+		photoViewport?.addEventListener(
+			"touchstart",
+			e => {
+				touchStartX = e.touches[0].clientX;
+				touchStartY = e.touches[0].clientY;
+			},
+			{ passive: true }
+		);
+
+		photoViewport?.addEventListener(
+			"touchend",
+			e => {
+				const touchEndX = e.changedTouches[0].clientX;
+				const touchEndY = e.changedTouches[0].clientY;
+				const diffX = touchEndX - touchStartX;
+				const diffY = touchEndY - touchStartY;
+
+				if (Math.abs(diffX) > 35 && Math.abs(diffX) > Math.abs(diffY)) {
+					if (diffX > 0) {
+						updateSlide(currentIndex - 1);
+					} else {
+						updateSlide(currentIndex + 1);
+					}
+				}
+			},
+			{ passive: true }
+		);
+	</script>
+
+	<style>
+		/* 自主招手微动画：每 3.6s 招手 2-3 次，自然生动 */
+		@keyframes auto-wave {
+			0%,
+			60%,
+			100% {
+				transform: rotate(0deg) scale(1);
+			}
+			66% {
+				transform: rotate(16deg) scale(1.15);
+			}
+			72% {
+				transform: rotate(-10deg) scale(1.15);
+			}
+			78% {
+				transform: rotate(15deg) scale(1.15);
+			}
+			84% {
+				transform: rotate(-6deg) scale(1.1);
+			}
+			90% {
+				transform: rotate(8deg) scale(1.05);
+			}
+			95% {
+				transform: rotate(0deg) scale(1);
+			}
+		}
+
+		:global(.animate-idle-wave) {
+			animation: auto-wave 3.6s ease-in-out infinite;
+			transform-origin: 70% 70%;
+		}
+
+		/* 鼠标悬停时高频欢快招手 */
+		:global(.group:hover .animate-idle-wave) {
+			animation: fast-wave 0.55s ease-in-out infinite;
+			transform-origin: 70% 70%;
+		}
+
+		@keyframes fast-wave {
+			0%,
+			100% {
+				transform: rotate(0deg) scale(1.12);
+			}
+			25% {
+				transform: rotate(18deg) scale(1.18);
+			}
+			75% {
+				transform: rotate(-12deg) scale(1.18);
+			}
+		}
+
+		/* 气球轻盈漂浮动效：微风徐徐、在空中轻缓起伏 */
+		@keyframes balloon-float {
+			0%,
+			100% {
+				transform: translateY(0px) rotate(0deg);
+			}
+			50% {
+				transform: translateY(-4px) rotate(1.5deg);
+			}
+		}
+
+		:global(.animate-balloon) {
+			animation: balloon-float 3.4s ease-in-out infinite;
+			transform-origin: bottom left;
+		}
+
+		/* 点击弹跳回弹动效 */
+		:global(.hand-popping) {
+			animation: pop-bounce 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+		}
+
+		@keyframes pop-bounce {
+			0% {
+				transform: scale(1);
+			}
+			35% {
+				transform: scale(0.85);
+			}
+			65% {
+				transform: scale(1.35) rotate(16deg);
+			}
+			100% {
+				transform: scale(1);
+			}
+		}
+	</style>
 </PageLayout>

@@ -1,292 +1,722 @@
 ---
 import LoopVideo from "@/components/LoopVideo.astro";
 import PageLayout from "@/layouts/Base.astro";
+
+import "@/styles/cortex-agent.css";
+import "@/styles/cortex-toolhub.css";
+import "@/styles/cortex-proactive.css";
+import "@/styles/cortex-brief-evaluation.css";
+import "@/styles/cortex-closing.css";
+
+const initiatives = [
+	{
+		isCore: true,
+		badge: "核心场景 01 · 为什么做",
+		title: "从读邮件到推进行动",
+		contextLabel: "核心痛点",
+		context: "论文与校招通知分散在多处邮箱，读完还要手动记截止时间与应聘进展",
+		action: "自动整理出可执行的待办，并按公司汇总求职状态，开机即清楚重点",
+		metrics: [
+			{ val: "双线场景", label: "硕士论文 + 校招求职" },
+			{ val: "多源分散", label: "学校 Gmail · 国内 163" }
+		],
+		anchor: "#motivation"
+	},
+	{
+		isCore: true,
+		badge: "产品形态 02 · 客户端形态",
+		title: "为什么选择桌面端：聊天 Bot、网页与桌面端",
+		contextLabel: "场景考量",
+		context: "查待办是开机即看的被动感知，对话式bot不适用该场景；网页端多标签页切换容易被忽略",
+		action: "常驻 macOS 边缘随开随看，阿里云后端 24h 抓取入库，开机私有 API 快速同步",
+		metrics: [
+			{ val: "常驻桌面", label: "macOS 屏幕边缘随开随看" },
+			{ val: "私有部署", label: "阿里云后端 · 免公网备案" }
+		],
+		anchor: "#desktop"
+	},
+	{
+		isCore: false,
+		badge: "核心功能 03 · 流程闭环",
+		title: "待办提取、求职汇总与 HTML 面试资料",
+		contextLabel: "核心功能",
+		context: "从邮件提取事项与 DDL、求职信息按公司汇总进度，并按固定工作流生成面试资料",
+		action: "待办直接进清单、不确定的邮件人工核对，并自动输出 HTML 面试资料",
+		metrics: [
+			{ val: "待办提取", label: "事项 / 来源 / 截止时间" },
+			{ val: "求职进度", label: "按企业汇总测评与面试" },
+			{ val: "HTML 资料", label: "公司调研与面经自动整理" }
+		],
+		anchor: "#features"
+	},
+	{
+		isCore: false,
+		badge: "实践验证 04 · 自用与心得",
+		title: "自用验证与做个人 AI 工具的心得",
+		contextLabel: "自用与开源",
+		context: "已用于毕业求职期间日常整理，减少重复翻找；项目已开源至 GitHub",
+		action: "选准高频任务把信息可靠转成行动，允许用户及时纠错才更容易真正用起来",
+		metrics: [
+			{ val: "自用落地", label: "平稳度过校招求职期" },
+			{ val: "完全开源", label: "已开源至 GitHub 仓库" }
+		],
+		anchor: "#retro"
+	}
+];
+
+const navigation = [
+	{ id: "overview", num: "TOP", label: "项目概览" },
+	{ id: "motivation", num: "01", label: "为什么做" },
+	{ id: "desktop", num: "02", label: "为什么选择桌面端" },
+	{ id: "features", num: "03", label: "核心功能" },
+	{ id: "retro", num: "04", label: "自用结果与复盘" }
+];
 ---
 
 <PageLayout
 	meta={{
-		title: "DayMate · 常驻 macOS 的个人工作代理",
-		description:
-			"个人产品 0 → 1：把非结构化邮件转化为必读清单、可跟进待办与求职档案，独立完成产品定义、全栈开发与评测闭环。",
-	}}
->
-	<section
-		class="relative z-20 mx-auto mt-10 max-w-4xl border-neutral-200 px-5 pb-1 md:rounded-t-2xl md:border-t md:border-r md:border-l dark:border-neutral-800"
-	>
-		<div class="pt-6 md:pt-20">
-			<a
-				class="mb-10 inline-flex font-mono text-xs text-neutral-400 duration-200 ease-out hover:text-neutral-900 dark:hover:text-white"
-				href="/practice/">← 返回其他实践</a
-			>
-			<p
-				class="mb-4 font-mono text-xs uppercase tracking-widest text-neutral-400 dark:text-neutral-500"
-			>
-				Practice · Personal product 0 → 1
+		title: "DayMate｜邮件待办与求职进度工具",
+		description: "个人项目 · 独立设计与开发 · Electron / TypeScript / SQLite / 大模型 API · 已开源"
+	}}>
+	<article class="cortex-case">
+		<!-- 桌面端侧边目录 -->
+		<aside class="ca-sidebar" aria-label="页内目录">
+			<nav class="ca-nav" aria-label="项目章节导航">
+				<p>本页目录</p>
+				{
+					navigation.map(item => (
+						<a href={`#${item.id}`} aria-current={item.id === "overview" ? "location" : undefined}>
+							<span>{item.num}</span>
+							{item.label}
+						</a>
+					))
+				}
+			</nav>
+		</aside>
+
+		<!-- 移动端浮动目录 -->
+		<details class="ca-mobile-toc">
+			<summary>本页目录 <span aria-hidden="true">≡</span></summary>
+			<nav aria-label="移动端项目章节导航">
+				{
+					navigation.map(item => (
+						<a href={`#${item.id}`} aria-current={item.id === "overview" ? "location" : undefined}>
+							<span>{item.num}</span>
+							{item.label}
+						</a>
+					))
+				}
+			</nav>
+		</details>
+
+		<!-- Hero Section & Scorecard -->
+		<header class="ca-hero" id="overview" data-case-section>
+			<a class="ca-back" href="/projects/">← 返回项目经历</a>
+			<p class="ca-eyebrow"><span aria-hidden="true"></span> 个人项目 · 独立设计与开发 · 已开源</p>
+			<h1>DayMate<span class="ca-title-dot" aria-hidden="true">.</span></h1>
+			<p class="ca-subtitle">邮件待办与求职进度工具</p>
+			<p class="ca-intro ca-reading">
+				写硕士论文和参加校招期间，导师反馈、论文节点、测评通知和面试安排分散在学校 Gmail、163
+				邮箱及招聘平台。我的问题不是缺少一个地方读邮件，而是读完之后还要自己记下截止时间、下一步行动，以及每家公司的应聘进展。
 			</p>
-			<h1
-				class="max-w-3xl text-3xl leading-tight font-bold tracking-tighter md:text-4xl lg:text-5xl dark:text-neutral-100"
-			>
-				DayMate｜常驻 macOS 的个人工作代理
-			</h1>
-			<p
-				class="mt-6 max-w-3xl text-base leading-8 text-neutral-600 sm:text-lg dark:text-neutral-400"
-			>
-				信息散在多个邮箱、日历与招聘平台，关键节点容易漏。DayMate
-				把非结构化邮件转成必读清单、可跟进待办与求职档案；产品定义、全栈开发与评测闭环由我独立完成，本人自用、未商业化。
+			<p class="ca-intro ca-reading" style="margin-top: 12px;">
+				因此，我做了 DayMate：从邮件中整理出可执行的待办，按公司汇总求职状态，并自动生成 HTML
+				格式的面试准备资料，让我打开电脑后能直接判断哪些事需要处理。项目现已开源至 GitHub。
 			</p>
-			<div class="mt-6 flex flex-wrap gap-2">
-				<span
-					class="inline-flex rounded-full border border-neutral-300 px-3 py-1 font-mono text-xs dark:border-neutral-600"
-					>Agent 产品</span
-				>
-				<span
-					class="inline-flex rounded-full border border-neutral-300 px-3 py-1 font-mono text-xs dark:border-neutral-600"
-					>全栈实现</span
-				>
-				<span
-					class="inline-flex rounded-full border border-neutral-300 px-3 py-1 font-mono text-xs dark:border-neutral-600"
-					>评测门禁</span
-				>
-				<span
-					class="inline-flex rounded-full border border-neutral-300 px-3 py-1 font-mono text-xs dark:border-neutral-600"
-					>privacy-first</span
-				>
+
+			<!-- 职责与项目信息条 -->
+			<div class="ca-role-strip ca-role-strip-balanced">
+				<div class="ca-role-col">
+					<strong>我的角色</strong>
+					<span>独立设计与全栈开发 (个人项目)</span>
+				</div>
+				<div class="ca-role-col">
+					<strong>核心场景</strong>
+					<span>硕士论文与校招求职事务整理</span>
+				</div>
+				<div class="ca-role-col">
+					<strong>技术与部署</strong>
+					<span>Electron · SQLite · 大模型 · 阿里云</span>
+				</div>
 			</div>
-		</div>
-	</section>
 
-	<div class="relative z-20 mx-auto max-w-4xl px-5 pb-20 md:px-10">
-		<LoopVideo
-			class="mt-10 md:mt-16"
-			label="DayMate 首页与必读模块演示"
-			poster="/portfolio/daymate/home.png"
-			src="/portfolio/daymate/home-demo.mp4"
-		/>
-		<p class="muted mt-4 text-sm leading-6">首页即结论：必读、晨报与待办摊在一屏。</p>
-
-		<section class="case-section">
-			<div><p class="number-label">01 / PROBLEM</p><h2>问题不是信息多，而是没有被推进</h2></div>
-			<div class="case-copy">
-				<p class="case-lede">
-					信息不会自己变成行动：筛选、判断、维护状态三步全靠人做，关键节点就漏在这里。
-				</p>
-				<p>
-					课程与签证通知、投递与面试安排分散在 Gmail、163
-					邮箱与日历，切换入口、判断轻重、记录进度全靠人。
-				</p>
-				<p class="muted mt-7">
-					口径：本页数据来自本人真实邮箱环境的自用观测与离线评测，是个人项目指标，不是线上业务数据；未商业化，无外部用户规模。
-				</p>
-				<div class="judgment">
-					<p class="judgment__label">我的判断</p>
+			<!-- 核心看点看板 (Scorecard) -->
+			<div class="ca-initiatives-wrap ca-reveal">
+				<div class="ca-initiatives-head">
+					<h3><span>EXECUTIVE SCORECARD</span>项目规划与核心看点总览</h3>
 					<p>
-						常驻代理把判断责任收到自己这边：漏一条必读的代价高于多问一句，所以过滤门控要被反复重构。
+						围绕「待办提取」、「求职汇总」与「HTML 面试资料生成」，结合常驻桌面端形态与阿里云部署。
 					</p>
 				</div>
-			</div>
-		</section>
-
-		<section class="case-section">
-			<div><p class="number-label">02 / PRODUCT</p><h2>产品边界收窄到六项任务</h2></div>
-			<div class="case-copy">
-				<p class="case-lede">
-					六项任务围绕同一天：必读与晨报、待办与求职追踪，以及记忆与安全门。
-				</p>
-				<div class="tile-grid">
-					<div class="tile">
-						<p class="tile__index">01</p><b>跨邮箱必读聚合</b>
-						<p>按学校 / 求职 / 日常 / 其他分组</p>
-					</div>
-					<div class="tile">
-						<p class="tile__index">02</p><b>天气与每日晨报</b>
-						<p>实时天气 + 润色，按日缓存</p>
-					</div>
-					<div class="tile">
-						<p class="tile__index">03</p><b>邮件转可管理待办</b>
-						<p>复用分类器，零额外调用</p>
-					</div>
-					<div class="tile">
-						<p class="tile__index">04</p><b>求职漏斗与时间线</b>
-						<p>六类事件串成时间线</p>
-					</div>
-					<div class="tile">
-						<p class="tile__index">05</p><b>个人记忆与草稿语气</b>
-						<p>偏好与事实逐条可改</p>
-					</div>
-					<div class="tile">
-						<p class="tile__index">06</p><b>集成、安全与审批门</b>
-						<p>凭据集中配置 + 批准门</p>
-					</div>
-				</div>
-				<p>
-					安全边界写在架构里：凭据、Provider 调用、Agent 执行与 SQLite 写入全留在 Electron
-					主进程，渲染层 sandbox 化，只走类型化 IPC。
-				</p>
-				<div class="scope">
-					<div class="scope__col scope__col--in">
-						<p class="scope__title">本次做</p>
-						<ul>
-							<li>六项任务与常驻桌面形态。</li>
-							<li>必读三层过滤。</li>
-						</ul>
-					</div>
-					<div class="scope__col scope__col--out">
-						<p class="scope__title">明确不做</p>
-						<ul>
-							<li>不做多用户。</li>
-							<li>不做云端同步。</li>
-							<li>不做未经批准的写操作。</li>
-						</ul>
-					</div>
-				</div>
-				<div class="decision">
-					<div class="decision__head">
-						<span class="decision__index">取舍 01</span>
-						<span class="decision__title">做常驻主动代理，不做聊天式问答</span>
-					</div>
-					<dl class="decision__rows">
-						<div class="decision__row"><dt>约束</dt><dd>信息分散在多邮箱与日历，关键节点容易漏。</dd></div>
-						<div class="decision__row"><dt>候选方案</dt><dd>A 聊天式问答，问了才答；B 常驻主动整理并推送必读。</dd></div>
-						<div class="decision__row"><dt>证据</dt><dd>定位是 privacy-first 的常驻工作代理；必读走三层过滤：确定性预过滤（批量、营销、验证码不进 LLM）→ LLM 分类 → <code>important || actionable</code> 出口门控。</dd></div>
-						<div class="decision__row"><dt>选择</dt><dd><em>B</em>：问答式交互不进 MVP。</dd></div>
-						<div class="decision__row"><dt>代价</dt><dd>要为「今天该看什么」的判断质量负责，噪音一旦失控就直接打扰用户。</dd></div>
-					</dl>
-				</div>
-				<div class="judgment">
-					<p class="judgment__label">我的判断</p>
-					<p>
-						能省的调用一律省：待办复用分类器、天气按日缓存。自用产品没有预算兜底，运行成本就是我的耐心。
-					</p>
+				<div class="ca-initiatives-grid">
+					{
+						initiatives.map(item => (
+							<div class:list={["ca-init-card", "ca-reveal", { "is-core": item.isCore }]}>
+								<div class="ca-init-top">
+									<div class="ca-init-badge-row">
+										<span class="ca-init-badge">{item.badge}</span>
+										{item.isCore && <span class="ca-core-tag">核心刚需</span>}
+									</div>
+									<h4>{item.title}</h4>
+								</div>
+								<div class="ca-init-body">
+									<p class="ca-init-pain">
+										<strong>{item.contextLabel}：</strong>
+										{item.context}
+									</p>
+									<p class="ca-init-action">
+										<strong>做法与思路：</strong>
+										{item.action}
+									</p>
+								</div>
+								<div class="ca-init-metrics">
+									{item.metrics.map(m => (
+										<div class="ca-init-m-col">
+											<strong>{m.val}</strong>
+											<span>{m.label}</span>
+										</div>
+									))}
+								</div>
+								<a class="ca-init-link" href={item.anchor}>
+									查看详细内容 <span>↓</span>
+								</a>
+							</div>
+						))
+					}
 				</div>
 			</div>
-		</section>
 
-		<section class="case-section">
-			<div><p class="number-label">03 / APPLICATIONS</p><h2>求职漏斗：低置信不自动污染档案</h2></div>
-			<div class="case-copy">
-				<p class="case-lede">
-					从邮件识别投递、测评、笔试、面试、Offer 与复盘；置信度不够的停在
-					<code>pending</code>，由我决定是否建档。
-				</p>
-				<div class="flow">
-					<div class="flow__step"><span>STEP 01</span><b>邮件事件识别</b><small>六类节点</small></div>
-					<div class="flow__arrow">→</div>
-					<div class="flow__step flow__step--gate"><span>GATE</span><b>置信门控</b><small>低置信不建档</small></div>
-					<div class="flow__arrow">→</div>
-					<div class="flow__step"><span>STEP 02</span><b>漏斗与时间线</b><small>状态视图</small></div>
-				</div>
+			<!-- 首页视频演示展示 -->
+			<div class="ca-block ca-reveal" style="margin-top: 36px;">
 				<LoopVideo
-					class="mt-2"
-					label="DayMate 求职追踪模块演示"
-					poster="/portfolio/daymate/applications.png"
-					src="/portfolio/daymate/application-demo.mp4"
+					label="DayMate 首页与待办模块演示"
+					poster="/portfolio/daymate/home.png"
+					src="/portfolio/daymate/home-demo.mp4"
 				/>
-				<p class="muted mt-4 text-sm leading-6">时间线之外还有复盘看板：KPI 卡、漏斗条与来源环图。</p>
-				<div class="judgment">
-					<p class="judgment__label">我的判断</p>
-					<p>
-						牺牲全自动的爽感换档案可信：没有第二道人工审核，档案被脏数据污染后，晨报与跟进都会失真。
+				<p class="ca-caption">
+					开机即见：从邮件中整理出的待办与求职进度并置一屏，打开电脑后直接判断哪些事需要处理。
+				</p>
+			</div>
+		</header>
+
+		<!-- 01 为什么做 -->
+		<section class="ca-section" id="motivation" data-case-section>
+			<header class="ca-section-head">
+				<p class="ca-kicker"><span>01</span> 需求来源 · 为什么做</p>
+				<h2>从读邮件到推进行动：信息分散与手动记录的负担</h2>
+				<p class="ca-copy">
+					写硕士论文和参加校招期间，导师反馈、论文节点、测评通知和面试安排分散在学校 Gmail、163
+					邮箱及招聘平台。我的问题不是缺少一个地方读邮件，而是读完之后还要自己记下截止时间、下一步行动，以及每家公司的应聘进展。
+				</p>
+			</header>
+
+			<div class="ca-block ca-reveal">
+				<h3><span>信息分散的真实场景</span>多头输入带来的记忆与整理负荷</h3>
+				<p class="ca-copy">当时各条线的信息入口彼此独立，且都伴随着明确的时间约束与后续动作：</p>
+				<ul class="ca-observations" style="margin-top: 14px;">
+					<li>
+						<strong>海外学业（学校 Gmail）：</strong>
+						导师论文修改意见、题目审核结果、毕业答辩申请节点与签证手续通知。全英文长邮件篇幅大，看漏一条就可能延误关键答辩节点。
+					</li>
+					<li>
+						<strong>校招求职（163 邮箱 / 招聘平台）：</strong>
+						投递企业的确认回执、48 小时限时 OT 在线测评链接、笔试考场安排与多轮面试邀约。发件主体五花八门，格式各不相同。
+					</li>
+					<li>
+						<strong>日常事务：</strong>
+						实习工作与日常团队协作任务同步。
+					</li>
+				</ul>
+				<p class="ca-copy" style="margin-top: 14px;">
+					读完邮件并不代表事情已经推进。如果每次都要自己手动去备忘录里记下“哪家公司需要在周三前做完测评”、“哪封邮件需要尽快回复导师修改意见”，一旦事情集中，就极易出现疏漏。
+				</p>
+				<div
+					class="ca-card"
+					style="margin-top: 18px; padding: 18px 22px; border-left: 3px solid var(--ca-accent); background: var(--ca-soft); border-radius: 0 8px 8px 0;">
+					<strong style="color: var(--ca-text); font-size: 14px;">产品出发点：</strong>
+					<p class="ca-copy" style="font-size: 14px; margin-top: 4px;">
+						因此，我做了
+						DayMate：从邮件中整理出可执行的待办，并按公司汇总求职状态，让我打开电脑后能直接判断哪些事需要处理。
 					</p>
 				</div>
 			</div>
 		</section>
 
-		<section class="case-section">
-			<div><p class="number-label">04 / MEMORY</p><h2>记忆必须可见、可改、可删除</h2></div>
-			<div class="case-copy">
-				<p class="case-lede">记忆不是隐藏的上下文，而是一份我能直接读、改、删的事实清单。</p>
-				<p>它保存长期偏好与可控事实，让晨报和草稿贴合我的背景与语气。</p>
-				<LoopVideo
-					class="mt-2"
-					label="DayMate 记忆模块演示"
-					poster="/portfolio/daymate/memory.png"
-					src="/portfolio/daymate/memory-demo.mp4"
-				/>
-				<p class="muted mt-4 text-sm leading-6">改一条偏好，晨报与草稿随之改变。</p>
-				<div class="judgment">
-					<p class="judgment__label">我的判断</p>
-					<p>记忆不可见就无法纠错。做成条目清单要多花时间维护，但错了能改、能删。</p>
+		<!-- 02 为什么选择桌面端 -->
+		<section class="ca-section" id="desktop" data-case-section>
+			<header class="ca-section-head">
+				<p class="ca-kicker"><span>02</span> 产品形态 · 为什么选择桌面端</p>
+				<h2>聊天 Bot、网页端与桌面端的形态取舍</h2>
+				<p class="ca-copy">
+					这个工具服务于每天反复查看的个人工作流程。如果形态选错，每次查看都需要额外克服阻力，很难在真实生活里长期用下去。
+				</p>
+			</header>
+
+			<div class="ca-block ca-reveal">
+				<h3><span>三类形态权衡</span>对比聊天 Bot、网页端与常驻桌面端</h3>
+				<p class="ca-copy">
+					我对比过做聊天 Bot、网页端与桌面端三种不同的产品形态，最终做出了清晰的取舍：
+				</p>
+				<div class="be-dilemma-grid" style="margin-top: 16px;">
+					<div class="be-dilemma-card">
+						<div class="be-dilemma-head">
+							<span class="be-dilemma-tag">OPTION A</span>
+							<h5 class="be-dilemma-title">聊天 Bot (Chatbot)</h5>
+						</div>
+						<p class="be-dilemma-approach">
+							<strong>交互方式：</strong>提供对话输入框，通过与 AI 问答获取今日要务与邮件信息
+						</p>
+						<p class="be-dilemma-pain">
+							<strong>根本问题：</strong
+							>查看今日待办和求职进展，本质上是「开机看一眼」的被动感知场景，根本没必要打字交互。每天坐下来还要想“该向
+							AI 问什么”，完全不适用这种高频日常场景。
+						</p>
+						<div class="be-dilemma-verdict">放弃：不适用该场景，查待办根本没必要打字</div>
+					</div>
+					<div class="be-dilemma-card">
+						<div class="be-dilemma-head">
+							<span class="be-dilemma-tag">OPTION B</span>
+							<h5 class="be-dilemma-title">网页端形态 (Web App)</h5>
+						</div>
+						<p class="be-dilemma-approach">
+							<strong>交互方式：</strong>部署为公网 Web 网站，在浏览器中打开标签页使用
+						</p>
+						<p class="be-dilemma-pain">
+							<strong>实际问题：</strong>除了高频切换繁琐，在国内服务器上线公网网站还需繁琐的域名
+							ICP
+							备案；更关键的是，邮件包含学业与求职敏感信息，暴露在公网网页端存在天然的安全与鉴权风险。
+						</p>
+						<div class="be-dilemma-verdict">放弃：繁琐备案 + 隐私暴露风险，完全没必要</div>
+					</div>
+					<div class="be-dilemma-card is-adopted">
+						<div class="be-dilemma-head">
+							<span class="be-dilemma-tag">OPTION C</span>
+							<h5 class="be-dilemma-title">常驻桌面端 (DayMate)</h5>
+						</div>
+						<p class="be-dilemma-approach">
+							<strong>交互方式：</strong>常驻在 macOS 屏幕边缘，开机即直观呈现待办与进度
+						</p>
+						<p class="be-dilemma-pros">
+							<strong>核心价值：</strong>开机即见，被动感知；后端与数据库常驻阿里云 24h 持续抓取解析与入库，关机也不断联；通过私有 API 同步，免去公网 Web 备案与暴露风险。
+						</p>
+						<div class="be-dilemma-verdict">采用：随时可见，免去备案摩擦，保障隐私安全</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="ca-block ca-reveal">
+				<h3><span>架构澄清与安全边界</span>客户端形态、免备案与云端后端部署</h3>
+				<p class="ca-copy">
+					DayMate 是我每天都会查看的工具，所以我选择做成常驻在 macOS 屏幕边缘的桌面端。打开电脑就能看到待办和求职进度，不用再额外打开一个网页。
+				</p>
+				<p class="ca-copy" style="margin-top: 12px;">
+					邮件处理则由部署在阿里云服务器上的后端负责：定时获取邮件、提取待办并保存求职记录。电脑关机时，后端仍可以继续处理；下次打开 DayMate，桌面端会获取更新后的结果。这样既满足了随手查看的使用习惯，也不需要为个人自用工具维护一个网页入口。
+				</p>
+			</div>
+
+			<div class="ca-block ca-reveal">
+				<h3><span>界面实景与设置</span>自用客户端界面</h3>
+				<div class="dm-grid-2" style="margin-top: 16px;">
+					<figure class="media-card">
+						<img src="/portfolio/daymate/inbox.png" alt="邮件看板与求职状态整理" loading="lazy" />
+						<figcaption class="ca-caption">
+							邮件看板与求职整理：集中收拢各邮件源，提炼待办事项与推进状态
+						</figcaption>
+					</figure>
+					<figure class="media-card">
+						<img src="/portfolio/daymate/settings.png" alt="邮件凭据与配置设置" loading="lazy" />
+						<figcaption class="ca-caption">
+							配置与连接管理：客户端通过私有 API 与阿里云后端通信，连接云端数据库稳定同步最新待办与求职进展
+						</figcaption>
+					</figure>
 				</div>
 			</div>
 		</section>
 
-		<section class="case-section">
-			<div><p class="number-label">05 / EVALUATION</p><h2>把回归评测设为提交门禁</h2></div>
-			<div class="case-copy">
-				<p class="case-lede">评测不是事后补的分数，而是每次提交前必须过的门禁：回归不过，不进主干。</p>
-				<p>
-					为六项任务定义可量化成功标准，建立功能测试集与跨功能回归集：62 条回归用例、5 类 Bad
-					Case，评测资产用 Langfuse 管理。
+		<!-- 03 核心功能 -->
+		<section class="ca-section" id="features" data-case-section>
+			<header class="ca-section-head">
+				<p class="ca-kicker"><span>03</span> 功能设计 · 核心功能</p>
+				<h2>待办提取、求职汇总与 HTML 面试准备资料</h2>
+				<p class="ca-copy">
+					DayMate
+					聚焦三项紧密衔接的核心功能：将相关邮件提取为待办、按公司汇总求职进展，以及自动化整理 HTML
+					格式的面试准备资料。
 				</p>
-				<div class="flow">
-					<div class="flow__step"><span>STEP 01</span><b>功能测试集</b><small>单任务验证</small></div>
-					<div class="flow__arrow">→</div>
-					<div class="flow__step"><span>STEP 02</span><b>跨功能回归集</b><small>存量不回退</small></div>
-					<div class="flow__arrow">→</div>
-					<div class="flow__step flow__step--gate"><span>GATE</span><b>提交前门禁</b><small>不过不进主干</small></div>
-				</div>
-				<div class="stat-row">
-					<div class="metric">
-						<strong class="font-mono text-3xl">27 → 1</strong
-						><p class="muted text-sm">用户价值 · 必读噪音条数</p>
-					</div>
-					<div class="metric">
-						<strong class="font-mono text-3xl">约 72% → 96%</strong
-						><p class="muted text-sm">AI 质量 · 邮件分类准确率</p>
-					</div>
-					<div class="metric">
-						<strong class="font-mono text-3xl">30+ → 0</strong
-						><p class="muted text-sm">运行约束 · 单日无效调用</p>
-					</div>
-				</div>
-				<p class="muted mt-7">
-					口径：本人真实邮箱环境自用，功能测试集 + 跨功能回归集离线评测，多轮迭代；项目未商业化，无外部用户规模数据。
+			</header>
+
+			<!-- 功能一：邮件提取待办 -->
+			<div class="ca-block ca-reveal">
+				<h3><span>核心功能一：邮件提取待办</span>事项、来源与截止时间一目了然</h3>
+				<p class="ca-copy">
+					DayMate
+					将相关邮件自动提取为待办，记录事项、来源和截止时间，直接推进到当日清单，无需手动复制备忘：
 				</p>
-				<div class="decision">
-					<div class="decision__head">
-						<span class="decision__index">取舍 02</span>
-						<span class="decision__title">回归集作为提交门禁，不做手工自测</span>
+				<ul class="ca-observations" style="margin-top: 14px;">
+					<li>
+						<strong>跟进 Dr. Rohani 论文审核反馈：</strong>【学校 Gmail · 学业 ·
+						截止周五】核对论文修改意见并提交第二版草稿
+					</li>
+					<li>
+						<strong>REMOS 会议系统背书确认：</strong>【学校 Gmail · 学业 · 8/16
+						截止】联系导师确认会议系统摘要审核
+					</li>
+					<li>
+						<strong>限时完成在线测评 (OT)：</strong>【163 邮箱 · 求职 · 48h
+						截止】点击链接进入系统完成笔试测评
+					</li>
+				</ul>
+			</div>
+
+			<!-- 功能二：按公司汇总求职进展 -->
+			<div class="ca-block ca-reveal">
+				<h3><span>核心功能二：按公司汇总求职进度</span>看清每个机会走到了哪一步</h3>
+				<p class="ca-copy">
+					针对求职邮件，DayMate
+					按公司汇总投递、测评、笔试和面试等进展，方便查看每个机会目前走到了哪一步：
+				</p>
+				<div class="flow" style="margin-top: 16px;">
+					<div class="flow__step"><span>STEP 01</span><b>投递</b><small>回执确认与归档</small></div>
+					<div class="flow__arrow">→</div>
+					<div class="flow__step">
+						<span>STEP 02</span><b>测评</b><small>OT 限时作答链接</small>
 					</div>
-					<dl class="decision__rows">
-						<div class="decision__row"><dt>约束</dt><dd>一人负责产品定义与全栈开发，没有第二道把关。</dd></div>
-						<div class="decision__row"><dt>候选方案</dt><dd>A 手工自测；B 62 条回归用例 + 5 类 Bad Case 作为 GitHub 提交前门禁。</dd></div>
-						<div class="decision__row"><dt>证据</dt><dd>测试集、Rubric 与评测结果已在 Langfuse 统一管理，可批量复用。</dd></div>
-						<div class="decision__row"><dt>选择</dt><dd><em>B</em>：回归不过不进主干。</dd></div>
-						<div class="decision__row"><dt>代价</dt><dd>每次提交都要跑评测，迭代变慢。</dd></div>
-					</dl>
+					<div class="flow__arrow">→</div>
+					<div class="flow__step"><span>STEP 03</span><b>笔试</b><small>考场时间与通知</small></div>
+					<div class="flow__arrow">→</div>
+					<div class="flow__step">
+						<span>STEP 04</span><b>面试</b><small>多轮面试日程确认</small>
+					</div>
+					<div class="flow__arrow">→</div>
+					<div class="flow__step">
+						<span>STEP 05</span><b>Offer/归档</b><small>进展归档与记录</small>
+					</div>
 				</div>
-				<div class="judgment">
-					<p class="judgment__label">我的判断</p>
-					<p>回归集的价值不在分数，而在把「我改坏了吗」变成可判定的问题。我接受提交变慢。</p>
+
+				<div style="margin-top: 24px;">
+					<LoopVideo
+						label="DayMate 求职追踪模块演示"
+						poster="/portfolio/daymate/applications.png"
+						src="/portfolio/daymate/application-demo.mp4"
+					/>
+					<p class="ca-caption">
+						求职进度汇总：按公司记录投递、测评、笔试与面试各阶段状态，方便随时掌握求职全盘进展。
+					</p>
+				</div>
+
+				<div
+					class="ca-card"
+					style="margin-top: 18px; padding: 18px 22px; border-left: 3px solid var(--ca-accent); background: var(--ca-soft); border-radius: 0 8px 8px 0;">
+					<strong style="color: var(--ca-text); font-size: 14px;">准确优先的“待确认”机制：</strong>
+					<p class="ca-copy" style="font-size: 14px; margin-top: 4px;">
+						邮件格式并不统一，自动回执也可能缺少明确的岗位或流程信息。因此，对无法可靠判断的结果，我让它停留在待确认状态，由自己核对后再加入记录。对这个自用工具来说，求职进度准确，比每封邮件都自动归档更重要。
+					</p>
+				</div>
+			</div>
+
+			<!-- 功能三：HTML 格式面试准备资料自动整理 -->
+			<div class="ca-block ca-reveal">
+				<h3>
+					<span>核心功能三：HTML 面试准备资料自动整理</span>固定的业务调研工作流，大幅减轻整理负担
+				</h3>
+				<p class="ca-copy">
+					在校招面试密集期，每收到一家面试通知，最耗费精力的往往是在短时间内临时到处翻看公司官网、产品线、最新业务动态，并对照岗位
+					JD 逐条整理自我介绍与常见问答。这不仅耗时 1~2 小时，而且极易因信息零散而准备不充分。
+				</p>
+				<p class="ca-copy" style="margin-top: 12px;">
+					DayMate
+					设计了一个固定的业务调研与信息整理工作流（Workflow），在识别到面试邀约后，自动生成一份<strong
+						>排版干净、结构清晰、可离线全屏浏览的独立 HTML 格式面试准备资料</strong
+					>：
+				</p>
+
+				<div class="flow" style="margin-top: 18px;">
+					<div class="flow__step">
+						<span>STEP 01</span>
+						<b>邮件与 JD 要素提取</b>
+						<small>自动解析目标公司、应聘岗位、面试轮次与考核侧重点</small>
+					</div>
+					<div class="flow__arrow">→</div>
+					<div class="flow__step">
+						<span>STEP 02</span>
+						<b>固定工作流业务调研</b>
+						<small>按既定框架自动调研公司主营业务、核心产品线与行业定位</small>
+					</div>
+					<div class="flow__arrow">→</div>
+					<div class="flow__step">
+						<span>STEP 03</span>
+						<b>个人经历与岗位对齐</b>
+						<small>将公司业务诉求与个人简历经历做要点映射，梳理问答提纲</small>
+					</div>
+					<div class="flow__arrow">→</div>
+					<div class="flow__step flow__step--gate">
+						<span>OUTPUT 04</span>
+						<b>独立 HTML 资料渲染</b>
+						<small>生成独立 HTML 产物，面试前一键全屏查阅，减少手工整理负担</small>
+					</div>
+				</div>
+
+				<div
+					class="ca-card"
+					style="margin-top: 20px; padding: 20px 24px; border: 1px solid var(--ca-line); border-radius: 8px; background: var(--ca-soft);">
+					<strong style="color: var(--ca-text); font-size: 14px;">HTML 准备资料的内容框架：</strong>
+					<ul class="ca-observations" style="margin-top: 10px; font-size: 13px;">
+						<li>
+							<strong>公司速览与业务脉络：</strong
+							>公司主营业务、核心盈利模式、行业竞争格局与近期关键动态。
+						</li>
+						<li>
+							<strong>岗位画像与 JD 拆解：</strong>目标岗位核心考察能力、业务期望与关键交付指标。
+						</li>
+						<li>
+							<strong>针对性问答与简历映射：</strong
+							>针对该业务场景的个人经历要点提炼、高频专业提问预测与自我介绍底稿。
+						</li>
+						<li>
+							<strong>离线独立可查：</strong>产物为原生单文件
+							HTML，界面干净无多余杂讯，面试前一键全屏打开，快速进入状态。
+						</li>
+					</ul>
 				</div>
 			</div>
 		</section>
 
-		<section class="case-section">
-			<div><p class="number-label">06 / ITERATION</p><h2>两次真实迭代与当前状态</h2></div>
-			<div class="case-copy">
-				<p class="case-lede">用量数据比直觉更早发现问题：一次退役冗余例程，一次重构过滤门控。</p>
-				<p>
-					先从用量数据定位冗余例程并退役，单日 30+ 次无效调用清零；随后重构信息过滤门控，必读噪音从 27 条压到 1
-					条。两次都来自真实自用的观测，不是设想中的需求。
+		<!-- 04 自用结果与复盘 -->
+		<section class="ca-section" id="retro" data-case-section>
+			<header class="ca-section-head">
+				<p class="ca-kicker"><span>04</span> 验证复盘 · 自用结果与心得</p>
+				<h2>自用结果与做个人 AI 工具的心得</h2>
+				<p class="ca-copy">
+					DayMate
+					已用于我毕业求职期间的日常事务整理。它解决的核心问题，是把散落在邮件里的“需要做什么”和“求职走到哪一步”集中呈现，减少重复翻找和手动记录。从这个自用项目中，我有两点体会：
 				</p>
-				<p class="muted mt-7">
-					当前状态：M0–M5 与 ADR 0029 前的扩展已完成，本人自托管使用；Gmail 与 163 已启用真实
-					Provider，飞书日历保留配置入口。Releases 有 universal <code>.dmg</code>，未签名，需一次性
-					Gatekeeper 允许。
-				</p>
-				<div class="judgment">
-					<p class="judgment__label">我的判断</p>
-					<p>自己是唯一用户，反馈链路极短但没人兜底，所以我把观测、归因、重构、回归固定成流程，由数据驱动迭代。</p>
+			</header>
+
+			<div class="ca-block ca-reveal">
+				<div class="dm-grid-2">
+					<div
+						class="ca-card"
+						style="padding: 22px 24px; border-radius: 8px; border: 1px solid var(--ca-line); background: var(--ca-soft);">
+						<h4
+							style="font-size: 15px; font-weight: 600; margin-bottom: 8px; color: var(--ca-text);">
+							1. 选准高频任务，把信息可靠地转成行动
+						</h4>
+						<p class="ca-copy" style="font-size: 13px; line-height: 1.8;">
+							这个项目让我认识到，个人 AI
+							工具不必追求功能多。很多工具堆砌了一堆低频功能，最后反而被闲置。选准一个每天都要面对的高频任务，把信息可靠地转成可打勾的行动，才更容易真正解决问题。
+						</p>
+					</div>
+					<div
+						class="ca-card"
+						style="padding: 22px 24px; border-radius: 8px; border: 1px solid var(--ca-line); background: var(--ca-soft);">
+						<h4
+							style="font-size: 15px; font-weight: 600; margin-bottom: 8px; color: var(--ca-text);">
+							2. 允许用户及时纠错，才更容易真正用起来
+						</h4>
+						<p class="ca-copy" style="font-size: 13px; line-height: 1.8;">
+							大模型处理非标准化内容时存在不确定性。不追求虚幻的 100%
+							全自动，在关键节点提供简单直接的人工核对入口，让用户能随时纠错，工具才能在真实生活中被长期信任、真正用起来。
+						</p>
+					</div>
 				</div>
-				<div class="case-cta">
-					<a class="button-primary" href="https://github.com/Zhaozed/DayMate" target="_blank"
-						>查看 GitHub ↗</a
-					><a class="button-ghost" href="https://github.com/Zhaozed/DayMate/releases" target="_blank"
-						>下载 .dmg</a
+			</div>
+
+			<div class="ca-block ca-reveal" style="margin-top: 36px;">
+				<div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+					<a
+						class="button-primary"
+						href="https://github.com/Zhaozed/DayMate"
+						target="_blank"
+						rel="noopener noreferrer">查看 GitHub 仓库 ↗</a
 					>
+					<a
+						class="button-ghost"
+						href="https://github.com/Zhaozed/DayMate/releases"
+						target="_blank"
+						rel="noopener noreferrer">下载 .dmg 产物</a
+					>
+					<a class="button-ghost" href="/projects/">返回项目经历 →</a>
 				</div>
 			</div>
 		</section>
-	</div>
+	</article>
 </PageLayout>
+
+<script>
+	const links = [...document.querySelectorAll<HTMLAnchorElement>(".ca-nav a, .ca-mobile-toc a")];
+	const sections = [...document.querySelectorAll<HTMLElement>("[data-case-section]")];
+	let scheduled = false;
+	function updateNavigation() {
+		const anchor = 128;
+		const active =
+			sections.filter(section => section.getBoundingClientRect().top <= anchor).at(-1) ??
+			sections[0];
+		for (const link of links) {
+			if (link.hash === `#${active?.id}`) link.setAttribute("aria-current", "location");
+			else link.removeAttribute("aria-current");
+		}
+		scheduled = false;
+	}
+	window.addEventListener(
+		"scroll",
+		() => {
+			if (!scheduled) {
+				scheduled = true;
+				requestAnimationFrame(updateNavigation);
+			}
+		},
+		{ passive: true }
+	);
+	window.addEventListener("resize", updateNavigation);
+	updateNavigation();
+
+	const mobileToc = document.querySelector<HTMLDetailsElement>(".ca-mobile-toc");
+	for (const link of links)
+		link.addEventListener("click", () => {
+			if (mobileToc) mobileToc.open = false;
+		});
+	document.addEventListener("keydown", event => {
+		if (event.key === "Escape" && mobileToc?.open) {
+			mobileToc.open = false;
+			mobileToc.querySelector("summary")?.focus();
+		}
+	});
+	document.addEventListener("click", event => {
+		if (mobileToc?.open && event.target instanceof Node && !mobileToc.contains(event.target))
+			mobileToc.open = false;
+	});
+
+	// 高级滚动进入动画 (Scroll Reveal Observer)
+	const reveals = document.querySelectorAll(".ca-reveal");
+	if ("IntersectionObserver" in window) {
+		const revealObserver = new IntersectionObserver(
+			(entries, observer) => {
+				entries.forEach((entry, idx) => {
+					if (entry.isIntersecting) {
+						setTimeout(
+							() => {
+								entry.target.classList.add("is-revealed");
+							},
+							(idx % 4) * 60
+						);
+						observer.unobserve(entry.target);
+					}
+				});
+			},
+			{ threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+		);
+		reveals.forEach(el => revealObserver.observe(el));
+	} else {
+		reveals.forEach(el => el.classList.add("is-revealed"));
+	}
+</script>
+
+<style>
+	/* 角色与信息条：三等分严格均等间距，带优雅轻量纵向分割线 */
+	.ca-role-strip-balanced {
+		display: grid !important;
+		grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+		gap: 0 !important;
+		margin-top: 24px;
+		padding: 18px 0 !important;
+		border: 1px solid var(--ca-line);
+		border-radius: 10px;
+		background: var(--ca-soft);
+		font-size: 13px;
+	}
+
+	.ca-role-strip-balanced .ca-role-col {
+		padding: 2px 24px !important;
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		min-width: 0;
+	}
+
+	.ca-role-strip-balanced .ca-role-col + .ca-role-col {
+		border-left: 1px solid var(--ca-line);
+	}
+
+	.ca-role-strip-balanced strong {
+		font-size: 11px;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--ca-accent);
+	}
+
+	.ca-role-strip-balanced span {
+		color: var(--ca-muted);
+		line-height: 1.6;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	@media (max-width: 920px) {
+		.ca-role-strip-balanced span {
+			white-space: normal;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.ca-role-strip-balanced {
+			grid-template-columns: 1fr !important;
+			padding: 12px 0 !important;
+		}
+		.ca-role-strip-balanced .ca-role-col {
+			padding: 12px 20px !important;
+		}
+		.ca-role-strip-balanced .ca-role-col + .ca-role-col {
+			border-left: 0;
+			border-top: 1px solid var(--ca-line);
+		}
+	}
+
+	/* 网格布局优化与间距对齐 */
+	.dm-grid-2 {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 20px;
+	}
+
+	.dm-grid-3 {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 18px;
+	}
+
+	@media (max-width: 768px) {
+		.dm-grid-2,
+		.dm-grid-3 {
+			grid-template-columns: 1fr;
+			gap: 16px;
+		}
+	}
+
+	/* 看板底部标签自适应：支持 2 列与 3 列等宽分布，保证对齐与间距美观 */
+	.ca-init-metrics {
+		display: flex !important;
+		align-items: stretch !important;
+		gap: 8px !important;
+		padding: 12px 12px !important;
+	}
+
+	.ca-init-m-col {
+		flex: 1 1 0 !important;
+		min-width: 0 !important;
+		text-align: center !important;
+	}
+
+	.ca-init-m-col strong {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.ca-init-m-col span {
+		white-space: normal !important;
+		line-height: 1.35 !important;
+		word-break: break-word;
+	}
+</style>

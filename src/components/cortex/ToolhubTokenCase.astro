@@ -1,0 +1,154 @@
+---
+import {
+	formatToken,
+	inputReduction,
+	toolhubStages,
+	toolhubTask,
+	toolhubTotals,
+} from "@/data/cortex-toolhub";
+
+const routerIncrease = toolhubStages[0].after.input - toolhubStages[0].before.input;
+const plannerSaving = toolhubStages
+	.slice(1)
+	.reduce((n, s) => n + s.before.input - s.after.input, 0);
+const saving = toolhubTotals.before.input - toolhubTotals.after.input;
+---
+
+<section class="th-token-case" aria-labelledby="token-case-heading">
+	<header class="th-case-heading">
+		<p class="ca-kicker">典型案例 / 单任务 Token 对比</p><h3 id="token-case-heading">
+			Notion 文档检索：治理前后执行对比
+		</h3><p class="th-evidence-tag">
+			以一个典型任务，展示 Router 工具预选与按需加载带来的输入变化。
+		</p>
+	</header>
+	<div class="th-task">
+		<span>用户输入</span><p>“{toolhubTask}”</p><small>1 次 Router + 2 次 Planner</small>
+	</div>
+	<div class="th-token-overview">
+		<div class="th-saving">
+			<span>本例任务输入 Token</span><strong>−{inputReduction}<small>%</small></strong><p>
+				净减少 {formatToken(saving)} Token
+			</p>
+		</div>
+		<div
+			class="th-token-bars"
+			role="img"
+			aria-label={`本例输入Token：治理前${formatToken(toolhubTotals.before.input)}，治理后${formatToken(toolhubTotals.after.input)}，下降约${inputReduction}%。`}
+		>
+			{
+				(["before", "after"] as const).map((phase) => (
+					<div class={`th-token-bar-row th-token-bar-row--${phase}`}>
+						<>
+							<div>
+								<>
+									<span>{phase === "before" ? "治理前" : "治理后"}</span>
+									<strong>{formatToken(toolhubTotals[phase].input)}</strong>
+								</>
+							</div>
+							<div class="th-token-track">
+								<span
+									style={`width:${(toolhubTotals[phase].input / toolhubTotals.before.input) * 100}%`}
+								/>
+							</div>
+						</>
+					</div>
+				))
+			}
+			<p>同一任务目标 · 输入 Token 汇总，非费用换算</p>
+		</div>
+	</div>
+	<div class="th-cost-breakdown">
+		<p>
+			<span>Router 输入</span><strong>+{formatToken(routerIncrease)}</strong><small
+				>工具目录与预选前移</small
+			>
+		</p><span aria-hidden="true">＋</span><p>
+			<span>两轮 Planner 输入</span><strong>−{formatToken(plannerSaving)}</strong><small
+				>每轮注入 122 → 7 个 Schema</small
+			>
+		</p><span aria-hidden="true">＝</span><p class="th-net">
+			<span>任务净变化</span><strong>−{formatToken(saving)}</strong><small
+				>已计入 Router 新增开销</small
+			>
+		</p>
+	</div>
+	<div class="th-table-heading">
+		<h4>逐阶段 Token 明细</h4><span>单位：Token · 窄屏可横向滑动</span>
+	</div>
+	<div
+		class="th-token-table-wrap"
+		role="region"
+		aria-label="单任务治理前后Token明细，窄屏可横向滚动"
+		tabindex="0"
+	>
+		<table class="th-token-table">
+			<caption class="sr-only"
+				>Notion 典型任务的治理前后执行记录，按 Router 与两轮 Planner 展示 Token 明细。</caption
+			>
+			<thead
+				><tr
+					><th scope="col">阶段 / 模型</th><th scope="col">Schema 数<small>治理前 → 后</small></th
+					><th scope="col">输入 · 前</th><th scope="col" class="th-after-col">输入 · 后</th><th
+						scope="col">输出 · 前</th
+					><th scope="col" class="th-after-col">输出 · 后</th></tr
+				></thead
+			>
+			<tbody
+				>{
+					toolhubStages.map((stage) => (
+						<tr>
+							<>
+								<th scope="row">
+									{stage.name}
+									<small>{stage.model}</small>
+								</th>
+								<td>
+									{stage.before.schema} → {stage.after.schema}
+									{stage.id === "router" && <small>目录在提示词中</small>}
+								</td>
+								<td>{formatToken(stage.before.input)}</td>
+								<td class="th-after-col">{formatToken(stage.after.input)}</td>
+								<td>{formatToken(stage.before.output)}</td>
+								<td class="th-after-col">{formatToken(stage.after.output)}</td>
+							</>
+						</tr>
+					))
+				}</tbody
+			>
+			<tfoot
+				><tr
+					><th scope="row">任务合计<small>1 次路由 + 2 次规划</small></th><td>—</td><td
+						>{formatToken(toolhubTotals.before.input)}</td
+					><td class="th-after-col">{formatToken(toolhubTotals.after.input)}</td><td
+						>{formatToken(toolhubTotals.before.output)}</td
+					><td class="th-after-col">{formatToken(toolhubTotals.after.output)}</td></tr
+				></tfoot
+			>
+		</table>
+	</div>
+	<div class="th-case-conclusion">
+		<strong>Router 增加一次工具预选，两轮 Planner 都减少了输入 Token。</strong><p>
+			本例 Router 输入增加 {formatToken(routerIncrease)} Token，但两轮 Planner 共减少 {
+				formatToken(plannerSaving)
+			} Token；任务输出由 138 增至 147 Token，没有下降。
+		</p>
+	</div>
+	<details class="ca-details">
+		<summary>本例统计口径</summary>
+		<div>
+			<ul>
+				<li>治理前后均为任务执行记录，均包含 1 次 Router 路由与 2 次 Planner 规划。</li>
+				<li>
+					本例输入 Token 合计下降 {inputReduction}%，统计范围是整个任务；上文约 30% 为 67
+					条测试用例评测中的 Planner 单轮输入降幅。
+				</li>
+				<li>
+					Router 的工具目录位于提示词中，不计入 Schema 数；本例每轮 Planner 注入的 Schema 从 122
+					个降至 7 个。
+				</li>
+				<li>Token 合计用于比较输入规模，不直接等同于费用变化。</li>
+			</ul>
+		</div>
+	</details>
+</section>

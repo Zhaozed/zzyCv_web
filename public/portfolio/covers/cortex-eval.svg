@@ -1,75 +1,192 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img">
-<defs>
-<pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse">
-<path d="M40 0H0V40" fill="none" stroke="rgba(231,229,228,0.05)" stroke-width="1"/>
-</pattern>
-<radialGradient id="v" cx="50%" cy="35%" r="75%">
-<stop offset="0%" stop-color="rgba(217,119,91,0.10)"/>
-<stop offset="100%" stop-color="rgba(16,18,22,0)"/>
-</radialGradient>
-<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-<path d="M0 1 L9 5 L0 9" fill="none" stroke="rgba(231,229,228,0.22)" stroke-width="1.4"/>
-</marker>
-<marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-<path d="M0 1 L9 5 L0 9" fill="none" stroke="#D9775B" stroke-width="1.4"/>
-</marker>
-</defs>
-<rect width="1200" height="675" fill="#101216"/>
-<rect width="1200" height="675" fill="url(#v)"/>
-<rect width="1200" height="675" fill="url(#g)"/>
-<circle cx="69" cy="57" r="5" fill="#D9775B"/>
-<text x="82" y="62" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.66)">CORTEX-EVAL</text>
-<text x="1136" y="62" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" letter-spacing="2.4" text-anchor="end" fill="rgba(231,229,228,0.44)">FLAGSHIP CASE · 0→1 EVAL PLATFORM</text>
-<line x1="64" y1="88" x2="1136" y2="88" stroke="rgba(231,229,228,0.14)" stroke-width="1" stroke-dasharray="4 6"/>
-<rect x="64" y="148" width="1072" height="56" rx="12" fill="rgba(231,229,228,0.035)" stroke="rgba(231,229,228,0.14)" stroke-width="1.2" stroke-dasharray="4 6"/>
-<text x="84" y="182" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" letter-spacing="2.4" text-anchor="start" fill="#D9775B">5 LAYERS</text>
-<text x="322.2" y="183" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="16" font-weight="500" letter-spacing="0.4" text-anchor="middle" fill="rgba(231,229,228,0.66)">1 任务理解</text>
-<text x="498.59999999999997" y="183" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="16" font-weight="500" letter-spacing="0.4" text-anchor="middle" fill="rgba(231,229,228,0.66)">2 工具规划</text>
-<line x1="414.4" y1="162" x2="414.4" y2="190" stroke="rgba(231,229,228,0.14)" stroke-width="1"/>
-<text x="675" y="183" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="16" font-weight="500" letter-spacing="0.4" text-anchor="middle" fill="rgba(231,229,228,0.66)">3 执行结果</text>
-<line x1="590.8" y1="162" x2="590.8" y2="190" stroke="rgba(231,229,228,0.14)" stroke-width="1"/>
-<text x="851.4000000000001" y="183" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="16" font-weight="500" letter-spacing="0.4" text-anchor="middle" fill="rgba(231,229,228,0.66)">4 最终回复</text>
-<line x1="767.2" y1="162" x2="767.2" y2="190" stroke="rgba(231,229,228,0.14)" stroke-width="1"/>
-<text x="1027.8" y="183" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="16" font-weight="500" letter-spacing="0.4" text-anchor="middle" fill="rgba(231,229,228,0.66)">5 A2UI 展示</text>
-<line x1="943.6" y1="162" x2="943.6" y2="190" stroke="rgba(231,229,228,0.14)" stroke-width="1"/>
-<line x1="600" y1="208" x2="600" y2="246" stroke="rgba(231,229,228,0.14)" stroke-width="1.2" stroke-dasharray="5 5" marker-end="url(#ah)"/>
-<rect x="64" y="252" width="184" height="132" rx="14" fill="rgba(231,229,228,0.035)" stroke="rgba(231,229,228,0.22)" stroke-width="1.2"/>
-<text x="84" y="286" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12.5" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.44)">STEP 01</text>
-<text x="84" y="322" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="23" font-weight="600" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.94)">用例集</text>
-<text x="84" y="352" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12.5" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.66)">213 端到端 CASE</text>
-<line x1="253" y1="318" x2="280" y2="318" stroke="rgba(231,229,228,0.22)" stroke-width="1.3" marker-end="url(#ah)"/>
-<rect x="286" y="252" width="184" height="132" rx="14" fill="rgba(231,229,228,0.035)" stroke="rgba(231,229,228,0.22)" stroke-width="1.2"/>
-<text x="306" y="286" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12.5" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.44)">STEP 02</text>
-<text x="306" y="322" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="23" font-weight="600" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.94)">批量执行</text>
-<text x="306" y="352" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12.5" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.66)">TRACE 采集</text>
-<line x1="475" y1="318" x2="502" y2="318" stroke="rgba(231,229,228,0.22)" stroke-width="1.3" marker-end="url(#ah)"/>
-<rect x="508" y="252" width="184" height="132" rx="14" fill="rgba(231,229,228,0.035)" stroke="rgba(231,229,228,0.22)" stroke-width="1.2"/>
-<text x="528" y="286" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12.5" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.44)">STEP 03</text>
-<text x="528" y="322" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="23" font-weight="600" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.94)">结果评判</text>
-<text x="528" y="352" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12.5" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.66)">断言 + LLM JUDGE</text>
-<line x1="697" y1="318" x2="724" y2="318" stroke="rgba(231,229,228,0.22)" stroke-width="1.3" marker-end="url(#ah)"/>
-<rect x="730" y="252" width="184" height="132" rx="14" fill="rgba(231,229,228,0.035)" stroke="rgba(231,229,228,0.22)" stroke-width="1.2"/>
-<text x="750" y="286" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12.5" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.44)">STEP 04</text>
-<text x="750" y="322" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="23" font-weight="600" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.94)">版本对比</text>
-<text x="750" y="352" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12.5" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.66)">五层归因</text>
-<line x1="919" y1="318" x2="946" y2="318" stroke="rgba(231,229,228,0.22)" stroke-width="1.3" marker-end="url(#ah)"/>
-<rect x="952" y="252" width="184" height="132" rx="14" fill="rgba(217,119,91,0.08)" stroke="#D9775B" stroke-width="1.2"/>
-<text x="972" y="286" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12.5" letter-spacing="2.4" text-anchor="start" fill="#D9775B">STEP 05</text>
-<text x="972" y="322" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="23" font-weight="600" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.94)">准入门禁</text>
-<text x="972" y="352" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12.5" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.66)">通过率 + 阻塞项</text>
-<path d="M1044 390 L1044 428 L156 428 L156 392" fill="none" stroke="rgba(231,229,228,0.14)" stroke-width="1.2" stroke-dasharray="5 5" marker-end="url(#ah)"/>
-<text x="600" y="422" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" letter-spacing="2.4" text-anchor="middle" fill="rgba(231,229,228,0.66)">问题单 → 修复复测 → 纳入回归</text>
-<rect x="64" y="496" width="341.3333333333333" height="112" rx="14" fill="rgba(231,229,228,0.035)" stroke="rgba(231,229,228,0.14)" stroke-width="1.2"/>
-<text x="88" y="548" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="34" font-weight="600" letter-spacing="-0.5" fill="#D9775B">213</text>
-<text x="88" y="578" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="17" font-weight="500" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.66)">端到端 Case</text>
-<text x="88" y="602" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.44)">9 SCENARIOS</text>
-<rect x="429.3333333333333" y="496" width="341.3333333333333" height="118" rx="14" fill="rgba(231,229,228,0.035)" stroke="rgba(231,229,228,0.14)" stroke-width="1.2"/>
-<text x="453.3333333333333" y="548" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="34" font-weight="600" letter-spacing="-0.5" fill="#D9775B">40 项</text>
-<text x="453.3333333333333" y="578" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="17" font-weight="500" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.66)">检查规则（通用 + 场景专属）</text>
-<text x="453.3333333333333" y="602" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.44)">ASSERTIONS &amp; RUBRIC</text>
-<rect x="794.6666666666666" y="496" width="341.3333333333333" height="118" rx="14" fill="rgba(231,229,228,0.035)" stroke="rgba(231,229,228,0.14)" stroke-width="1.2"/>
-<text x="818.6666666666666" y="548" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="34" font-weight="600" letter-spacing="-0.5" fill="#D9775B">≈60% ↓</text>
-<text x="818.6666666666666" y="578" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif" font-size="17" font-weight="500" letter-spacing="0.4" text-anchor="start" fill="rgba(231,229,228,0.66)">单轮走查周期</text>
-<text x="818.6666666666666" y="602" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" letter-spacing="2.4" text-anchor="start" fill="rgba(231,229,228,0.44)">INTERNAL BEFORE / AFTER</text>
-<text x="1136" y="646" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12.5" letter-spacing="2.4" text-anchor="end" fill="rgba(231,229,228,0.44)">2026.04—2026.06 内部评测 · 支撑 3 次版本验收 · 已脱敏</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Cortex-Eval · 让每次迭代，都有验收依据</title>
+  <desc id="desc">灰绿色封面，项目标题配以结构化评测验收报告卡片、白盒断言核验流与高精度品质门禁镜。</desc>
+  <defs>
+    <!-- 基础投影 -->
+    <filter id="evalCardShadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#233B39" flood-opacity=".14"/>
+    </filter>
+    <filter id="lensShadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="6" dy="18" stdDeviation="18" flood-color="#193331" flood-opacity=".18"/>
+    </filter>
+    <filter id="greenGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- 渐变定义 -->
+    <linearGradient id="evalPaper" x1="0" y1="0" x2="310" y2="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="60%" stop-color="#F9FBFB"/>
+      <stop offset="100%" stop-color="#EDF3F1"/>
+    </linearGradient>
+    <linearGradient id="lensRing" x1="0" y1="0" x2="220" y2="220" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#6E8E8A"/>
+      <stop offset="50%" stop-color="#3A6362"/>
+      <stop offset="100%" stop-color="#1F4241"/>
+    </linearGradient>
+    <linearGradient id="lensGlass" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E2F2ED" stop-opacity=".12"/>
+      <stop offset="100%" stop-color="#72A99E" stop-opacity=".25"/>
+    </linearGradient>
+    <linearGradient id="passTagGrad" x1="0" y1="0" x2="90" y2="30" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <linearGradient id="evalHandle" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3A5C5A"/>
+      <stop offset="100%" stop-color="#1B3332"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 背景底色 -->
+  <path fill="#EAF0EE" d="M0 0h1200v675H0z"/>
+
+  <!-- 右侧视觉中心光晕圆 -->
+  <circle cx="910" cy="335" r="285" fill="#DCE7E2" fill-opacity=".65"/>
+  <circle cx="910" cy="335" r="215" fill="#D0DFD9" fill-opacity=".45"/>
+
+  <!-- 左侧项目信息与文字排版 -->
+  <g font-family="Arial, Helvetica, -apple-system, sans-serif">
+    <path d="M72 65h14v14H72z" fill="#3F6866"/>
+    <text x="101" y="79" font-size="17" letter-spacing="3" fill="#586965">AI PRODUCT / 02</text>
+    <text x="68" y="264" font-size="108" font-weight="700" letter-spacing="-6" fill="#253532">Cortex</text>
+    <text x="68" y="374" font-size="108" font-weight="700" letter-spacing="-6" fill="#253532">Eval<tspan fill="#507E78">.</tspan></text>
+    <text x="74" y="448" font-family="'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="28" letter-spacing="1" fill="#586965">让每次迭代，都有验收依据</text>
+    <text x="74" y="608" font-size="16" letter-spacing="2.5" fill="#71827B">CRITERIA. EVIDENCE. CONFIDENCE.</text>
+  </g>
+
+  <!-- 右侧视觉组件：结构化评测看板 + 准入门禁检视镜 -->
+  <g id="eval-scene">
+    <!-- 环形度量轨道与雷达网格线 -->
+    <ellipse cx="910" cy="340" rx="245" ry="165" stroke="#BFD3CB" stroke-width="1.5" stroke-dasharray="6 8" transform="rotate(-15 910 340)"/>
+    <ellipse cx="910" cy="340" rx="175" ry="240" stroke="#CCDED8" stroke-width="1.5" stroke-dasharray="4 6" transform="rotate(25 910 340)"/>
+
+    <!-- 地面轻微阴影 -->
+    <ellipse cx="900" cy="546" rx="145" ry="22" fill="#233B39" fill-opacity=".12" filter="url(#evalCardShadow)"/>
+
+    <!-- 底层轻微错位重叠的基线对比报告卡片 (表达多版本比对) -->
+    <rect x="742" y="142" width="296" height="380" rx="26" fill="#D3E2DC" transform="rotate(10 890 332)"/>
+    <rect x="726" y="152" width="296" height="380" rx="26" fill="#E2ECE8" stroke="#F5F9F7" stroke-width="2" transform="rotate(4 874 342)"/>
+
+    <!-- 主评测报告卡片 (优雅微倾斜 -6 度) -->
+    <g transform="translate(860, 335) rotate(-6)">
+      <rect x="-148" y="-190" width="296" height="380" rx="26" fill="url(#evalPaper)" stroke="#FFFFFF" stroke-width="2.5" filter="url(#evalCardShadow)"/>
+
+      <!-- 报告头部状态栏 -->
+      <g transform="translate(-122, -164)">
+        <rect x="0" y="0" width="38" height="7" rx="3.5" fill="#507E78"/>
+        <rect x="44" y="0" width="60" height="7" rx="3.5" fill="#C4DAD2"/>
+        <rect x="180" y="-3" width="64" height="20" rx="6" fill="#E4EFEA"/>
+        <text x="212" y="11" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9" font-weight="700" fill="#3D6864" text-anchor="middle">v2.4 PASS</text>
+      </g>
+
+      <!-- 核心测试链路检查项 -->
+      <g transform="translate(-122, -125)">
+        <!-- 项 1：意图路由 -->
+        <g transform="translate(0, 0)">
+          <circle cx="10" cy="14" r="8" fill="#E1EFEA"/>
+          <path d="M7 14l2.5 2.5L14 11" stroke="#25756C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="26" y="14" font-family="'PingFang SC', sans-serif" font-size="12" font-weight="600" fill="#2E423E">路由意图分流</text>
+          <text x="26" y="27" font-family="ui-monospace, monospace" font-size="9" fill="#758B86">Intent Contract · 100%</text>
+          <rect x="194" y="5" width="48" height="18" rx="4" fill="#EAF5F0"/>
+          <text x="218" y="17" font-family="ui-monospace, monospace" font-size="9" font-weight="700" fill="#0D9488" text-anchor="middle">0 DRIFT</text>
+        </g>
+        <line x1="0" y1="38" x2="242" y2="38" stroke="#E3EDE9" stroke-width="1"/>
+
+        <!-- 项 2：工具编排 -->
+        <g transform="translate(0, 48)">
+          <circle cx="10" cy="14" r="8" fill="#E1EFEA"/>
+          <path d="M7 14l2.5 2.5L14 11" stroke="#25756C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="26" y="14" font-family="'PingFang SC', sans-serif" font-size="12" font-weight="600" fill="#2E423E">工具时序依赖</text>
+          <text x="26" y="27" font-family="ui-monospace, monospace" font-size="9" fill="#758B86">先查后改 · Schema 校验</text>
+          <rect x="194" y="5" width="48" height="18" rx="4" fill="#EAF5F0"/>
+          <text x="218" y="17" font-family="ui-monospace, monospace" font-size="9" font-weight="700" fill="#0D9488" text-anchor="middle">PASS</text>
+        </g>
+        <line x1="0" y1="86" x2="242" y2="86" stroke="#E3EDE9" stroke-width="1"/>
+
+        <!-- 项 3：高危写操作确认卡 -->
+        <g transform="translate(0, 96)">
+          <circle cx="10" cy="14" r="8" fill="#E1EFEA"/>
+          <path d="M7 14l2.5 2.5L14 11" stroke="#25756C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="26" y="14" font-family="'PingFang SC', sans-serif" font-size="12" font-weight="600" fill="#2E423E">安全红线门禁</text>
+          <text x="26" y="27" font-family="ui-monospace, monospace" font-size="9" fill="#758B86">强制二次确认 · 0 越权</text>
+          <rect x="194" y="5" width="48" height="18" rx="4" fill="#EAF5F0"/>
+          <text x="218" y="17" font-family="ui-monospace, monospace" font-size="9" font-weight="700" fill="#0D9488" text-anchor="middle">BLOCK: 0</text>
+        </g>
+        <line x1="0" y1="134" x2="242" y2="134" stroke="#E3EDE9" stroke-width="1"/>
+      </g>
+
+      <!-- 报告底部：综合准入大印章 (Release Verified) -->
+      <g transform="translate(0, 80)">
+        <circle cx="0" cy="0" r="42" fill="#E3EFE9" stroke="#92BAAD" stroke-width="2" stroke-dasharray="3 3"/>
+        <circle cx="0" cy="0" r="34" fill="#3D7068" filter="url(#greenGlow)"/>
+        <path d="m-12 -2 8 8 18-18" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="0" y="20" font-family="ui-monospace, monospace" font-size="7.5" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">VERIFIED</text>
+      </g>
+
+      <!-- 底部 Trace 条形统计小图 -->
+      <g transform="translate(-122, 142)">
+        <rect x="0" y="8" width="55" height="4" rx="2" fill="#B4CDC4"/>
+        <rect x="62" y="8" width="40" height="4" rx="2" fill="#B4CDC4"/>
+        <rect x="108" y="8" width="75" height="4" rx="2" fill="#3D7068"/>
+        <rect x="189" y="8" width="53" height="4" rx="2" fill="#B4CDC4"/>
+      </g>
+    </g>
+
+    <!-- 高级品质检视镜 (Precision Quality Inspector Lens) -->
+    <g transform="translate(930, 340)" filter="url(#lensShadow)">
+      <!-- 放大镜金属手柄 -->
+      <path d="m85 85 75 75" stroke="url(#evalHandle)" stroke-width="32" stroke-linecap="round"/>
+      <path d="m87 83 75 75" stroke="#79A69D" stroke-width="6" stroke-linecap="round" opacity=".6"/>
+      <circle cx="160" cy="160" r="16" fill="#1C3634"/>
+
+      <!-- 镜头外圈精工金属圈 -->
+      <circle cx="0" cy="0" r="130" fill="none" stroke="url(#lensRing)" stroke-width="18"/>
+      <circle cx="0" cy="0" r="121" stroke="#F5FDF9" stroke-opacity=".7" stroke-width="2.5" fill="none"/>
+
+      <!-- 镜面高透玻璃层 -->
+      <circle cx="0" cy="0" r="120" fill="url(#lensGlass)"/>
+
+      <!-- 镜面高光弧光 -->
+      <path d="M-90 -55 A105 105 0 0 1 55 -90" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-opacity=".8" fill="none"/>
+
+      <!-- 镜内高精度瞄准准心十字与数据游标 (体现严密验证) -->
+      <g opacity=".85">
+        <circle cx="0" cy="0" r="76" stroke="#48867C" stroke-width="1.2" stroke-dasharray="4 6" fill="none"/>
+        <line x1="-86" y1="0" x2="-62" y2="0" stroke="#3D7068" stroke-width="2"/>
+        <line x1="62" y1="0" x2="86" y2="0" stroke="#3D7068" stroke-width="2"/>
+        <line x1="0" y1="-86" x2="0" y2="-62" stroke="#3D7068" stroke-width="2"/>
+        <line x1="0" y1="62" x2="0" y2="86" stroke="#3D7068" stroke-width="2"/>
+        <!-- 镜内核心指示 -->
+        <circle cx="0" cy="0" r="4" fill="#0D9488"/>
+      </g>
+    </g>
+
+    <!-- 外围质量门禁与回归标签 -->
+    <g transform="translate(1030, 160)" filter="url(#evalCardShadow)">
+      <rect width="84" height="74" rx="20" fill="#FFFFFF" stroke="#D7E6E0" stroke-width="1.5"/>
+      <text x="42" y="28" font-family="ui-monospace, monospace" font-size="9" font-weight="700" fill="#3D7068" text-anchor="middle">GATEWAY</text>
+      <text x="42" y="48" font-family="'PingFang SC', sans-serif" font-size="12" font-weight="600" fill="#253532" text-anchor="middle">版本准入</text>
+      <circle cx="42" cy="60" r="3" fill="#10B981"/>
+    </g>
+
+    <g transform="translate(680, 420)" filter="url(#evalCardShadow)">
+      <rect width="84" height="74" rx="20" fill="#FFFFFF" stroke="#D7E6E0" stroke-width="1.5"/>
+      <text x="42" y="28" font-family="ui-monospace, monospace" font-size="9" font-weight="700" fill="#3D7068" text-anchor="middle">REPLAY</text>
+      <text x="42" y="48" font-family="'PingFang SC', sans-serif" font-size="12" font-weight="600" fill="#253532" text-anchor="middle">Trace溯源</text>
+      <circle cx="42" cy="60" r="3" fill="#10B981"/>
+    </g>
+
+    <!-- 轨道点缀粒子 -->
+    <circle cx="1090" cy="270" r="6" fill="#3D7068"/>
+    <circle cx="670" cy="210" r="5" fill="#507E78"/>
+    <circle cx="1060" cy="460" r="5" fill="#10B981"/>
+  </g>
+
+  <!-- 右下角探索箭头 -->
+  <path d="M1086 588h38m-13-13 13 13-13 13" stroke="#819A8F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

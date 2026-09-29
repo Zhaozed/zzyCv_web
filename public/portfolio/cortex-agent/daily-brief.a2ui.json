@@ -1,0 +1,1760 @@
+{
+  "source_tool_name": "daily_brief",
+  "messages": [
+    {
+      "version": "v0.9",
+      "createSurface": {
+        "surfaceId": "portfolio-daily-brief",
+        "catalogId": "https://loona.dm/catalog/v1"
+      }
+    },
+    {
+      "version": "v0.9",
+      "updateComponents": {
+        "surfaceId": "portfolio-daily-brief",
+        "components": [
+          {
+            "id": "root",
+            "component": "Carousel",
+            "cardWidth": 400,
+            "autoHeight": true,
+            "currentIndex": {
+              "path": "/idx"
+            },
+            "children": [
+              "c0_root",
+              "c1_root",
+              "c2_root",
+              "c3_root",
+              "c5_root"
+            ]
+          },
+          {
+            "id": "c0_root",
+            "component": "Card",
+            "width": 400,
+            "minWidth": 400,
+            "maxWidth": 400,
+            "maxHeight": 360,
+            "padding": 12,
+            "radius": 24,
+            "borderWidth": 0,
+            "background": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20preserveAspectRatio%3D%22none%22%20width%3D%22400%22%20height%3D%22360%22%20viewBox%3D%220%200%20400%20360%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22a2uiGradientStroke%22%20x1%3D%2250%25%22%20y1%3D%22100%25%22%20x2%3D%2250%25%22%20y2%3D%220%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgb(255%2C255%2C255)%22%20stop-opacity%3D%220.1%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgb(255%2C255%2C255)%22%20stop-opacity%3D%220.3%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20x%3D%220.5%22%20y%3D%220.5%22%20width%3D%22399%22%20height%3D%22359%22%20rx%3D%2223.5%22%20ry%3D%2223.5%22%20fill%3D%22none%22%20stroke%3D%22url(%23a2uiGradientStroke)%22%20stroke-width%3D%221%22%20vector-effect%3D%22non-scaling-stroke%22%2F%3E%3C%2Fsvg%3E\") center / 100% 100% no-repeat, linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))",
+            "overflowHidden": true,
+            "child": "c0_layout"
+          },
+          {
+            "id": "c0_layout",
+            "component": "Column",
+            "width": 376,
+            "gap": 10,
+            "children": [
+              "c0_header",
+              "c0_divider",
+              "c0_focusList"
+            ]
+          },
+          {
+            "id": "c0_header",
+            "component": "Row",
+            "width": 376,
+            "height": 32,
+            "gap": 8,
+            "align": "center",
+            "children": [
+              "c0_icon",
+              "c0_titleArea",
+              "c0_count"
+            ]
+          },
+          {
+            "id": "c0_icon",
+            "component": "RiveAnim",
+            "file": "calendar_circle_checkmark",
+            "width": 32,
+            "height": 32
+          },
+          {
+            "id": "c0_titleArea",
+            "component": "List",
+            "direction": "vertical",
+            "weight": 1,
+            "maxHeight": 32,
+            "overflowY": "auto",
+            "overflowX": "hidden",
+            "children": [
+              "c0_title"
+            ]
+          },
+          {
+            "id": "c0_title",
+            "component": "Text",
+            "text": {
+              "path": "/brief0/computed/title"
+            },
+            "fontSize": 18,
+            "lineHeight": 22,
+            "fontWeight": 700,
+            "color": "#ffffff"
+          },
+          {
+            "id": "c0_divider",
+            "component": "Spacer",
+            "width": 376,
+            "height": 1,
+            "backgroundColor": "rgba(255,255,255,0.30)"
+          },
+          {
+            "id": "c0_count",
+            "component": "Badge",
+            "text": {
+              "path": "/brief0/computed/focusCountText"
+            },
+            "height": 20,
+            "minWidth": 20,
+            "hugWidth": true,
+            "radius": 9999,
+            "color": "rgba(255,255,255,0.1)",
+            "fontSize": 12,
+            "fontWeight": 700,
+            "textColor": "rgba(255,255,255,0.8)"
+          },
+          {
+            "id": "c0_focusList",
+            "component": "List",
+            "direction": "vertical",
+            "width": 376,
+            "maxHeight": 283,
+            "overflowX": "hidden",
+            "overflowY": "auto",
+            "gap": 10,
+            "children": {
+              "componentId": "c0_focusCard",
+              "path": "/brief0/computed/focusItems"
+            }
+          },
+          {
+            "id": "c0_focusCard",
+            "component": "Card",
+            "width": 376,
+            "padding": 8,
+            "radius": 16,
+            "background": "linear-gradient(90deg, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 5px, transparent 5px), linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1))",
+            "child": "c0_focusCardInfo"
+          },
+          {
+            "id": "c0_focusCardInfo",
+            "component": "Column",
+            "width": 360,
+            "gap": 8,
+            "children": [
+              "c0_focusProject",
+              "c0_focusTitle",
+              "c0_focusSummary"
+            ],
+            "paddingLeft": 16
+          },
+          {
+            "id": "c0_focusProject",
+            "component": "Row",
+            "gap": 0,
+            "align": "center",
+            "justify": "start",
+            "children": [
+              "c0_focusProjectLabel"
+            ]
+          },
+          {
+            "id": "c0_focusTitle",
+            "component": "Text",
+            "text": {
+              "path": "title"
+            },
+            "fontSize": 16,
+            "lineHeight": 22,
+            "fontWeight": 700,
+            "color": "#ffffff"
+          },
+          {
+            "id": "c0_focusSummary",
+            "component": "Text",
+            "text": {
+              "path": "summary"
+            },
+            "fontSize": 14,
+            "lineHeight": 18,
+            "fontWeight": 400,
+            "color": "rgba(255,255,255,0.8)"
+          },
+          {
+            "id": "c0_focusProjectLabel",
+            "component": "Badge",
+            "text": {
+              "path": "projectLabel"
+            },
+            "variant": "default",
+            "size": "small",
+            "hugWidth": true,
+            "height": 16,
+            "minWidth": 16,
+            "maxWidth": 344,
+            "radius": 9999,
+            "color": "#ffaa00",
+            "fontSize": 10,
+            "fontWeight": 700,
+            "textColor": "#000000"
+          },
+          {
+            "id": "c1_root",
+            "component": "Card",
+            "width": 400,
+            "minWidth": 400,
+            "maxWidth": 400,
+            "maxHeight": 360,
+            "padding": 12,
+            "radius": 24,
+            "borderWidth": 0,
+            "background": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20preserveAspectRatio%3D%22none%22%20width%3D%22400%22%20height%3D%22360%22%20viewBox%3D%220%200%20400%20360%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22a2uiGradientStroke%22%20x1%3D%2250%25%22%20y1%3D%22100%25%22%20x2%3D%2250%25%22%20y2%3D%220%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgb(255%2C255%2C255)%22%20stop-opacity%3D%220.1%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgb(255%2C255%2C255)%22%20stop-opacity%3D%220.3%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20x%3D%220.5%22%20y%3D%220.5%22%20width%3D%22399%22%20height%3D%22359%22%20rx%3D%2223.5%22%20ry%3D%2223.5%22%20fill%3D%22none%22%20stroke%3D%22url(%23a2uiGradientStroke)%22%20stroke-width%3D%221%22%20vector-effect%3D%22non-scaling-stroke%22%2F%3E%3C%2Fsvg%3E\") center / 100% 100% no-repeat, linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))",
+            "overflowHidden": true,
+            "child": "c1_layout"
+          },
+          {
+            "id": "c1_layout",
+            "component": "Column",
+            "width": 376,
+            "gap": 10,
+            "children": [
+              "c1_headerArea",
+              "c1_divider",
+              "c1_content"
+            ]
+          },
+          {
+            "id": "c1_headerArea",
+            "component": "List",
+            "direction": "vertical",
+            "width": 376,
+            "maxHeight": 80,
+            "overflowX": "hidden",
+            "overflowY": "auto",
+            "gap": 10,
+            "children": [
+              "c1_topRow"
+            ]
+          },
+          {
+            "id": "c1_topRow",
+            "component": "Column",
+            "width": 376,
+            "gap": 8,
+            "children": [
+              "c1_project",
+              "c1_title"
+            ]
+          },
+          {
+            "id": "c1_project",
+            "component": "Row",
+            "gap": 0,
+            "align": "center",
+            "justify": "start",
+            "children": [
+              "c1_projectLabel"
+            ]
+          },
+          {
+            "id": "c1_title",
+            "component": "Text",
+            "text": {
+              "path": "/brief1/computed/title"
+            },
+            "fontSize": 16,
+            "lineHeight": 22,
+            "fontWeight": 700,
+            "color": "#ffffff"
+          },
+          {
+            "id": "c1_divider",
+            "component": "Spacer",
+            "width": 376,
+            "height": 1,
+            "backgroundColor": "rgba(255,255,255,0.30)"
+          },
+          {
+            "id": "c1_content",
+            "component": "List",
+            "direction": "vertical",
+            "width": 376,
+            "maxHeight": 235,
+            "overflowX": "hidden",
+            "overflowY": "auto",
+            "gap": 10,
+            "children": [
+              "c1_summaryCard",
+              "c1_stepsPanel"
+            ]
+          },
+          {
+            "id": "c1_summaryCard",
+            "component": "Card",
+            "width": 376,
+            "padding": 8,
+            "radius": 16,
+            "background": "linear-gradient(90deg, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 5px, transparent 5px), linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1))",
+            "child": "c1_summaryCardInfo"
+          },
+          {
+            "id": "c1_summaryCardInfo",
+            "component": "Column",
+            "width": 360,
+            "gap": 8,
+            "children": [
+              "c1_summaryRow"
+            ],
+            "paddingLeft": 8
+          },
+          {
+            "id": "c1_summaryRow",
+            "component": "Row",
+            "width": 352,
+            "gap": 8,
+            "align": "start",
+            "children": [
+              "c1_summaryIcon",
+              "c1_summary"
+            ]
+          },
+          {
+            "id": "c1_summaryIcon",
+            "component": "Icon",
+            "name": "vg_blub",
+            "size": 16,
+            "color": "#ffaa00"
+          },
+          {
+            "id": "c1_summary",
+            "component": "Text",
+            "text": {
+              "path": "/brief1/computed/summary"
+            },
+            "fontSize": 14,
+            "lineHeight": 18,
+            "fontWeight": 400,
+            "color": "#ffffff",
+            "weight": 1
+          },
+          {
+            "id": "c1_stepsPanel",
+            "component": "Column",
+            "width": 376,
+            "gap": 10,
+            "children": [
+              "c1_stepsLabel",
+              "c1_steps"
+            ]
+          },
+          {
+            "id": "c1_stepsLabel",
+            "component": "Text",
+            "text": {
+              "path": "/brief1/computed/nextStepsLabel"
+            },
+            "fontSize": 16,
+            "lineHeight": 22,
+            "fontWeight": 700,
+            "color": "#ffaa00"
+          },
+          {
+            "id": "c1_steps",
+            "component": "List",
+            "direction": "vertical",
+            "width": 376,
+            "gap": 8,
+            "children": {
+              "componentId": "c1_step",
+              "path": "/brief1/computed/nextSteps"
+            }
+          },
+          {
+            "id": "c1_step",
+            "component": "Card",
+            "width": 376,
+            "padding": 8,
+            "radius": 16,
+            "background": "linear-gradient(90deg, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 5px, transparent 5px), linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1))",
+            "child": "c1_stepInfo"
+          },
+          {
+            "id": "c1_stepInfo",
+            "component": "Column",
+            "width": 360,
+            "gap": 8,
+            "children": [
+              "c1_stepRow"
+            ]
+          },
+          {
+            "id": "c1_stepRow",
+            "component": "Row",
+            "width": 360,
+            "gap": 8,
+            "align": "start",
+            "children": [
+              "c1_stepNumber",
+              "c1_stepContent"
+            ]
+          },
+          {
+            "id": "c1_stepNumber",
+            "component": "Badge",
+            "text": {
+              "path": "number"
+            },
+            "height": 20,
+            "minWidth": 20,
+            "radius": 10,
+            "color": "rgba(255,255,255,0.2)",
+            "fontSize": 12,
+            "fontWeight": 400,
+            "textColor": "#ffffff",
+            "width": 20,
+            "paddingX": 0,
+            "paddingY": 0
+          },
+          {
+            "id": "c1_stepContent",
+            "component": "Column",
+            "weight": 1,
+            "gap": 4,
+            "children": [
+              "c1_loonaBadges",
+              "c1_stepText"
+            ]
+          },
+          {
+            "id": "c1_loonaBadges",
+            "component": "List",
+            "direction": "vertical",
+            "children": {
+              "componentId": "c1_loonaBadge",
+              "path": "loonaBadges"
+            }
+          },
+          {
+            "id": "c1_loonaBadge",
+            "component": "Row",
+            "gap": 0,
+            "align": "center",
+            "justify": "start",
+            "children": [
+              "c1_loonaBadgeLabel"
+            ]
+          },
+          {
+            "id": "c1_stepText",
+            "component": "Text",
+            "text": {
+              "path": "text"
+            },
+            "fontSize": 14,
+            "lineHeight": 18,
+            "fontWeight": 400,
+            "color": "#ffffff"
+          },
+          {
+            "id": "c1_projectLabel",
+            "component": "Badge",
+            "text": {
+              "path": "/brief1/computed/projectLabel"
+            },
+            "variant": "default",
+            "size": "large",
+            "hugWidth": true,
+            "height": 24,
+            "minWidth": 24,
+            "maxWidth": 376,
+            "radius": 9999,
+            "color": "#ffaa00",
+            "fontSize": 12,
+            "fontWeight": 700,
+            "textColor": "#000000"
+          },
+          {
+            "id": "c1_loonaBadgeLabel",
+            "component": "Badge",
+            "text": "Loona 可以帮忙",
+            "variant": "secondary",
+            "height": 20,
+            "hugWidth": true,
+            "radius": 9999,
+            "color": "rgba(255,170,0,0.3)",
+            "fontSize": 12,
+            "fontWeight": 700,
+            "textColor": "#ffaa00"
+          },
+          {
+            "id": "c2_root",
+            "component": "Card",
+            "width": 400,
+            "minWidth": 400,
+            "maxWidth": 400,
+            "maxHeight": 360,
+            "padding": 12,
+            "radius": 24,
+            "borderWidth": 0,
+            "background": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20preserveAspectRatio%3D%22none%22%20width%3D%22400%22%20height%3D%22360%22%20viewBox%3D%220%200%20400%20360%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22a2uiGradientStroke%22%20x1%3D%2250%25%22%20y1%3D%22100%25%22%20x2%3D%2250%25%22%20y2%3D%220%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgb(255%2C255%2C255)%22%20stop-opacity%3D%220.1%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgb(255%2C255%2C255)%22%20stop-opacity%3D%220.3%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20x%3D%220.5%22%20y%3D%220.5%22%20width%3D%22399%22%20height%3D%22359%22%20rx%3D%2223.5%22%20ry%3D%2223.5%22%20fill%3D%22none%22%20stroke%3D%22url(%23a2uiGradientStroke)%22%20stroke-width%3D%221%22%20vector-effect%3D%22non-scaling-stroke%22%2F%3E%3C%2Fsvg%3E\") center / 100% 100% no-repeat, linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))",
+            "overflowHidden": true,
+            "child": "c2_layout"
+          },
+          {
+            "id": "c2_layout",
+            "component": "Column",
+            "width": 376,
+            "gap": 10,
+            "children": [
+              "c2_headerArea",
+              "c2_divider",
+              "c2_content"
+            ]
+          },
+          {
+            "id": "c2_headerArea",
+            "component": "List",
+            "direction": "vertical",
+            "width": 376,
+            "maxHeight": 80,
+            "overflowX": "hidden",
+            "overflowY": "auto",
+            "gap": 10,
+            "children": [
+              "c2_topRow"
+            ]
+          },
+          {
+            "id": "c2_topRow",
+            "component": "Column",
+            "width": 376,
+            "gap": 8,
+            "children": [
+              "c2_project",
+              "c2_title"
+            ]
+          },
+          {
+            "id": "c2_project",
+            "component": "Row",
+            "gap": 0,
+            "align": "center",
+            "justify": "start",
+            "children": [
+              "c2_projectLabel"
+            ]
+          },
+          {
+            "id": "c2_title",
+            "component": "Text",
+            "text": {
+              "path": "/brief2/computed/title"
+            },
+            "fontSize": 16,
+            "lineHeight": 22,
+            "fontWeight": 700,
+            "color": "#ffffff"
+          },
+          {
+            "id": "c2_divider",
+            "component": "Spacer",
+            "width": 376,
+            "height": 1,
+            "backgroundColor": "rgba(255,255,255,0.30)"
+          },
+          {
+            "id": "c2_content",
+            "component": "List",
+            "direction": "vertical",
+            "width": 376,
+            "maxHeight": 235,
+            "overflowX": "hidden",
+            "overflowY": "auto",
+            "gap": 10,
+            "children": [
+              "c2_summaryCard",
+              "c2_stepsPanel"
+            ]
+          },
+          {
+            "id": "c2_summaryCard",
+            "component": "Card",
+            "width": 376,
+            "padding": 8,
+            "radius": 16,
+            "background": "linear-gradient(90deg, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 5px, transparent 5px), linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1))",
+            "child": "c2_summaryCardInfo"
+          },
+          {
+            "id": "c2_summaryCardInfo",
+            "component": "Column",
+            "width": 360,
+            "gap": 8,
+            "children": [
+              "c2_summaryRow"
+            ],
+            "paddingLeft": 8
+          },
+          {
+            "id": "c2_summaryRow",
+            "component": "Row",
+            "width": 352,
+            "gap": 8,
+            "align": "start",
+            "children": [
+              "c2_summaryIcon",
+              "c2_summary"
+            ]
+          },
+          {
+            "id": "c2_summaryIcon",
+            "component": "Icon",
+            "name": "vg_blub",
+            "size": 16,
+            "color": "#ffaa00"
+          },
+          {
+            "id": "c2_summary",
+            "component": "Text",
+            "text": {
+              "path": "/brief2/computed/summary"
+            },
+            "fontSize": 14,
+            "lineHeight": 18,
+            "fontWeight": 400,
+            "color": "#ffffff",
+            "weight": 1
+          },
+          {
+            "id": "c2_stepsPanel",
+            "component": "Column",
+            "width": 376,
+            "gap": 10,
+            "children": [
+              "c2_stepsLabel",
+              "c2_steps"
+            ]
+          },
+          {
+            "id": "c2_stepsLabel",
+            "component": "Text",
+            "text": {
+              "path": "/brief2/computed/nextStepsLabel"
+            },
+            "fontSize": 16,
+            "lineHeight": 22,
+            "fontWeight": 700,
+            "color": "#ffaa00"
+          },
+          {
+            "id": "c2_steps",
+            "component": "List",
+            "direction": "vertical",
+            "width": 376,
+            "gap": 8,
+            "children": {
+              "componentId": "c2_step",
+              "path": "/brief2/computed/nextSteps"
+            }
+          },
+          {
+            "id": "c2_step",
+            "component": "Card",
+            "width": 376,
+            "padding": 8,
+            "radius": 16,
+            "background": "linear-gradient(90deg, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 5px, transparent 5px), linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1))",
+            "child": "c2_stepInfo"
+          },
+          {
+            "id": "c2_stepInfo",
+            "component": "Column",
+            "width": 360,
+            "gap": 8,
+            "children": [
+              "c2_stepRow"
+            ]
+          },
+          {
+            "id": "c2_stepRow",
+            "component": "Row",
+            "width": 360,
+            "gap": 8,
+            "align": "start",
+            "children": [
+              "c2_stepNumber",
+              "c2_stepContent"
+            ]
+          },
+          {
+            "id": "c2_stepNumber",
+            "component": "Badge",
+            "text": {
+              "path": "number"
+            },
+            "height": 20,
+            "minWidth": 20,
+            "radius": 10,
+            "color": "rgba(255,255,255,0.2)",
+            "fontSize": 12,
+            "fontWeight": 400,
+            "textColor": "#ffffff",
+            "width": 20,
+            "paddingX": 0,
+            "paddingY": 0
+          },
+          {
+            "id": "c2_stepContent",
+            "component": "Column",
+            "weight": 1,
+            "gap": 4,
+            "children": [
+              "c2_loonaBadges",
+              "c2_stepText"
+            ]
+          },
+          {
+            "id": "c2_loonaBadges",
+            "component": "List",
+            "direction": "vertical",
+            "children": {
+              "componentId": "c2_loonaBadge",
+              "path": "loonaBadges"
+            }
+          },
+          {
+            "id": "c2_loonaBadge",
+            "component": "Row",
+            "gap": 0,
+            "align": "center",
+            "justify": "start",
+            "children": [
+              "c2_loonaBadgeLabel"
+            ]
+          },
+          {
+            "id": "c2_stepText",
+            "component": "Text",
+            "text": {
+              "path": "text"
+            },
+            "fontSize": 14,
+            "lineHeight": 18,
+            "fontWeight": 400,
+            "color": "#ffffff"
+          },
+          {
+            "id": "c2_projectLabel",
+            "component": "Badge",
+            "text": {
+              "path": "/brief2/computed/projectLabel"
+            },
+            "variant": "default",
+            "size": "large",
+            "hugWidth": true,
+            "height": 24,
+            "minWidth": 24,
+            "maxWidth": 376,
+            "radius": 9999,
+            "color": "#ffaa00",
+            "fontSize": 12,
+            "fontWeight": 700,
+            "textColor": "#000000"
+          },
+          {
+            "id": "c2_loonaBadgeLabel",
+            "component": "Badge",
+            "text": "Loona 可以帮忙",
+            "variant": "secondary",
+            "height": 20,
+            "hugWidth": true,
+            "radius": 9999,
+            "color": "rgba(255,170,0,0.3)",
+            "fontSize": 12,
+            "fontWeight": 700,
+            "textColor": "#ffaa00"
+          },
+          {
+            "id": "c3_root",
+            "component": "Card",
+            "width": 400,
+            "minWidth": 400,
+            "maxWidth": 400,
+            "maxHeight": 360,
+            "padding": 12,
+            "radius": 24,
+            "borderWidth": 0,
+            "background": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20preserveAspectRatio%3D%22none%22%20width%3D%22400%22%20height%3D%22360%22%20viewBox%3D%220%200%20400%20360%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22a2uiGradientStroke%22%20x1%3D%2250%25%22%20y1%3D%22100%25%22%20x2%3D%2250%25%22%20y2%3D%220%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgb(255%2C255%2C255)%22%20stop-opacity%3D%220.1%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgb(255%2C255%2C255)%22%20stop-opacity%3D%220.3%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20x%3D%220.5%22%20y%3D%220.5%22%20width%3D%22399%22%20height%3D%22359%22%20rx%3D%2223.5%22%20ry%3D%2223.5%22%20fill%3D%22none%22%20stroke%3D%22url(%23a2uiGradientStroke)%22%20stroke-width%3D%221%22%20vector-effect%3D%22non-scaling-stroke%22%2F%3E%3C%2Fsvg%3E\") center / 100% 100% no-repeat, linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))",
+            "overflowHidden": true,
+            "child": "c3_layout"
+          },
+          {
+            "id": "c3_layout",
+            "component": "Column",
+            "width": 376,
+            "gap": 10,
+            "children": [
+              "c3_headerArea",
+              "c3_divider",
+              "c3_content"
+            ]
+          },
+          {
+            "id": "c3_headerArea",
+            "component": "List",
+            "direction": "vertical",
+            "width": 376,
+            "maxHeight": 80,
+            "overflowX": "hidden",
+            "overflowY": "auto",
+            "gap": 10,
+            "children": [
+              "c3_topRow"
+            ]
+          },
+          {
+            "id": "c3_topRow",
+            "component": "Column",
+            "width": 376,
+            "gap": 8,
+            "children": [
+              "c3_project",
+              "c3_title"
+            ]
+          },
+          {
+            "id": "c3_project",
+            "component": "Row",
+            "gap": 0,
+            "align": "center",
+            "justify": "start",
+            "children": [
+              "c3_projectLabel"
+            ]
+          },
+          {
+            "id": "c3_title",
+            "component": "Text",
+            "text": {
+              "path": "/brief3/computed/title"
+            },
+            "fontSize": 16,
+            "lineHeight": 22,
+            "fontWeight": 700,
+            "color": "#ffffff"
+          },
+          {
+            "id": "c3_divider",
+            "component": "Spacer",
+            "width": 376,
+            "height": 1,
+            "backgroundColor": "rgba(255,255,255,0.30)"
+          },
+          {
+            "id": "c3_content",
+            "component": "List",
+            "direction": "vertical",
+            "width": 376,
+            "maxHeight": 235,
+            "overflowX": "hidden",
+            "overflowY": "auto",
+            "gap": 10,
+            "children": [
+              "c3_summaryCard",
+              "c3_stepsPanel"
+            ]
+          },
+          {
+            "id": "c3_summaryCard",
+            "component": "Card",
+            "width": 376,
+            "padding": 8,
+            "radius": 16,
+            "background": "linear-gradient(90deg, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 5px, transparent 5px), linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1))",
+            "child": "c3_summaryCardInfo"
+          },
+          {
+            "id": "c3_summaryCardInfo",
+            "component": "Column",
+            "width": 360,
+            "gap": 8,
+            "children": [
+              "c3_summaryRow"
+            ],
+            "paddingLeft": 8
+          },
+          {
+            "id": "c3_summaryRow",
+            "component": "Row",
+            "width": 352,
+            "gap": 8,
+            "align": "start",
+            "children": [
+              "c3_summaryIcon",
+              "c3_summary"
+            ]
+          },
+          {
+            "id": "c3_summaryIcon",
+            "component": "Icon",
+            "name": "vg_blub",
+            "size": 16,
+            "color": "#ffaa00"
+          },
+          {
+            "id": "c3_summary",
+            "component": "Text",
+            "text": {
+              "path": "/brief3/computed/summary"
+            },
+            "fontSize": 14,
+            "lineHeight": 18,
+            "fontWeight": 400,
+            "color": "#ffffff",
+            "weight": 1
+          },
+          {
+            "id": "c3_stepsPanel",
+            "component": "Column",
+            "width": 376,
+            "gap": 10,
+            "children": [
+              "c3_stepsLabel",
+              "c3_steps"
+            ]
+          },
+          {
+            "id": "c3_stepsLabel",
+            "component": "Text",
+            "text": {
+              "path": "/brief3/computed/nextStepsLabel"
+            },
+            "fontSize": 16,
+            "lineHeight": 22,
+            "fontWeight": 700,
+            "color": "#ffaa00"
+          },
+          {
+            "id": "c3_steps",
+            "component": "List",
+            "direction": "vertical",
+            "width": 376,
+            "gap": 8,
+            "children": {
+              "componentId": "c3_step",
+              "path": "/brief3/computed/nextSteps"
+            }
+          },
+          {
+            "id": "c3_step",
+            "component": "Card",
+            "width": 376,
+            "padding": 8,
+            "radius": 16,
+            "background": "linear-gradient(90deg, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 5px, transparent 5px), linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1))",
+            "child": "c3_stepInfo"
+          },
+          {
+            "id": "c3_stepInfo",
+            "component": "Column",
+            "width": 360,
+            "gap": 8,
+            "children": [
+              "c3_stepRow"
+            ]
+          },
+          {
+            "id": "c3_stepRow",
+            "component": "Row",
+            "width": 360,
+            "gap": 8,
+            "align": "start",
+            "children": [
+              "c3_stepNumber",
+              "c3_stepContent"
+            ]
+          },
+          {
+            "id": "c3_stepNumber",
+            "component": "Badge",
+            "text": {
+              "path": "number"
+            },
+            "height": 20,
+            "minWidth": 20,
+            "radius": 10,
+            "color": "rgba(255,255,255,0.2)",
+            "fontSize": 12,
+            "fontWeight": 400,
+            "textColor": "#ffffff",
+            "width": 20,
+            "paddingX": 0,
+            "paddingY": 0
+          },
+          {
+            "id": "c3_stepContent",
+            "component": "Column",
+            "weight": 1,
+            "gap": 4,
+            "children": [
+              "c3_loonaBadges",
+              "c3_stepText"
+            ]
+          },
+          {
+            "id": "c3_loonaBadges",
+            "component": "List",
+            "direction": "vertical",
+            "children": {
+              "componentId": "c3_loonaBadge",
+              "path": "loonaBadges"
+            }
+          },
+          {
+            "id": "c3_loonaBadge",
+            "component": "Row",
+            "gap": 0,
+            "align": "center",
+            "justify": "start",
+            "children": [
+              "c3_loonaBadgeLabel"
+            ]
+          },
+          {
+            "id": "c3_stepText",
+            "component": "Text",
+            "text": {
+              "path": "text"
+            },
+            "fontSize": 14,
+            "lineHeight": 18,
+            "fontWeight": 400,
+            "color": "#ffffff"
+          },
+          {
+            "id": "c3_projectLabel",
+            "component": "Badge",
+            "text": {
+              "path": "/brief3/computed/projectLabel"
+            },
+            "variant": "default",
+            "size": "large",
+            "hugWidth": true,
+            "height": 24,
+            "minWidth": 24,
+            "maxWidth": 376,
+            "radius": 9999,
+            "color": "#ffaa00",
+            "fontSize": 12,
+            "fontWeight": 700,
+            "textColor": "#000000"
+          },
+          {
+            "id": "c3_loonaBadgeLabel",
+            "component": "Badge",
+            "text": "Loona 可以帮忙",
+            "variant": "secondary",
+            "height": 20,
+            "hugWidth": true,
+            "radius": 9999,
+            "color": "rgba(255,170,0,0.3)",
+            "fontSize": 12,
+            "fontWeight": 700,
+            "textColor": "#ffaa00"
+          },
+          {
+            "id": "c4_root",
+            "component": "Card",
+            "width": 400,
+            "minWidth": 400,
+            "maxWidth": 400,
+            "maxHeight": 360,
+            "padding": 12,
+            "radius": 24,
+            "borderWidth": 0,
+            "background": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20preserveAspectRatio%3D%22none%22%20width%3D%22400%22%20height%3D%22360%22%20viewBox%3D%220%200%20400%20360%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22a2uiGradientStroke%22%20x1%3D%2250%25%22%20y1%3D%22100%25%22%20x2%3D%2250%25%22%20y2%3D%220%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgb(255%2C255%2C255)%22%20stop-opacity%3D%220.1%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgb(255%2C255%2C255)%22%20stop-opacity%3D%220.3%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20x%3D%220.5%22%20y%3D%220.5%22%20width%3D%22399%22%20height%3D%22359%22%20rx%3D%2223.5%22%20ry%3D%2223.5%22%20fill%3D%22none%22%20stroke%3D%22url(%23a2uiGradientStroke)%22%20stroke-width%3D%221%22%20vector-effect%3D%22non-scaling-stroke%22%2F%3E%3C%2Fsvg%3E\") center / 100% 100% no-repeat, linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))",
+            "overflowHidden": true,
+            "child": "c4_layout"
+          },
+          {
+            "id": "c4_layout",
+            "component": "Column",
+            "width": 376,
+            "gap": 10,
+            "children": [
+              "c4_header",
+              "c4_divider",
+              "c4_items"
+            ]
+          },
+          {
+            "id": "c4_header",
+            "component": "Row",
+            "width": 376,
+            "height": 32,
+            "gap": 8,
+            "align": "center",
+            "children": [
+              "c4_icon",
+              "c4_titleArea",
+              "c4_count"
+            ]
+          },
+          {
+            "id": "c4_icon",
+            "component": "RiveAnim",
+            "file": "calendar_pen_drawing",
+            "width": 32,
+            "height": 32
+          },
+          {
+            "id": "c4_titleArea",
+            "component": "List",
+            "direction": "vertical",
+            "weight": 1,
+            "maxHeight": 32,
+            "overflowY": "auto",
+            "overflowX": "hidden",
+            "children": [
+              "c4_title"
+            ]
+          },
+          {
+            "id": "c4_title",
+            "component": "Text",
+            "text": {
+              "path": "/brief4/computed/title"
+            },
+            "fontSize": 18,
+            "lineHeight": 22,
+            "fontWeight": 700,
+            "color": "#ffffff"
+          },
+          {
+            "id": "c4_divider",
+            "component": "Spacer",
+            "width": 376,
+            "height": 1,
+            "backgroundColor": "rgba(255,255,255,0.30)"
+          },
+          {
+            "id": "c4_count",
+            "component": "Badge",
+            "text": {
+              "path": "/brief4/computed/itemCountText"
+            },
+            "height": 20,
+            "minWidth": 20,
+            "hugWidth": true,
+            "radius": 9999,
+            "color": "rgba(255,255,255,0.1)",
+            "fontSize": 12,
+            "fontWeight": 700,
+            "textColor": "rgba(255,255,255,0.8)"
+          },
+          {
+            "id": "c4_items",
+            "component": "List",
+            "direction": "vertical",
+            "width": 376,
+            "maxHeight": 283,
+            "overflowX": "hidden",
+            "overflowY": "auto",
+            "gap": 10,
+            "children": {
+              "componentId": "c4_item",
+              "path": "/brief4/computed/items"
+            }
+          },
+          {
+            "id": "c4_item",
+            "component": "Card",
+            "width": 376,
+            "padding": 8,
+            "radius": 16,
+            "background": "linear-gradient(90deg, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 5px, transparent 5px), linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1))",
+            "child": "c4_itemInfo"
+          },
+          {
+            "id": "c4_itemInfo",
+            "component": "Column",
+            "width": 360,
+            "gap": 8,
+            "children": [
+              "c4_itemTitle",
+              "c4_itemSecondary",
+              "c4_itemMeta"
+            ],
+            "paddingLeft": 16
+          },
+          {
+            "id": "c4_itemTitle",
+            "component": "Text",
+            "text": {
+              "path": "title"
+            },
+            "fontSize": 16,
+            "lineHeight": 22,
+            "fontWeight": 700,
+            "color": "#ffffff"
+          },
+          {
+            "id": "c4_itemSecondary",
+            "component": "Text",
+            "text": {
+              "path": "secondary"
+            },
+            "fontSize": 14,
+            "lineHeight": 18,
+            "fontWeight": 400,
+            "color": "rgba(255,255,255,0.8)"
+          },
+          {
+            "id": "c4_itemMeta",
+            "component": "Text",
+            "text": {
+              "path": "meta"
+            },
+            "fontSize": 14,
+            "lineHeight": 18,
+            "fontWeight": 400,
+            "color": "rgba(255,255,255,0.8)"
+          },
+          {
+            "id": "c5_root",
+            "component": "Card",
+            "width": 400,
+            "minWidth": 400,
+            "maxWidth": 400,
+            "maxHeight": 360,
+            "padding": 12,
+            "radius": 24,
+            "borderWidth": 0,
+            "background": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20preserveAspectRatio%3D%22none%22%20width%3D%22400%22%20height%3D%22360%22%20viewBox%3D%220%200%20400%20360%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22a2uiGradientStroke%22%20x1%3D%2250%25%22%20y1%3D%22100%25%22%20x2%3D%2250%25%22%20y2%3D%220%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22rgb(255%2C255%2C255)%22%20stop-opacity%3D%220.1%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22rgb(255%2C255%2C255)%22%20stop-opacity%3D%220.3%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20x%3D%220.5%22%20y%3D%220.5%22%20width%3D%22399%22%20height%3D%22359%22%20rx%3D%2223.5%22%20ry%3D%2223.5%22%20fill%3D%22none%22%20stroke%3D%22url(%23a2uiGradientStroke)%22%20stroke-width%3D%221%22%20vector-effect%3D%22non-scaling-stroke%22%2F%3E%3C%2Fsvg%3E\") center / 100% 100% no-repeat, linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))",
+            "overflowHidden": true,
+            "child": "c5_layout"
+          },
+          {
+            "id": "c5_layout",
+            "component": "Column",
+            "width": 376,
+            "gap": 10,
+            "children": [
+              "c5_header",
+              "c5_divider",
+              "c5_content"
+            ]
+          },
+          {
+            "id": "c5_header",
+            "component": "Row",
+            "width": 376,
+            "height": 32,
+            "gap": 8,
+            "align": "center",
+            "children": [
+              "c5_icon",
+              "c5_titleArea",
+              "c5_count"
+            ]
+          },
+          {
+            "id": "c5_icon",
+            "component": "RiveAnim",
+            "file": "tools",
+            "viewModel": "ViewModel1",
+            "viewModelInputs": {
+              "toolsName": "commonTask",
+              "toolsActions": "none"
+            },
+            "width": 32,
+            "height": 32
+          },
+          {
+            "id": "c5_titleArea",
+            "component": "List",
+            "direction": "vertical",
+            "weight": 1,
+            "maxHeight": 32,
+            "overflowY": "auto",
+            "overflowX": "hidden",
+            "children": [
+              "c5_title"
+            ]
+          },
+          {
+            "id": "c5_title",
+            "component": "Text",
+            "text": {
+              "path": "/brief5/computed/title"
+            },
+            "fontSize": 18,
+            "lineHeight": 22,
+            "fontWeight": 700,
+            "color": "#ffffff"
+          },
+          {
+            "id": "c5_divider",
+            "component": "Spacer",
+            "width": 376,
+            "height": 1,
+            "backgroundColor": "rgba(255,255,255,0.30)"
+          },
+          {
+            "id": "c5_count",
+            "component": "Badge",
+            "text": {
+              "path": "/brief5/computed/itemCountText"
+            },
+            "height": 20,
+            "minWidth": 20,
+            "hugWidth": true,
+            "radius": 9999,
+            "color": "rgba(255,255,255,0.1)",
+            "fontSize": 12,
+            "fontWeight": 700,
+            "textColor": "rgba(255,255,255,0.8)"
+          },
+          {
+            "id": "c5_content",
+            "component": "List",
+            "direction": "vertical",
+            "width": 376,
+            "maxHeight": 283,
+            "overflowX": "hidden",
+            "overflowY": "auto",
+            "gap": 10,
+            "children": [
+              "c5_items"
+            ]
+          },
+          {
+            "id": "c5_items",
+            "component": "List",
+            "direction": "vertical",
+            "width": 376,
+            "gap": 10,
+            "children": {
+              "componentId": "c5_item",
+              "path": "/brief5/computed/items"
+            }
+          },
+          {
+            "id": "c5_item",
+            "component": "Card",
+            "width": 376,
+            "padding": 8,
+            "radius": 16,
+            "background": "linear-gradient(90deg, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 5px, transparent 5px), linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1))",
+            "child": "c5_itemInfo"
+          },
+          {
+            "id": "c5_itemInfo",
+            "component": "Column",
+            "width": 360,
+            "gap": 8,
+            "children": [
+              "c5_itemRow"
+            ]
+          },
+          {
+            "id": "c5_itemRow",
+            "component": "Row",
+            "width": 360,
+            "gap": 8,
+            "align": "start",
+            "children": [
+              "c5_itemNumber",
+              "c5_itemText"
+            ]
+          },
+          {
+            "id": "c5_itemNumber",
+            "component": "Badge",
+            "text": {
+              "path": "title"
+            },
+            "height": 20,
+            "minWidth": 20,
+            "radius": 10,
+            "color": "rgba(255,255,255,0.2)",
+            "fontSize": 12,
+            "fontWeight": 400,
+            "textColor": "#ffffff",
+            "width": 20,
+            "paddingX": 0,
+            "paddingY": 0
+          },
+          {
+            "id": "c5_itemText",
+            "component": "Text",
+            "text": {
+              "path": "secondary"
+            },
+            "fontSize": 16,
+            "lineHeight": 22,
+            "fontWeight": 400,
+            "color": "#ffffff",
+            "weight": 1
+          }
+        ]
+      }
+    },
+    {
+      "version": "v0.9",
+      "updateDataModel": {
+        "surfaceId": "portfolio-daily-brief",
+        "path": "/",
+        "value": {
+          "idx": 0,
+          "cards": [
+            {
+              "computed": {
+                "cardType": "overview",
+                "title": "每日简报",
+                "briefIcon": "calendar_circle_checkmark",
+                "listHeaderIcon": "calendar_circle_checkmark",
+                "body": "",
+                "focusCountText": "3",
+                "itemCountText": "0",
+                "focusLabel": "今日焦点",
+                "projectLabel": "",
+                "summary": "",
+                "nextStepsLabel": "下一步",
+                "focusItems": [
+                  {
+                    "title": "用例差异卡点待确认",
+                    "summary": "用例差异卡点待确认，今日 15:00 参加评审。",
+                    "projectLabel": "评测平台对齐"
+                  },
+                  {
+                    "title": "完成表格翻译",
+                    "summary": "今日到期：您需在周五前完成表格翻译。",
+                    "projectLabel": "多语言支持"
+                  },
+                  {
+                    "title": "提交实习生日报",
+                    "summary": "18:00 前提交实习生日报。",
+                    "projectLabel": "其他待办"
+                  }
+                ],
+                "nextSteps": [],
+                "items": []
+              },
+              "render": {},
+              "action_context": {}
+            },
+            {
+              "computed": {
+                "cardType": "highlight",
+                "title": "用例差异卡点待确认",
+                "briefIcon": "calendar_circle_checkmark",
+                "listHeaderIcon": "calendar_circle_checkmark",
+                "body": "",
+                "focusCountText": "0",
+                "itemCountText": "0",
+                "focusLabel": "今日焦点",
+                "projectLabel": "评测平台对齐",
+                "summary": "用例差异卡点待确认，今日 15:00 参加评审。",
+                "nextStepsLabel": "下一步",
+                "focusItems": [],
+                "nextSteps": [
+                  {
+                    "number": "1",
+                    "text": "核对评测自动化差异报告与争议用例。",
+                    "loonaBadges": []
+                  },
+                  {
+                    "number": "2",
+                    "text": "今日 15:00 准时参加用例评审会。",
+                    "loonaBadges": []
+                  }
+                ],
+                "items": []
+              },
+              "render": {},
+              "action_context": {}
+            },
+            {
+              "computed": {
+                "cardType": "highlight",
+                "title": "完成表格翻译",
+                "briefIcon": "calendar_circle_checkmark",
+                "listHeaderIcon": "calendar_circle_checkmark",
+                "body": "",
+                "focusCountText": "0",
+                "itemCountText": "0",
+                "focusLabel": "今日焦点",
+                "projectLabel": "多语言支持",
+                "summary": "今日到期：您需在周五前完成表格翻译。",
+                "nextStepsLabel": "下一步",
+                "focusItems": [],
+                "nextSteps": [
+                  {
+                    "number": "1",
+                    "text": "导出待翻译表格字段并核对专业术语库。",
+                    "loonaBadges": []
+                  },
+                  {
+                    "number": "2",
+                    "text": "周五下班前完成多语言版本提交并同步测试。",
+                    "loonaBadges": []
+                  }
+                ],
+                "items": []
+              },
+              "render": {},
+              "action_context": {}
+            },
+            {
+              "computed": {
+                "cardType": "highlight",
+                "title": "提交实习生日报",
+                "briefIcon": "calendar_circle_checkmark",
+                "listHeaderIcon": "calendar_circle_checkmark",
+                "body": "",
+                "focusCountText": "0",
+                "itemCountText": "0",
+                "focusLabel": "今日焦点",
+                "projectLabel": "其他待办",
+                "summary": "18:00 前提交实习生日报。",
+                "nextStepsLabel": "下一步",
+                "focusItems": [],
+                "nextSteps": [
+                  {
+                    "number": "1",
+                    "text": "整理今日各模块评测跟进进展与遗留事项。",
+                    "loonaBadges": []
+                  },
+                  {
+                    "number": "2",
+                    "text": "18:00 前在飞书工作台提交实习生日报。",
+                    "loonaBadges": []
+                  }
+                ],
+                "items": []
+              },
+              "render": {},
+              "action_context": {}
+            },
+            {
+              "computed": {
+                "cardType": "start_now",
+                "title": "今天可以直接开始",
+                "briefIcon": "calendar_circle_checkmark",
+                "listHeaderIcon": "calendar_circle_checkmark",
+                "body": "",
+                "focusCountText": "0",
+                "itemCountText": "2",
+                "focusLabel": "今日焦点",
+                "projectLabel": "",
+                "summary": "",
+                "nextStepsLabel": "下一步",
+                "focusItems": [],
+                "nextSteps": [],
+                "items": [
+                  {
+                    "title": "1",
+                    "secondary": "15:00 参加用例差异卡点评审。",
+                    "meta": "",
+                    "icon": "vg_checkmark-circle",
+                    "color": "",
+                    "countText": ""
+                  },
+                  {
+                    "title": "2",
+                    "secondary": "周五前完成多语言表格翻译并提交。",
+                    "meta": "",
+                    "icon": "vg_checkmark-circle",
+                    "color": "",
+                    "countText": ""
+                  }
+                ]
+              },
+              "render": {},
+              "action_context": {}
+            }
+          ],
+          "brief0": {
+            "computed": {
+              "cardType": "overview",
+              "title": "每日简报",
+              "briefIcon": "calendar_circle_checkmark",
+              "listHeaderIcon": "calendar_circle_checkmark",
+              "body": "",
+              "focusCountText": "3",
+              "itemCountText": "0",
+              "focusLabel": "今日焦点",
+              "projectLabel": "",
+              "summary": "",
+              "nextStepsLabel": "下一步",
+              "focusItems": [
+                {
+                  "title": "用例差异卡点待确认",
+                  "summary": "用例差异卡点待确认，今日 15:00 参加评审。",
+                  "projectLabel": "评测平台对齐"
+                },
+                {
+                  "title": "完成表格翻译",
+                  "summary": "今日到期：您需在周五前完成表格翻译。",
+                  "projectLabel": "多语言支持"
+                },
+                {
+                  "title": "提交实习生日报",
+                  "summary": "18:00 前提交实习生日报。",
+                  "projectLabel": "其他待办"
+                }
+              ],
+              "nextSteps": [],
+              "items": []
+            },
+            "render": {},
+            "action_context": {}
+          },
+          "brief1": {
+            "computed": {
+              "cardType": "highlight",
+              "title": "用例差异卡点待确认",
+              "briefIcon": "calendar_circle_checkmark",
+              "listHeaderIcon": "calendar_circle_checkmark",
+              "body": "",
+              "focusCountText": "0",
+              "itemCountText": "0",
+              "focusLabel": "今日焦点",
+              "projectLabel": "评测平台对齐",
+              "summary": "用例差异卡点待确认，今日 15:00 参加评审。",
+              "nextStepsLabel": "下一步",
+              "focusItems": [],
+              "nextSteps": [
+                {
+                  "number": "1",
+                  "text": "核对评测自动化差异报告与争议用例。",
+                  "loonaBadges": []
+                },
+                {
+                  "number": "2",
+                  "text": "今日 15:00 准时参加用例评审会。",
+                  "loonaBadges": []
+                }
+              ],
+              "items": []
+            },
+            "render": {},
+            "action_context": {}
+          },
+          "brief2": {
+            "computed": {
+              "cardType": "highlight",
+              "title": "完成表格翻译",
+              "briefIcon": "calendar_circle_checkmark",
+              "listHeaderIcon": "calendar_circle_checkmark",
+              "body": "",
+              "focusCountText": "0",
+              "itemCountText": "0",
+              "focusLabel": "今日焦点",
+              "projectLabel": "多语言支持",
+              "summary": "今日到期：您需在周五前完成表格翻译。",
+              "nextStepsLabel": "下一步",
+              "focusItems": [],
+              "nextSteps": [
+                {
+                  "number": "1",
+                  "text": "导出待翻译表格字段并核对专业术语库。",
+                  "loonaBadges": []
+                },
+                {
+                  "number": "2",
+                  "text": "周五下班前完成多语言版本提交并同步测试。",
+                  "loonaBadges": []
+                }
+              ],
+              "items": []
+            },
+            "render": {},
+            "action_context": {}
+          },
+          "brief3": {
+            "computed": {
+              "cardType": "highlight",
+              "title": "提交实习生日报",
+              "briefIcon": "calendar_circle_checkmark",
+              "listHeaderIcon": "calendar_circle_checkmark",
+              "body": "",
+              "focusCountText": "0",
+              "itemCountText": "0",
+              "focusLabel": "今日焦点",
+              "projectLabel": "其他待办",
+              "summary": "18:00 前提交实习生日报。",
+              "nextStepsLabel": "下一步",
+              "focusItems": [],
+              "nextSteps": [
+                {
+                  "number": "1",
+                  "text": "整理今日各模块评测跟进进展与遗留事项。",
+                  "loonaBadges": []
+                },
+                {
+                  "number": "2",
+                  "text": "18:00 前在飞书工作台提交实习生日报。",
+                  "loonaBadges": []
+                }
+              ],
+              "items": []
+            },
+            "render": {},
+            "action_context": {}
+          },
+          "brief5": {
+            "computed": {
+              "cardType": "start_now",
+              "title": "今天可以直接开始",
+              "briefIcon": "calendar_circle_checkmark",
+              "listHeaderIcon": "calendar_circle_checkmark",
+              "body": "",
+              "focusCountText": "0",
+              "itemCountText": "2",
+              "focusLabel": "今日焦点",
+              "projectLabel": "",
+              "summary": "",
+              "nextStepsLabel": "下一步",
+              "focusItems": [],
+              "nextSteps": [],
+              "items": [
+                {
+                  "title": "1",
+                  "secondary": "15:00 参加用例差异卡点评审。",
+                  "meta": "",
+                  "icon": "vg_checkmark-circle",
+                  "color": "",
+                  "countText": ""
+                },
+                {
+                  "title": "2",
+                  "secondary": "周五前完成多语言表格翻译并提交。",
+                  "meta": "",
+                  "icon": "vg_checkmark-circle",
+                  "color": "",
+                  "countText": ""
+                }
+              ]
+            },
+            "render": {},
+            "action_context": {}
+          },
+          "_chip": {
+            "label": "每日简报",
+            "actionLabel": "详情",
+            "status": "success",
+            "icon": "calendar_circle_checkmark"
+          }
+        }
+      }
+    }
+  ]
+}

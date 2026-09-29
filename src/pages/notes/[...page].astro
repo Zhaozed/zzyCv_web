@@ -1,64 +1,550 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
-import type { GetStaticPaths, Page } from "astro";
-import { Icon } from "astro-icon/components";
-import PageHeading from "@/components/aria/PageHeading.astro";
-import Note from "@/components/note/Note.astro";
-import Pagination from "@/components/Paginator.astro";
+import { getCollection } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import FormattedDate from "@/components/FormattedDate.astro";
 import PageLayout from "@/layouts/Base.astro";
 import { collectionDateSort } from "@/utils/date";
 
 export const getStaticPaths = (async ({ paginate }) => {
-	const MAX_NOTES_PER_PAGE = 10;
 	const allNotes = await getCollection("note");
-	return paginate(allNotes.sort(collectionDateSort), { pageSize: MAX_NOTES_PER_PAGE });
+	return paginate(allNotes.sort(collectionDateSort), { pageSize: 100 });
 }) satisfies GetStaticPaths;
 
-interface Props {
-	page: Page<CollectionEntry<"note">>;
-}
-
-const { page } = Astro.props;
+const allNotes = await getCollection("note");
 
 const meta = {
-	description: "Read my collection of notes",
-	title: "Notes",
+	title: "学习笔记",
+	description: "赵泽宇的 AI 学习笔记：产品思考、技术学习与行业观察拆解。",
 };
 
-const paginationProps = {
-	...(page.url.prev && {
-		prevUrl: {
-			text: "← Previous Page",
-			url: page.url.prev,
-		},
-	}),
-	...(page.url.next && {
-		nextUrl: {
-			text: "Next Page →",
-			url: page.url.next,
-		},
-	}),
-};
+// 严格按照用户指定的结构组织三大分类
+const categories = [
+	{
+		id: "product-thinking",
+		num: "01",
+		title: "产品思考",
+		subtitle: "需求分析 · 场景选择 · 交互设计 · 效果评测 · 商业化",
+		categoryName: "产品思考",
+	},
+	{
+		id: "tech-learning",
+		num: "02",
+		title: "技术学习",
+		subtitle: "模型基础 · Prompt · RAG · Agent · 工具调用 · 动手实验",
+		categoryName: "技术学习",
+	},
+	{
+		id: "observations",
+		num: "03",
+		title: "观察与拆解",
+		subtitle: "AI 产品体验 · 案例分析 · 行业观察 · 个人判断",
+		categoryName: "观察与拆解",
+	},
+];
+
+const categoryBlocks = categories.map((cat) => {
+	const notes = allNotes
+		.filter((n) => n.data.category === cat.categoryName)
+		.sort(collectionDateSort);
+	return {
+		...cat,
+		notes,
+	};
+});
 ---
 
-<PageLayout meta={meta}>
-	<section class="relative z-20 mx-auto my-12 max-w-2xl px-7 lg:px-0">
-		<div class="flex items-end justify-between gap-4">
-			<PageHeading title={meta.title} />
-			<a
-				class="mb-2 shrink-0 text-neutral-400 transition-colors duration-200 hover:text-neutral-900 dark:hover:text-white"
-				href="/notes/rss.xml"
-				target="_blank"
-				aria-label="RSS feed"
-			>
-				<Icon aria-hidden="true" class="h-5 w-5" focusable="false" name="mdi:rss" />
-			</a>
-		</div>
-		<div class="mt-8 flex flex-col gap-5">
-			{
-				page.data.map((note) => <Note note={note} isPreview />)
-			}
-		</div>
-		<Pagination {...paginationProps} />
-	</section>
+<PageLayout showBackground={false} meta={meta}>
+	<div class="notes-wrapper">
+		<article class="notes-case">
+			<!-- 桌面端侧边目录（像 Cortex 一样，随滚动吸顶且高亮） -->
+			<aside class="notes-sidebar" aria-label="页内分类导航">
+				<nav class="notes-nav" aria-label="分类目录">
+					<p class="nav-heading">分类导航 / INDEX</p>
+					{
+						categoryBlocks.map((item, idx) => (
+							<a
+								href={`#${item.id}`}
+								class="nav-link"
+								data-target={item.id}
+								aria-current={idx === 0 ? "location" : undefined}
+							>
+								<span class="nav-num">{item.num}</span>
+								<span class="nav-text">{item.title}</span>
+							</a>
+						))
+					}
+				</nav>
+			</aside>
+
+			<!-- 移动端折叠目录 -->
+			<details class="notes-mobile-toc">
+				<summary>分类目录 <span aria-hidden="true">≡</span></summary>
+				<nav aria-label="移动端分类导航">
+					{
+						categoryBlocks.map((item) => (
+							<a href={`#${item.id}`}>
+								<span>{item.num}</span>
+								{item.title}
+							</a>
+						))
+					}
+				</nav>
+			</details>
+
+			<!-- 页面头部 -->
+			<header class="notes-hero" id="overview">
+				<h1 class="notes-title">
+					学习笔记<span class="title-dot" aria-hidden="true">.</span>
+				</h1>
+				<p class="notes-subtitle">
+					记录在学习过程中的深度思考、技术架构学习与行业观察拆解。
+				</p>
+			</header>
+
+			<!-- 三大分类板块内容流 -->
+			<div class="sections-stream">
+				{
+					categoryBlocks.map((cat) => (
+						<section id={cat.id} class="category-block" data-section-id={cat.id}>
+							<!-- 分类头部：编号与标题同行对齐，字体一致，无英文 -->
+							<div class="block-header">
+								<h2 class="block-title">
+									<span class="block-num">{cat.num}</span>
+									<span class="block-name">{cat.title}</span>
+									<span class="block-title-dot" aria-hidden="true">.</span>
+								</h2>
+								<p class="block-subtitle">{cat.subtitle}</p>
+							</div>
+
+							<!-- 笔记卡片网格 -->
+							<div class="notes-grid">
+								{cat.notes.map((note) => (
+									<a
+										href={`/notes/${note.id}/`}
+										class="note-card"
+										aria-label={`阅读笔记：${note.data.title}`}
+									>
+										<div class="card-top">
+											{note.data.subcategory && (
+												<span class="card-subcat">{note.data.subcategory}</span>
+											)}
+											<FormattedDate
+												class="card-date"
+												date={note.data.publishDate}
+												dateTimeOptions={{
+													year: "numeric",
+													month: "2-digit",
+													day: "2-digit",
+												}}
+											/>
+										</div>
+
+										<h3 class="card-title">
+											<span>{note.data.title}</span>
+											<span class="card-arrow" aria-hidden="true">
+												→
+											</span>
+										</h3>
+
+										{note.data.description && (
+											<p class="card-desc">{note.data.description}</p>
+										)}
+									</a>
+								))}
+							</div>
+						</section>
+					))
+				}
+			</div>
+		</article>
+	</div>
 </PageLayout>
+
+<script>
+	// Cortex 风格的侧边导航滚动监听 (Scrollspy)
+	function initScrollSpy() {
+		const sections = document.querySelectorAll<HTMLElement>(".category-block");
+		const navLinks = document.querySelectorAll<HTMLAnchorElement>(".notes-sidebar .nav-link");
+
+		if (!sections.length || !navLinks.length) return;
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						const id = entry.target.getAttribute("id");
+						navLinks.forEach((link) => {
+							if (link.getAttribute("href") === `#${id}`) {
+								link.setAttribute("aria-current", "location");
+							} else {
+								link.removeAttribute("aria-current");
+							}
+						});
+					}
+				});
+			},
+			{
+				rootMargin: "-15% 0px -70% 0px",
+				threshold: 0,
+			}
+		);
+
+		sections.forEach((section) => observer.observe(section));
+	}
+
+	document.addEventListener("DOMContentLoaded", initScrollSpy);
+</script>
+
+<style>
+	/* 全局页面包裹与主题变量 */
+	.notes-wrapper {
+		position: relative;
+		width: 100%;
+		overflow-x: clip;
+	}
+
+	.notes-case {
+		--notes-text: #242424;
+		--notes-muted: #686868;
+		--notes-faint: #888888;
+		--notes-line: rgba(0, 0, 0, 0.08);
+		--notes-soft: #f7f7f5;
+		--notes-card-bg: #ffffff;
+		--notes-card-border: rgba(0, 0, 0, 0.08);
+		--notes-card-border-hover: rgba(180, 58, 48, 0.4);
+		--notes-accent: #b43a30;
+		--notes-accent-soft: rgba(180, 58, 48, 0.06);
+
+		position: relative;
+		z-index: 20;
+		max-width: 960px;
+		margin: 0 auto;
+		padding: 38px 24px 80px;
+		color: var(--notes-text);
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+	}
+
+	:global([data-theme="dark"]) .notes-case {
+		--notes-text: #ededeb;
+		--notes-muted: #b0b0ac;
+		--notes-faint: #80807c;
+		--notes-line: rgba(255, 255, 255, 0.09);
+		--notes-soft: #161615;
+		--notes-card-bg: rgba(255, 255, 255, 0.025);
+		--notes-card-border: rgba(255, 255, 255, 0.08);
+		--notes-card-border-hover: rgba(240, 154, 143, 0.4);
+		--notes-accent: #f09a8f;
+		--notes-accent-soft: rgba(240, 154, 143, 0.1);
+	}
+
+	/* Cortex 侧边栏：绝对定位 + 粘性浮动 */
+	.notes-sidebar {
+		position: absolute;
+		left: calc(100% + 28px);
+		top: 48px;
+		bottom: 72px;
+		width: 148px;
+	}
+
+	.notes-nav {
+		position: sticky;
+		top: 116px;
+		padding-left: 14px;
+		border-left: 1px solid var(--notes-line);
+	}
+
+	.nav-heading {
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+		font-size: 11px;
+		letter-spacing: 0.08em;
+		color: var(--notes-faint);
+		margin: 0 0 12px 6px;
+		text-transform: uppercase;
+	}
+
+	.nav-link {
+		position: relative;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		padding: 8px 6px;
+		color: var(--notes-muted);
+		font-size: 13px;
+		white-space: nowrap;
+		text-decoration: none;
+		transition: color 0.15s ease;
+	}
+
+	.nav-link:hover {
+		color: var(--notes-text);
+	}
+
+	.nav-num {
+		font-size: 11px;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+		color: var(--notes-faint);
+		min-width: 18px;
+	}
+
+	.nav-text {
+		flex: 1;
+	}
+
+	.nav-link[aria-current="location"] {
+		color: var(--notes-accent);
+		font-weight: 600;
+	}
+
+	.nav-link[aria-current="location"] .nav-num {
+		color: var(--notes-accent);
+		opacity: 1;
+	}
+
+	.nav-link[aria-current="location"]::before {
+		content: "";
+		position: absolute;
+		left: -15px;
+		width: 2px;
+		top: 6px;
+		bottom: 6px;
+		background: var(--notes-accent);
+	}
+
+	/* 移动端折叠目录 */
+	.notes-mobile-toc {
+		display: none;
+	}
+
+	@media (max-width: 1260px) {
+		.notes-sidebar {
+			display: none;
+		}
+
+		.notes-mobile-toc {
+			display: block;
+			margin-bottom: 28px;
+			border: 1px solid var(--notes-line);
+			border-radius: 8px;
+			background: var(--notes-soft);
+			padding: 10px 16px;
+		}
+
+		.notes-mobile-toc summary {
+			cursor: pointer;
+			font-size: 13px;
+			font-weight: 600;
+			color: var(--notes-text);
+			list-style: none;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.notes-mobile-toc summary::-webkit-details-marker {
+			display: none;
+		}
+
+		.notes-mobile-toc nav {
+			margin-top: 10px;
+			padding-top: 10px;
+			border-top: 1px dashed var(--notes-line);
+			display: flex;
+			flex-direction: column;
+			gap: 6px;
+		}
+
+		.notes-mobile-toc a {
+			font-size: 13px;
+			color: var(--notes-muted);
+			display: flex;
+			gap: 8px;
+			text-decoration: none;
+			padding: 4px 0;
+		}
+	}
+
+	/* Hero 头部 */
+	.notes-hero {
+		margin-bottom: 40px;
+	}
+
+	.notes-title {
+		margin: 0;
+		font-size: clamp(32px, 4.5vw, 42px);
+		font-weight: 700;
+		letter-spacing: -0.04em;
+		line-height: 1.15;
+	}
+
+	.title-dot {
+		color: var(--notes-accent);
+	}
+
+	.notes-subtitle {
+		margin: 12px 0 0;
+		font-size: 15px;
+		line-height: 1.6;
+		color: var(--notes-muted);
+		max-width: 680px;
+	}
+
+	/* 分类流 */
+	.sections-stream {
+		display: flex;
+		flex-direction: column;
+		gap: 48px;
+	}
+
+	.category-block {
+		scroll-margin-top: 110px;
+	}
+
+	/* 模块头部：编号与标题对齐，相同字体 */
+	.block-header {
+		margin-bottom: 20px;
+		padding-bottom: 12px;
+		border-bottom: 1px solid var(--notes-line);
+	}
+
+	.block-title {
+		margin: 0;
+		font-size: 24px;
+		font-weight: 700;
+		letter-spacing: -0.03em;
+		line-height: 1.3;
+		display: flex;
+		align-items: baseline;
+		gap: 10px;
+	}
+
+	.block-num {
+		color: var(--notes-accent);
+		font-family: inherit;
+		font-size: inherit;
+		font-weight: inherit;
+		letter-spacing: -0.02em;
+	}
+
+	.block-name {
+		color: inherit;
+		font-family: inherit;
+		font-weight: inherit;
+	}
+
+	.block-title-dot {
+		color: var(--notes-accent);
+		margin-left: -6px;
+	}
+
+	.block-subtitle {
+		margin: 8px 0 0;
+		font-size: 13px;
+		color: var(--notes-muted);
+		line-height: 1.5;
+	}
+
+	/* 卡片网格 */
+	.notes-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 16px;
+	}
+
+	/* 笔记卡片：Cortex 高级卡片样式 */
+	.note-card {
+		display: flex;
+		flex-direction: column;
+		background: var(--notes-card-bg);
+		border: 1px solid var(--notes-card-border);
+		border-radius: 12px;
+		padding: 22px;
+		color: inherit;
+		text-decoration: none;
+		position: relative;
+		transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+
+	.note-card:hover {
+		border-color: var(--notes-card-border-hover);
+		transform: translateY(-2px);
+		box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.08);
+	}
+
+	:global([data-theme="dark"]) .note-card:hover {
+		box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.4);
+	}
+
+	.card-top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 12px;
+	}
+
+	.card-subcat {
+		display: inline-block;
+		font-size: 11px;
+		font-weight: 600;
+		color: var(--notes-accent);
+		background: var(--notes-accent-soft);
+		padding: 2px 7px;
+		border-radius: 4px;
+	}
+
+	.card-date {
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+		font-size: 12px;
+		color: var(--notes-faint);
+	}
+
+	.card-title {
+		margin: 0;
+		font-size: 16px;
+		font-weight: 650;
+		line-height: 1.45;
+		letter-spacing: -0.02em;
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 8px;
+		transition: color 0.15s ease;
+	}
+
+	.card-arrow {
+		font-size: 14px;
+		color: var(--notes-faint);
+		transition: transform 0.2s ease, color 0.2s ease;
+		flex-shrink: 0;
+		margin-top: 2px;
+	}
+
+	.note-card:hover .card-title {
+		color: var(--notes-accent);
+	}
+
+	.note-card:hover .card-arrow {
+		color: var(--notes-accent);
+		transform: translateX(4px);
+	}
+
+	.card-desc {
+		margin: 10px 0 0;
+		font-size: 13px;
+		line-height: 1.6;
+		color: var(--notes-muted);
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	@media (max-width: 680px) {
+		.notes-case {
+			padding: 28px 16px 64px;
+		}
+
+		.notes-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

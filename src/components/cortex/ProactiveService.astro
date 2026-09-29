@@ -1,0 +1,230 @@
+---
+import {
+	executionDilemmas,
+	inputScopeDilemmas,
+	kindProjectionMatrix,
+	stageOutcomes
+} from "@/data/cortex-proactive";
+import BriefEvaluation from "./BriefEvaluation.astro";
+import BriefShowcase from "./BriefShowcase.astro";
+---
+
+<section
+	class="ca-section mo-section"
+	id="proactive"
+	data-case-section
+	aria-labelledby="proactive-heading">
+	<header class="ca-section-head">
+		<p class="ca-kicker"><span>02</span> 核心攻坚 · 主动智能闭环</p>
+		<h2 id="proactive-heading">DeskMate Daily Brief 晨间智能工作简报</h2>
+	</header>
+
+	<!-- 01 场景痛点与需求定义 (朴素人话阐述，去 AI 味) -->
+	<div class="ca-block mo-intro-block ca-reveal">
+		<h3><span>场景定义与痛点</span>在坐下工位的第一分钟，帮用户快速看清今天重点</h3>
+		<p class="ca-copy">
+			在多项目并行的日常办公中，大家早晨坐上工位，最繁琐的往往不是着手干活，而是「理清头绪」——昨晚群里没结的讨论、被排满的日程会议、跨团队项目的各色进展，往往要花上
+			10 来分钟翻找各个应用，才能弄清楚今天到底该先跟进什么。
+		</p>
+		<p class="ca-copy">
+			基于桌面机器人的硬件形态，我们希望给用户一个贴心的小助手体验：当用户早晨坐到工位、随手将手机贴到底座时，设备能极快地整理出「今天最需要关注的几件大事」，让用户在一上工就能看清主线、轻松进入工作状态。
+		</p>
+		<div class="mo-role-card">
+			<strong>我的职责：</strong>我负责桌面机器人 <strong
+				>DeskMate Daily Brief（晨间智能工作简报）</strong
+			> 的需求定义、技术方案权衡与质量评测闭环。核心挑战在于：既不能让用户在工位前干等（时延要极短），也不能造成服务器算力空转浪费（成本要可控），更不能吐出一堆无用闲聊把真正重要的承诺淹没（信噪比要极高）。
+		</div>
+	</div>
+
+	<!-- 02 方案权衡与取舍决策 (两个正交技术决策) -->
+	<div class="ca-block mo-dilemma-block ca-reveal">
+		<h3><span>方案权衡与取舍决策</span>技术选型：两个正交问题的原型实验与工程取舍</h3>
+		<p class="ca-copy">
+			主动服务的技术方案不能将“何时计算”与“输入什么”混为一谈。我们将其解构为两个独立的工程决策：
+		</p>
+
+		<!-- 决策一：执行机制权衡（何时与如何计算） -->
+		<div style="margin-top: 20px;">
+			<h4 style="font-size: 15px; font-weight: 600; color: var(--ca-text); margin-bottom: 8px;">
+				<span style="font-family: var(--font-mono, monospace); font-size: 11px; color: var(--ca-accent); display: block; margin-bottom: 2px;">DECISION 01 · 计算机制</span>
+				决策一：执行机制权衡（何时与如何计算）
+			</h4>
+			<div class="be-dilemma-grid">
+				{
+					executionDilemmas.map(d => (
+						<div class:list={["be-dilemma-card", { "is-adopted": d.isAdopted }]}>
+							<div class="be-dilemma-head">
+								<span class="be-dilemma-tag">{d.code}</span>
+								<h5 class="be-dilemma-title">{d.title}</h5>
+							</div>
+							<p class="be-dilemma-approach">
+								<strong>做法：</strong>
+								{d.approach}
+							</p>
+							<p class="be-dilemma-pros">
+								<strong>核心优势：</strong>
+								{d.advantage}
+							</p>
+							<p class="be-dilemma-pain">
+								<strong>瓶颈 / 代价：</strong>
+								{d.fatalPain}
+							</p>
+							<div class="be-dilemma-verdict">结论：{d.verdict}</div>
+						</div>
+					))
+				}
+			</div>
+		</div>
+
+		<!-- 决策二：输入范围裁决（输入哪些上下文） -->
+		<div style="margin-top: 24px;">
+			<h4 style="font-size: 15px; font-weight: 600; color: var(--ca-text); margin-bottom: 8px;">
+				<span style="font-family: var(--font-mono, monospace); font-size: 11px; color: var(--ca-accent); display: block; margin-bottom: 2px;">DECISION 02 · 输入范围</span>
+				决策二：输入范围裁决（输入哪些上下文）
+			</h4>
+			<div class="be-dilemma-grid" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+				{
+					inputScopeDilemmas.map(d => (
+						<div class:list={["be-dilemma-card", { "is-adopted": d.isAdopted }]}>
+							<div class="be-dilemma-head">
+								<span class="be-dilemma-tag">{d.code}</span>
+								<h5 class="be-dilemma-title">{d.title}</h5>
+							</div>
+							<p class="be-dilemma-approach">
+								<strong>做法：</strong>
+								{d.approach}
+							</p>
+							<p class="be-dilemma-pros">
+								<strong>核心优势：</strong>
+								{d.advantage}
+							</p>
+							<p class="be-dilemma-pain">
+								<strong>瓶颈 / 代价：</strong>
+								{d.fatalPain}
+							</p>
+							<div class="be-dilemma-verdict">结论：{d.verdict}</div>
+						</div>
+					))
+				}
+			</div>
+		</div>
+
+		<!-- PM 的破局取舍与决断 -->
+		<div class="mo-decision-summary">
+			<div class="mo-decision-head">
+				<span class="mo-decision-badge">★ PM 关键决断</span>
+				<h4>坚持现场按需生成，由工程代码与大模型明确分工——“确定性归代码，提炼性归模型”</h4>
+			</div>
+			<div class="mo-tradeoffs-grid">
+				<div class="mo-tradeoff-card">
+					<div class="mo-to-tag">取舍 01 / 数据输入剪枝</div>
+					<h5>LiveMem 场景化白名单剪枝</h5>
+					<p>
+						全量注入 LiveMem 导致上万 Token 膨胀且混杂海量闲聊。虽然 LiveMem 本身按天异步离线更新，但若无过滤直接消费会淹没工作主线。我们改为在消费端引入<strong
+							>场景化白名单投影</strong
+						>：仅放行核心工作字段（承诺、阻塞、计划），并保留<strong
+							>用户画像与人际协作背景</strong
+						>作为噪音隔离基准锚点；以增加前置抽取与过滤流水线复杂度为代价，物理阻断生活琐碎，记忆输入从
+						15,000 降至约 1,200 Token。
+					</p>
+				</div>
+				<div class="mo-tradeoff-card">
+					<div class="mo-to-tag">取舍 02 / 架构流水线</div>
+					<h5>上座即并发取数，模型单轮生成</h5>
+					<p>
+						针对现场多轮 ReAct 调工具的长尾时延（30–40s）与离线定时预生成的算力空转/动态失效，我们将取数时机确立为<strong
+							>用户上座事件到达瞬间，由工程代码并发（约 0.5s）并行拉取实时日程与 LiveMem 当日工作承诺</strong
+						>，组装精简输入快照。大模型免除一切工具调度负担，仅负责<strong>单轮归纳、优先级重排与口语化生成（约 3~4s）</strong
+						>，端到端实测稳定控制在约 4~5s。
+					</p>
+				</div>
+				<div class="mo-tradeoff-card">
+					<div class="mo-to-tag">取舍 03 / 具身交互协同</div>
+					<h5>具身动作与扫读体验协同</h5>
+					<p>
+						手机吸附到底座瞬间，机器人立即触发转头眨眼与开场问候（约 3~4s），<strong
+							>问候与动作和后台数据预查、单轮生成完全并行，大幅弱化体感等待</strong
+						>；卡片立现可交互，语音播报无缝切入。语音严格约束 ≤25 字单焦点播报，卡片通过 A2UI 结构化呈现供 5 秒快速扫读。
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- 长期记忆场景化剪枝矩阵：折叠抽屉 -->
+		<details class="ca-details-drawer">
+			<summary class="ca-drawer-summary">
+				<span class="ca-drawer-title">
+					<span aria-hidden="true">📋</span>
+					<strong>展开查看完整字段映射表：</strong>
+					<span
+						>长期记忆 32 类字段场景化剪枝规则（工作记忆、画像与人际背景白名单 vs 闲聊偏好物理隔离）</span
+					>
+				</span>
+				<span class="ca-drawer-arrow" aria-hidden="true">↓</span>
+			</summary>
+			<div class="ca-drawer-content">
+				<div class="be-kind-matrix">
+					{
+						kindProjectionMatrix.map(m => (
+							<div class="be-kind-card">
+								<div class="be-kind-domain">{m.domain}</div>
+								<div>
+									<div class="be-kind-whitelist-head">
+										<span aria-hidden="true">✔</span> 白名单放行 (准入 Daily Brief)
+									</div>
+									<div class="be-kind-pills">
+										{m.whitelist.map(k => (
+											<span class="be-pill-allow">{k}</span>
+										))}
+									</div>
+									<p class="be-kind-desc">{m.whitelistDesc}</p>
+								</div>
+								<div>
+									<div class="be-kind-blocked-head">
+										<span aria-hidden="true">✕</span> 物理隔离 (晨报直接拦截)
+									</div>
+									<div class="be-kind-pills">
+										{m.blocked.map(k => (
+											<span class="be-pill-deny">{k}</span>
+										))}
+									</div>
+									<p class="be-kind-desc">{m.blockedDesc}</p>
+								</div>
+							</div>
+						))
+					}
+				</div>
+			</div>
+		</details>
+	</div>
+
+	<!-- 03 实际交付体验与 A2UI 原型 -->
+	<div class="ca-block mo-showcase-block ca-reveal">
+		<h3><span>实际交付体验</span>交付契约与真实 A2UI 渲染</h3>
+		<BriefShowcase />
+	</div>
+
+	<!-- 04 评测闭环与归因迭代 -->
+	<div class="ca-block mo-eval-block ca-reveal">
+		<h3><span>评测闭环与归因迭代</span>以质量评测守住内容底线，以用户反馈验证简报价值</h3>
+		<BriefEvaluation />
+	</div>
+
+	<!-- 05 阶段成果与反思复盘 -->
+	<div class="ca-block mo-outcomes-block ca-reveal">
+		<h3><span>反思复盘</span>阶段成果与下一步（Outcomes & Next Steps）</h3>
+		<div class="mo-tradeoffs-grid" style="margin-top: 18px;">
+			{
+				stageOutcomes.map(item => (
+					<div class="mo-tradeoff-card">
+						<div class="mo-to-tag">{item.label}</div>
+						<p
+							style={`margin-top: 8px; font-size: 13px; line-height: 1.75; color: ${item.type === "result" ? "var(--ca-text)" : "var(--ca-muted)"};`}>
+							{item.detail}
+						</p>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

@@ -1,0 +1,77 @@
+{
+  "defaultLocale": "en",
+  "locales": [
+    {
+      "code": "ar",
+      "direction": "rtl"
+    },
+    {
+      "code": "de",
+      "direction": "ltr"
+    },
+    {
+      "code": "en",
+      "direction": "ltr"
+    },
+    {
+      "code": "es",
+      "direction": "ltr"
+    },
+    {
+      "code": "fr",
+      "direction": "ltr"
+    },
+    {
+      "code": "it",
+      "direction": "ltr"
+    },
+    {
+      "code": "ja",
+      "direction": "ltr"
+    },
+    {
+      "code": "ko",
+      "direction": "ltr"
+    },
+    {
+      "code": "nl",
+      "direction": "ltr"
+    },
+    {
+      "code": "pl",
+      "direction": "ltr"
+    },
+    {
+      "code": "pt",
+      "direction": "ltr"
+    },
+    {
+      "code": "ru",
+      "direction": "ltr"
+    },
+    {
+      "code": "sv",
+      "direction": "ltr"
+    },
+    {
+      "code": "th",
+      "direction": "ltr"
+    },
+    {
+      "code": "tr",
+      "direction": "ltr"
+    },
+    {
+      "code": "zh-Hans",
+      "direction": "ltr"
+    },
+    {
+      "code": "zh-Hant",
+      "direction": "ltr"
+    },
+    {
+      "code": "zh-Hant-TW",
+      "direction": "ltr"
+    }
+  ]
+}

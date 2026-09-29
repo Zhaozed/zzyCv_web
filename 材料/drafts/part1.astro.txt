@@ -1,0 +1,47 @@
+<section class="case-section">
+	<div>
+		<p class="number-label">01 / CONTEXT</p>
+		<h2>从「能聊天」到「能办事」，卡在工具治理与场景可用性</h2>
+	</div>
+	<div class="case-copy">
+		<p class="case-lede">
+			具身 Agent 的价值不在对话流畅，而在能不能稳定办成一件事；产品属于公司，本页只写我负责的部分。
+		</p>
+		<p>
+			Cortex-Agent 是 Loona 桌面机器人的 Agent 运行时，面向办公辅助与陪伴场景。原状态卡在四点：只能聊天、办不成事；工具一多上下文就膨胀；同类能力一重叠就误选；主动推送一漏关键事项就变成打扰。
+		</p>
+		<!-- 待补：简化版治理前流程图（脱敏），呈现「全量注入 → 上下文膨胀 → 误选」原状态 -->
+		<p>
+			团队目标是把它从「能聊天」推到「能办事」，我承担四条线：<strong>ToolHub 治理</strong>——设计同类能力聚合与业务域动态召回，推动工具由全量注入转为按需加载；<strong>办公能力接入</strong>——负责 Notion、Outlook 邮件／日历／待办等 9 项办公工具能力的需求定义、功能设计与验收，协同研发落地；<strong>Mental Offload</strong>——参与规划 9 大核心场景，主导会议与工作汇报两个垂直场景的方案设计与验收；<strong>评审工作台</strong>——搭建可播放的交互评审工作台。
+		</p>
+		<div class="tile-grid">
+			<div class="tile">
+				<p class="tile__index">01</p>
+				<b>工具接入 PRD 生成 Skill</b>
+				<p>9 项能力的接入要求沉淀为标准化 SOP：已落地复用，Skill 已公开。</p>
+			</div>
+			<div class="tile">
+				<p class="tile__index">02</p>
+				<b>ToolHub 治理机制</b>
+				<p>工具数 122 → 77（≈36.9% ↓）：治理前后对照评测。</p>
+			</div>
+			<div class="tile">
+				<p class="tile__index">03</p>
+				<b>Agent 评审工作台</b>
+				<p>链路可播放 + 关键帧批注：Mock 工具，非产品代码，已沉淀为设计资产。</p>
+			</div>
+			<div class="tile">
+				<p class="tile__index">04</p>
+				<b>Mental Offload 用例资产</b>
+				<p>46 条用例 · 5 轮 Bad Case 迭代 · 覆盖率 60% → 87%：离线场景用例评测。</p>
+			</div>
+		</div>
+		<!-- 待补：公司允许披露评审工作台截图／演示素材的确认 -->
+		<div class="judgment">
+			<p class="judgment__label">我的判断</p>
+			<p>
+				Kickstarter 众筹超 70 万美元是产品整体成绩、非个人独立成果，我不把它当作自己的结果；能证明我的是上面四份可复用资产，数字一律标注口径（对照评测／离线用例评测），不当作上线成果写。
+			</p>
+		</div>
+	</div>
+</section>

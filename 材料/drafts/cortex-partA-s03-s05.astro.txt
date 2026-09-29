@@ -1,0 +1,176 @@
+<section class="case-section" id="proactive">
+	<div>
+		<p class="number-label">03 / PROACTIVE</p>
+		<h2>关键事项写进验收，主动服务才可度量、可迭代</h2>
+	</div>
+	<div class="case-copy">
+		<p class="case-lede">
+			主动服务可信的前提，是把「不能漏什么」写成可检查的标准，用离线用例评测迭代。
+		</p>
+		<h3>场景与职责</h3>
+		<p>
+			会议准备与工作汇报都需用户自行整理分散信息。我参与 Mental Offload
+			主动服务体系设计，主导两类场景的需求定义、设计与验收，把场景内容转化为可检查的输出要求。
+		</p>
+		<h3>产品设计</h3>
+		<div class="tile-grid">
+			<div class="tile">
+				<p class="tile__index">01</p>
+				<b>触发条件</b>
+				<p>何时发起。</p>
+			</div>
+			<div class="tile">
+				<p class="tile__index">02</p>
+				<b>信息范围</b>
+				<p>读取哪些信息。</p>
+			</div>
+			<div class="tile">
+				<p class="tile__index">03</p>
+				<b>内容结构</b>
+				<p>如何组织排序。</p>
+			</div>
+			<div class="tile">
+				<p class="tile__index">04</p>
+				<b>后续操作</b>
+				<p>可查看、可追问。</p>
+			</div>
+		</div>
+		<p>再把关键事项纳入验收：检查遗漏、失真与偏离任务。</p>
+		<h3>交互示例</h3>
+		<div class="mt-6 border border-dashed border-neutral-300 p-5 dark:border-neutral-600">
+			<p class="font-mono text-xs tracking-widest uppercase text-neutral-400">待补素材 / TODO</p>
+			<p class="mt-2 text-sm leading-7 text-neutral-500 dark:text-neutral-400">
+				需要会议简报完整示例：使用情境与服务目标（各一句话）、脱敏截图或重绘示意、图下「内容安排」「用户操作」说明。脱敏后替换本块。
+			</p>
+		</div>
+		<details class="mt-7 border-t border-dashed border-neutral-300 pt-4 dark:border-neutral-600">
+			<summary class="cursor-pointer font-mono text-xs tracking-widest uppercase text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100">查看工作汇报示例</summary>
+			<div class="mt-4 text-sm leading-7 text-neutral-600 dark:text-neutral-400">
+				<div class="border border-dashed border-neutral-300 p-5 dark:border-neutral-600">
+					<p class="font-mono text-xs tracking-widest uppercase text-neutral-400">待补素材 / TODO</p>
+					<p class="mt-2 text-sm leading-7 text-neutral-500 dark:text-neutral-400">
+						需要工作汇报的使用情境、服务目标、脱敏截图与两项说明；补齐后替换。
+					</p>
+				</div>
+			</div>
+		</details>
+		<h3>评测方法</h3>
+		<p>
+			围绕场景用例标注关键事项，逐项比对输出，定位遗漏并验证修改；覆盖率衡量完整性，并检查事实与输入一致、无无依据新增。
+		</p>
+		<!-- SLOT:DIAGRAM-ITERATION --> <!-- Archify：图 2 · 主动服务覆盖率评测与 Bad Case 迭代闭环（主线程替换） -->
+		<h3>一条代表性迭代</h3>
+		<div class="mt-6 border border-dashed border-neutral-300 p-5 dark:border-neutral-600">
+			<p class="font-mono text-xs tracking-widest uppercase text-neutral-400">待补素材 / TODO</p>
+			<p class="mt-2 text-sm leading-7 text-neutral-500 dark:text-neutral-400">
+				需要一条真实迭代记录，四块：场景输入与 GT、迭代前节选与遗漏标注、原因与改动、迭代后节选与复测结论。当前无记录，保留为待办，不写虚构结论；补齐后替换。
+			</p>
+		</div>
+		<h3>验证结果</h3>
+		<div class="stat-row">
+			<div class="metric">
+				<strong class="font-mono text-3xl">46 条</strong>
+				<p class="muted text-sm">样本 · 场景用例</p>
+			</div>
+			<div class="metric">
+				<strong class="font-mono text-3xl">5 轮</strong>
+				<p class="muted text-sm">迭代 · Bad Case 归因</p>
+			</div>
+			<div class="metric">
+				<strong class="font-mono text-3xl">60% → 87%</strong>
+				<p class="muted text-sm">关键事项覆盖率 · 内容完整性</p>
+			</div>
+		</div>
+		<p class="muted mt-7">
+			口径：离线场景用例评测。指标只反映评测样本中的内容覆盖效果；实际有用率与推送时机需另行验证。
+		</p>
+		<details class="mt-7 border-t border-dashed border-neutral-300 pt-4 dark:border-neutral-600">
+			<summary class="cursor-pointer font-mono text-xs tracking-widest uppercase text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100">查看标注与评测口径</summary>
+			<div class="mt-4 text-sm leading-7 text-neutral-600 dark:text-neutral-400">
+				<ol class="list-decimal space-y-2 ps-5">
+					<li>GT 依据什么信息建立 —— 待补。</li>
+					<li>关键事项如何标注与审核 —— 待补。</li>
+					<li>怎样判定正确覆盖 —— 待补。</li>
+					<li>总体覆盖率如何计算 —— 待补。</li>
+					<li>前后样本、输入及规则是否一致 —— 待补。</li>
+				</ol>
+				<p class="mt-4">
+					范围限定：若 GT 基于提供给 Agent 的记忆或上下文，评测范围为「对可用输入的组织与覆盖」，不延伸到上游信息提取质量。
+				</p>
+			</div>
+		</details>
+	</div>
+</section>
+
+<section class="case-section" id="assets">
+	<div>
+		<p class="number-label">04 / ASSETS</p>
+		<h2>经验变成工具才算沉淀：接入走 Skill，评审走工作台</h2>
+	</div>
+	<div class="case-copy">
+		<p class="case-lede">
+			两件工具支撑同一件事：接入口径一致，评审有可播放证据，团队直接复用。
+		</p>
+		<h3>资产一 · 接入与 PRD 生成 Skill</h3>
+		<p>
+			负责 Gmail、Outlook 邮件／日程等 5 项办公能力的需求定义、功能设计与验收；把接口调研、交互规则、异常分支及验收要求沉淀为 PRD 生成 Skill，供同类需求复用。
+		</p>
+		<div class="mt-6 border border-dashed border-neutral-300 p-5 dark:border-neutral-600">
+			<p class="font-mono text-xs tracking-widest uppercase text-neutral-400">待补素材 / TODO</p>
+			<p class="mt-2 text-sm leading-7 text-neutral-500 dark:text-neutral-400">
+				需要 PRD 局部预览，突出「异常处理」「验收要求」，脱敏后提供；「查看 PRD 示例」入口随素材补齐，不编造链接。
+			</p>
+		</div>
+		<a
+			class="button-ghost mt-6"
+			href="https://github.com/Zhaozed/Loona-PMdevelopskill"
+			target="_blank"
+			rel="noopener">查看 Skill ↗</a
+		>
+		<h3>资产二 · Agent 交互评审工作台</h3>
+		<p>
+			语音、Agent 决策、UI 状态与时序难以用静态原型完整评审。工作台基于预设 Case
+			按事件播放用户输入、Agent 状态、语音与卡片呈现，支持关键帧批注与理想链路导出，帮助对齐时序。
+		</p>
+		<div id="workbench-demo" class="mt-6">
+			<!-- SLOT:VIDEO-WORKBENCH --> <!-- LoopVideo：评审工作台 20—30 秒演示；封面图注「Mock 交互评审工作台｜预设 Case 演示」（主线程替换） -->
+		</div>
+		<div class="mt-6 flex flex-wrap gap-3">
+			<a class="button-ghost" href="#workbench-demo">播放演示</a>
+			<a class="button-ghost" href="/practice/review-workbench/">查看评审工作台细节 ↗</a>
+		</div>
+		<p class="muted mt-7">口径：评审工作台是 Mock 评审工具、非产品代码，为可复用设计资产。</p>
+		<div class="judgment">
+			<p class="judgment__label">我的判断</p>
+			<p>工具的价值在固定口径：接入按同一套验收要求写，评审按同一条链路播。</p>
+		</div>
+	</div>
+</section>
+
+<section class="case-section" id="retro">
+	<div>
+		<p class="number-label">05 / RETRO</p>
+		<h2>每项结果都还有没被验证的另一半</h2>
+	</div>
+	<div class="case-copy">
+		<p class="case-lede">
+			两条复盘指向同一件事：单维指标撑不起结论，两组变量分开验证。
+		</p>
+		<div class="judgment">
+			<p class="judgment__label">复盘 01 · 工具治理</p>
+			<p>治理需兼顾上下文成本与能力完整性：按需加载减少无关信息，也引入召回环节，要同时验证成本、漏召回与任务完成情况。</p>
+		</div>
+		<div class="judgment">
+			<p class="judgment__label">复盘 02 · 主动服务</p>
+			<p>需分别验证内容质量与用户价值：覆盖率帮助定位遗漏，推送时机、打扰程度与实际有用性仍需其他证据。</p>
+		</div>
+		<div class="case-cta">
+			<a
+				class="button-ghost"
+				href="https://github.com/Zhaozed/Loona-PMdevelopskill"
+				target="_blank"
+				rel="noopener">查看工具接入 Skill ↗</a
+			><a class="button-ghost" href="/projects/">返回精选项目</a>
+		</div>
+	</div>
+</section>

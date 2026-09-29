@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "deliver",
+  "type": "architecture",
+  "input": "/Users/joey/项目/astro-theme-cactus/材料/archify/toolhub-after.architecture.json",
+  "output": "/Users/joey/项目/astro-theme-cactus/public/portfolio/cortex-agent/toolhub-after.html",
+  "specification": {
+    "sha256": "947f2fc644437780665d77e6b4ac3f2739c95670946a50e6546828ff1102f9dc",
+    "bytes": 2097
+  },
+  "artifact": {
+    "sha256": "0282a54fd0162847ea9e9a653ffe4cac3694774052f9e3af7091559bdf1eee36",
+    "bytes": 700329
+  },
+  "validation": {
+    "checksPassed": 9,
+    "checkCount": 9,
+    "compositionProfile": "showcase",
+    "compositionStatus": "pass",
+    "errors": 0,
+    "warnings": 0
+  }
+}

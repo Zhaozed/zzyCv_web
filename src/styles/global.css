@@ -176,19 +176,6 @@
 	.case-hero {
 		@apply grid gap-12 border-b border-black/10 pb-16 lg:grid-cols-[1fr_20rem] dark:border-white/10;
 	}
-	.case-meta {
-		@apply self-end rounded-3xl border border-black/10 p-6 dark:border-white/10;
-	}
-	.case-meta div {
-		@apply grid grid-cols-[6rem_1fr] gap-3 border-b border-black/10 py-3 last:border-0 dark:border-white/10;
-	}
-	.case-meta dt {
-		@apply font-mono text-xs;
-		color: var(--color-muted);
-	}
-	.case-meta dd {
-		@apply text-sm font-medium;
-	}
 	.case-section {
 		@apply grid gap-10 border-b border-black/10 py-20 lg:grid-cols-[14rem_1fr] dark:border-white/10;
 	}
@@ -226,6 +213,39 @@
 	}
 	.demo-caption {
 		@apply absolute right-3 bottom-3 flex items-center gap-2 rounded-full bg-black/75 px-3 py-1.5 font-mono text-[10px] text-white backdrop-blur;
+	}
+	.case-video {
+		@apply mt-8 overflow-hidden rounded-2xl border border-neutral-200 bg-[#101216] shadow-2xl shadow-black/10 dark:border-neutral-700;
+	}
+	.case-video video {
+		@apply block aspect-video w-full object-cover;
+	}
+	.media-caption,
+	.media-note {
+		@apply font-mono text-[10px] tracking-widest uppercase;
+		color: var(--color-muted);
+	}
+	.media-caption {
+		@apply mt-3;
+	}
+	.media-note {
+		@apply mt-5 leading-5;
+	}
+	.media-grid {
+		@apply my-8 grid gap-4 sm:grid-cols-2;
+	}
+	.media-grid--wide {
+		@apply lg:grid-cols-2;
+	}
+	.media-card {
+		@apply overflow-hidden rounded-xl border border-dashed border-neutral-300 dark:border-neutral-600;
+	}
+	.media-card img {
+		@apply block aspect-video w-full object-cover;
+	}
+	.media-card figcaption {
+		@apply border-t border-dashed border-neutral-200 px-4 py-3 text-xs leading-5 dark:border-neutral-800;
+		color: var(--color-muted);
 	}
 	.practice-grid {
 		@apply grid gap-5 md:grid-cols-2;
@@ -343,7 +363,7 @@
 		@apply text-2xl font-bold tracking-tight;
 	}
 	.eyebrow {
-		@apply mb-4 font-mono text-xs font-semibold uppercase tracking-widest;
+		@apply mb-4 font-mono text-xs font-semibold tracking-widest uppercase;
 		color: var(--color-muted);
 	}
 	.display {
@@ -358,7 +378,7 @@
 		color: var(--color-muted);
 	}
 	.number-label {
-		@apply mb-3 font-mono text-xs uppercase tracking-widest;
+		@apply mb-3 font-mono text-xs tracking-widest uppercase;
 		color: var(--color-muted);
 	}
 	.cactus-link {
@@ -382,17 +402,18 @@
 		@apply grid gap-10 border-b border-dashed border-neutral-200 pb-14 dark:border-neutral-800;
 	}
 	.case-meta {
-		@apply self-end rounded-2xl border border-dashed border-neutral-300 p-6 dark:border-neutral-600;
+		@apply grid gap-x-8 gap-y-5 border-t border-dashed border-neutral-300 pt-6 sm:grid-cols-2 lg:grid-cols-3 dark:border-neutral-600;
 	}
 	.case-meta div {
-		@apply grid grid-cols-[6rem_1fr] gap-3 border-b border-dashed border-neutral-200 py-3 last:border-0 dark:border-neutral-800;
+		@apply grid gap-1.5;
 	}
 	.case-meta dt {
-		@apply font-mono text-xs uppercase tracking-widest;
+		@apply font-mono text-[10px] tracking-widest uppercase;
 		color: var(--color-muted);
 	}
 	.case-meta dd {
-		@apply text-sm font-medium;
+		@apply text-[13px] leading-6 font-medium;
+		color: var(--color-accent-2);
 	}
 	.case-section {
 		@apply grid gap-8 border-b border-dashed border-neutral-200 py-14 lg:grid-cols-[12rem_1fr] dark:border-neutral-800;
@@ -448,28 +469,51 @@
 
 	/* --- 概览卡：核心结果 --- */
 	.case-hero-grid {
-		@apply mt-10 grid gap-5 lg:grid-cols-[1.05fr_1fr] lg:items-stretch;
+		@apply mt-12 grid gap-7;
 	}
 	.case-results {
-		@apply rounded-2xl border border-dashed border-neutral-300 p-6 dark:border-neutral-600;
+		@apply rounded-2xl border border-dashed border-neutral-300 p-6 sm:p-8 dark:border-neutral-600;
 	}
-	.case-results__grid {
-		@apply grid gap-5 sm:grid-cols-2;
+	.case-results__head {
+		@apply flex items-baseline justify-between gap-4;
 	}
-	.case-results__scope {
-		@apply mt-6 border-t border-dashed border-neutral-200 pt-4 font-mono text-[11px] leading-5 dark:border-neutral-800;
+	.case-results__head .number-label {
+		@apply mb-0;
+	}
+	.case-results__count {
+		@apply font-mono text-[10px] tracking-widest;
 		color: var(--color-muted);
 	}
+	.case-results__grid {
+		@apply mt-7 grid gap-x-7 gap-y-8 sm:grid-cols-2;
+	}
+	.case-results__grid--cols-3 {
+		@apply lg:grid-cols-3;
+	}
+	.case-results__grid--cols-4 {
+		@apply lg:grid-cols-4;
+	}
+	.case-results__scope {
+		@apply mt-8 border-t border-dashed border-neutral-200 pt-4 text-[11px] leading-5 dark:border-neutral-800;
+		color: var(--color-muted);
+	}
+	.metric-tile {
+		@apply border-t border-dashed border-neutral-300 pt-4 dark:border-neutral-600;
+	}
+	.metric-tile__index {
+		@apply font-mono text-[10px] tracking-widest;
+		color: var(--color-accent);
+	}
 	.metric-tile strong {
-		@apply block font-mono text-3xl font-semibold tracking-tight;
+		@apply mt-2 block font-mono text-[26px] leading-9 font-semibold tracking-tight sm:text-3xl;
 		color: var(--color-accent-2);
 	}
 	.metric-tile p {
-		@apply mt-1.5 text-sm font-medium;
+		@apply mt-1.5 text-[13px] leading-6 font-medium;
 		color: var(--color-accent-2);
 	}
-	.metric-tile span {
-		@apply mt-1 block font-mono text-[10px] uppercase tracking-widest;
+	.metric-tile__note {
+		@apply mt-2 block text-[11px] leading-5;
 		color: var(--color-muted);
 	}
 
@@ -489,7 +533,7 @@
 		@apply my-8 rounded-2xl border border-dashed border-neutral-300 p-6 dark:border-neutral-600;
 	}
 	.judgment__label {
-		@apply mb-3 font-mono text-[10px] uppercase tracking-widest;
+		@apply mb-3 font-mono text-[10px] tracking-widest uppercase;
 		color: var(--color-accent);
 	}
 	.judgment p {
@@ -522,7 +566,7 @@
 		@apply grid gap-1 px-6 py-3.5 sm:grid-cols-[6.5rem_1fr] sm:gap-4;
 	}
 	.decision__row dt {
-		@apply font-mono text-[10px] uppercase tracking-widest;
+		@apply font-mono text-[10px] tracking-widest uppercase;
 		color: var(--color-muted);
 	}
 	.decision__row dd {
@@ -530,7 +574,7 @@
 		color: var(--color-accent-2);
 	}
 	.decision__row dd em {
-		@apply not-italic font-medium;
+		@apply font-medium not-italic;
 		color: var(--color-accent);
 	}
 
@@ -546,7 +590,7 @@
 		color: var(--color-accent-2);
 	}
 	.flow__step span {
-		@apply mt-0.5 font-mono text-[10px] uppercase tracking-widest;
+		@apply mt-0.5 font-mono text-[10px] tracking-widest uppercase;
 		color: var(--color-muted);
 	}
 	.flow__step small {
@@ -590,7 +634,7 @@
 		@apply rounded-xl border border-dashed border-neutral-300 p-5 dark:border-neutral-600;
 	}
 	.scope__title {
-		@apply mb-3 font-mono text-[10px] uppercase tracking-widest;
+		@apply mb-3 font-mono text-[10px] tracking-widest uppercase;
 	}
 	.scope__col--in .scope__title {
 		color: var(--color-accent);
@@ -622,11 +666,11 @@
 		@apply my-8 w-full border-collapse text-left;
 	}
 	.data-table caption {
-		@apply mb-3 text-start font-mono text-[10px] uppercase tracking-widest;
+		@apply mb-3 text-start font-mono text-[10px] tracking-widest uppercase;
 		color: var(--color-muted);
 	}
 	.data-table th {
-		@apply border-b border-dashed border-neutral-300 pb-2.5 font-mono text-[10px] font-normal uppercase tracking-widest dark:border-neutral-600;
+		@apply border-b border-dashed border-neutral-300 pb-2.5 font-mono text-[10px] font-normal tracking-widest uppercase dark:border-neutral-600;
 		color: var(--color-muted);
 	}
 	.data-table td {
@@ -656,7 +700,7 @@
 		@apply w-full rounded-xl border border-dashed border-neutral-300 dark:border-neutral-600;
 	}
 	.figure figcaption {
-		@apply mt-3 font-mono text-[10px] uppercase tracking-widest;
+		@apply mt-3 font-mono text-[10px] tracking-widest uppercase;
 		color: var(--color-muted);
 	}
 
@@ -665,7 +709,7 @@
 		@apply my-6 flex flex-wrap gap-2;
 	}
 	.chip {
-		@apply inline-flex rounded-full border border-dashed border-neutral-300 px-3 py-1 font-mono text-[10px] uppercase tracking-widest dark:border-neutral-600;
+		@apply inline-flex rounded-full border border-dashed border-neutral-300 px-3 py-1 font-mono text-[10px] tracking-widest uppercase dark:border-neutral-600;
 		color: var(--color-muted);
 	}
 

@@ -10,25 +10,27 @@ import type { SiteMeta } from "@/types";
 
 interface Props {
 	meta: SiteMeta;
+	showBackground?: boolean;
 }
 
 const {
+	showBackground = true,
 	meta: { articleDate, description = siteConfig.description, ogImage, title },
 } = Astro.props;
 ---
 
-<html class="scroll-smooth" lang={siteConfig.lang}>
+<html class="scroll-smooth" lang={siteConfig.lang} data-theme="light">
 	<head>
 		<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
 		<ThemeProvider />
 	</head>
 	<body
-		class="relative min-h-screen bg-white text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-100"
+		class="relative flex min-h-screen flex-col bg-white text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-100"
 	>
 		<SkipLink />
-		<SquareLines />
+		{showBackground && <SquareLines />}
 		<Header />
-		<main id="main">
+		<main id="main" class="flex flex-1 flex-col">
 			<slot />
 		</main>
 		<Footer />

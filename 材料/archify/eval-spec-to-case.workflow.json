@@ -1,0 +1,344 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "一条产品验收要求如何变成可执行评测",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "v-define",
+        "label": "从验收要求到成功标准",
+        "focus": [
+          "req",
+          "std"
+        ],
+        "note": "产品验收要求（任务目标 + 约束 + 展示要求）按 6 个维度转成可判定的成功标准。"
+      },
+      {
+        "id": "v-split",
+        "label": "三类判定分工",
+        "focus": [
+          "std",
+          "assert-det",
+          "judge-llm",
+          "review-human",
+          "case-exec"
+        ],
+        "note": "明确条件走确定性断言，语义内容走 LLM Judge，歧义与争议保留人工复核。"
+      },
+      {
+        "id": "v-asset",
+        "label": "落成 Case 与复用资产",
+        "focus": [
+          "case-exec",
+          "rules",
+          "asset",
+          "isolation"
+        ],
+        "note": "Case 配检查规则并沉淀为可复用资产，状态隔离减少运行干扰。"
+      }
+    ],
+    "legend": {
+      "mode": "hidden"
+    }
+  },
+  "lanes": [
+    {
+      "id": "lane-spec",
+      "label": "产品要求 → 评测规范 · 主链路"
+    },
+    {
+      "id": "lane-assert",
+      "label": "机器判定 · 确定性"
+    },
+    {
+      "id": "lane-judge",
+      "label": "模型判定 · 语义"
+    },
+    {
+      "id": "lane-review",
+      "label": "人工判定 · 歧义与争议",
+      "variant": "exception"
+    },
+    {
+      "id": "lane-runtime",
+      "label": "执行保障机制"
+    }
+  ],
+  "phases": [
+    {
+      "id": "ph-define",
+      "label": "定义标准",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "ph-split",
+      "label": "判定分工",
+      "fromCol": 2,
+      "toCol": 2,
+      "variant": "emphasis"
+    },
+    {
+      "id": "ph-asset",
+      "label": "落成 Case 与资产",
+      "fromCol": 3,
+      "toCol": 5,
+      "variant": "dashed"
+    }
+  ],
+  "semanticChecks": {
+    "allowedRoots": [
+      "req",
+      "isolation"
+    ],
+    "allowedTerminals": [
+      "asset"
+    ],
+    "requiredEdges": [
+      {
+        "from": "std",
+        "to": "assert-det"
+      },
+      {
+        "from": "std",
+        "to": "judge-llm"
+      },
+      {
+        "from": "std",
+        "to": "review-human"
+      }
+    ],
+    "requiredPaths": [
+      {
+        "from": "req",
+        "to": "asset"
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "req",
+      "lane": "lane-spec",
+      "col": 0,
+      "type": "external",
+      "label": "产品验收要求",
+      "sublabel": "任务目标 / 约束 / 展示要求",
+      "width": 160
+    },
+    {
+      "id": "std",
+      "lane": "lane-spec",
+      "col": 1,
+      "type": "backend",
+      "label": "成功标准定义 · 6 个维度",
+      "sublabel": "路由 / 工具编排 / 结果与展示",
+      "width": 176
+    },
+    {
+      "id": "assert-det",
+      "lane": "lane-assert",
+      "col": 2,
+      "type": "backend",
+      "label": "确定性断言 · 明确条件",
+      "sublabel": "字段值 / 执行状态 / 必要约束",
+      "width": 176
+    },
+    {
+      "id": "judge-llm",
+      "lane": "lane-judge",
+      "col": 2,
+      "type": "cloud",
+      "label": "LLM Judge · 语义内容",
+      "sublabel": "回复准确 / 完整表达任务结果",
+      "width": 176
+    },
+    {
+      "id": "review-human",
+      "lane": "lane-review",
+      "col": 2,
+      "type": "security",
+      "label": "人工复核",
+      "sublabel": "歧义 / 争议复核 / 校准评分标准",
+      "width": 176
+    },
+    {
+      "id": "case-exec",
+      "lane": "lane-spec",
+      "col": 3,
+      "type": "database",
+      "label": "可执行 Case",
+      "sublabel": "前置条件 / 输入 / 预期 / 硬断言 / 语义评分",
+      "width": 216
+    },
+    {
+      "id": "rules",
+      "lane": "lane-spec",
+      "col": 4,
+      "type": "database",
+      "label": "检查规则",
+      "sublabel": "通用规则 + 场景专属规则",
+      "width": 168
+    },
+    {
+      "id": "asset",
+      "lane": "lane-spec",
+      "col": 5,
+      "type": "frontend",
+      "label": "可复用评测资产",
+      "sublabel": "9 类场景 · 213 个 Case · 37 项检查规则",
+      "width": 216
+    },
+    {
+      "id": "isolation",
+      "lane": "lane-runtime",
+      "col": 3,
+      "type": "messagebus",
+      "label": "状态隔离",
+      "sublabel": "减少写操作 / 历史会话 / 重复运行干扰",
+      "width": 208
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-req-std",
+      "from": "req",
+      "to": "std",
+      "label": "定义标准",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "e-std-assert",
+      "from": "std",
+      "to": "assert-det",
+      "label": "明确条件",
+      "variant": "default",
+      "role": "branch",
+      "fromSide": "bottom",
+      "toSide": "left",
+      "via": [
+        [
+          352.4,
+          243
+        ]
+      ],
+      "labelSegment": 0
+    },
+    {
+      "id": "e-std-judge",
+      "from": "std",
+      "to": "judge-llm",
+      "label": "语义内容",
+      "variant": "default",
+      "role": "branch",
+      "fromSide": "left",
+      "toSide": "left",
+      "via": [
+        [
+          248.4,
+          119
+        ],
+        [
+          248.4,
+          367
+        ]
+      ]
+    },
+    {
+      "id": "e-std-review",
+      "from": "std",
+      "to": "review-human",
+      "label": "歧义与争议",
+      "variant": "default",
+      "role": "branch",
+      "fromSide": "left",
+      "toSide": "left",
+      "via": [
+        [
+          224.4,
+          119
+        ],
+        [
+          224.4,
+          491
+        ]
+      ]
+    },
+    {
+      "id": "e-assert-case",
+      "from": "assert-det",
+      "to": "case-exec",
+      "label": "硬断言",
+      "variant": "default",
+      "fromSide": "top",
+      "toSide": "left",
+      "via": [
+        [
+          472.4,
+          180
+        ],
+        [
+          450.8,
+          180
+        ],
+        [
+          450.8,
+          119
+        ]
+      ],
+      "labelSegment": 1
+    },
+    {
+      "id": "e-judge-case",
+      "from": "judge-llm",
+      "to": "case-exec",
+      "label": "语义评分",
+      "variant": "default"
+    },
+    {
+      "id": "e-review-case",
+      "from": "review-human",
+      "to": "case-exec",
+      "label": "复核结论",
+      "variant": "default"
+    },
+    {
+      "id": "e-case-rules",
+      "from": "case-exec",
+      "to": "rules",
+      "label": "配套规则",
+      "variant": "default"
+    },
+    {
+      "id": "e-rules-asset",
+      "from": "rules",
+      "to": "asset",
+      "label": "沉淀复用",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "e-iso-case",
+      "from": "isolation",
+      "to": "case-exec",
+      "label": "执行前提",
+      "variant": "dashed",
+      "role": "async",
+      "fromSide": "right",
+      "toSide": "right",
+      "via": [
+        [
+          724.4,
+          615
+        ],
+        [
+          724.4,
+          119
+        ]
+      ],
+      "labelSegment": 1
+    }
+  ]
+}

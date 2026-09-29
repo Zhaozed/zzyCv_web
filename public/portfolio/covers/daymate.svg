@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">DayMate｜常驻 macOS 的个人工作代理</title>
+  <desc id="desc">macOS 极客暗黑风封面，展示常驻菜单栏代理、多源邮件降噪与行动建议看板。</desc>
+  <defs>
+    <filter id="macWindowShadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="20" stdDeviation="24" flood-color="#09090B" flood-opacity=".35"/>
+    </filter>
+    <linearGradient id="daymateBg" x1="0" y1="0" x2="1200" y2="675" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F4F4F5"/>
+      <stop offset="100%" stop-color="#E4E4E7"/>
+    </linearGradient>
+    <linearGradient id="windowBg" x1="0" y1="0" x2="420" y2="440" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#18181B"/>
+      <stop offset="100%" stop-color="#09090B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 背景底色 -->
+  <rect width="1200" height="675" fill="url(#daymateBg)"/>
+
+  <!-- 右侧背景光晕 -->
+  <circle cx="890" cy="335" r="280" fill="#D4D4D8" fill-opacity=".5"/>
+  <circle cx="890" cy="335" r="200" fill="#A1A1AA" fill-opacity=".3"/>
+
+  <!-- 左侧项目信息排版 -->
+  <g font-family="Arial, Helvetica, -apple-system, sans-serif">
+    <rect x="72" y="65" width="14" height="14" fill="#18181B"/>
+    <text x="101" y="79" font-size="17" letter-spacing="3" fill="#71717A" font-weight="600">PERSONAL PROJECT / 03</text>
+    <text x="68" y="255" font-size="82" font-weight="700" letter-spacing="-3" fill="#09090B">DayMate<tspan fill="#71717A">.</tspan></text>
+    <text x="70" y="325" font-family="'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="26" letter-spacing="1" fill="#52525B" font-weight="500">邮件待办与求职进度工具</text>
+    <text x="70" y="385" font-family="'PingFang SC', sans-serif" font-size="18" fill="#71717A">写硕士论文与校招期间的自用工具</text>
+    <text x="70" y="420" font-family="'PingFang SC', sans-serif" font-size="15" fill="#A1A1AA">从邮件整理可执行待办 · 按公司汇总求职进度</text>
+    <text x="70" y="580" font-size="16" letter-spacing="2.5" fill="#71717A">ACTIONIZE · TRACK · PROGRESS</text>
+  </g>
+
+  <!-- 右侧视觉中心：macOS 原生沉浸式窗口卡片 -->
+  <g transform="translate(680, 115)" filter="url(#macWindowShadow)">
+    <rect width="420" height="440" rx="16" fill="url(#windowBg)" stroke="#27272A" stroke-width="1.5"/>
+
+    <!-- 窗口标题栏与三色圆点 -->
+    <rect width="420" height="40" rx="16" fill="#27272A"/>
+    <circle cx="24" cy="20" r="6" fill="#EF4444"/>
+    <circle cx="44" cy="20" r="6" fill="#F59E0B"/>
+    <circle cx="64" cy="20" r="6" fill="#10B981"/>
+    <text x="160" y="25" font-family="-apple-system, sans-serif" font-size="12" font-weight="600" fill="#A1A1AA">DayMate · Workflow Feed</text>
+
+    <!-- 待办提取条目 -->
+    <g transform="translate(20, 60)">
+      <rect width="380" height="96" rx="10" fill="#27272A" stroke="#3F3F46" stroke-width="1"/>
+      <rect x="14" y="14" width="70" height="22" rx="6" fill="#3F3F46"/>
+      <text x="24" y="29" font-family="'PingFang SC', sans-serif" font-size="11" font-weight="600" fill="#E4E4E7">待办提取</text>
+      <text x="96" y="29" font-family="'PingFang SC', sans-serif" font-size="13" font-weight="600" fill="#FFFFFF">3 项关键事项需今日处理</text>
+      <text x="14" y="60" font-family="'PingFang SC', sans-serif" font-size="12" fill="#A1A1AA">自动提取事项、来源与截止时间，直接推进到当日清单</text>
+      <text x="14" y="80" font-family="Arial, sans-serif" font-size="11" fill="#71717A">Gmail · 163 · 阿里云后端服务处理</text>
+    </g>
+
+    <!-- 求职进度与 DDL 条目 -->
+    <g transform="translate(20, 172)">
+      <rect width="380" height="96" rx="10" fill="#27272A" stroke="#3F3F46" stroke-width="1"/>
+      <rect x="14" y="14" width="70" height="22" rx="6" fill="#3B82F6" fill-opacity=".2"/>
+      <text x="24" y="29" font-family="'PingFang SC', sans-serif" font-size="11" font-weight="600" fill="#60A5FA">求职汇总</text>
+      <text x="96" y="29" font-family="'PingFang SC', sans-serif" font-size="13" font-weight="600" fill="#FFFFFF">毕业论文与校招应聘进度跟进</text>
+      <text x="14" y="60" font-family="'PingFang SC', sans-serif" font-size="12" fill="#A1A1AA">按公司归纳投递、测评、笔试与面试各阶段状态</text>
+      <text x="14" y="80" font-family="Arial, sans-serif" font-size="11" fill="#71717A">17:00 截至 · 不确定项停留待确认状态</text>
+    </g>
+
+    <!-- 底部状态指示 -->
+    <g transform="translate(20, 284)">
+      <rect width="380" height="130" rx="10" fill="#18181B" stroke="#27272A"/>
+      <text x="16" y="32" font-family="'PingFang SC', sans-serif" font-size="12" font-weight="600" fill="#D4D4D8">求职与待办进度</text>
+      <text x="16" y="58" font-family="'PingFang SC', sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">今日要务提炼<tspan font-size="13" font-weight="400" fill="#71717A"> · 自动同步</tspan></text>
+      <rect x="16" y="78" width="348" height="8" rx="4" fill="#27272A"/>
+      <rect x="16" y="78" width="250" height="8" rx="4" fill="#10B981"/>
+      <text x="16" y="110" font-family="'PingFang SC', sans-serif" font-size="11" fill="#71717A">常驻桌面边缘 · 阿里云后端部署 · 独立全栈自用</text>
+    </g>
+  </g>
+</svg>

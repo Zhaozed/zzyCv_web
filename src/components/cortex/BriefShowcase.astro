@@ -1,0 +1,329 @@
+---
+// DeskMate Daily Brief A2UI 交付展示组件 (聚焦晨间智能简报)
+---
+
+<brief-showcase class="brief-showcase" id="brief-delivery">
+	<!-- 顶部标题栏 -->
+	<div class="brief-header">
+		<p class="brief-eyebrow">A2UI 交互原型 <span>/ 真实运行渲染</span></p>
+		<span class="brief-status-tag"><span class="ca-pulse-dot" aria-hidden="true"></span>Daily Brief 晨间交付态</span>
+	</div>
+
+	<!-- 左右平铺交付展示区 -->
+	<div class="brief-inner">
+		<!-- 左侧：双模态交付契约与挑选原则 -->
+		<div class="brief-copy">
+			<p class="brief-overline">DELIVERY CONTRACT</p>
+			<h4>晨间主动推送，如何决定取舍？</h4>
+			<p class="brief-description">
+				早晨面对 10+ 项备选信息，桌面卡片与语音口播严格按优先级阶梯呈现：
+			</p>
+
+			<div class="brief-features">
+				<div class="brief-feat-item">
+					<strong style="color:var(--ca-accent);">P0 刚性置顶 · 行动底线</strong>
+					<span>今日到期承诺与阻断级卡点强制排在首位，守住待办基本盘。</span>
+				</div>
+				<div class="brief-feat-item">
+					<strong>P1 单句压缩 · 主线进展</strong>
+					<span>核心重点项目的关键进展严格单句提炼，舍弃非关键流水账。</span>
+				</div>
+				<div class="brief-feat-item">
+					<strong>散碎待办 · 保守分流</strong>
+					<span>无明确项目归属的零散事项（如报销、日报）独立展示，不强行归并。</span>
+				</div>
+				<div class="brief-feat-item">
+					<strong style="color:var(--ca-accent);">语音口播硬限 · 仅 1 句话</strong>
+					<span>口播严格限制 1 句话（≤25 字）避免听觉骚扰；卡片结构化呈现全貌，无事实分区直接隐藏。</span>
+				</div>
+			</div>
+
+			<div class="brief-principle">
+				<strong>交互原则：内容宁缺毋滥，触达绝不打扰。</strong>
+				<p>右侧为真实 A2UI 渲染结果 · 可在卡片区域左右滑动切换</p>
+			</div>
+		</div>
+
+		<!-- 右侧：Daily Brief A2UI 渲染舞台 -->
+		<div class="brief-stage-pane" role="region" aria-label="每日简报原始 A2UI 渲染结果">
+			<iframe
+				id="daily-brief-runtime"
+				title="Daily Brief A2UI React Renderer"
+				src="/portfolio/cortex-agent/a2ui-runtime/daily-brief.html"
+				loading="lazy"
+				aria-label="每日简报原始 A2UI 渲染结果，可在卡片区域左右滑动切换"></iframe>
+		</div>
+	</div>
+</brief-showcase>
+
+<script>
+	class BriefShowcase extends HTMLElement {
+		private cleanup: (() => void) | undefined;
+
+		connectedCallback() {
+			if (this.cleanup) return;
+			const controller = new AbortController();
+			const { signal } = controller;
+
+			const frame = this.querySelector<HTMLIFrameElement>("#daily-brief-runtime");
+			const payloadUrl = "/portfolio/cortex-agent/daily-brief.a2ui.json";
+			let cachedMessages: unknown[] | null = null;
+			let cancelled = false;
+
+			const sendToRuntime = (iframe: HTMLIFrameElement | null, messages: unknown[]) => {
+				const bridge = (
+					iframe?.contentWindow as
+						| (Window & {
+								A2UIBridge?: {
+									ready?: boolean;
+									receive: (channel: string, payload: string) => void;
+								};
+						  })
+						| null
+				)?.A2UIBridge;
+				if (!bridge?.ready) return false;
+				bridge.receive("a2ui", JSON.stringify(messages));
+				return true;
+			};
+
+			const trySend = () => {
+				if (cancelled || !cachedMessages) return;
+				if (!sendToRuntime(frame, cachedMessages)) {
+					window.requestAnimationFrame(trySend);
+				}
+			};
+
+			const loadPayload = async () => {
+				try {
+					const res = await fetch(payloadUrl, { signal });
+					if (!res.ok) throw new Error(`HTTP ${res.status}`);
+					const data = (await res.json()) as { messages?: unknown[] };
+					if (data.messages?.length) {
+						cachedMessages = data.messages;
+						trySend();
+					}
+				} catch (err) {
+					if (!signal.aborted) {
+						console.error("[BriefShowcase] Failed to load daily-brief A2UI data", err);
+					}
+				}
+			};
+
+			frame?.addEventListener("load", () => trySend(), { signal });
+			loadPayload();
+
+			this.cleanup = () => {
+				cancelled = true;
+				controller.abort();
+			};
+		}
+
+		disconnectedCallback() {
+			this.cleanup?.();
+			this.cleanup = undefined;
+		}
+	}
+
+	if (!customElements.get("brief-showcase")) {
+		customElements.define("brief-showcase", BriefShowcase);
+	}
+</script>
+
+<style>
+	.brief-showcase {
+		display: block;
+		margin-top: 28px;
+		border: 1px solid var(--ca-line);
+		border-radius: 16px;
+		overflow: hidden;
+		background: var(--ca-soft);
+		scroll-margin-top: 100px;
+	}
+
+	/* 顶部标题栏 */
+	.brief-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 14px 28px;
+		border-bottom: 1px solid var(--ca-line);
+		background: var(--ca-soft);
+		gap: 16px;
+	}
+
+	.brief-eyebrow {
+		color: var(--ca-text);
+		font-size: 13px;
+		font-weight: 600;
+		margin: 0;
+	}
+
+	.brief-eyebrow span {
+		color: var(--ca-muted);
+		margin-left: 8px;
+		font-size: 11px;
+		letter-spacing: 0.05em;
+		font-weight: 400;
+	}
+
+	.brief-status-tag {
+		font-family: var(--font-mono, monospace);
+		font-size: 11px;
+		font-weight: 600;
+		color: var(--ca-accent);
+		background: color-mix(in srgb, var(--ca-accent) 10%, transparent);
+		border: 1px solid color-mix(in srgb, var(--ca-accent) 25%, transparent);
+		padding: 3px 10px;
+		border-radius: 9999px;
+	}
+
+	/* 左右分区：左右直接平铺 */
+	.brief-inner {
+		display: grid;
+		grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+		align-items: stretch;
+		min-height: 480px;
+	}
+
+	/* 左侧介绍区 */
+	.brief-copy {
+		min-width: 0;
+		padding: 28px 28px 30px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		background: var(--ca-soft);
+	}
+
+	.brief-overline {
+		font-size: 11px;
+		font-weight: 600;
+		color: var(--ca-accent);
+		letter-spacing: 0.12em;
+		margin: 0;
+	}
+
+	.brief-copy h4 {
+		font-size: clamp(20px, 2vw, 24px);
+		line-height: 1.4;
+		font-weight: 600;
+		margin: 8px 0 10px;
+		letter-spacing: -0.02em;
+		color: var(--ca-text);
+	}
+
+	.brief-description {
+		font-size: 13px;
+		line-height: 1.6;
+		color: var(--ca-muted);
+		max-width: 380px;
+		margin: 0;
+	}
+
+	.brief-features {
+		display: grid;
+		gap: 9px;
+		margin-top: 14px;
+		max-width: 400px;
+	}
+
+	.brief-feat-item {
+		padding: 8px 12px;
+		border-radius: 8px;
+		background: var(--ca-bg);
+		border: 1px solid var(--ca-line);
+	}
+
+	.brief-feat-item strong {
+		display: block;
+		font-size: 12px;
+		font-weight: 600;
+		color: var(--ca-text);
+	}
+
+	.brief-feat-item span {
+		display: block;
+		font-size: 12px;
+		line-height: 1.5;
+		color: var(--ca-muted);
+		margin-top: 2px;
+	}
+
+	.brief-principle {
+		border-top: 1px solid var(--ca-line);
+		padding-top: 14px;
+		margin-top: 16px;
+		max-width: 400px;
+	}
+
+	.brief-principle strong {
+		display: block;
+		font-size: 13px;
+		line-height: 1.6;
+		color: var(--ca-text);
+	}
+
+	.brief-principle p {
+		font-size: 11px;
+		color: var(--ca-muted);
+		line-height: 1.6;
+		margin-top: 4px;
+		margin-bottom: 0;
+	}
+
+	/* 右侧整体 A2UI 渲染舞台背景板 */
+	.brief-stage-pane {
+		min-width: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: color-mix(in srgb, var(--ca-line) 28%, var(--ca-soft));
+		border-left: 1px solid var(--ca-line);
+		position: relative;
+		overflow: hidden;
+	}
+
+	.brief-stage-pane iframe {
+		display: block;
+		width: 100%;
+		height: 100%;
+		min-height: 480px;
+		border: 0;
+		background: transparent;
+	}
+
+	/* 响应式 */
+	@media (max-width: 768px) {
+		.brief-header {
+			padding: 12px 18px;
+		}
+
+		.brief-inner {
+			grid-template-columns: minmax(0, 1fr);
+			min-height: auto;
+		}
+
+		.brief-copy {
+			padding: 24px 20px;
+		}
+
+		.brief-stage-pane {
+			border-left: 0;
+			border-top: 1px solid var(--ca-line);
+			min-height: 440px;
+		}
+
+		.brief-stage-pane iframe {
+			min-height: 440px;
+		}
+
+		.brief-copy h4 br {
+			display: none;
+		}
+
+		.brief-copy h4 {
+			font-size: 21px;
+			margin: 8px 0 10px;
+		}
+	}
+</style>

@@ -1,0 +1,109 @@
+<section class="case-section">
+	<div>
+		<p class="number-label">02 / DECISION</p>
+		<h2>三个卡点，我的拆法是治结构、做深场景、给写操作加门禁</h2>
+	</div>
+	<div class="case-copy">
+		<p class="case-lede">
+			核心问题是三个：工具一多上下文膨胀且同类能力误选、主动推送漏关键事项、写操作不可逆；对应的三件事是治能力结构、把两个场景做深、给写操作加确认门禁。
+		</p>
+		<div class="decision">
+			<div class="decision__head">
+				<span class="decision__index">取舍 01</span>
+				<span class="decision__title">治理「业务能力」，而不是治理 API 清单</span>
+			</div>
+			<dl class="decision__rows">
+				<div class="decision__row">
+					<dt>约束</dt>
+					<dd>Planner 每轮承担全量工具描述成本，同类能力并存导致误选。</dd>
+				</div>
+				<div class="decision__row">
+					<dt>候选方案</dt>
+					<dd>A 精简 API 清单；B 同类能力聚合 + 业务域动态召回；C 只做提示词优化。</dd>
+				</div>
+				<div class="decision__row">
+					<dt>证据</dt>
+					<dd>
+						治理前后对照评测：工具数 122 → 77，Planner 单轮输入 Token ≈30% ↓，端到端任务成功率 +4
+						pp；口径为治理前后对照评测，非长期线上数据。
+					</dd>
+				</div>
+				<div class="decision__row">
+					<dt>选择</dt>
+					<dd><em>B</em>：治能力结构与召回策略，而不是继续删 API。</dd>
+				</div>
+				<div class="decision__row">
+					<dt>代价</dt>
+					<dd>多一层抽象，定位变长；召回错误表现为「工具不存在」。</dd>
+				</div>
+			</dl>
+		</div>
+		<div class="decision">
+			<div class="decision__head">
+				<span class="decision__index">取舍 02</span>
+				<span class="decision__title">先把 2 个垂直场景做深，而不是 9 个场景平铺</span>
+			</div>
+			<dl class="decision__rows">
+				<div class="decision__row">
+					<dt>约束</dt>
+					<dd>主动推送一旦打扰就是负体验，每个场景都要单独定义验收，成本高于开发。</dd>
+				</div>
+				<div class="decision__row">
+					<dt>候选方案</dt>
+					<dd>A 9 大场景并行；B 先做会议与工作汇报，其余只保留规划；C 只做被动问答。</dd>
+				</div>
+				<div class="decision__row">
+					<dt>证据</dt>
+					<dd>
+						市场调研发现目标用户多源信息整理负担重；46 条场景用例 + 5 轮 Bad Case
+						迭代，关键事项覆盖率 60% → 87%；口径为离线场景用例评测。
+					</dd>
+				</div>
+				<div class="decision__row">
+					<dt>选择</dt>
+					<dd><em>B</em>：用例、归因与迭代集中在高负担场景。</dd>
+				</div>
+				<div class="decision__row">
+					<dt>代价</dt>
+					<dd>场景覆盖面暂时窄，其余场景仍显能力缺失。</dd>
+				</div>
+			</dl>
+		</div>
+		<div class="decision">
+			<div class="decision__head">
+				<span class="decision__index">取舍 03</span>
+				<span class="decision__title">读可以自动，写必须先确认</span>
+			</div>
+			<dl class="decision__rows">
+				<div class="decision__row">
+					<dt>约束</dt>
+					<dd>出错代价不对称：读错可重试，写错会直接改动用户的邮件、日历与待办。</dd>
+				</div>
+				<div class="decision__row">
+					<dt>候选方案</dt>
+					<dd>A 全自动执行；B 读自动 + 写前确认；C 全部人工确认。</dd>
+				</div>
+				<div class="decision__row">
+					<dt>证据</dt>
+					<dd>
+						Cortex Runtime 已有危险工具确认与失败回流机制，我把它们写进办公工具需求：SOP
+						中「权限、隐私与危险操作」「失败、空结果与人工兜底」为必填项，我按必填项验收。
+					</dd>
+				</div>
+				<div class="decision__row">
+					<dt>选择</dt>
+					<dd><em>B</em>：确认前不产生副作用，读侧不打断用户。</dd>
+				</div>
+				<div class="decision__row">
+					<dt>代价</dt>
+					<dd>写操作多一步交互，效率收益让位于可逆性。</dd>
+				</div>
+			</dl>
+		</div>
+		<!-- 待补：取舍 03 的 A/B/C 方案对比表脱敏版（交互成本 × 失败代价），需从评审材料脱敏后补入 -->
+		<div class="judgment">
+			<p class="judgment__label">我的判断</p>
+			<p>三个取舍共用一个原则：把不可逆与不可判定的部分留给人或门禁，其余交给模型与规则。</p>
+		</div>
+	</div>
+</section>

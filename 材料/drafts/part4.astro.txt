@@ -1,0 +1,88 @@
+<section class="case-section">
+	<div>
+		<p class="number-label">04 / VERIFY</p>
+		<h2>结论要能复测，不能复测的就标明边界</h2>
+	</div>
+	<div class="case-copy">
+		<p class="case-lede">
+			所有结果都带口径：能复测的写清复测方式，不能复测的标明边界，不用离线结论包装上线成果。
+		</p>
+		<p>
+			验收分两条线：ToolHub 治理走治理前后对照评测，主动服务走离线场景用例评测，都以用例先行为前提——46
+			条场景用例先定义什么算覆盖，再跑模型。迭代靠 Bad Case 归因回流：每轮把失败用例归到召回、规划或输出门控，改完重跑同一批用例，5
+			轮把关键事项覆盖率从 60% 拉到 87%。最典型的坑是召回错误在链路上表现为「工具不存在」，看着像工具问题，实为业务域召回没命中，必须回到召回层定位，改提示词无效。
+		</p>
+		<div class="stat-row">
+			<div class="metric">
+				<strong class="font-mono text-3xl">+4 pp</strong>
+				<p class="muted text-sm">用户价值 · 端到端任务成功率</p>
+			</div>
+			<div class="metric">
+				<strong class="font-mono text-3xl">60% → 87%</strong>
+				<p class="muted text-sm">AI 质量 · 关键事项覆盖率</p>
+			</div>
+			<div class="metric">
+				<strong class="font-mono text-3xl">≈30% ↓</strong>
+				<p class="muted text-sm">运行约束 · Planner 单轮输入 Token</p>
+			</div>
+		</div>
+		<p class="muted">
+			口径：成功率与 Token 来自治理前后对照评测，样本量待补，当前仅标注周期（2026.04—2026.09）；覆盖率来自
+			46 条用例离线场景评测。均非长期线上数据。
+		</p>
+		<table class="data-table">
+			<caption>表 1 · 产出、结果与口径</caption>
+			<thead>
+				<tr>
+					<th>产出</th>
+					<th>结果</th>
+					<th>口径与状态</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>工具接入 PRD 生成 Skill</td>
+					<td class="num">5 项办公能力 · 5 段式 PRD 结构</td>
+					<td>已落地复用，Skill 已公开</td>
+				</tr>
+				<tr>
+					<td>ToolHub 治理机制</td>
+					<td class="num">122 → 77 · 单轮 Token ≈30% ↓ · 成功率 +4 pp</td>
+					<td>治理前后对照评测</td>
+				</tr>
+				<tr>
+					<td>Agent 评审工作台</td>
+					<td class="num">链路可播放 · 关键帧批注 · 支撑 10+ 需求评审</td>
+					<td>Mock 评审工具，非产品代码</td>
+				</tr>
+				<tr>
+					<td>Mental Offload 用例资产</td>
+					<td class="num">46 条用例 · 5 轮迭代 · 60% → 87%</td>
+					<td>离线场景用例评测</td>
+				</tr>
+				<tr>
+					<td>LiveMem 个性化记忆</td>
+					<td class="num">记忆准确率 91% · 检索工具调用次数 ↓ 31%</td>
+					<td>3 轮内测，非上线能力</td>
+				</tr>
+				<tr>
+					<td>Mail Draft 个性化</td>
+					<td class="num">个性化采纳率 43% → 71%</td>
+					<td>3 轮内测，非上线能力</td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- 待补：脱敏 Bad Case 示例 1 条（召回未命中 →「工具不存在」），需标注「模拟数据，非真实会话」 -->
+		<p class="muted">
+			局限与下一步：LiveMem 与 Mail Draft 均为 3 轮内测数据，未形成上线成果；Token
+			与成功率依赖治理前后对照评测口径，缺长期线上数据；主动服务只有两个场景做深。下一步把用例接入持续回归、打通召回与
+			Bad Case 回流、补齐打扰度指标。
+		</p>
+		<div class="judgment">
+			<p class="judgment__label">我的判断</p>
+			<p>
+				众筹数字属于产品整体，能证明我的是可复用资产与带口径的评测结论；内测与离线数据一律标明边界，不当上线成果写。
+			</p>
+		</div>
+	</div>
+</section>

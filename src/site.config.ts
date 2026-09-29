@@ -14,7 +14,7 @@ export const siteConfig: SiteConfig = {
 	// Used as both a meta property (src/components/BaseHead.astro L:31 + L:49) & the generated satori png (src/pages/og-image/[slug].png.ts)
 	author: "赵泽宇",
 	// Used as the default description meta property and webmanifest description
-	description: "赵泽宇的 AI 产品经理作品集：Agent 产品设计、工具治理、评测准入与售后 AI 落地。",
+	description: "赵泽宇的 AI 产品经理作品集：Agent 产品设计、ToolHub 工具治理与评测验收体系。",
 	// HTML lang property, found in src/layouts/Base.astro L:18 & astro.config.ts L:48
 	lang: "zh-CN",
 	// Meta property, found in src/components/BaseHead.astro L:42
@@ -39,15 +39,11 @@ export const menuLinks: { path: string; title: string }[] = [
 	},
 	{
 		path: "/projects/",
-		title: "精选项目",
+		title: "项目经历",
 	},
 	{
-		path: "/practice/",
-		title: "其他实践",
-	},
-	{
-		path: "/about/",
-		title: "关于我",
+		path: "/notes/",
+		title: "学习笔记",
 	},
 ];
 

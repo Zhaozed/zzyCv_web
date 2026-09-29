@@ -1,10 +1,9 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
-import Note from "@/components/note/Note.astro";
+import FormattedDate from "@/components/FormattedDate.astro";
 import PageLayout from "@/layouts/Base.astro";
 
-// if you're using an adaptor in SSR mode, getStaticPaths wont work -> https://docs.astro.build/en/guides/routing/#modifying-the-slug-example-for-ssr
 export const getStaticPaths = (async () => {
 	const allNotes = await getCollection("note");
 	return allNotes.map((note) => ({
@@ -16,15 +15,232 @@ export const getStaticPaths = (async () => {
 export type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { note } = Astro.props;
+const { Content } = await render(note);
 
 const meta = {
+	title: `${note.data.title} | 学习笔记`,
 	description:
 		note.data.description ||
-		`Read about my note posted on: ${note.data.publishDate.toLocaleDateString()}`,
-	title: note.data.title,
+		`阅读关于 ${note.data.title} 的思考与沉淀`,
 };
 ---
 
-<PageLayout meta={meta}>
-	<section class="relative z-20 mx-auto my-12 max-w-2xl px-7"><Note as="h1" note={note} /></section>
+<PageLayout showBackground={false} meta={meta}>
+	<div class="note-detail-page">
+		<!-- 返回导航 -->
+		<nav class="note-back-nav">
+			<a href="/notes/" class="back-link">
+				<span class="back-arrow">←</span>
+				<span>返回学习笔记</span>
+			</a>
+		</nav>
+
+		<article class="note-article" data-pagefind-body>
+			<!-- 头部信息 -->
+			<header class="note-header">
+				{
+					note.data.category && (
+						<div class="note-category-pill">
+							<span>{note.data.category}</span>
+						</div>
+					)
+				}
+
+				<h1 class="note-title">{note.data.title}</h1>
+
+				<div class="note-meta-row">
+					<FormattedDate
+						class="note-date"
+						date={note.data.publishDate}
+						dateTimeOptions={{
+							year: "numeric",
+							month: "2-digit",
+							day: "2-digit",
+						}}
+					/>
+				</div>
+
+				{
+					note.data.description && (
+						<div class="note-lead">
+							<p>{note.data.description}</p>
+						</div>
+					)
+				}
+			</header>
+
+			<!-- 正文内容 -->
+			<div class="note-body prose dark:prose-invert">
+				<Content />
+			</div>
+
+			<!-- 底部导航 -->
+			<footer class="note-footer">
+				<a href="/notes/" class="footer-back-btn">
+					<span>← 返回所有分类笔记</span>
+				</a>
+			</footer>
+		</article>
+	</div>
 </PageLayout>
+
+<style>
+	.note-detail-page {
+		--note-muted: #737373;
+		--note-accent: #b43a30;
+		--note-line: rgba(0, 0, 0, 0.08);
+		--note-lead-bg: rgba(0, 0, 0, 0.025);
+		--note-lead-border: rgba(180, 58, 48, 0.3);
+
+		max-width: 760px;
+		margin: 0 auto;
+		padding: 40px 24px 80px;
+	}
+
+	:global([data-theme="dark"]) .note-detail-page {
+		--note-muted: #a3a3a3;
+		--note-accent: #f09a8f;
+		--note-line: rgba(255, 255, 255, 0.1);
+		--note-lead-bg: rgba(255, 255, 255, 0.03);
+		--note-lead-border: rgba(240, 154, 143, 0.3);
+	}
+
+	.note-back-nav {
+		margin-bottom: 32px;
+	}
+
+	.back-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		color: var(--note-muted);
+		text-decoration: none;
+		font-size: 14px;
+		transition: color 0.2s ease, transform 0.2s ease;
+	}
+
+	.back-link:hover {
+		color: var(--note-accent);
+		transform: translateX(-2px);
+	}
+
+	.back-arrow {
+		font-size: 16px;
+	}
+
+	.note-header {
+		margin-bottom: 36px;
+		padding-bottom: 28px;
+		border-bottom: 1px solid var(--note-line);
+	}
+
+	.note-category-pill {
+		display: inline-block;
+		padding: 4px 10px;
+		border-radius: 9999px;
+		background: rgba(180, 58, 48, 0.08);
+		color: var(--note-accent);
+		font-size: 12px;
+		font-weight: 600;
+		margin-bottom: 16px;
+	}
+
+	:global([data-theme="dark"]) .note-category-pill {
+		background: rgba(240, 154, 143, 0.12);
+	}
+
+	.note-subcat-dot {
+		margin: 0 4px;
+		opacity: 0.5;
+	}
+
+	.note-title {
+		margin: 0;
+		font-size: clamp(24px, 3.2vw, 32px);
+		font-weight: 700;
+		letter-spacing: -0.03em;
+		line-height: 1.35;
+	}
+
+	.note-meta-row {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 12px;
+		margin-top: 14px;
+	}
+
+	.note-date {
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+		font-size: 13px;
+		color: var(--note-muted);
+	}
+
+	.note-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+
+	.note-tag {
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+		font-size: 12px;
+		color: var(--note-muted);
+		background: rgba(0, 0, 0, 0.04);
+		padding: 2px 6px;
+		border-radius: 4px;
+	}
+
+	:global([data-theme="dark"]) .note-tag {
+		background: rgba(255, 255, 255, 0.06);
+	}
+
+	.note-lead {
+		margin-top: 20px;
+		padding: 16px 20px;
+		border-left: 3px solid var(--note-lead-border);
+		background: var(--note-lead-bg);
+		border-radius: 0 8px 8px 0;
+	}
+
+	.note-lead p {
+		margin: 0;
+		font-size: 15px;
+		line-height: 1.65;
+		color: inherit;
+		font-style: italic;
+	}
+
+	.note-body {
+		font-size: 15px;
+		line-height: 1.8;
+	}
+
+	.note-footer {
+		margin-top: 48px;
+		padding-top: 24px;
+		border-top: 1px solid var(--note-line);
+	}
+
+	.footer-back-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		color: var(--note-accent);
+		text-decoration: none;
+		font-size: 14px;
+		font-weight: 500;
+		transition: transform 0.2s ease;
+	}
+
+	.footer-back-btn:hover {
+		transform: translateX(-2px);
+		text-decoration: underline;
+	}
+
+	@media (max-width: 640px) {
+		.note-detail-page {
+			padding: 28px 16px 60px;
+		}
+	}
+</style>

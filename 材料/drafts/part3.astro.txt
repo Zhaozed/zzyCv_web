@@ -1,0 +1,113 @@
+<section class="case-section">
+	<div>
+		<p class="number-label">03 / DESIGN</p>
+		<h2>我交付的不是接口文档，是让验收前置的结构</h2>
+	</div>
+	<div class="case-copy">
+		<p class="case-lede">
+			我交付的不是接口文档，而是一套让验收前置的结构：SOP 六步把「怎样算做完」写进需求，可播放的评审链路把「体验对不对」变成看得见的证据。
+		</p>
+
+		<h3>工具接入 SOP 与 PRD 生成 Skill</h3>
+		<div class="tile-grid">
+			<div class="tile">
+				<p class="tile__index">01</p>
+				<b>场景与成功标准</b>
+				<p>先定义什么算成功。</p>
+			</div>
+			<div class="tile">
+				<p class="tile__index">02</p>
+				<b>API 与交互映射</b>
+				<p>字段映射成交互。</p>
+			</div>
+			<div class="tile">
+				<p class="tile__index">03</p>
+				<b>权限、隐私与危险操作</b>
+				<p>授权、边界、写确认。</p>
+			</div>
+			<div class="tile">
+				<p class="tile__index">04</p>
+				<b>失败、空结果与人工兜底</b>
+				<p>报错、超时、转人工路径。</p>
+			</div>
+			<div class="tile">
+				<p class="tile__index">05</p>
+				<b>用例与评测验收</b>
+				<p>用例先行，验收前置。</p>
+			</div>
+			<div class="tile">
+				<p class="tile__index">06</p>
+				<b>Badcase 回流</b>
+				<p>问题回到用例，持续回归。</p>
+			</div>
+		</div>
+		<p class="muted">
+			Skill 覆盖接口调研、功能设计、核心
+			Case、异常分支与验收标准，把「描述一个功能」变成结构统一的
+			PRD：后续工具接入不再从零写文档，验收标准在需求阶段就已就位。
+		</p>
+		<a
+			class="button-ghost"
+			href="https://github.com/Zhaozed/Loona-PMdevelopskill"
+			target="_blank"
+			rel="noopener">查看公开 Skill ↗</a
+		>
+		<!-- 待补：脱敏 PRD 片段截图（需公司披露确认，只保留章节结构与字段名，不含业务数据与内网地址） -->
+
+		<h3>写操作门禁落在链路上</h3>
+		<p>Agent 出错代价不对称：读错可重试，写错会直接改动用户的邮件、日历与待办。</p>
+		<div class="flow">
+			<div class="flow__step">
+				<span>STEP 01</span>
+				<b>意图与目标解析</b>
+				<small>高频表达走 quick_router / quick_plan</small>
+			</div>
+			<div class="flow__arrow">→</div>
+			<div class="flow__step">
+				<span>STEP 02</span>
+				<b>THINK</b>
+				<small>决定调用工具或追问</small>
+			</div>
+			<div class="flow__arrow">→</div>
+			<div class="flow__step">
+				<span>STEP 03</span>
+				<b>ASK_USER 追问</b>
+				<small>信息不足先问，不猜</small>
+			</div>
+			<div class="flow__arrow">→</div>
+			<div class="flow__step flow__step--gate">
+				<span>STEP 04</span>
+				<b>危险工具确认</b>
+				<small>确认前不产生副作用</small>
+			</div>
+			<div class="flow__arrow">→</div>
+			<div class="flow__step">
+				<span>STEP 05</span>
+				<b>TOOL_RESULT 回流</b>
+				<small>失败可感知；崩溃与租约自愈</small>
+			</div>
+		</div>
+		<p>
+			这些机制在 Cortex Runtime 中已存在；我把它们写进办公工具需求：SOP
+			中「权限、隐私与危险操作」「失败、空结果与人工兜底」为必填项，我按必填项验收。
+		</p>
+		<!-- 待补：重绘简化版接入流程图（去掉内网系统名，只保留需求、研发、验收三方与门禁节点） -->
+
+		<h3>评审工作台：把时序变成可播放证据</h3>
+		<p>
+			静态原型评审不了语音与时序。工作台按预设 Case 逐事件播放「用户提问 → Agent 思考 → TTS 口播 →
+			卡片呈现」，同时生成关键帧瀑布，评审者能定位到具体节点写批注。
+		</p>
+		<p>认可后的理想链路导出为 JSON，直接作为研发对接契约，评审结论不再散落在会议纪要里。</p>
+		<LoopVideo
+			label="Cortex Agent 评审工作台演示"
+			poster="/portfolio/practice/review-workbench.png"
+			src="/portfolio/practice/review-workbench-demo.mp4"
+		/>
+		<a class="button-ghost" href="/practice/review-workbench/">查看评审工作台细节 ↗</a>
+		<div class="judgment">
+			<p class="judgment__label">我的判断</p>
+			<p>结构与门禁前置的代价是单需求前期投入变大，换来每次接入口径一致、验收不必返工。</p>
+		</div>
+	</div>
+</section>

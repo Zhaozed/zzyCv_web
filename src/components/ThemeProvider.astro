@@ -1,34 +1,28 @@
 {/* Inlined to avoid FOUC. This is a parser blocking script. */}
 <script is:inline>
-	const lightModePref = window.matchMedia("(prefers-color-scheme: light)");
-
 	function getUserPref() {
 		const storedTheme = typeof localStorage !== "undefined" && localStorage.getItem("theme");
-		return storedTheme || (lightModePref.matches ? "light" : "dark");
+		// 严格默认白天模式（light），只有当用户显式手动点击过暗色模式时才使用 dark
+		return storedTheme === "dark" ? "dark" : "light";
 	}
 
 	function setTheme(newTheme) {
-		if (newTheme !== "light" && newTheme !== "dark") {
-			return console.warn(
-				`Invalid theme value '${newTheme}' received. Expected 'light' or 'dark'.`,
-			);
-		}
-
+		const theme = newTheme === "dark" ? "dark" : "light";
 		const root = document.documentElement;
 
 		// root already set to newTheme, exit early
-		if (newTheme === root.getAttribute("data-theme")) {
+		if (theme === root.getAttribute("data-theme")) {
 			return;
 		}
 
-		root.setAttribute("data-theme", newTheme);
+		root.setAttribute("data-theme", theme);
 
 		if (typeof localStorage !== "undefined") {
-			localStorage.setItem("theme", newTheme);
+			localStorage.setItem("theme", theme);
 		}
 	}
 
-	// initial setup
+	// 初始默认白天模式
 	setTheme(getUserPref());
 
 	// listen for pageshow event, browser restored page from bfcache
@@ -42,7 +36,4 @@
 	document.addEventListener("theme-change", (e) => {
 		setTheme(e.detail.theme);
 	});
-
-	// listen for prefers-color-scheme change.
-	lightModePref.addEventListener("change", (e) => setTheme(e.matches ? "light" : "dark"));
 </script>

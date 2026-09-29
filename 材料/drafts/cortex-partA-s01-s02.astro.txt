@@ -1,0 +1,91 @@
+<section class="case-section case-section--overview" id="overview">
+	<div>
+		<p class="number-label">01 / OVERVIEW</p>
+		<h2>工具接进来只是第一步，可治理、可交付才算办公能力</h2>
+	</div>
+	<div class="case-copy">
+		<p class="case-lede">
+			Cortex-Agent 的价值不在能聊天，而在稳定办成办公任务；本页只写我负责的部分。
+		</p>
+		<p>
+			Cortex-Agent 是可以科技 Loona 桌面机器人的 Agent
+			运行时，面向办公辅助与日常陪伴场景：通过语音交互、任务规划与工具调用，连接邮件、日程等办公能力，并提供会议、工作汇报等主动服务。
+		</p>
+		<p>
+			我负责 ToolHub 工具治理方案、会议与工作汇报主动服务设计，以及办公能力接入与验收；同时建设 PRD 生成
+			Skill 和交互评审工作台，支持需求交付与团队协作。
+		</p>
+		<div class="mt-6 border border-dashed border-neutral-300 p-5 dark:border-neutral-600">
+			<p class="font-mono text-xs tracking-widest uppercase text-neutral-400">待补素材 / TODO</p>
+			<p class="mt-2 text-sm leading-7 text-neutral-500 dark:text-neutral-400">
+				需要一张真实办公场景图或一段短交互视频（由本人提供，经公司脱敏确认后使用），补齐后以图片组件替换本块，图注计划为「Loona 办公交互示例｜［实际演示场景］」。
+			</p>
+		</div>
+	</div>
+</section>
+
+<section class="case-section" id="toolhub">
+	<div>
+		<p class="number-label">02 / TOOLHUB</p>
+		<h2>控制上下文开销与误选风险，靠工具治理而不是继续堆工具</h2>
+	</div>
+	<div class="case-copy">
+		<p class="case-lede">
+			工具增长到 122 个之后，我们用聚合、路由与按需加载把开销和误选一起收口，并用治理前后对照评测验证。
+		</p>
+		<p>
+			问题有三层：工具数量增长至 122 个；全量注入使 Planner
+			承担大量工具描述开销；不同平台的同类能力重复表达，进一步增加工具选择复杂度。
+		</p>
+		<p>
+			我主导同类能力聚合、业务域路由与按需加载的方案设计，协同研发推动 ToolHub
+			从全量注入转为按任务加载。
+		</p>
+		<!-- SLOT:DIAGRAM-TOOLHUB -->
+		<!-- Archify：图 1 · ToolHub 治理前后对比 -->
+		<div class="tile-grid">
+			<div class="tile">
+				<p class="tile__index">01</p>
+				<b>能力聚合</b>
+				<p>按业务语义组织同类能力，减少重复定义；保留平台选择与必要差异，避免统一入口掩盖执行约束。</p>
+			</div>
+			<div class="tile">
+				<p class="tile__index">02</p>
+				<b>按需加载</b>
+				<p>根据任务识别所需业务域，再加载相关工具 Schema，缩小 Planner 的工具范围；同时关注跨域任务是否漏召回。</p>
+			</div>
+		</div>
+		<div class="judgment">
+			<p class="judgment__label">设计判断</p>
+			<p>
+				聚合处理「同类能力重复」，动态加载处理「当前任务无关」。两者需要配合，也需要分别检查：工具是否选对、所需能力是否完整、执行结果是否符合预期。
+			</p>
+		</div>
+		<p>验证走治理前后对照评测，同时检查上下文开销与端到端任务完成情况。</p>
+		<div class="stat-row">
+			<div class="metric">
+				<strong class="font-mono text-3xl">122 → 77</strong>
+				<p class="muted text-sm">治理前后对照评测 · 工具数量</p>
+			</div>
+			<div class="metric">
+				<strong class="font-mono text-3xl">≈30% ↓</strong>
+				<p class="muted text-sm">治理前后对照评测 · Planner 单轮输入 Token</p>
+			</div>
+			<div class="metric">
+				<strong class="font-mono text-3xl">+4 pp</strong>
+				<p class="muted text-sm">治理前后对照评测 · 端到端任务成功率</p>
+			</div>
+		</div>
+		<details class="mt-7 border-t border-dashed border-neutral-300 pt-4 dark:border-neutral-600">
+			<summary class="cursor-pointer font-mono text-xs tracking-widest uppercase text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100">查看评测口径与一个工具聚合示例</summary>
+			<div class="mt-4 text-sm leading-7 text-neutral-600 dark:text-neutral-400">
+				<ol class="list-decimal space-y-2 ps-5">
+					<li>对照评测使用的版本、样本量与场景范围 —— 待补：当前无真实材料，补齐后替换本条，不虚构口径。</li>
+					<li>任务成功的判定方式 —— 待补：需按真实评测记录填写判定规则。</li>
+					<li>Token 的统计范围与聚合方式 —— 待补：需按实际统计口径填写。</li>
+					<li>一项真实能力的聚合前后对照（原有工具 → 聚合能力 → 保留的平台差异）—— 待补：需脱敏后的真实示例，不得编造。</li>
+				</ol>
+			</div>
+		</details>
+	</div>
+</section>

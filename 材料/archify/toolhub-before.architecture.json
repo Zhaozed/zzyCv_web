@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "治理前 · 全量注入",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "viewBox": [
+      1080,
+      350
+    ],
+    "legend": {
+      "mode": "hidden"
+    }
+  },
+  "components": [
+    {
+      "id": "task-full",
+      "type": "external",
+      "label": "用户任务",
+      "sublabel": "当前任务所需能力有限",
+      "pos": [
+        30,
+        220
+      ],
+      "size": [
+        240,
+        76
+      ]
+    },
+    {
+      "id": "catalog-full",
+      "type": "database",
+      "label": "全量工具 Schema",
+      "sublabel": "122 个工具 · 全量注入",
+      "pos": [
+        420,
+        40
+      ],
+      "size": [
+        240,
+        76
+      ]
+    },
+    {
+      "id": "plan-full",
+      "type": "backend",
+      "label": "Planner",
+      "sublabel": "处理任务与完整工具描述",
+      "pos": [
+        420,
+        220
+      ],
+      "size": [
+        240,
+        76
+      ]
+    },
+    {
+      "id": "execute-full",
+      "type": "external",
+      "label": "工具执行",
+      "sublabel": "选择工具并调用",
+      "pos": [
+        810,
+        220
+      ],
+      "size": [
+        240,
+        76
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "task-full-to-plan-full",
+      "from": "task-full",
+      "to": "plan-full",
+      "variant": "default"
+    },
+    {
+      "id": "catalog-full-to-plan-full",
+      "from": "catalog-full",
+      "to": "plan-full",
+      "variant": "default"
+    },
+    {
+      "id": "plan-full-to-execute-full",
+      "from": "plan-full",
+      "to": "execute-full",
+      "variant": "default"
+    }
+  ]
+}

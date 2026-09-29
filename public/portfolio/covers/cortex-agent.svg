@@ -1,0 +1,216 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Cortex-Agent · 从工具调用，到主动服务</title>
+  <desc id="desc">暖白色封面，项目标题配以 Loona DeskMate 桌面具身机器人卡通形象及外围工具生态轨道。</desc>
+  <defs>
+    <!-- 基础投影 -->
+    <filter id="cardShadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#4A3B32" flood-opacity=".12"/>
+    </filter>
+    <filter id="robotShadow" x="-40%" y="-30%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="24" stdDeviation="22" flood-color="#3D2E24" flood-opacity=".18"/>
+    </filter>
+    <filter id="eyeGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- 渐变定义 -->
+    <linearGradient id="phoneBody" x1="0" y1="0" x2="320" y2="190" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2D3139"/>
+      <stop offset="100%" stop-color="#16181E"/>
+    </linearGradient>
+    <linearGradient id="phoneBezel" x1="0" y1="0" x2="320" y2="190" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#5B6270"/>
+      <stop offset="50%" stop-color="#3C414C"/>
+      <stop offset="100%" stop-color="#20232A"/>
+    </linearGradient>
+    <linearGradient id="screenGlass" x1="-150" y1="-90" x2="150" y2="90" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#121419"/>
+      <stop offset="100%" stop-color="#060709"/>
+    </linearGradient>
+    <linearGradient id="glareGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity=".14"/>
+      <stop offset="60%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- 眼睛发光渐变 (Loona 标志性暖黄/琥珀瞳孔) -->
+    <radialGradient id="eyeAura" cx="50%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#FFF8D6"/>
+      <stop offset="35%" stop-color="#FDBA74"/>
+      <stop offset="75%" stop-color="#EA580C"/>
+      <stop offset="100%" stop-color="#9A3412" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="eyeCore" cx="45%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="25%" stop-color="#FEF08A"/>
+      <stop offset="65%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </radialGradient>
+
+    <!-- 底座立体渐变 (圆润哑光黑色球形底座) -->
+    <radialGradient id="domeLight" cx="45%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#4B5160"/>
+      <stop offset="45%" stop-color="#282C35"/>
+      <stop offset="85%" stop-color="#181A20"/>
+      <stop offset="100%" stop-color="#0F1014"/>
+    </radialGradient>
+    <linearGradient id="baseRim" x1="835" y1="495" x2="985" y2="535" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#242730"/>
+      <stop offset="100%" stop-color="#0C0E11"/>
+    </linearGradient>
+    <linearGradient id="neckJoint" x1="0" y1="0" x2="36" y2="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F1F5F9"/>
+      <stop offset="40%" stop-color="#CBD5E1"/>
+      <stop offset="70%" stop-color="#94A3B8"/>
+      <stop offset="100%" stop-color="#475569"/>
+    </linearGradient>
+
+    <!-- 工具卡片渐变 -->
+    <linearGradient id="badgeGrad" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F5EFE6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 背景底色 -->
+  <path fill="#F2EEE6" d="M0 0h1200v675H0z"/>
+
+  <!-- 右侧视觉中心光晕圆 -->
+  <circle cx="910" cy="335" r="285" fill="#EAE2D6" fill-opacity=".55"/>
+  <circle cx="910" cy="335" r="215" fill="#E4DCD0" fill-opacity=".35"/>
+
+  <!-- 左侧项目信息与文字排版 -->
+  <g font-family="Arial, Helvetica, -apple-system, sans-serif">
+    <path d="M72 65h14v14H72z" fill="#BC4934"/>
+    <text x="101" y="79" font-size="17" letter-spacing="3" fill="#655E55">AI PRODUCT / 01</text>
+    <text x="68" y="264" font-size="108" font-weight="700" letter-spacing="-6" fill="#282722">Cortex</text>
+    <text x="68" y="374" font-size="108" font-weight="700" letter-spacing="-6" fill="#282722">Agent<tspan fill="#BC4934">.</tspan></text>
+    <text x="74" y="448" font-family="'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="28" letter-spacing="1" fill="#655E55">从工具调用，到主动服务</text>
+    <text x="74" y="608" font-size="16" letter-spacing="2.5" fill="#7F776D">TOOLS. CONTEXT. ACTION.</text>
+  </g>
+
+  <!-- 右侧视觉组件：DeskMate 具身智能体 + 工具生态轨道 -->
+  <g id="deskmate-scene">
+    <!-- 环形能力轨道 -->
+    <ellipse cx="910" cy="340" rx="245" ry="165" stroke="#C6BBAB" stroke-width="1.5" stroke-dasharray="6 8" transform="rotate(-15 910 340)"/>
+    <ellipse cx="910" cy="340" rx="175" ry="240" stroke="#D8CFC3" stroke-width="1.5" stroke-dasharray="4 6" transform="rotate(25 910 340)"/>
+
+    <!-- 地面阴影 -->
+    <ellipse cx="910" cy="546" rx="140" ry="22" fill="#4A3B32" fill-opacity=".18" filter="url(#robotShadow)"/>
+
+    <!-- DeskMate 机器人底座与机械颈部 -->
+    <g id="deskmate-base-group">
+      <!-- 底盘底脚与接口 -->
+      <path d="M840 522 C840 514 845 508 852 508 L968 508 C975 508 980 514 980 522 C980 534 970 540 910 540 C850 540 840 534 840 522 Z" fill="url(#baseRim)"/>
+      <rect x="895" y="524" width="30" height="6" rx="3" fill="#252932"/>
+      <rect x="862" y="525" width="14" height="4" rx="2" fill="#252932"/>
+      <rect x="944" y="525" width="14" height="4" rx="2" fill="#252932"/>
+
+      <!-- 主体：饱满的圆弧球形穹顶底座 -->
+      <path d="M830 510 C824 430 858 392 910 392 C962 392 996 430 990 510 C965 516 935 518 910 518 C885 518 855 516 830 510 Z" fill="url(#domeLight)" filter="url(#robotShadow)"/>
+
+      <!-- 旋转水平分割缝隙 -->
+      <path d="M834 496 Q910 504 986 496" stroke="#121418" stroke-width="2.5" fill="none"/>
+      <path d="M838 498 Q910 506 982 498" stroke="#525866" stroke-width="1" fill="none" opacity=".5"/>
+
+      <!-- 球顶上部的高光微弧 -->
+      <path d="M865 422 Q910 408 955 422" stroke="#687285" stroke-width="3" stroke-linecap="round" fill="none" opacity=".4"/>
+
+      <!-- 顶部金属插孔槽 (Crater) -->
+      <ellipse cx="910" cy="392" rx="24" ry="8" fill="#181B22" stroke="#333842" stroke-width="1.5"/>
+
+      <!-- 灵巧铝合金颈部机械臂 -->
+      <g transform="translate(896, 335)">
+        <path d="M7 60 C8 35 14 18 18 6 L26 8 C22 20 17 38 17 60 Z" fill="url(#neckJoint)"/>
+        <!-- 机械支撑背板接头 -->
+        <rect x="12" y="2" width="22" height="34" rx="6" fill="url(#neckJoint)"/>
+        <circle cx="23" cy="18" r="5" fill="#334155"/>
+        <circle cx="23" cy="18" r="2.5" fill="#94A3B8"/>
+      </g>
+    </g>
+
+    <!-- 头部：横屏 iPhone (自然微倾斜 -8 度，生动好奇感) -->
+    <g transform="translate(910, 275) rotate(-8)">
+      <!-- 手机背光与投影 -->
+      <rect x="-162" y="-98" width="324" height="196" rx="36" fill="none" filter="url(#cardShadow)"/>
+
+      <!-- 手机金属中框 -->
+      <rect x="-160" y="-96" width="320" height="192" rx="34" fill="url(#phoneBody)" stroke="url(#phoneBezel)" stroke-width="3"/>
+
+      <!-- 侧边精工按键与天线条 -->
+      <rect x="52" y="-99" width="36" height="3" rx="1.5" fill="#4B525F"/>
+      <rect x="-88" y="-99" width="28" height="3" rx="1.5" fill="#4B525F"/>
+      <rect x="-163" y="-28" width="3" height="42" rx="1.5" fill="#4B525F"/>
+
+      <!-- 屏幕超黑面板 -->
+      <rect x="-147" y="-83" width="294" height="166" rx="24" fill="url(#screenGlass)"/>
+
+      <!-- 扬声器 / 前摄微孔 -->
+      <rect x="-142" y="-12" width="5" height="24" rx="2.5" fill="#1C1E24"/>
+
+      <!-- 斜向通透玻璃反光 -->
+      <path d="M-147 -83 L-25 -83 L-147 65 Z" fill="url(#glareGrad)"/>
+
+      <!-- Loona DeskMate 灵魂大眼睛 (卡通面包型圆弧暖光大眼) -->
+      <g id="loona-eyes" filter="url(#eyeGlow)">
+        <!-- 左眼外光晕 (圆顶微弧底) -->
+        <path d="M -90 -22 C -90 -54 -40 -54 -40 -22 L -40 18 C -40 38 -52 44 -65 44 C -78 44 -90 38 -90 18 Z" fill="url(#eyeAura)"/>
+        <!-- 左眼核心亮瞳 -->
+        <path d="M -82 -20 C -82 -46 -48 -46 -48 -20 L -48 15 C -48 30 -56 35 -65 35 C -74 35 -82 30 -82 15 Z" fill="url(#eyeCore)"/>
+        <!-- 左眼萌态高光斑 -->
+        <circle cx="-53" cy="-16" r="7" fill="#FFFFFF" fill-opacity=".95"/>
+        <circle cx="-45" cy="-2" r="3.5" fill="#FFFFFF" fill-opacity=".75"/>
+
+        <!-- 右眼外光晕 -->
+        <path d="M 24 -22 C 24 -54 74 -54 74 -22 L 74 18 C 74 38 62 44 49 44 C 36 44 24 38 24 18 Z" fill="url(#eyeAura)"/>
+        <!-- 右眼核心亮瞳 -->
+        <path d="M 32 -20 C 32 -46 66 -46 66 -20 L 66 15 C 66 30 58 35 49 35 C 40 35 32 30 32 15 Z" fill="url(#eyeCore)"/>
+        <!-- 右眼萌态高光斑 -->
+        <circle cx="61" cy="-16" r="7" fill="#FFFFFF" fill-opacity=".95"/>
+        <circle cx="69" cy="-2" r="3.5" fill="#FFFFFF" fill-opacity=".75"/>
+      </g>
+    </g>
+
+    <!-- 围绕 DeskMate 飞行的 4 个 Agent 能力组件卡片 -->
+    <!-- 01 日程能力卡 (右上) -->
+    <g transform="translate(1030, 160)" filter="url(#cardShadow)">
+      <rect width="80" height="80" rx="24" fill="url(#badgeGrad)" stroke="#FFFFFF" stroke-width="2"/>
+      <rect x="22" y="24" width="36" height="34" rx="7" stroke="#817569" stroke-width="2.5" fill="none"/>
+      <path d="M22 35h36M32 20v8M48 20v8" stroke="#817569" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="40" cy="45" r="3.5" fill="#BC4934"/>
+    </g>
+
+    <!-- 02 邮件/通讯卡 (右中) -->
+    <g transform="translate(1060, 360)" filter="url(#cardShadow)">
+      <rect width="76" height="76" rx="22" fill="url(#badgeGrad)" stroke="#FFFFFF" stroke-width="2"/>
+      <rect x="20" y="25" width="36" height="26" rx="6" stroke="#817569" stroke-width="2.5" fill="none"/>
+      <path d="M22 28l16 12 16-12" stroke="#817569" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+
+    <!-- 03 晨间简报/文档卡 (左下) -->
+    <g transform="translate(670, 415)" filter="url(#cardShadow)">
+      <rect width="80" height="80" rx="24" fill="url(#badgeGrad)" stroke="#FFFFFF" stroke-width="2"/>
+      <path d="M27 22h26l9 9v27H27V22z" stroke="#817569" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
+      <path d="M34 38h18M34 46h12" stroke="#817569" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="56" cy="22" r="3" fill="#BC4934"/>
+    </g>
+
+    <!-- 04 意图分流/语音气泡 (左上) -->
+    <g transform="translate(665, 175)" filter="url(#cardShadow)">
+      <rect width="76" height="76" rx="22" fill="url(#badgeGrad)" stroke="#FFFFFF" stroke-width="2"/>
+      <path d="M24 26h28v24H38l-9 8v-8h-5V26z" stroke="#817569" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
+      <path d="M31 35h14M31 41h8" stroke="#817569" stroke-width="2.5" stroke-linecap="round"/>
+    </g>
+
+    <!-- 轨道连接节点装饰 -->
+    <circle cx="1070" cy="140" r="7" fill="#BC4934"/>
+    <circle cx="655" cy="370" r="5" fill="#BC4934"/>
+    <circle cx="1120" cy="460" r="6" fill="#D97706"/>
+  </g>
+
+  <!-- 右下角探索箭头 -->
+  <path d="M1086 588h38m-13-13 13 13-13 13" stroke="#9C8E7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
