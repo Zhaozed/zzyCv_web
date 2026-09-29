@@ -64,10 +64,13 @@ import PageLayout from "@/layouts/Base.astro";
 								<div
 									class="absolute inset-0 -rotate-6 rounded-xl border border-neutral-200/80 bg-white p-1 shadow-md transition-all duration-300 ease-out group-hover:-translate-x-1.5 group-hover:-translate-y-0.5 group-hover:-rotate-12 dark:border-neutral-800 dark:bg-neutral-900">
 									<img
-										src="/portfolio/about/bromo-dji.jpg"
+										src="/portfolio/about/bromo-dji-thumb.webp"
 										alt="布罗莫火山航拍全景"
 										class="h-full w-full rounded-lg object-cover object-center select-none"
 										loading="eager"
+										decoding="async"
+										width="240"
+										height="180"
 									/>
 								</div>
 
@@ -75,10 +78,13 @@ import PageLayout from "@/layouts/Base.astro";
 								<div
 									class="relative z-10 h-full w-full rotate-3 rounded-xl border border-neutral-200/90 bg-white p-1 shadow-lg transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:rotate-6 dark:border-neutral-800 dark:bg-neutral-900">
 									<img
-										src="/portfolio/about/bromo-hike.jpg"
+										src="/portfolio/about/bromo-hike-thumb.webp"
 										alt="绿色衣服旅行照封面"
 										class="h-full w-full rounded-lg object-cover object-center select-none"
 										loading="eager"
+										decoding="async"
+										width="240"
+										height="180"
 									/>
 									<!-- 右下角黑色小圆圈 ↗ 图标 -->
 									<div
@@ -106,11 +112,13 @@ import PageLayout from "@/layouts/Base.astro";
 
 					<div class="relative z-30 px-10">
 						<img
-							src="/portfolio/about/chatgpt-home.png"
+							src="/portfolio/about/chatgpt-home.webp"
 							loading="eager"
-							decoding="auto"
+							decoding="async"
 							class="relative z-30 mx-auto aspect-[993/1583] w-full md:max-w-md dark:-translate-y-0.5"
 							alt="赵泽宇的 AI 形象照"
+							width="993"
+							height="1583"
 						/>
 					</div>
 					<div
@@ -189,12 +197,11 @@ import PageLayout from "@/layouts/Base.astro";
 							<video
 								id="basketball-video"
 								src="/portfolio/about/basketball-motion.mp4"
-								poster="/portfolio/about/basketball-poster.jpg"
-								autoplay
+								poster="/portfolio/about/basketball-poster.webp"
 								loop
 								muted
 								playsinline
-								preload="auto"
+								preload="none"
 								class="h-full w-full cursor-pointer bg-black/95 object-contain"></video>
 							<!-- 实况微胶囊标签 -->
 							<div
@@ -238,10 +245,11 @@ import PageLayout from "@/layouts/Base.astro";
 							class="slide pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300"
 							data-index="1">
 							<img
-								src="/portfolio/about/bromo-hike.jpg"
+								src="/portfolio/about/bromo-hike.webp"
 								alt="布罗莫火山山脊与破晓云海"
 								class="h-full w-full object-cover object-center"
 								loading="lazy"
+								decoding="async"
 							/>
 						</div>
 
@@ -250,10 +258,11 @@ import PageLayout from "@/layouts/Base.astro";
 							class="slide pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300"
 							data-index="2">
 							<img
-								src="/portfolio/about/bromo-dji.jpg"
+								src="/portfolio/about/bromo-dji.webp"
 								alt="布罗莫火山航拍全景与云海"
 								class="h-full w-full object-cover object-center"
 								loading="lazy"
+								decoding="async"
 							/>
 						</div>
 
@@ -262,10 +271,11 @@ import PageLayout from "@/layouts/Base.astro";
 							class="slide pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300"
 							data-index="3">
 							<img
-								src="/portfolio/about/snorkeling.jpg"
+								src="/portfolio/about/snorkeling.webp"
 								alt="澄澈深海浮潜"
 								class="h-full w-full object-cover object-center"
 								loading="lazy"
+								decoding="async"
 							/>
 						</div>
 
@@ -274,10 +284,11 @@ import PageLayout from "@/layouts/Base.astro";
 							class="slide pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300"
 							data-index="4">
 							<img
-								src="/portfolio/about/beach-fishing.jpg"
+								src="/portfolio/about/beach-fishing.webp"
 								alt="暮光沙滩横屏海钓"
 								class="h-full w-full object-cover object-center"
 								loading="lazy"
+								decoding="async"
 							/>
 						</div>
 
@@ -286,10 +297,11 @@ import PageLayout from "@/layouts/Base.astro";
 							class="slide pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300"
 							data-index="5">
 							<img
-								src="/portfolio/about/kl-night.jpg"
+								src="/portfolio/about/kl-night.webp"
 								alt="吉隆坡双子塔天际线夜景"
 								class="h-full w-full object-cover object-center"
 								loading="lazy"
+								decoding="async"
 							/>
 						</div>
 					</div>
