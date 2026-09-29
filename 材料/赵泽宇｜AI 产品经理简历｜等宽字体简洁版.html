@@ -59,7 +59,7 @@
       width: 210mm;
       height: 297mm;
       margin: 9mm auto;
-      padding: 7mm 12mm 11mm;
+      padding: 6mm 12mm 7.5mm;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -151,8 +151,13 @@
       line-height: 1.55;
     }
 
+    .summary strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
     .section {
-      margin: 0 0 2.8mm;
+      margin: 0 0 2.2mm;
     }
 
     .section:last-child {
@@ -163,7 +168,7 @@
       display: flex;
       align-items: center;
       gap: 3mm;
-      margin: 0 0 1.8mm;
+      margin: 0 0 1.6mm;
       color: var(--accent);
       font-size: 10.5pt;
       font-weight: 650;
@@ -219,7 +224,7 @@
     }
 
     .entry {
-      margin: 0 0 3.2mm;
+      margin: 0 0 2.8mm;
       break-inside: avoid;
     }
 
@@ -271,11 +276,11 @@
     }
 
     .project {
-      margin-top: 2.8mm;
+      margin-top: 2.6mm;
     }
 
     .project+.project {
-      margin-top: 3.2mm;
+      margin-top: 3mm;
     }
 
     .entry-name {
@@ -302,14 +307,14 @@
     }
 
     .project-name {
-      font-size: 9.6pt;
+      font-size: 10pt;
       font-weight: 650;
       color: var(--accent);
     }
 
     .project-description {
       color: #495862;
-      font-size: 8.4pt;
+      font-size: 8.5pt;
       font-weight: 500;
     }
 
@@ -330,11 +335,13 @@
       white-space: nowrap;
     }
 
+    .entry-head--linked,
     .workstream--linked {
       display: grid;
       grid-template-columns: auto minmax(0, 1fr) auto;
     }
 
+    .entry-head--linked .project-source,
     .workstream--linked .project-source {
       justify-self: center;
     }
@@ -371,14 +378,14 @@
     }
 
     .project .bullets {
-      margin-top: 1.2mm;
+      margin-top: 1.3mm;
     }
 
     .bullets li {
       padding-left: .25mm;
-      margin: 0 0 1.1mm;
-      font-size: 8.2pt;
-      line-height: 1.52;
+      margin: 0 0 1.2mm;
+      font-size: 8.3pt;
+      line-height: 1.55;
     }
 
     .bullets li:last-child {
@@ -549,7 +556,7 @@
       <div class="header-spacer" aria-hidden="true"></div>
       <div class="identity">
         <h1>赵泽宇</h1>
-        <p class="target">27 届硕士｜求职意向：AI 产品经理</p>
+        <p class="target">27 届硕士（毕业时间：2027年3月）｜求职意向：AI 产品经理</p>
         <div class="contact">
           <a href="tel:+8618032098113"><img class="contact-icon" src="./赵泽宇｜AI 产品经理简历｜等宽字体简洁版_files/phone.svg"
               alt="">180 3209 8113</a>
@@ -565,8 +572,7 @@
       </div>
     </header>
 
-    <p class="summary">具备软件开发背景的 AI 产品经理，聚焦 Agent 产品设计与评测，推动 AI
-      能力在实际业务场景中落地。具备从需求定义、方案设计到产品验证的实践经验，能将业务要求转化为可执行的评测标准，并借助编程能力独立完成原型与工具落地。</p>
+    <p class="summary"><strong>27 届海外软件工程硕士</strong>，专注于 <strong>Agent 产品设计</strong>与体验优化，善于结合业务诉求与模型边界设计可行方案，把控系统容错与确定性交付；坚持以<strong>评测驱动</strong>效果迭代，能凭借开发能力独立完成从方案设计、原型验证到工具落地的<strong>全流程闭环</strong>。</p>
     <section class="section">
       <h2 class="section-title">教育背景</h2>
 
@@ -589,9 +595,8 @@
     </section>
 
     <section class="section">
-      <h2 class="section-title">实习与项目经历</h2>
+      <h2 class="section-title">实习经历</h2>
 
-      <!-- 1. 可以科技 -->
       <article class="entry">
         <div class="entry-head">
           <div class="entry-brand">
@@ -603,9 +608,8 @@
           <div class="entry-date">2026.05 - 至今</div>
         </div>
 
-        <p class="company-overview">参与 Loona 桌面机器人 Agent 的功能规划、交互设计与体验优化；主导 Agent 评测平台及评测体系从 0 到 1 设计与交付；搭建团队自用的飞书多语种翻译机器人。</p>
+        <!-- <p class="company-overview">参与 Loona 桌面机器人 Agent 的功能规划、交互设计与体验优化；主导 Agent 评测平台及评测体系从 0 到 1 设计与交付；搭建团队自用的飞书多语种翻译机器人。</p> -->
 
-        <!-- 项目 1.1：Cortex-Agent -->
         <div class="project">
           <div class="workstream">
             <strong>
@@ -616,61 +620,67 @@
           </div>
 
           <p class="intro">
-            可以科技 Loona 桌面机器人的 Agent 运行时，面向办公辅助与陪伴场景，支持语音交互与主动任务执行；基于 ReAct 架构完成任务路由、规划、工具编排与输出门控。
+            可以科技 Loona 桌面机器人的 Agent 运行时，面向办公辅助与陪伴场景，支持语音交互与主动任务执行；
+            基于 ReAct 架构完成任务路由、规划、工具编排与输出门控。
           </p>
 
           <ul class="bullets">
             <li>
               <strong class="lead">工具治理与效果优化：</strong>
-              针对 122 个工具全量注入引发的上下文膨胀与模型误选，主导设计“同类能力聚合＋业务域路由＋按需动态挂载”分层调度方案，推动 ToolHub 目录精简至 <strong class="metric">77 个</strong>；在基准评测集下，Planner 单轮输入 Token 降低约 <strong class="metric">30%</strong>，基准用例成功率由 <strong class="metric">91.2% 提升至 97.8%</strong>（124 → 133/136）。
+              针对 122 个工具全量注入引发的上下文膨胀与模型误选，主导设计“同类能力聚合＋业务域路由＋按需动态挂载”分层调度方案，
+              推动 ToolHub 目录精简 <strong class="metric">至 77 个</strong>；
+              在基准评测集下，Planner单轮<strong class="metric">输入 Token 降低</strong>约 <strong class="metric">30%</strong>，基准用例成功率由
+              <strong class="metric">91.2%提升至 97.8%（124 → 133/136）</strong>。
             </li>
 
             <li>
               <strong class="lead">主动服务设计与闭环：</strong>
-              主导<strong>晨间智能简报（Daily Brief）</strong>等核心主动服务落地；针对现场多轮 ReAct 等待过长痛点，设计“并发预查＋场景化记忆过滤”方案，将端到端时延压至 <strong class="metric">4~5s</strong>；通过建立“门禁·质检·验证”三层闭环，持续收敛 Bad Case，保障晨报核心信息的准确生成。
+              主导<strong>晨间智能简报（Daily Brief）</strong>主动服务落地；针对现场多轮 ReAct 等待过长痛点，设计“并发预查＋场景化记忆过滤”方案，将端到端时延压至 <strong
+                class="metric">4~5s</strong>；通过建立“门禁·质检·验证”三层闭环，持续收敛 Bad Case，保障晨报核心信息的准确生成。
             </li>
 
             <li>
               <strong class="lead">办公能力接入与标准化：</strong>
-              负责 Gmail、Outlook 邮件／日程等 <strong class="metric">5 项核心办公工具</strong>的功能设计与交付，确立<strong>“高危操作必确认、缺参必反问”</strong>等交互防错红线；沉淀覆盖场景标准、权限边界与异常兜底的 <strong class="metric">6 步标准接入 SOP</strong>，并将接入规范封装为可复用的 PRD Skill。
+              负责 Gmail、Outlook 邮件／日程等 <strong class="metric">5
+                项核心办公工具</strong>的功能设计与交付，确立<strong>“高危操作必确认、缺参必反问”</strong>等交互防错红线；沉淀覆盖场景标准、权限边界与异常兜底的 <strong
+                class="metric">6
+                步标准接入 SOP</strong>，并将接入规范封装为可复用的 PRD Skill。
             </li>
           </ul>
         </div>
 
-        <!-- 项目 1.2：Cortex-Eval -->
         <div class="project">
-          <div class="workstream workstream--linked">
-            <strong>
-              <span class="project-name">Cortex-Eval</span>
-              <span class="project-description">｜Cortex-Agent 评测与版本验收平台（0—1）</span>
-            </strong>
-            <a class="project-source"
+          <div class="workstream workstream--linked"><strong><span class="project-name">Cortex-Eval</span><span
+                class="project-description">｜Cortex-Agent 评测与版本验收平台（0—1）</span></strong><a class="project-source"
               href="https://github.com/Zhaozed/cortex-eval" target="_blank" rel="noopener noreferrer"
-              aria-label="查看 Cortex-Eval 的 GitHub 仓库" title="github.com/Zhaozed/cortex-eval">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 .75a11.25 11.25 0 0 0-3.56 21.92c.56.1.77-.24.77-.54v-2.1c-3.13.68-3.8-1.33-3.8-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.03-.7.08-.69.08-.69 1.14.08 1.74 1.17 1.74 1.17 1.01 1.73 2.65 1.23 3.3.94.1-.73.4-1.23.72-1.51-2.5-.28-5.13-1.25-5.13-5.56 0-1.23.44-2.23 1.16-3.01-.12-.28-.5-1.43.11-2.98 0 0 .95-.3 3.1 1.15a10.8 10.8 0 0 1 5.64 0c2.15-1.45 3.09-1.15 3.09-1.15.62 1.55.23 2.7.12 2.98.72.78 1.15 1.78 1.15 3.01 0 4.32-2.63 5.27-5.14 5.55.4.35.76 1.03.76 2.08v3.1c0 .3.2.65.78.54A11.25 11.25 0 0 0 12 .75Z" />
-              </svg>github.com/Zhaozed/cortex-eval
-            </a>
-            <span class="project-date">2026.06—2026.08</span>
-          </div>
+              aria-label="查看 Cortex-Eval 的 GitHub 仓库" title="github.com/Zhaozed/cortex-eval"><svg viewBox="0 0 24 24"
+                aria-hidden="true">
+                <path
+                  d="M12 .75a11.25 11.25 0 0 0-3.56 21.92c.56.1.77-.24.77-.54v-2.1c-3.13.68-3.8-1.33-3.8-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.03-.7.08-.69.08-.69 1.14.08 1.74 1.17 1.74 1.17 1.01 1.73 2.65 1.23 3.3.94.1-.73.4-1.23.72-1.51-2.5-.28-5.13-1.25-5.13-5.56 0-1.23.44-2.23 1.16-3.01-.12-.28-.5-1.43.11-2.98 0 0 .95-.3 3.1 1.15a10.8 10.8 0 0 1 5.64 0c2.15-1.45 3.09-1.15 3.09-1.15.62 1.55.23 2.7.12 2.98.72.78 1.15 1.78 1.15 3.01 0 4.32-2.63 5.27-5.14 5.55.4.35.76 1.03.76 2.08v3.1c0 .3.2.65.78.54A11.25 11.25 0 0 0 12 .75Z" />
+              </svg>github.com/Zhaozed/cortex-eval</a><span class="project-date">2026.06—2026.08</span></div>
           <p class="intro">
-            为 Cortex-Agent 配套建设的评测与版本验收平台，解决人工走查效率低、执行过程检查不足及存量能力回归难等问题；主导产品规划、评测体系设计与平台落地。
+            为 Cortex-Agent 配套建设的评测与版本验收平台，解决人工走查效率低、执行过程检查不足及存量能力回归难等问题；
+            主导产品规划、评测体系设计与平台落地。
           </p>
 
           <ul class="bullets">
             <li>
               <strong class="lead">产品规划与平台交付：</strong>
-              拆解 Langfuse、Promptfoo 在评测与扩展能力上的差异，结合 Cortex 执行接口与产品验收需求，定义平台边界与核心模块；基于 Codex 独立完成从方案设计到产品交付，落地多环境批跑、单 Case 调试、版本对比、A2UI 渲染及 MCP 辅助的 Bad Case 归因能力。
+              拆解 Langfuse、Promptfoo 差异与边界，结合 Cortex 接口定义核心模块；基于 Codex 独立完成平台交付，落地多环境批跑、版本对比、A2UI 渲染及 Trace 归因诊断。
             </li>
 
             <li>
               <strong class="lead">评测规范与资产建设：</strong>
-              建立覆盖路由、工具编排、发声与安全等 <strong class="metric">6 维评测矩阵</strong>；围绕日程、邮件等 <strong class="metric">9 类核心场景</strong>，沉淀 <strong class="metric">30+ 项检查规则</strong>与回归基线；结合 JEV、代码断言和 LLM 裁判，分别核验结构化规则、确定性要求与开放语义，识别存量能力退化。
+              建立覆盖路由、工具编排、发声与安全等 <strong class="metric">6 维评测矩阵</strong>；
+              围绕日程、邮件等 <strong class="metric">9 类核心场景</strong>，
+              沉淀 <strong class="metric">30+ 项检查规则</strong>与回归基线；
+              结合 JEV、代码断言和 LLM 裁判，分别核验结构化规则、确定性要求与开放语义，识别存量能力退化。
             </li>
-
             <li>
               <strong class="lead">综合成果：</strong>
-              建立起“评测发现—归因修复—复测验证—回归集更新”的质量闭环；累计支撑 <strong class="metric">3 次版本验收</strong>，识别并推动解决 <strong class="metric">5 个阻塞级问题</strong>，单轮走查周期<strong class="metric">缩短约 60%</strong>。
+              建立起“评测发现—归因修复—复测验证—回归集更新”的质量闭环；累计支撑
+              <strong class="metric">3 次版本验收</strong>，识别并推动解决 <strong class="metric">5 个阻塞级问题</strong>，单轮走查周期
+              <strong class="metric">缩短约 60%</strong>。
             </li>
           </ul>
 
@@ -678,35 +688,6 @@
 
       </article>
 
-      <!-- 2. DayMate 个人项目 -->
-      <article class="entry">
-        <div class="entry-head">
-          <div class="entry-brand">
-            <span class="project-name" style="font-size: 9.2pt; color: var(--ink);">DayMate</span>
-            <span class="project-description">｜桌面端个人工作代理（独立全栈开发 · 开源）</span>
-            <a class="project-source" href="https://github.com/Zhaozed/DayMate" target="_blank" rel="noopener noreferrer" style="margin-left: 2mm;">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .75a11.25 11.25 0 0 0-3.56 21.92c.56.1.77-.24.77-.54v-2.1c-3.13.68-3.8-1.33-3.8-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.03-.7.08-.69.08-.69 1.14.08 1.74 1.17 1.74 1.17 1.01 1.73 2.65 1.23 3.3.94.1-.73.4-1.23.72-1.51-2.5-.28-5.13-1.25-5.13-5.56 0-1.23.44-2.23 1.16-3.01-.12-.28-.5-1.43.11-2.98 0 0 .95-.3 3.1 1.15a10.8 10.8 0 0 1 5.64 0c2.15-1.45 3.09-1.15 3.09-1.15.62 1.55.23 2.7.12 2.98.72.78 1.15 1.78 1.15 3.01 0 4.32-2.63 5.27-5.14 5.55.4.35.76 1.03.76 2.08v3.1c0 .3.2.65.78.54A11.25 11.25 0 0 0 12 .75Z"/></svg>
-              github.com/Zhaozed/DayMate
-            </a>
-          </div>
-          <div class="entry-date">2026.02 - 2026.04</div>
-        </div>
-
-        <p class="company-overview">针对海外求学（毕业进度、导师沟通）及校招求职信息分散多处的痛点，独立开发常驻桌面的个人工作代理，将邮件非结构化内容自动转化为待办清单、求职进展看板与面试资料。已自用并开源。</p>
-
-        <ul class="bullets">
-          <li>
-            <strong class="lead">岗位归并与人机协同：</strong>
-            针对招聘邮件来源分散、同公司多岗位等情况，设计“多级匹配＋置信度校验”归并策略；建立缺参刹车机制，在缺失 JD 等关键信息时阻断自动流转并引导人工补全，岗位归并准确率达 <strong class="metric">94%</strong>，缺损信息拦截唤起率达 <strong class="metric">100%</strong>。
-          </li>
-          <li>
-            <strong class="lead">资料生成与事实控制：</strong>
-            串联企业调研、岗位匹配与高频考点梳理，基于固定 HTML 模板约束输出形态；设计来源引用溯源与事实核验规则，强制模型仅依据真实邮件与个人简历生成内容，杜绝胡编乱造，实现核心事实零幻觉，面试资料直接可用率达 <strong class="metric">85% 以上</strong>。
-          </li>
-        </ul>
-      </article>
-
-      <!-- 3. 九号公司 -->
       <article class="entry">
         <div class="entry-head">
           <div class="entry-brand">
@@ -716,11 +697,45 @@
           </div>
           <div class="entry-date">2025.07 - 2026.01</div>
         </div>
-        <p class="company-overview">参与九号云运营平台、车联网平台建设，承担 B 端业务模块的需求评审、前端开发与上线交付。</p>
+        <!-- <p class="company-overview">参与九号云运营平台、车联网平台建设，承担 B 端业务模块的需求评审、前端开发与上线交付。</p> -->
+        <ul class="bullets">
+          <li><span class="lead">B 端研发交付与全栈协作：</span>围绕消息推送、设备数据看板等业务场景，参与需求评审，负责 RBAC
+            权限控制、复杂表单与长列表优化等前端交付；协同后端、测试完成全流程联调验收，独立交付 <span class="metric">10+</span> 项需求、闭环 <span
+              class="metric">15+</span> 个缺陷，沉淀扎实的工程实现与产研协同底色。</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">个人项目</h2>
+
+      <article class="entry">
+        <div class="entry-head entry-head--linked">
+          <div class="entry-brand">
+            <span class="project-name" style="font-size: 9.2pt; color: var(--ink);">DayMate</span>
+            <span class="project-description">｜桌面端AI 待办与求职助手（独立全栈开发 · 开源）</span>
+          </div>
+          <a class="project-source" href="https://github.com/Zhaozed/DayMate" target="_blank"
+            rel="noopener noreferrer" aria-label="查看 DayMate 的 GitHub 仓库" title="github.com/Zhaozed/DayMate">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 .75a11.25 11.25 0 0 0-3.56 21.92c.56.1.77-.24.77-.54v-2.1c-3.13.68-3.8-1.33-3.8-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.03-.7.08-.69.08-.69 1.14.08 1.74 1.17 1.74 1.17 1.01 1.73 2.65 1.23 3.3.94.1-.73.4-1.23.72-1.51-2.5-.28-5.13-1.25-5.13-5.56 0-1.23.44-2.23 1.16-3.01-.12-.28-.5-1.43.11-2.98 0 0 .95-.3 3.1 1.15a10.8 10.8 0 0 1 5.64 0c2.15-1.45 3.09-1.15 3.09-1.15.62 1.55.23 2.7.12 2.98.72.78 1.15 1.78 1.15 3.01 0 4.32-2.63 5.27-5.14 5.55.4.35.76 1.03.76 2.08v3.1c0 .3.2.65.78.54A11.25 11.25 0 0 0 12 .75Z" />
+            </svg>github.com/Zhaozed/DayMate</a>
+          <div class="entry-date">2026.02 - 2026.04</div>
+        </div>
+
+        <p class="company-overview">
+          针对海外求学（毕业进度、导师沟通）及校招求职信息分散多处的痛点，独立开发AI 邮件待办与求职助手，将邮件非结构化内容自动转化为待办清单、求职进展看板与面试资料。已自用并开源。</p>
+
         <ul class="bullets">
           <li>
-            <strong class="lead">B 端研发交付与全栈协作：</strong>
-            围绕消息推送、设备看板等核心场景，负责 RBAC 权限控制、长表单虚拟列表优化与通用组件封装等前端交付；协同后端与测试完成全流程联调验收，独立交付 <span class="metric">10+</span> 项需求并闭环 <span class="metric">15+</span> 个缺陷，沉淀扎实的工程实现与产研协同底色。
+            <strong class="lead">人机协同（HITL）防错：</strong>
+            针对多岗位同公司场景设计分级匹配，无法唯一确定时不盲目归并，转由人工确认；缺失 JD 等关键信息时兜底保留基础待办，挂起深度生成并引导补全，坚决杜绝记录串线与无据脑补。
+          </li>
+          <li>
+            <strong class="lead">Workflow 设计：</strong>
+            设计串联企业调研、岗位匹配与考点梳理的自动化工作流；基于设定的 HTML 模板约束输出形态，强制模型仅依据客观事实与简历生成准备资料，杜绝无据幻觉，累计支撑自身 <strong class="metric">6
+              场求职面试</strong>备战。
           </li>
         </ul>
       </article>
