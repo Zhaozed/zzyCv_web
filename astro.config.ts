@@ -22,6 +22,10 @@ import { expressiveCodeOptions, siteConfig } from "./src/site.config";
 // https://astro.build/config
 export default defineConfig({
 	site: siteConfig.url,
+	prefetch: {
+		prefetchAll: true,
+		defaultStrategy: "hover",
+	},
 	devToolbar: {
 		enabled: false,
 	},
