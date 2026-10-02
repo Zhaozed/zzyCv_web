@@ -3,18 +3,18 @@ import type { SiteConfig } from "@/types";
 
 export const siteConfig: SiteConfig = {
 	// ! Please remember to replace the following site property with your own domain, used in astro.config.ts
-	url: "https://zhaozed.github.io/",
+	url: "https://zhaozeyu-cv.top/",
 	/*
 		- Used to construct the meta title property found in src/components/BaseHead.astro L:11
 		- The webmanifest name found in astro.config.ts L:42
 		- The link value found in src/components/layout/Header.astro L:35
 		- In the footer found in src/components/layout/Footer.astro L:12
 	*/
-	title: "赵泽宇 / AI PM",
+	title: "赵泽宇",
 	// Used as both a meta property (src/components/BaseHead.astro L:31 + L:49) & the generated satori png (src/pages/og-image/[slug].png.ts)
 	author: "赵泽宇",
 	// Used as the default description meta property and webmanifest description
-	description: "赵泽宇的 AI 产品经理作品集：Agent 产品设计、ToolHub 工具治理与评测验收体系。",
+	description: "赵泽宇的个人作品集：关注产品设计、复杂场景交付与系统工程落地。",
 	// HTML lang property, found in src/layouts/Base.astro L:18 & astro.config.ts L:48
 	lang: "zh-CN",
 	// Meta property, found in src/components/BaseHead.astro L:42
