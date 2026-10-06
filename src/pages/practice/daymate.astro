@@ -1,5 +1,4 @@
 ---
-import LoopVideo from "@/components/LoopVideo.astro";
 import PageLayout from "@/layouts/Base.astro";
 
 import "@/styles/cortex-agent.css";
@@ -11,72 +10,64 @@ import "@/styles/cortex-closing.css";
 const initiatives = [
 	{
 		isCore: true,
-		badge: "核心场景 01 · 为什么做",
-		title: "从读邮件到推进行动",
-		contextLabel: "核心痛点",
-		context: "论文与校招通知分散在多处邮箱，读完还要手动记截止时间与应聘进展",
-		action: "自动整理出可执行的待办，并按公司汇总求职状态，开机即清楚重点",
+		badge: "01 · 需求与产品形态",
+		title: "使用需求",
+		subtitle: "把分散的通知放到桌面上",
+		context:
+			"遇到的问题：论文和校招通知分散在不同邮箱，读完后还要手动记录截止时间。每天查看待办时，我希望打开电脑就能看到，不打开各个平台查阅。",
+		action:
+			"设计选择：采用「云端服务常驻监听 + 桌面端开机即览」的架构，确保电脑关机也能持续轮询整理邮件，开机直接呈现最新待办。",
 		metrics: [
-			{ val: "双线场景", label: "硕士论文 + 校招求职" },
-			{ val: "多源分散", label: "学校 Gmail · 国内 163" }
+			{ val: "两类主要场景", label: "论文事务 · 校招求职" },
+			{ val: "关机持续轮询", label: "开机即看 · 关机不漏通知" }
 		],
 		anchor: "#motivation"
 	},
 	{
 		isCore: true,
-		badge: "产品形态 02 · 客户端形态",
-		title: "为什么选择桌面端：聊天 Bot、网页与桌面端",
-		contextLabel: "场景考量",
-		context: "查待办是开机即看的被动感知，对话式bot不适用该场景；网页端多标签页切换容易被忽略",
-		action: "常驻 macOS 边缘随开随看，阿里云后端 24h 抓取入库，开机私有 API 快速同步",
+		badge: "02 · 邮件处理流程",
+		title: "处理思路",
+		subtitle: "规则过滤，模型提取，程序更新记录",
+		context:
+			"遇到的问题：邮件中混有营销、广播和验证码，没有必要全部交给模型处理。同公司投递多个岗位时，还可能把通知归到错误的岗位。",
+		action:
+			"处理方式：先用规则过滤明显无关的邮件，再由模型提取类别、摘要和待办，最后按明确的匹配规则更新求职记录。",
 		metrics: [
-			{ val: "常驻桌面", label: "macOS 屏幕边缘随开随看" },
-			{ val: "私有部署", label: "阿里云后端 · 免公网备案" }
+			{ val: "规则过滤", label: "减少无关邮件和模型调用" },
+			{ val: "三类模型任务", label: "邮件整理 · 提取信息 · 准备面试" }
 		],
-		anchor: "#desktop"
+		anchor: "#architecture"
 	},
 	{
 		isCore: false,
-		badge: "核心功能 03 · 流程闭环",
-		title: "待办提取、求职汇总与 HTML 面试资料",
-		contextLabel: "核心功能",
-		context: "从邮件提取事项与 DDL、求职信息按公司汇总进度，并按固定工作流生成面试资料",
-		action: "待办直接进清单、不确定的邮件人工核对，并自动输出 HTML 面试资料",
+		badge: "03 · 界面与功能",
+		title: "功能落地",
+		subtitle: "从查看邮件到处理待办、准备面试",
+		context:
+			"使用需求：除了知道收到什么消息，还需要清楚接下来做什么、什么时候做，以及每个岗位进行到了哪一步。",
+		action:
+			"界面设计：首页展示邮件摘要，待办看板管理截止时间，求职看板跟进岗位进度，详情页集中整理岗位信息和面试准备资料。",
 		metrics: [
-			{ val: "待办提取", label: "事项 / 来源 / 截止时间" },
-			{ val: "求职进度", label: "按企业汇总测评与面试" },
-			{ val: "HTML 资料", label: "公司调研与面经自动整理" }
+			{ val: "四个主要界面", label: "首页 / 待办 / 求职 / 岗位详情" },
+			{ val: "个人使用", label: "日常管理与多场面试准备" }
 		],
 		anchor: "#features"
-	},
-	{
-		isCore: false,
-		badge: "实践验证 04 · 自用与心得",
-		title: "自用验证与做个人 AI 工具的心得",
-		contextLabel: "自用与开源",
-		context: "已用于毕业求职期间日常整理，减少重复翻找；项目已开源至 GitHub",
-		action: "选准高频任务把信息可靠转成行动，允许用户及时纠错才更容易真正用起来",
-		metrics: [
-			{ val: "6 场面试", label: "累计支撑求职实战备战" },
-			{ val: "完全开源", label: "已开源至 GitHub 仓库" }
-		],
-		anchor: "#retro"
 	}
 ];
 
 const navigation = [
 	{ id: "overview", num: "TOP", label: "项目概览" },
-	{ id: "motivation", num: "01", label: "为什么做" },
-	{ id: "desktop", num: "02", label: "为什么选择桌面端" },
-	{ id: "features", num: "03", label: "核心功能" },
+	{ id: "motivation", num: "01", label: "需求与产品形态" },
+	{ id: "architecture", num: "02", label: "邮件处理流程" },
+	{ id: "features", num: "03", label: "四个主要界面" },
 	{ id: "retro", num: "04", label: "自用结果与复盘" }
 ];
 ---
 
 <PageLayout
 	meta={{
-		title: "DayMate｜桌面端 AI 待办与求职助手",
-		description: "个人项目 · 独立设计与开发 · Electron / TypeScript / SQLite / 大模型 API · 已开源"
+		title: "DayMate｜桌面 AI 助手：整理邮件、提取待办、跟进求职进度",
+		description: "个人项目 · 独立产品设计与全栈开发 · 已开源 · Electron / SQLite"
 	}}>
 	<article class="cortex-case">
 		<!-- 桌面端侧边目录 -->
@@ -112,62 +103,71 @@ const navigation = [
 		<!-- Hero Section & Scorecard -->
 		<header class="ca-hero" id="overview" data-case-section>
 			<a class="ca-back" href="/projects/">← 返回项目经历</a>
-			<p class="ca-eyebrow"><span aria-hidden="true"></span> 个人项目 · 独立设计与开发 · 已开源</p>
+			<p class="ca-eyebrow">
+				<span aria-hidden="true"></span> 个人项目 · 独立产品设计与全栈开发 · 已开源
+			</p>
 			<h1>DayMate<span class="ca-title-dot" aria-hidden="true">.</span></h1>
-			<p class="ca-subtitle">桌面端 AI 待办与求职助手</p>
+			<p class="ca-subtitle">个人 AI 助手：整理邮件、提取待办、跟进求职进度</p>
 			<p class="ca-intro ca-reading">
-				写硕士论文和参加校招期间，导师反馈、论文节点、测评通知和面试安排分散在学校 Gmail、163
-				邮箱及招聘平台。我的问题不是缺少一个地方读邮件，而是读完之后还要自己记下截止时间、下一步行动，以及每家公司的应聘进展。
+				写硕士论文和参加校招时，我需要在学校 Gmail、163
+				邮箱和各大求职平台之间来回查看导师反馈、论文进度、测评和面试通知。每次读完，我还要判断是否需要回复、有没有截止时间，以及是否需要更新某个岗位的进度。我希望把这些重复的整理工作交给工具，并让结果出现在每天都能看到的地方。
 			</p>
 			<p class="ca-intro ca-reading" style="margin-top: 12px;">
-				因此，我做了 DayMate：从邮件中整理出可执行的待办，按公司汇总求职状态，并自动生成 HTML
-				格式的面试准备资料，让我打开电脑后能直接判断哪些事需要处理。项目现已开源至 GitHub。
+				为此，我开发了
+				DayMate。它汇总两个邮箱的邮件，过滤无关信息，生成中文摘要，并提取待办和截止时间。求职邮件会按公司和岗位更新应聘进度，无法明确归属的邮件则留待人工确认。打开电脑，就能看到重要邮件、待办事项和各个岗位的最新进展。
 			</p>
 
 			<!-- 职责与项目信息条 -->
 			<div class="ca-role-strip ca-role-strip-balanced">
 				<div class="ca-role-col">
 					<strong>我的角色</strong>
-					<span>独立设计与全栈开发 (个人项目)</span>
+					<span>独立完成产品设计与全栈开发</span>
 				</div>
 				<div class="ca-role-col">
-					<strong>核心场景</strong>
-					<span>硕士论文与校招求职事务整理</span>
+					<strong>使用场景</strong>
+					<span>论文事务管理与校招求职</span>
 				</div>
 				<div class="ca-role-col">
-					<strong>技术与部署</strong>
-					<span>Electron · SQLite · 大模型 · 阿里云</span>
+					<strong>技术栈</strong>
+					<span>Electron · SQLite</span>
 				</div>
 			</div>
 
-			<!-- 核心看点看板 (Scorecard) -->
-			<div class="ca-initiatives-wrap ca-reveal">
+			<!-- 核心看点看板 (Scorecard 3 栏均布) -->
+			<div class="ca-initiatives-wrap">
 				<div class="ca-initiatives-head">
-					<h3><span>EXECUTIVE SCORECARD</span>项目规划与核心看点总览</h3>
-					<p>
-						围绕「待办提取」、「求职汇总」与「HTML 面试资料生成」，结合常驻桌面端形态与阿里云部署。
-					</p>
+					<h3><span>PROJECT OVERVIEW</span>项目概览</h3>
+					<h2 style="font-size: 20px; font-weight: 700; margin-top: 6px; color: var(--ca-text);">
+						解决什么问题，做了哪些设计
+					</h2>
+					<p style="margin-top: 6px;">将邮件整理成摘要、待办和求职记录，集中展示在桌面上。</p>
 				</div>
-				<div class="ca-initiatives-grid">
+				<div class="ca-initiatives-grid dm-initiatives-3col">
 					{
 						initiatives.map(item => (
-							<div class:list={["ca-init-card", "ca-reveal", { "is-core": item.isCore }]}>
+							<div class:list={["ca-init-card", { "is-core": item.isCore }]}>
 								<div class="ca-init-top">
 									<div class="ca-init-badge-row">
 										<span class="ca-init-badge">{item.badge}</span>
-										{item.isCore && <span class="ca-core-tag">核心刚需</span>}
 									</div>
 									<h4>{item.title}</h4>
+									<p class="ca-init-subtitle">{item.subtitle}</p>
 								</div>
 								<div class="ca-init-body">
-									<p class="ca-init-pain">
-										<strong>{item.contextLabel}：</strong>
-										{item.context}
-									</p>
-									<p class="ca-init-action">
-										<strong>做法与思路：</strong>
-										{item.action}
-									</p>
+									<p
+										class="ca-init-pain"
+										set:html={item.context.replace(
+											/^(遇到的问题：|使用需求：)/,
+											"<strong>$1</strong>"
+										)}
+									/>
+									<p
+										class="ca-init-action"
+										set:html={item.action.replace(
+											/^(设计选择：|处理方式：|界面设计：)/,
+											"<strong>$1</strong>"
+										)}
+									/>
 								</div>
 								<div class="ca-init-metrics">
 									{item.metrics.map(m => (
@@ -185,298 +185,421 @@ const navigation = [
 					}
 				</div>
 			</div>
-
-			<!-- 首页视频演示展示 -->
-			<div class="ca-block ca-reveal" style="margin-top: 36px;">
-				<LoopVideo
-					label="DayMate 首页与待办模块演示"
-					poster="/portfolio/daymate/home.png"
-					src="/portfolio/daymate/home-demo.mp4"
-				/>
-				<p class="ca-caption">
-					开机即见：从邮件中整理出的待办与求职进度并置一屏，打开电脑后直接判断哪些事需要处理。
-				</p>
-			</div>
 		</header>
 
-		<!-- 01 为什么做 -->
+		<!-- 01 需求与产品形态 -->
 		<section class="ca-section" id="motivation" data-case-section>
 			<header class="ca-section-head">
-				<p class="ca-kicker"><span>01</span> 需求来源 · 为什么做</p>
-				<h2>从读邮件到推进行动：信息分散与手动记录的负担</h2>
+				<p class="ca-kicker"><span>01</span> 需求与产品形态 · 为什么选择桌面端</p>
+				<h2>读完邮件之后，还有很多整理工作</h2>
 				<p class="ca-copy">
-					写硕士论文和参加校招期间，导师反馈、论文节点、测评通知和面试安排分散在学校 Gmail、163
-					邮箱及招聘平台。我的问题不是缺少一个地方读邮件，而是读完之后还要自己记下截止时间、下一步行动，以及每家公司的应聘进展。
+					导师的修改意见、答辩审批、48 小时内完成的测评和面试通知，分散在学校 Gmail 与 163
+					邮箱里。每次读完，我还要判断是否需要回复、有没有截止时间，以及是否需要更新某个岗位的进度。
+				</p>
+				<p class="ca-copy" style="margin-top: 12px;">
+					我希望把这些重复的整理工作交给工具，并让结果出现在每天都能看到的地方。为此，我比较了三种产品形式。
 				</p>
 			</header>
 
 			<div class="ca-block ca-reveal">
-				<h3><span>信息分散的真实场景</span>多头输入带来的记忆与整理负荷</h3>
-				<p class="ca-copy">当时各条线的信息入口彼此独立，且都伴随着明确的时间约束与后续动作：</p>
-				<ul class="ca-observations" style="margin-top: 14px;">
-					<li>
-						<strong>海外学业（学校 Gmail）：</strong>
-						导师论文修改意见、题目审核结果、毕业答辩申请节点与签证手续通知。全英文长邮件篇幅大，看漏一条就可能延误关键答辩节点。
-					</li>
-					<li>
-						<strong>校招求职（163 邮箱 / 招聘平台）：</strong>
-						投递企业的确认回执、48 小时限时 OT 在线测评链接、笔试考场安排与多轮面试邀约。发件主体五花八门，格式各不相同。
-					</li>
-					<li>
-						<strong>日常事务：</strong>
-						实习工作与日常团队协作任务同步。
-					</li>
-				</ul>
-				<p class="ca-copy" style="margin-top: 14px;">
-					读完邮件并不代表事情已经推进。如果每次都要自己手动去备忘录里记下“哪家公司需要在周三前做完测评”、“哪封邮件需要尽快回复导师修改意见”，一旦事情集中，就极易出现疏漏。
-				</p>
-				<div
-					class="ca-card"
-					style="margin-top: 18px; padding: 18px 22px; border-left: 3px solid var(--ca-accent); background: var(--ca-soft); border-radius: 0 8px 8px 0;">
-					<strong style="color: var(--ca-text); font-size: 14px;">产品出发点：</strong>
-					<p class="ca-copy" style="font-size: 14px; margin-top: 4px;">
-						因此，我做了
-						DayMate：从邮件中整理出可执行的待办，并按公司汇总求职状态，让我打开电脑后能直接判断哪些事需要处理。
-					</p>
-				</div>
-			</div>
-		</section>
-
-		<!-- 02 为什么选择桌面端 -->
-		<section class="ca-section" id="desktop" data-case-section>
-			<header class="ca-section-head">
-				<p class="ca-kicker"><span>02</span> 产品形态 · 为什么选择桌面端</p>
-				<h2>聊天 Bot、网页端与桌面端的形态取舍</h2>
-				<p class="ca-copy">
-					这个工具服务于每天反复查看的个人工作流程。如果形态选错，每次查看都需要额外克服阻力，很难在真实生活里长期用下去。
-				</p>
-			</header>
-
-			<div class="ca-block ca-reveal">
-				<h3><span>三类形态权衡</span>对比聊天 Bot、网页端与常驻桌面端</h3>
-				<p class="ca-copy">
-					我对比过做聊天 Bot、网页端与桌面端三种不同的产品形态，最终做出了清晰的取舍：
-				</p>
-				<div class="be-dilemma-grid" style="margin-top: 16px;">
+				<div class="be-dilemma-grid">
 					<div class="be-dilemma-card">
 						<div class="be-dilemma-head">
 							<span class="be-dilemma-tag">OPTION A</span>
-							<h5 class="be-dilemma-title">聊天 Bot (Chatbot)</h5>
+							<h5 class="be-dilemma-title">对话式助手</h5>
 						</div>
 						<p class="be-dilemma-approach">
-							<strong>交互方式：</strong>提供对话输入框，通过与 AI 问答获取今日要务与邮件信息
+							<strong>使用方式：</strong>向 AI 提问，查询今日待办或邮件内容。
 						</p>
 						<p class="be-dilemma-pain">
-							<strong>根本问题：</strong
-							>查看今日待办和求职进展，本质上是「开机看一眼」的被动感知场景，根本没必要打字交互。每天坐下来还要想“该向
-							AI 问什么”，完全不适用这种高频日常场景。
+							<strong>考虑：</strong
+							>查看待办是一个每天重复的动作。如果每次都要打开对话、输入问题，使用步骤就多了一层。我更希望直接看到结果。
 						</p>
-						<div class="be-dilemma-verdict">放弃：不适用该场景，查待办根本没必要打字</div>
+						<div class="be-dilemma-verdict">未采用：查看待办前需要主动提问。</div>
 					</div>
+
 					<div class="be-dilemma-card">
 						<div class="be-dilemma-head">
 							<span class="be-dilemma-tag">OPTION B</span>
-							<h5 class="be-dilemma-title">网页端形态 (Web App)</h5>
+							<h5 class="be-dilemma-title">网页应用 (Web App)</h5>
 						</div>
 						<p class="be-dilemma-approach">
-							<strong>交互方式：</strong>部署为公网 Web 网站，在浏览器中打开标签页使用
+							<strong>使用方式：</strong>部署公网网页，在浏览器标签页中查看。
 						</p>
 						<p class="be-dilemma-pain">
-							<strong>实际问题：</strong>除了高频切换繁琐，在国内服务器上线公网网站还需繁琐的域名
-							ICP
-							备案；更关键的是，邮件包含学业与求职敏感信息，暴露在公网网页端存在天然的安全与鉴权风险。
+							<strong>考虑：</strong
+							>一方面，浏览器多标签极易被淹没，无法做到开机即见；另一方面，邮件包含论文评审、校招
+							Offer 等高敏感隐私，公网 Web 隐私不受保护，且国内上线需要繁琐的域名 ICP 备案。
 						</p>
-						<div class="be-dilemma-verdict">放弃：繁琐备案 + 隐私暴露风险，完全没必要</div>
+						<div class="be-dilemma-verdict">
+							未采用：主动打开摩擦大，且有公网隐私暴露与 ICP 备案成本。
+						</div>
 					</div>
+
 					<div class="be-dilemma-card is-adopted">
 						<div class="be-dilemma-head">
 							<span class="be-dilemma-tag">OPTION C</span>
-							<h5 class="be-dilemma-title">常驻桌面端 (DayMate)</h5>
+							<h5 class="be-dilemma-title">常驻桌面客户端 (C/S 架构)</h5>
 						</div>
 						<p class="be-dilemma-approach">
-							<strong>交互方式：</strong>常驻在 macOS 屏幕边缘，开机即直观呈现待办与进度
+							<strong>使用方式：</strong>常驻 macOS 屏幕边缘，打开电脑即可查看最新邮件摘要与待办。
 						</p>
 						<p class="be-dilemma-pros">
-							<strong>核心价值：</strong>开机即见，被动感知；后端与数据库常驻阿里云 24h 持续抓取解析与入库，关机也不断联；通过私有 API 同步，免去公网 Web 备案与暴露风险。
+							<strong>考虑：</strong
+							>若采用纯本地程序，电脑关机或合盖休眠时轮询就会中断。因此架构设计为客户端与服务端解耦：由云端服务器常驻
+							7×24 小时持续监听新邮件并完成模型处理；macOS
+							客户端常驻桌面，开机直接呈现已整理好的最新要务，无需临时等待拉取。
 						</p>
-						<div class="be-dilemma-verdict">采用：随时可见，免去备案摩擦，保障隐私安全</div>
+						<div class="be-dilemma-verdict">
+							最终选择：电脑关机也能持续轮询处理，开机直接呈现最新要务。
+						</div>
 					</div>
-				</div>
-			</div>
-
-			<div class="ca-block ca-reveal">
-				<h3><span>架构澄清与安全边界</span>客户端形态、免备案与云端后端部署</h3>
-				<p class="ca-copy">
-					DayMate 是我每天都会查看的工具，所以我选择做成常驻在 macOS 屏幕边缘的桌面端。打开电脑就能看到待办和求职进度，不用再额外打开一个网页。
-				</p>
-				<p class="ca-copy" style="margin-top: 12px;">
-					邮件处理则由部署在阿里云服务器上的后端负责：定时获取邮件、提取待办并保存求职记录。电脑关机时，后端仍可以继续处理；下次打开 DayMate，桌面端会获取更新后的结果。这样既满足了随手查看的使用习惯，也不需要为个人自用工具维护一个网页入口。
-				</p>
-			</div>
-
-			<div class="ca-block ca-reveal">
-				<h3><span>界面实景与设置</span>自用客户端界面</h3>
-				<div class="dm-grid-2" style="margin-top: 16px;">
-					<figure class="media-card">
-						<img src="/portfolio/daymate/inbox.png" alt="邮件看板与求职状态整理" loading="lazy" />
-						<figcaption class="ca-caption">
-							邮件看板与求职整理：集中收拢各邮件源，提炼待办事项与推进状态
-						</figcaption>
-					</figure>
-					<figure class="media-card">
-						<img src="/portfolio/daymate/settings.png" alt="邮件凭据与配置设置" loading="lazy" />
-						<figcaption class="ca-caption">
-							配置与连接管理：客户端通过私有 API 与阿里云后端通信，连接云端数据库稳定同步最新待办与求职进展
-						</figcaption>
-					</figure>
 				</div>
 			</div>
 		</section>
 
-		<!-- 03 核心功能 -->
-		<section class="ca-section" id="features" data-case-section>
+		<!-- 02 邮件处理流程 -->
+		<section class="ca-section" id="architecture" data-case-section>
 			<header class="ca-section-head">
-				<p class="ca-kicker"><span>03</span> 功能设计 · 核心功能</p>
-				<h2>待办提取、求职汇总与 HTML 面试准备资料</h2>
+				<p class="ca-kicker"><span>02</span> 邮件处理流程 · 规则、模型与状态更新</p>
+				<h2>先过滤无关邮件，再提取信息，最后更新记录</h2>
 				<p class="ca-copy">
-					DayMate
-					聚焦三项紧密衔接的核心功能：将相关邮件提取为待办、按公司汇总求职进展，以及自动化整理 HTML
-					格式的面试准备资料。
+					不同邮件的格式和表达差异很大。规则适合过滤明确的营销内容和验证码，模型适合理解正文、提取信息，而岗位匹配和进度更新则交给程序处理。
+				</p>
+				<p class="ca-copy" style="margin-top: 12px;">
+					DayMate 将这三部分分开：既减少不必要的模型调用，也让错误更容易被发现和修正。
 				</p>
 			</header>
 
-			<!-- 功能一：邮件提取待办 -->
-			<div class="ca-block ca-reveal">
-				<h3><span>核心功能一：邮件提取待办</span>事项、来源与截止时间一目了然</h3>
-				<p class="ca-copy">
-					DayMate
-					将相关邮件自动提取为待办，记录事项、来源和截止时间，直接推进到当日清单，无需手动复制备忘：
-				</p>
-				<ul class="ca-observations" style="margin-top: 14px;">
-					<li>
-						<strong>跟进 Dr. Rohani 论文审核反馈：</strong>【学校 Gmail · 学业 ·
-						截止周五】核对论文修改意见并提交第二版草稿
-					</li>
-					<li>
-						<strong>REMOS 会议系统背书确认：</strong>【学校 Gmail · 学业 · 8/16
-						截止】联系导师确认会议系统摘要审核
-					</li>
-					<li>
-						<strong>限时完成在线测评 (OT)：</strong>【163 邮箱 · 求职 · 48h
-						截止】点击链接进入系统完成笔试测评
-					</li>
-				</ul>
+			<!-- 交互式架构流水线 (3 阶段主处理管道 + 侧边弹出详情卡片) -->
+			<div class="ca-block ca-reveal dm-pipeline-container" id="dm-pipeline-container">
+				<div class="dm-pipeline-header">
+					<div class="dm-pipe-titles">
+						<h3><span>⚡</span> DayMate 邮件处理流程</h3>
+						<p>规则过滤 → 邮件分类、摘要与待办提取 → 岗位匹配与进度更新</p>
+					</div>
+					<div class="dm-pipe-controls">
+						<button class="dm-filter-btn active" data-filter="all">全部流程</button>
+						<button class="dm-filter-btn" data-filter="job">👔 求职流程</button>
+						<button class="dm-filter-btn" data-filter="school-daily">🎓 学校与日常</button>
+						<button class="dm-filter-btn" data-filter="llm">🤖 仅模型调用</button>
+					</div>
+				</div>
+
+				<!-- 简洁图例条：紧凑单行排列，去厚重白卡背景 -->
+				<div class="dm-legend-strip">
+					<span class="dm-legend-label">图例说明：</span>
+					<span class="dm-legend-item">
+						<span class="dm-badge badge-rule">⚡ 规则过滤</span>
+						<span class="legend-desc">过滤无关</span>
+					</span>
+					<span class="dm-legend-item">
+						<span class="dm-badge badge-llm">🤖 模型处理</span>
+						<span class="legend-desc">摘要与待办</span>
+					</span>
+					<span class="dm-legend-item">
+						<span class="dm-badge badge-logic">⚖️ 程序规则</span>
+						<span class="legend-desc">匹配与更新</span>
+					</span>
+					<span class="dm-legend-item">
+						<span class="dm-badge badge-warn">⚠️ 人工确认</span>
+						<span class="legend-desc">歧义待确认</span>
+					</span>
+				</div>
+
+				<!-- 3 阶段主处理管道 -->
+				<div class="dm-pipeline-grid-3">
+					<!-- Stage 1 -->
+					<div class="dm-stage-col" data-stage="1">
+						<div class="dm-stage-head">
+							<span>01 / 邮件接入与过滤</span>
+							<span class="dm-stage-tag">规则处理</span>
+						</div>
+
+						<div class="dm-card" data-cat="all job school-daily" data-key="mail-input">
+							<div class="dm-card-top">
+								<span class="dm-badge badge-rule">邮件接入</span>
+								<span class="dm-card-click-tip">点击展开详情 ↗</span>
+							</div>
+							<div class="dm-card-title">📥 同步新邮件</div>
+							<div class="dm-card-desc">
+								通过 Gmail OAuth 2.0 和 163 IMAP 接入两个邮箱，每 3 分钟检查一次新邮件。
+							</div>
+						</div>
+
+						<div class="dm-card" data-cat="all job school-daily" data-key="prefilter">
+							<div class="dm-card-top">
+								<span class="dm-badge badge-rule">⚡ 规则过滤</span>
+								<span class="dm-card-click-tip">点击展开详情 ↗</span>
+							</div>
+							<div class="dm-card-title">🧹 过滤无关内容</div>
+							<div class="dm-card-desc">用正则规则过滤营销推广、验证码和部分全员广播邮件。</div>
+						</div>
+
+						<div class="dm-card" data-cat="all" data-key="junk">
+							<div class="dm-card-top">
+								<span class="dm-badge badge-rule">过滤结果</span>
+								<span class="dm-card-click-tip">点击展开详情 ↗</span>
+							</div>
+							<div class="dm-card-title">🗑️ 不再继续处理</div>
+							<div class="dm-card-desc">命中过滤规则的邮件不调用模型，也不进入待办列表。</div>
+						</div>
+					</div>
+
+					<!-- Stage 2 -->
+					<div class="dm-stage-col" data-stage="2">
+						<div class="dm-stage-head">
+							<span>02 / 邮件分类与信息提取</span>
+							<span class="dm-stage-tag">模型处理</span>
+						</div>
+
+						<div
+							class="dm-card dm-card-primary"
+							data-cat="all job school-daily llm"
+							data-key="llm-inbox">
+							<div class="dm-card-top">
+								<span class="dm-badge badge-llm">🤖 邮件整理</span>
+								<span class="dm-card-click-tip">点击展开详情 ↗</span>
+							</div>
+							<div class="dm-card-title">生成摘要，提取待办</div>
+							<div class="dm-card-desc">
+								一次模型调用完成三项工作：区分学校、日常和求职邮件；生成一到两句中文摘要；提取行动项和截止时间。
+							</div>
+						</div>
+
+						<!-- 意图路由下游分流指引 -->
+						<div class="dm-route-indicator">
+							<div class="dm-route-head">按类别继续处理 →</div>
+							<div class="dm-route-item"><span>🎓 学校事务</span> → 提取学业相关待办</div>
+							<div class="dm-route-item"><span>☕ 日常事务</span> → 提取缴费、还款等事项</div>
+							<div class="dm-route-item is-job">
+								<span>👔 校招求职</span> → 提取岗位信息，更新求职记录
+							</div>
+						</div>
+					</div>
+
+					<!-- Stage 3 -->
+					<div class="dm-stage-col" data-stage="3">
+						<div class="dm-stage-head">
+							<span>03 / 待办创建与求职进度更新</span>
+							<span class="dm-stage-tag">业务处理</span>
+						</div>
+
+						<div class="dm-branches">
+							<!-- 学校与日常分支 -->
+							<div class="dm-branch-box" data-cat="all school-daily">
+								<div class="dm-branch-title">🎓 学校事务与 ☕ 日常事务</div>
+
+								<div class="dm-card" data-cat="all school-daily" data-key="school-action">
+									<div class="dm-card-top">
+										<span class="dm-badge badge-logic">学校事务</span>
+										<span class="dm-card-click-tip">点击展开详情 ↗</span>
+									</div>
+									<div class="dm-card-title">🎓 创建学业待办</div>
+									<div class="dm-card-desc">
+										从导师反馈、论文审批和研讨会通知中提取明确的行动项。有截止时间时，一并记录到待办中。
+									</div>
+								</div>
+
+								<div class="dm-card" data-cat="all school-daily" data-key="daily-action">
+									<div class="dm-card-top">
+										<span class="dm-badge badge-logic">日常事务</span>
+										<span class="dm-card-click-tip">点击展开详情 ↗</span>
+									</div>
+									<div class="dm-card-title">☕ 创建日常待办</div>
+									<div class="dm-card-desc">
+										从账单、银行通知和生活日程中提取需要处理的事项及截止时间。
+									</div>
+								</div>
+							</div>
+
+							<!-- 求职分支 -->
+							<div class="dm-branch-box dm-job-branch" data-cat="all job llm">
+								<div class="dm-branch-title" style="color: #60a5fa;">👔 求职邮件处理</div>
+
+								<div class="dm-card dm-card-primary" data-cat="all job llm" data-key="llm-job">
+									<div class="dm-card-top">
+										<span class="dm-badge badge-llm">🤖 求职信息提取</span>
+										<span class="dm-card-click-tip">点击展开详情 ↗</span>
+									</div>
+									<div class="dm-card-title">提取公司、岗位和流程信息</div>
+									<div class="dm-card-desc">
+										识别邮件中的公司、岗位、笔试或面试环节、轮次、时间和面试链接，供后续匹配和更新使用。
+									</div>
+								</div>
+
+								<div class="dm-card" data-cat="all job" data-key="job-match">
+									<div class="dm-card-top">
+										<span class="dm-badge badge-logic">⚖️ 岗位匹配与状态更新</span>
+										<span class="dm-card-click-tip">点击展开详情 ↗</span>
+									</div>
+									<div class="dm-card-title">找到对应岗位，再更新进度</div>
+									<div class="dm-card-desc">
+										对照已有投递记录，匹配邮件对应的岗位并更新进度。同公司有多个岗位、邮件信息不足时，生成待确认项，由用户选择归属。
+									</div>
+								</div>
+
+								<div class="dm-card dm-card-dashed" data-cat="all job llm" data-key="llm-prep">
+									<div class="dm-card-top">
+										<span class="dm-badge badge-llm">🤖 面试准备</span>
+										<span class="dm-card-click-tip">点击展开详情 ↗</span>
+									</div>
+									<div class="dm-card-title">结合简历和岗位要求生成资料</div>
+									<div class="dm-card-desc">
+										由用户按需触发，结合所选简历、岗位 JD 和联网检索到的面试信息，生成面试准备资料。
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 侧边浮动弹出详情卡片 (在点击卡片的侧面高亮展开，拒绝下方占用) -->
+				<div class="dm-side-popover" id="dm-side-popover" aria-hidden="true">
+					<div class="dm-pop-arrow" id="dm-pop-arrow"></div>
+					<div class="dm-pop-header">
+						<span class="dm-pop-badge" id="dm-pop-badge">模块详情</span>
+						<button class="dm-pop-close" id="dm-pop-close" aria-label="关闭详情">✕</button>
+					</div>
+					<h4 class="dm-pop-title" id="dm-pop-title">模块标题</h4>
+					<div class="dm-pop-sub" id="dm-pop-sub">一句话定位</div>
+					<div class="dm-pop-body" id="dm-pop-body">详细描述...</div>
+				</div>
 			</div>
+		</section>
 
-			<!-- 功能二：按公司汇总求职进展 -->
+		<!-- 03 四个主要界面 -->
+		<section class="ca-section" id="features" data-case-section>
+			<header class="ca-section-head">
+				<p class="ca-kicker"><span>03</span> 界面展示 · 四个主要界面</p>
+				<h2>查看邮件、处理待办、跟进求职和准备面试</h2>
+				<p class="ca-copy">邮件处理的结果展示在以下四个界面中。点击截图可以放大查看。</p>
+			</header>
+
+			<!-- 2x2 优雅高画质画廊 (2048px 超清 Retina 呈现) -->
 			<div class="ca-block ca-reveal">
-				<h3><span>核心功能二：按公司汇总求职进度</span>看清每个机会走到了哪一步</h3>
-				<p class="ca-copy">
-					针对求职邮件，DayMate
-					按公司汇总投递、测评、笔试和面试等进展，方便查看每个机会目前走到了哪一步：
-				</p>
-				<div class="flow" style="margin-top: 16px;">
-					<div class="flow__step"><span>STEP 01</span><b>投递</b><small>回执确认与归档</small></div>
-					<div class="flow__arrow">→</div>
-					<div class="flow__step">
-						<span>STEP 02</span><b>测评</b><small>OT 限时作答链接</small>
+				<div class="dm-gallery-grid">
+					<!-- Screen 1: 首页 -->
+					<div class="dm-gallery-card">
+						<div class="dm-window-frame">
+							<div class="dm-window-header">
+								<span class="dm-window-dot red"></span>
+								<span class="dm-window-dot yellow"></span>
+								<span class="dm-window-dot green"></span>
+								<span class="dm-window-title">01 / 首页：邮件摘要</span>
+							</div>
+							<div
+								class="dm-img-box"
+								data-lightbox="/portfolio/daymate/home.png"
+								title="点击放大查看超清细节">
+								<img
+									src="/portfolio/daymate/home.png"
+									alt="DayMate 首页"
+									class="dm-screen-img"
+									loading="lazy"
+								/>
+								<span class="dm-zoom-badge">🔍 点击放大查看</span>
+							</div>
+						</div>
+						<div class="dm-gallery-desc">
+							<h4>首页：快速了解新消息</h4>
+							<p>
+								用一到两句中文概括邮件重点，按学校、求职和日常分类。同一线程的往来邮件聚合展示，减少重复信息，方便查看最新进展。
+							</p>
+						</div>
 					</div>
-					<div class="flow__arrow">→</div>
-					<div class="flow__step"><span>STEP 03</span><b>笔试</b><small>考场时间与通知</small></div>
-					<div class="flow__arrow">→</div>
-					<div class="flow__step">
-						<span>STEP 04</span><b>面试</b><small>多轮面试日程确认</small>
-					</div>
-					<div class="flow__arrow">→</div>
-					<div class="flow__step">
-						<span>STEP 05</span><b>Offer/归档</b><small>进展归档与记录</small>
-					</div>
-				</div>
 
-				<div style="margin-top: 24px;">
-					<LoopVideo
-						label="DayMate 求职追踪模块演示"
-						poster="/portfolio/daymate/applications.png"
-						src="/portfolio/daymate/application-demo.mp4"
-					/>
-					<p class="ca-caption">
-						求职进度汇总：按公司记录投递、测评、笔试与面试各阶段状态，方便随时掌握求职全盘进展。
-					</p>
-				</div>
-
-				<div
-					class="ca-card"
-					style="margin-top: 18px; padding: 18px 22px; border-left: 3px solid var(--ca-accent); background: var(--ca-soft); border-radius: 0 8px 8px 0;">
-					<strong style="color: var(--ca-text); font-size: 14px;">准确优先的“待确认”机制：</strong>
-					<p class="ca-copy" style="font-size: 14px; margin-top: 4px;">
-						邮件格式并不统一，自动回执也可能缺少明确的岗位或流程信息。因此，对无法可靠判断的结果，我让它停留在待确认状态，由自己核对后再加入记录。对这个自用工具来说，求职进度准确，比每封邮件都自动归档更重要。
-					</p>
-				</div>
-			</div>
-
-			<!-- 功能三：HTML 格式面试准备资料自动整理 -->
-			<div class="ca-block ca-reveal">
-				<h3>
-					<span>核心功能三：HTML 面试准备资料自动整理</span>固定的业务调研工作流，大幅减轻整理负担
-				</h3>
-				<p class="ca-copy">
-					在校招面试密集期，每收到一家面试通知，最耗费精力的往往是在短时间内临时到处翻看公司官网、产品线、最新业务动态，并对照岗位
-					JD 逐条整理自我介绍与常见问答。这不仅耗时 1~2 小时，而且极易因信息零散而准备不充分。
-				</p>
-				<p class="ca-copy" style="margin-top: 12px;">
-					DayMate
-					设计了一个固定的业务调研与信息整理工作流（Workflow），在识别到面试邀约后，自动生成一份<strong
-						>排版干净、结构清晰、可离线全屏浏览的独立 HTML 格式面试准备资料</strong
-					>：
-				</p>
-
-				<div class="flow" style="margin-top: 18px;">
-					<div class="flow__step">
-						<span>STEP 01</span>
-						<b>邮件与 JD 要素提取</b>
-						<small>自动解析目标公司、应聘岗位、面试轮次与考核侧重点</small>
+					<!-- Screen 2: 待办看板 -->
+					<div class="dm-gallery-card">
+						<div class="dm-window-frame">
+							<div class="dm-window-header">
+								<span class="dm-window-dot red"></span>
+								<span class="dm-window-dot yellow"></span>
+								<span class="dm-window-dot green"></span>
+								<span class="dm-window-title">02 / 待办看板</span>
+							</div>
+							<div
+								class="dm-img-box"
+								data-lightbox="/portfolio/daymate/todo.png"
+								title="点击放大查看超清细节">
+								<img
+									src="/portfolio/daymate/todo.png"
+									alt="DayMate 待办看板"
+									class="dm-screen-img"
+									loading="lazy"
+								/>
+								<span class="dm-zoom-badge">🔍 点击放大查看</span>
+							</div>
+						</div>
+						<div class="dm-gallery-desc">
+							<h4>待办：集中查看要做的事</h4>
+							<p>
+								汇总邮件中提取的测评、笔试、论文修改和缴费等事项，按截止时间排序并标注紧急程度。每项任务保留邮件原文入口，方便核对具体要求。
+							</p>
+						</div>
 					</div>
-					<div class="flow__arrow">→</div>
-					<div class="flow__step">
-						<span>STEP 02</span>
-						<b>固定工作流业务调研</b>
-						<small>按既定框架自动调研公司主营业务、核心产品线与行业定位</small>
-					</div>
-					<div class="flow__arrow">→</div>
-					<div class="flow__step">
-						<span>STEP 03</span>
-						<b>个人经历与岗位对齐</b>
-						<small>将公司业务诉求与个人简历经历做要点映射，梳理问答提纲</small>
-					</div>
-					<div class="flow__arrow">→</div>
-					<div class="flow__step flow__step--gate">
-						<span>OUTPUT 04</span>
-						<b>独立 HTML 资料渲染</b>
-						<small>生成独立 HTML 产物，面试前一键全屏查阅，减少手工整理负担</small>
-					</div>
-				</div>
 
-				<div
-					class="ca-card"
-					style="margin-top: 20px; padding: 20px 24px; border: 1px solid var(--ca-line); border-radius: 8px; background: var(--ca-soft);">
-					<strong style="color: var(--ca-text); font-size: 14px;">HTML 准备资料的内容框架：</strong>
-					<ul class="ca-observations" style="margin-top: 10px; font-size: 13px;">
-						<li>
-							<strong>公司速览与业务脉络：</strong
-							>公司主营业务、核心盈利模式、行业竞争格局与近期关键动态。
-						</li>
-						<li>
-							<strong>岗位画像与 JD 拆解：</strong>目标岗位核心考察能力、业务期望与关键交付指标。
-						</li>
-						<li>
-							<strong>针对性问答与简历映射：</strong
-							>针对该业务场景的个人经历要点提炼、高频专业提问预测与自我介绍底稿。
-						</li>
-						<li>
-							<strong>离线独立可查：</strong>产物为原生单文件
-							HTML，界面干净无多余杂讯，面试前一键全屏打开，快速进入状态。
-						</li>
-					</ul>
+					<!-- Screen 3: 求职看板 -->
+					<div class="dm-gallery-card">
+						<div class="dm-window-frame">
+							<div class="dm-window-header">
+								<span class="dm-window-dot red"></span>
+								<span class="dm-window-dot yellow"></span>
+								<span class="dm-window-dot green"></span>
+								<span class="dm-window-title">03 / 求职看板</span>
+							</div>
+							<div
+								class="dm-img-box"
+								data-lightbox="/portfolio/daymate/applications.png"
+								title="点击放大查看超清细节">
+								<img
+									src="/portfolio/daymate/applications.png"
+									alt="DayMate 求职看板"
+									class="dm-screen-img"
+									loading="lazy"
+								/>
+								<span class="dm-zoom-badge">🔍 点击放大查看</span>
+							</div>
+						</div>
+						<div class="dm-gallery-desc">
+							<h4>求职：按岗位跟进应聘进度</h4>
+							<p>
+								集中展示各岗位的投递、笔试和面试进度。超过 4
+								天没有更新时显示提醒；无法确定归属的邮件进入待确认区；收到拒信后，可以将对应岗位标记为已结束。
+							</p>
+						</div>
+					</div>
+
+					<!-- Screen 4: 岗位详情与面试准备 -->
+					<div class="dm-gallery-card">
+						<div class="dm-window-frame">
+							<div class="dm-window-header">
+								<span class="dm-window-dot red"></span>
+								<span class="dm-window-dot yellow"></span>
+								<span class="dm-window-dot green"></span>
+								<span class="dm-window-title">04 / 岗位详情与面试准备</span>
+							</div>
+							<div
+								class="dm-img-box"
+								data-lightbox="/portfolio/daymate/application-detail.png"
+								title="点击放大查看超清细节">
+								<img
+									src="/portfolio/daymate/application-detail.png"
+									alt="DayMate 岗位详情与面试准备"
+									class="dm-screen-img"
+									loading="lazy"
+								/>
+								<span class="dm-zoom-badge">🔍 点击放大查看</span>
+							</div>
+						</div>
+						<div class="dm-gallery-desc">
+							<h4>岗位详情：把相关信息放在一起</h4>
+							<p>
+								集中展示岗位信息、JD
+								和流程时间线，支持联网补充岗位资料。选择对应的简历版本后，可以生成面试准备资料，并检查其中的经历引用是否准确。
+							</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -484,38 +607,32 @@ const navigation = [
 		<!-- 04 自用结果与复盘 -->
 		<section class="ca-section" id="retro" data-case-section>
 			<header class="ca-section-head">
-				<p class="ca-kicker"><span>04</span> 验证复盘 · 自用结果与心得</p>
-				<h2>自用结果与做个人 AI 工具的心得</h2>
+				<p class="ca-kicker"><span>04</span> 自用结果与复盘</p>
+				<h2>日常使用后的三个体会</h2>
 				<p class="ca-copy">
 					DayMate
-					已用于我毕业求职期间的日常事务整理，累计支撑了 6 场求职面试的资料调研与实战备战。它解决的核心问题，是把散落在邮件里的“需要做什么”和“求职走到哪一步”集中呈现，减少重复翻找和手动记录。从这个自用项目中，我有两点体会：
+					已用于我写论文和参加校招期间的日常事务管理，也帮助我完成了多场面试的准备。以下是我在设计和使用过程中的三个体会。
 				</p>
 			</header>
 
 			<div class="ca-block ca-reveal">
-				<div class="dm-grid-2">
-					<div
-						class="ca-card"
-						style="padding: 22px 24px; border-radius: 8px; border: 1px solid var(--ca-line); background: var(--ca-soft);">
-						<h4
-							style="font-size: 15px; font-weight: 600; margin-bottom: 8px; color: var(--ca-text);">
-							1. 选准高频任务，把信息可靠地转成行动
-						</h4>
-						<p class="ca-copy" style="font-size: 13px; line-height: 1.8;">
-							这个项目让我认识到，个人 AI
-							工具不必追求功能多。很多工具堆砌了一堆低频功能，最后反而被闲置。选准一个每天都要面对的高频任务，把信息可靠地转成可打勾的行动，才更容易真正解决问题。
+				<div class="dm-grid-3">
+					<div class="dm-retro-card">
+						<h4>1. 先解决每天重复的小麻烦</h4>
+						<p>
+							这个项目起点很具体：每次读完邮件，都要再记一次待办、查一次日期、更新一次求职进度。因此，我优先做邮件摘要、待办提取和进度整理，让打开电脑后的第一眼更有用。
 						</p>
 					</div>
-					<div
-						class="ca-card"
-						style="padding: 22px 24px; border-radius: 8px; border: 1px solid var(--ca-line); background: var(--ca-soft);">
-						<h4
-							style="font-size: 15px; font-weight: 600; margin-bottom: 8px; color: var(--ca-text);">
-							2. 允许用户及时纠错，才更容易真正用起来
-						</h4>
-						<p class="ca-copy" style="font-size: 13px; line-height: 1.8;">
-							大模型处理非标准化内容时存在不确定性。不追求虚幻的 100%
-							全自动，在关键节点提供简单直接的人工核对入口，让用户能随时纠错，工具才能在真实生活中被长期信任、真正用起来。
+					<div class="dm-retro-card">
+						<h4>2. 信息不够时，留一个确认入口</h4>
+						<p>
+							同公司投递多个岗位时，一封没有写明岗位的邮件很难准确归属。我的选择是让系统暂时挂起，由用户确认后再更新记录。这一步增加了一次操作，但能减少后续查错和修正的麻烦。
+						</p>
+					</div>
+					<div class="dm-retro-card">
+						<h4>3. 不同工作交给合适的方法</h4>
+						<p>
+							明确的营销内容和验证码用规则过滤；邮件正文用模型理解；岗位匹配和进度更新按程序规则执行。这样划分后，出现问题时更容易判断是过滤、提取还是匹配出了错，也方便逐项调整。
 						</p>
 					</div>
 				</div>
@@ -533,19 +650,39 @@ const navigation = [
 						class="button-ghost"
 						href="https://github.com/Zhaozed/DayMate/releases"
 						target="_blank"
-						rel="noopener noreferrer">下载 .dmg 产物</a
+						rel="noopener noreferrer">下载 macOS 客户端</a
 					>
 					<a class="button-ghost" href="/projects/">返回项目经历 →</a>
 				</div>
 			</div>
 		</section>
 	</article>
+
+	<!-- 全屏超清 Lightbox 模态放大窗 (Root Level) -->
+	<div
+		id="dm-lightbox-overlay"
+		class="dm-lightbox-overlay"
+		aria-hidden="true"
+		title="点击任意位置退出">
+		<button
+			id="dm-lightbox-close"
+			class="dm-lightbox-close"
+			aria-label="关闭放大预览"
+			title="关闭 (ESC)">✕</button
+		>
+		<div class="dm-lightbox-content">
+			<img id="dm-lightbox-img" class="dm-lightbox-img" src="" alt="超清放大预览" />
+			<div class="dm-lightbox-hint">点击任意区域或按 ESC 缩小退出</div>
+		</div>
+	</div>
 </PageLayout>
 
 <script>
+	// 1. 页内导航平滑高亮与滚动联动
 	const links = [...document.querySelectorAll<HTMLAnchorElement>(".ca-nav a, .ca-mobile-toc a")];
 	const sections = [...document.querySelectorAll<HTMLElement>("[data-case-section]")];
 	let scheduled = false;
+
 	function updateNavigation() {
 		const anchor = 128;
 		const active =
@@ -557,6 +694,7 @@ const navigation = [
 		}
 		scheduled = false;
 	}
+
 	window.addEventListener(
 		"scroll",
 		() => {
@@ -570,23 +708,14 @@ const navigation = [
 	window.addEventListener("resize", updateNavigation);
 	updateNavigation();
 
+	// 移动端 TOC 控制
 	const mobileToc = document.querySelector<HTMLDetailsElement>(".ca-mobile-toc");
 	for (const link of links)
 		link.addEventListener("click", () => {
 			if (mobileToc) mobileToc.open = false;
 		});
-	document.addEventListener("keydown", event => {
-		if (event.key === "Escape" && mobileToc?.open) {
-			mobileToc.open = false;
-			mobileToc.querySelector("summary")?.focus();
-		}
-	});
-	document.addEventListener("click", event => {
-		if (mobileToc?.open && event.target instanceof Node && !mobileToc.contains(event.target))
-			mobileToc.open = false;
-	});
 
-	// 高级滚动进入动画 (Scroll Reveal Observer)
+	// 2. 滚动进入视口渐入动画
 	const reveals = document.querySelectorAll(".ca-reveal");
 	if ("IntersectionObserver" in window) {
 		const revealObserver = new IntersectionObserver(
@@ -603,12 +732,310 @@ const navigation = [
 					}
 				});
 			},
-			{ threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+			{ threshold: 0.04, rootMargin: "0px 0px 60px 0px" }
 		);
 		reveals.forEach(el => revealObserver.observe(el));
 	} else {
 		reveals.forEach(el => el.classList.add("is-revealed"));
 	}
+
+	// 3. 架构节点元数据 (纯业务与产品逻辑，无冗余后端代码路径)
+	const INSPECTOR_DATA: Record<
+		string,
+		{ badge: string; title: string; sub: string; body: string }
+	> = {
+		"mail-input": {
+			badge: "邮件接入",
+			title: "📥 同步新邮件",
+			sub: "通过 Gmail OAuth 2.0 和 163 IMAP 接入两个邮箱，每 3 分钟检查一次新邮件。",
+			body: `• 接入写论文与校招常用的学校 Gmail 与 163 邮箱。
+• 服务端常驻每 3 分钟检查一次新邮件并完成模型处理，电脑关机也不中断轮询。
+• 桌面端开机即直接呈现整理好的摘要与待办，无需等待实时拉取。`
+		},
+		prefilter: {
+			badge: "规则过滤",
+			title: "🧹 过滤无关内容",
+			sub: "用正则规则过滤营销推广、验证码和部分全员广播邮件。",
+			body: `• 邮件中混有大量营销推广、登录验证码和学校全员广播，没有必要全部交给模型处理。
+• 在进入模型前用正则规则快速识别并过滤，减少不必要的模型调用。
+• 过滤规则支持本地维护与调整，确保重要通知不被误拦。`
+		},
+		junk: {
+			badge: "过滤结果",
+			title: "🗑️ 不再继续处理",
+			sub: "命中过滤规则的邮件不调用模型，也不进入待办列表。",
+			body: `• 识别为推广、验证码或无关广播的邮件直接归档。
+• 不调用模型，不生成待办，保持待办列表和界面的清晰。`
+		},
+		"llm-inbox": {
+			badge: "模型处理",
+			title: "🤖 邮件整理",
+			sub: "生成摘要，提取待办",
+			body: `• 一次模型调用完成三项工作：区分学校事务、日常事务和校招求职。
+• 为邮件生成 1~2 句中文要点摘要，开机即可快速浏览。
+• 提取邮件中的截止时间和需要处理的事项，生成待办候选。`
+		},
+		"school-action": {
+			badge: "学校事务",
+			title: "🎓 创建学业待办",
+			sub: "从导师反馈、论文审批和研讨会通知中提取明确行动项与截止时间。",
+			body: `• 专门处理导师修改意见、论文提交、答辩申请、选课通知等学业事务。
+• 提取明确的截止日期与任务内容，生成学业待办。
+• 保留邮件原文入口，方便随时核对具体要求。`
+		},
+		"daily-action": {
+			badge: "日常事务",
+			title: "☕ 创建日常待办",
+			sub: "从账单、银行通知和生活日程中提取需要处理的事项及截止时间。",
+			body: `• 识别学费账单、银行通知、生活缴费等个人事务。
+• 提取还款日或支付截止期，沉淀为日常待办。
+• 与学业和求职待办集中管理，避免遗漏关键缴费。`
+		},
+		"llm-job": {
+			badge: "求职信息提取",
+			title: "🤖 提取公司、岗位和流程信息",
+			sub: "识别邮件中的公司、岗位、笔试或面试环节、轮次、时间和面试链接。",
+			body: `• 当邮件命中求职意图时，触发求职信息提取。
+• 识别企业规范名称、应聘岗位、环节类型（投递/笔试/测评/面试/Offer/感谢信）、轮次、会议链接及作答截止时间。
+• 提取结构化数据，供后续程序做记录匹配与状态更新。`
+		},
+		"job-match": {
+			badge: "程序规则",
+			title: "⚖️ 找到对应岗位，再更新进度",
+			sub: "对照已有投递记录，匹配邮件对应的岗位并更新进度。",
+			body: `• 对照投递数据库已有的记录更新求职进度：
+  1. 数据库中无该企业记录 ➔ 自动新建投递档案；
+  2. 唯一命中同公司同岗位 ➔ 自动追加到该公司的招聘时间线上，并把面试/笔试同步至待办列表；
+  3. 同公司有多个岗位、邮件信息不足时 ➔ 生成待确认项，由用户手动选择归属，避免归错岗位；
+  4. 收到感谢信或拒信 ➔ 标记该岗位已结束，不产生干扰待办。`
+		},
+		"llm-prep": {
+			badge: "模型处理",
+			title: "🤖 结合简历和岗位要求生成资料",
+			sub: "由用户按需触发，结合所选简历、岗位 JD 和联网检索到的面试信息，生成面试准备资料。",
+			body: `• 当岗位进入面试环节时，由用户在详情页主动触发，不盲目消耗调用配额。
+• 严格以用户选定的真实简历为依据，结合岗位 JD 要求与联网检索的企业面经。
+• 生成岗位考察要点、简历经历匹配和反问清单，辅助面试准备。`
+		}
+	};
+
+	// 4. 架构图过滤器交互
+	const filterBtns = document.querySelectorAll<HTMLButtonElement>(".dm-filter-btn");
+	const pipeCards = document.querySelectorAll<HTMLElement>(".dm-card");
+
+	filterBtns.forEach(btn => {
+		btn.addEventListener("click", () => {
+			filterBtns.forEach(b => b.classList.remove("active"));
+			btn.classList.add("active");
+			const filter = btn.getAttribute("data-filter") || "all";
+
+			pipeCards.forEach(card => {
+				const cat = card.getAttribute("data-cat") || "";
+				if (filter === "all") {
+					card.classList.remove("is-dimmed", "is-highlighted");
+				} else if (filter === "llm") {
+					if (cat.includes("llm")) {
+						card.classList.remove("is-dimmed");
+						card.classList.add("is-highlighted");
+					} else {
+						card.classList.add("is-dimmed");
+						card.classList.remove("is-highlighted");
+					}
+				} else if (filter === "job") {
+					if (cat.includes("job")) {
+						card.classList.remove("is-dimmed");
+						card.classList.add("is-highlighted");
+					} else {
+						card.classList.add("is-dimmed");
+						card.classList.remove("is-highlighted");
+					}
+				} else if (filter === "school-daily") {
+					if (cat.includes("school-daily")) {
+						card.classList.remove("is-dimmed");
+						card.classList.add("is-highlighted");
+					} else {
+						card.classList.add("is-dimmed");
+						card.classList.remove("is-highlighted");
+					}
+				}
+			});
+		});
+	});
+
+	// 5. 侧边弹出详情卡片联动 (在点击卡片的侧面高亮弹出，拒绝下方占用)
+	const pipelineContainer = document.getElementById("dm-pipeline-container");
+	const sidePopover = document.getElementById("dm-side-popover");
+	const popBadge = document.getElementById("dm-pop-badge");
+	const popTitle = document.getElementById("dm-pop-title");
+	const popSub = document.getElementById("dm-pop-sub");
+	const popBody = document.getElementById("dm-pop-body");
+	const popClose = document.getElementById("dm-pop-close");
+	const popArrow = document.getElementById("dm-pop-arrow");
+
+	function closeSidePopover() {
+		if (!sidePopover) return;
+		sidePopover.classList.remove("is-open");
+		sidePopover.setAttribute("aria-hidden", "true");
+		pipeCards.forEach(c => c.classList.remove("is-selected"));
+	}
+
+	function openSidePopover(card: HTMLElement, key: string) {
+		const data = INSPECTOR_DATA[key];
+		if (!data || !sidePopover || !pipelineContainer) return;
+
+		pipeCards.forEach(c => c.classList.remove("is-selected"));
+		card.classList.add("is-selected");
+
+		if (popBadge) popBadge.textContent = data.badge;
+		if (popTitle) popTitle.textContent = data.title;
+		if (popSub) popSub.textContent = data.sub;
+		if (popBody) popBody.innerHTML = data.body.split("\n").join("<br>");
+
+		sidePopover.classList.add("is-open");
+		sidePopover.setAttribute("aria-hidden", "false");
+
+		// 定位计算：判断该卡片在容器中的相对位置，决定向右或向左弹出
+		const containerRect = pipelineContainer.getBoundingClientRect();
+		const cardRect = card.getBoundingClientRect();
+
+		const cardTop = cardRect.top - containerRect.top;
+		const cardLeft = cardRect.left - containerRect.left;
+		const popoverWidth = Math.min(330, containerRect.width - 32);
+
+		const isMobile = window.innerWidth <= 860;
+
+		if (isMobile) {
+			sidePopover.classList.remove("arrow-left", "arrow-right");
+			sidePopover.style.left = "16px";
+			sidePopover.style.right = "16px";
+			sidePopover.style.width = "auto";
+			sidePopover.style.top = cardTop + card.offsetHeight + 10 + "px";
+			if (popArrow) popArrow.style.display = "none";
+		} else {
+			if (popArrow) popArrow.style.display = "block";
+			let popLeft = 0;
+			if (cardLeft < containerRect.width * 0.5) {
+				// 偏左侧卡片：向右侧展开
+				sidePopover.classList.remove("arrow-right");
+				sidePopover.classList.add("arrow-left");
+				popLeft = cardLeft + card.offsetWidth + 14;
+				if (popLeft + popoverWidth > containerRect.width - 16) {
+					popLeft = containerRect.width - popoverWidth - 16;
+				}
+			} else {
+				// 偏右侧卡片：向左侧展开
+				sidePopover.classList.remove("arrow-left");
+				sidePopover.classList.add("arrow-right");
+				popLeft = cardLeft - popoverWidth - 14;
+				if (popLeft < 16) {
+					popLeft = 16;
+				}
+			}
+			sidePopover.style.left = popLeft + "px";
+			sidePopover.style.right = "auto";
+			sidePopover.style.width = popoverWidth + "px";
+
+			// 垂直对齐：让浮窗尽量居中对应卡片垂直中心
+			const popHeight = sidePopover.offsetHeight || 300;
+			const cardCenterY = cardTop + card.offsetHeight / 2;
+			let targetTop = cardCenterY - popHeight / 2;
+			const maxTop = containerRect.height - popHeight - 16;
+			if (targetTop > maxTop) targetTop = maxTop;
+			if (targetTop < 16) targetTop = 16;
+			sidePopover.style.top = targetTop + "px";
+
+			// 箭头垂直精准指向卡片中心
+			if (popArrow) {
+				const arrowY = Math.max(18, Math.min(popHeight - 22, cardCenterY - targetTop - 6));
+				popArrow.style.top = arrowY + "px";
+			}
+		}
+	}
+
+	pipeCards.forEach(card => {
+		card.addEventListener("click", e => {
+			e.stopPropagation();
+			const key = card.getAttribute("data-key");
+			if (!key) return;
+			if (card.classList.contains("is-selected") && sidePopover?.classList.contains("is-open")) {
+				closeSidePopover();
+			} else {
+				openSidePopover(card, key);
+			}
+		});
+	});
+
+	if (popClose) {
+		popClose.addEventListener("click", e => {
+			e.stopPropagation();
+			closeSidePopover();
+		});
+	}
+
+	if (sidePopover) {
+		sidePopover.addEventListener("click", e => {
+			e.stopPropagation();
+		});
+	}
+
+	document.addEventListener("click", () => {
+		closeSidePopover();
+	});
+
+	document.addEventListener("keydown", e => {
+		if (e.key === "Escape") closeSidePopover();
+	});
+
+	// 6. 超清图片全屏 Lightbox 缩放 (移至 document.body 彻底突破父级层叠上下文)
+	const lightboxOverlay = document.getElementById("dm-lightbox-overlay");
+	const lightboxImg = document.getElementById("dm-lightbox-img") as HTMLImageElement | null;
+	const lightboxClose = document.getElementById("dm-lightbox-close");
+	const zoomBoxes = document.querySelectorAll<HTMLElement>("[data-lightbox]");
+
+	if (lightboxOverlay && lightboxOverlay.parentElement !== document.body) {
+		document.body.appendChild(lightboxOverlay);
+	}
+
+	function openLightbox(src: string) {
+		if (!lightboxOverlay || !lightboxImg) return;
+		lightboxImg.src = src;
+		lightboxOverlay.classList.add("is-open");
+		lightboxOverlay.setAttribute("aria-hidden", "false");
+		document.body.style.overflow = "hidden";
+	}
+
+	function closeLightbox() {
+		if (!lightboxOverlay) return;
+		lightboxOverlay.classList.remove("is-open");
+		lightboxOverlay.setAttribute("aria-hidden", "true");
+		document.body.style.overflow = "";
+	}
+
+	zoomBoxes.forEach(box => {
+		box.addEventListener("click", () => {
+			const src = box.getAttribute("data-lightbox");
+			if (src) openLightbox(src);
+		});
+	});
+
+	if (lightboxClose) {
+		lightboxClose.addEventListener("click", e => {
+			e.stopPropagation();
+			closeLightbox();
+		});
+	}
+
+	if (lightboxOverlay) {
+		lightboxOverlay.addEventListener("click", () => {
+			closeLightbox();
+		});
+	}
+
+	document.addEventListener("keydown", e => {
+		if (e.key === "Escape" && lightboxOverlay?.classList.contains("is-open")) {
+			closeLightbox();
+		}
+	});
 </script>
 
 <style>
@@ -695,6 +1122,24 @@ const navigation = [
 	}
 
 	/* 看板底部标签自适应：支持 2 列与 3 列等宽分布，保证对齐与间距美观 */
+	.dm-initiatives-3col {
+		grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+	}
+
+	@media (max-width: 900px) {
+		.dm-initiatives-3col {
+			grid-template-columns: 1fr !important;
+		}
+	}
+
+	.ca-init-subtitle {
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--ca-text);
+		margin-top: 4px;
+		line-height: 1.4;
+	}
+
 	.ca-init-metrics {
 		display: flex !important;
 		align-items: stretch !important;
@@ -718,5 +1163,707 @@ const navigation = [
 		white-space: normal !important;
 		line-height: 1.35 !important;
 		word-break: break-word;
+	}
+
+	/* macOS 窗口外框与原图展现（100% 完整展现，杜绝裁切） */
+	.dm-window-frame {
+		border: 1px solid var(--ca-line);
+		border-radius: 12px;
+		background: var(--ca-soft);
+		overflow: hidden;
+		box-shadow: 0 6px 28px -4px rgba(0, 0, 0, 0.12);
+	}
+
+	.dm-window-header {
+		display: flex;
+		align-items: center;
+		gap: 7px;
+		padding: 11px 16px;
+		border-bottom: 1px solid var(--ca-line);
+		background: color-mix(in srgb, var(--ca-soft) 85%, transparent);
+	}
+
+	.dm-window-dot {
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		display: inline-block;
+	}
+	.dm-window-dot.red {
+		background: #ff5f56;
+	}
+	.dm-window-dot.yellow {
+		background: #ffbd2e;
+	}
+	.dm-window-dot.green {
+		background: #27c93f;
+	}
+
+	.dm-window-title {
+		margin-left: 8px;
+		font-size: 11px;
+		font-family: var(--font-mono, monospace);
+		color: var(--ca-muted);
+		letter-spacing: 0.02em;
+	}
+
+	/* ========== 03 四大界面 2x2 画廊排版 ========== */
+	.dm-gallery-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 20px;
+		margin-top: 14px;
+	}
+
+	@media (max-width: 768px) {
+		.dm-gallery-grid {
+			grid-template-columns: 1fr;
+			gap: 16px;
+		}
+	}
+
+	.dm-gallery-card {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.dm-img-box {
+		position: relative;
+		cursor: zoom-in;
+		overflow: hidden;
+		background: #000;
+	}
+
+	.dm-screen-img {
+		display: block !important;
+		width: 100% !important;
+		height: auto !important;
+		aspect-ratio: auto !important;
+		object-fit: contain !important;
+		image-rendering: -webkit-optimize-contrast;
+		image-rendering: crisp-edges;
+		transition: transform 0.25s ease;
+	}
+
+	.dm-img-box:hover .dm-screen-img {
+		transform: scale(1.02);
+	}
+
+	.dm-zoom-badge {
+		position: absolute;
+		bottom: 8px;
+		right: 8px;
+		background: rgba(0, 0, 0, 0.7);
+		color: #fff;
+		font-size: 10.5px;
+		padding: 3px 8px;
+		border-radius: 4px;
+		pointer-events: none;
+		opacity: 0.85;
+		backdrop-filter: blur(4px);
+		transition: opacity 0.2s ease;
+	}
+
+	.dm-img-box:hover .dm-zoom-badge {
+		opacity: 1;
+	}
+
+	.dm-gallery-desc {
+		padding: 2px 4px;
+	}
+
+	.dm-gallery-desc h4 {
+		font-size: 13.5px;
+		font-weight: 700;
+		color: var(--ca-text);
+		margin-bottom: 4px;
+	}
+
+	.dm-gallery-desc p {
+		font-size: 12px;
+		color: var(--ca-muted);
+		line-height: 1.55;
+	}
+
+	.dm-gallery-desc p strong {
+		color: var(--ca-text);
+	}
+
+	/* ========== 超清 Lightbox 弹窗 (挂载至 document.body 顶层) ========== */
+	:global(#dm-lightbox-overlay) {
+		position: fixed !important;
+		inset: 0 !important;
+		width: 100vw !important;
+		height: 100vh !important;
+		background: rgba(0, 0, 0, 0.9) !important;
+		backdrop-filter: blur(12px) !important;
+		-webkit-backdrop-filter: blur(12px) !important;
+		display: none;
+		justify-content: center !important;
+		align-items: center !important;
+		z-index: 999999 !important;
+		padding: 24px !important;
+		cursor: zoom-out !important;
+		user-select: none !important;
+		box-sizing: border-box !important;
+	}
+
+	:global(#dm-lightbox-overlay.is-open) {
+		display: flex !important;
+		animation: dm-fade-in 0.18s ease-out forwards;
+	}
+
+	@keyframes dm-fade-in {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	:global(#dm-lightbox-close) {
+		position: fixed !important;
+		top: 24px !important;
+		right: 28px !important;
+		width: 46px !important;
+		height: 46px !important;
+		border-radius: 50% !important;
+		background: rgba(255, 255, 255, 0.22) !important;
+		border: 1px solid rgba(255, 255, 255, 0.45) !important;
+		color: #ffffff !important;
+		font-size: 24px !important;
+		line-height: 1 !important;
+		display: flex !important;
+		align-items: center !important;
+		justify-content: center !important;
+		cursor: pointer !important;
+		z-index: 1000000 !important;
+		backdrop-filter: blur(10px) !important;
+		-webkit-backdrop-filter: blur(10px) !important;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6) !important;
+		transition: all 0.18s ease !important;
+	}
+
+	:global(#dm-lightbox-close:hover) {
+		background: rgba(255, 255, 255, 0.4) !important;
+		border-color: rgba(255, 255, 255, 0.8) !important;
+		transform: scale(1.08) !important;
+	}
+
+	:global(.dm-lightbox-content) {
+		position: relative !important;
+		max-width: 1400px !important;
+		width: 100% !important;
+		max-height: 94vh !important;
+		display: flex !important;
+		flex-direction: column !important;
+		justify-content: center !important;
+		align-items: center !important;
+		cursor: zoom-out !important;
+	}
+
+	:global(#dm-lightbox-img) {
+		max-width: 92vw !important;
+		max-height: 84vh !important;
+		object-fit: contain !important;
+		border-radius: 8px !important;
+		box-shadow: 0 16px 50px rgba(0, 0, 0, 0.8) !important;
+		image-rendering: -webkit-optimize-contrast !important;
+		image-rendering: crisp-edges !important;
+		cursor: zoom-out !important;
+		transition: transform 0.18s ease !important;
+	}
+
+	:global(.dm-lightbox-hint) {
+		margin-top: 14px !important;
+		font-size: 13px !important;
+		color: rgba(255, 255, 255, 0.75) !important;
+		background: rgba(0, 0, 0, 0.55) !important;
+		padding: 5px 16px !important;
+		border-radius: 14px !important;
+		border: 1px solid rgba(255, 255, 255, 0.18) !important;
+		letter-spacing: 0.3px !important;
+		pointer-events: none !important;
+	}
+
+	/* ========== 架构流水线专业样式体系 (适配 Dark/Light 双主题) ========== */
+	.dm-pipeline-container {
+		position: relative;
+		border: 1px solid var(--ca-line);
+		border-radius: 14px;
+		background: var(--ca-soft);
+		padding: 24px;
+		margin-top: 24px;
+	}
+
+	.dm-pipeline-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding-bottom: 18px;
+		border-bottom: 1px solid var(--ca-line);
+		margin-bottom: 20px;
+		flex-wrap: wrap;
+		gap: 16px;
+	}
+
+	.dm-pipe-titles h3 {
+		font-size: 17px;
+		font-weight: 700;
+		color: var(--ca-text);
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.dm-pipe-titles p {
+		font-size: 13px;
+		color: var(--ca-muted);
+		margin-top: 4px;
+	}
+
+	.dm-pipe-controls {
+		display: flex;
+		gap: 8px;
+		align-items: center;
+		flex-wrap: wrap;
+	}
+
+	.dm-filter-btn {
+		background: var(--ca-bg);
+		border: 1px solid var(--ca-line);
+		color: var(--ca-text);
+		padding: 6px 12px;
+		border-radius: 6px;
+		font-size: 12px;
+		cursor: pointer;
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		transition: all 0.15s ease;
+	}
+
+	.dm-filter-btn:hover {
+		border-color: var(--ca-accent);
+		color: var(--ca-accent);
+	}
+
+	.dm-filter-btn.active {
+		background: var(--ca-accent);
+		color: #fff;
+		border-color: var(--ca-accent);
+	}
+
+	/* 简洁图例条：紧凑单行排列、去厚重白底与多余折行 */
+	.dm-legend-strip {
+		display: flex;
+		align-items: center;
+		gap: 16px;
+		flex-wrap: wrap;
+		padding: 2px 0;
+		margin-bottom: 20px;
+		font-size: 12px;
+	}
+
+	.dm-legend-label {
+		font-weight: 600;
+		color: var(--ca-text);
+		font-size: 12px;
+	}
+
+	.dm-legend-item {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+	}
+
+	.legend-desc {
+		color: var(--ca-muted);
+		font-size: 11px;
+	}
+
+	.dm-badge {
+		font-size: 10px;
+		font-weight: 700;
+		padding: 2px 6px;
+		border-radius: 4px;
+		letter-spacing: 0.3px;
+	}
+
+	/* 语义徽章颜色体系 */
+	.badge-rule {
+		background: rgba(100, 116, 139, 0.18);
+		border: 1px solid #64748b;
+		color: #64748b;
+	}
+	[data-theme="dark"] .badge-rule {
+		color: #cbd5e1;
+	}
+
+	.badge-llm {
+		background: rgba(168, 85, 247, 0.15);
+		border: 1px solid #a855f7;
+		color: #9333ea;
+	}
+	[data-theme="dark"] .badge-llm {
+		color: #d8b4fe;
+	}
+
+	.badge-logic {
+		background: rgba(6, 182, 212, 0.15);
+		border: 1px solid #0891b2;
+		color: #0e7490;
+	}
+	[data-theme="dark"] .badge-logic {
+		color: #67e8f9;
+	}
+
+	.badge-board {
+		background: rgba(16, 185, 129, 0.15);
+		border: 1px solid #10b981;
+		color: #059669;
+	}
+	[data-theme="dark"] .badge-board {
+		color: #6ee7b7;
+	}
+
+	.badge-warn {
+		background: rgba(245, 158, 11, 0.15);
+		border: 1px solid #d97706;
+		color: #b45309;
+	}
+	[data-theme="dark"] .badge-warn {
+		color: #fcd34d;
+	}
+
+	/* 3 列宽敞主管道 */
+	.dm-pipeline-grid-3 {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 16px;
+	}
+
+	@media (max-width: 900px) {
+		.dm-pipeline-grid-3 {
+			grid-template-columns: 1fr;
+			gap: 18px;
+		}
+	}
+
+	.dm-stage-col {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.dm-stage-head {
+		font-size: 12px;
+		font-weight: 700;
+		letter-spacing: 0.4px;
+		padding: 7px 12px;
+		border-radius: 6px;
+		background: var(--ca-bg);
+		border: 1px solid var(--ca-line);
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		color: var(--ca-text);
+	}
+
+	.dm-stage-tag {
+		background: var(--ca-soft);
+		border: 1px solid var(--ca-line);
+		padding: 1px 6px;
+		border-radius: 4px;
+		font-size: 10.5px;
+		color: var(--ca-muted);
+	}
+
+	/* 管道卡片 */
+	.dm-card {
+		background: var(--ca-bg);
+		border: 1px solid var(--ca-line);
+		border-radius: 8px;
+		padding: 13px 14px;
+		cursor: pointer;
+		position: relative;
+		transition:
+			transform 0.16s ease,
+			border-color 0.16s ease,
+			box-shadow 0.16s ease,
+			background-color 0.16s ease;
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
+
+	.dm-card:hover {
+		border-color: var(--ca-accent);
+		transform: translateY(-2px);
+		box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+	}
+
+	.dm-card.dm-card-primary {
+		border: 1.5px solid #a855f7;
+	}
+
+	.dm-card.dm-card-dashed {
+		border: 1.5px dashed #a855f7;
+	}
+
+	/* 选中高亮状态：双重高亮发光，与侧面弹出框遥相呼应 */
+	.dm-card.is-selected {
+		border-color: var(--ca-accent) !important;
+		background: color-mix(in srgb, var(--ca-accent) 8%, var(--ca-bg)) !important;
+		box-shadow:
+			0 0 0 2px var(--ca-accent),
+			0 8px 24px -4px rgba(180, 58, 48, 0.25) !important;
+		transform: translateY(-2px);
+	}
+
+	.dm-card.is-highlighted {
+		border-color: #3b82f6 !important;
+		box-shadow: 0 0 0 2px #3b82f6 !important;
+	}
+
+	.dm-card.is-dimmed {
+		opacity: 0.28;
+		filter: grayscale(0.7);
+	}
+
+	.dm-card-top {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.dm-card-click-tip {
+		font-size: 10px;
+		color: var(--ca-muted);
+		opacity: 0.7;
+		transition: opacity 0.15s ease;
+	}
+
+	.dm-card:hover .dm-card-click-tip,
+	.dm-card.is-selected .dm-card-click-tip {
+		opacity: 1;
+		color: var(--ca-accent);
+		font-weight: 600;
+	}
+
+	.dm-card-title {
+		font-size: 13px;
+		font-weight: 700;
+		color: var(--ca-text);
+		line-height: 1.4;
+	}
+
+	.dm-card-desc {
+		font-size: 11.5px;
+		color: var(--ca-muted);
+		line-height: 1.5;
+	}
+
+	/* 意图分流下游去向指引 */
+	.dm-route-indicator {
+		border: 1px dashed var(--ca-line);
+		border-radius: 8px;
+		padding: 12px 14px;
+		background: color-mix(in srgb, var(--ca-bg) 50%, transparent);
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		font-size: 11.5px;
+	}
+
+	.dm-route-head {
+		font-size: 11px;
+		font-weight: 700;
+		color: var(--ca-muted);
+		letter-spacing: 0.3px;
+		margin-bottom: 2px;
+	}
+
+	.dm-route-item {
+		color: var(--ca-muted);
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		line-height: 1.4;
+	}
+
+	.dm-route-item span {
+		font-weight: 600;
+		color: var(--ca-text);
+	}
+
+	.dm-route-item.is-job {
+		color: #3b82f6;
+	}
+
+	[data-theme="dark"] .dm-route-item.is-job {
+		color: #93c5fd;
+	}
+
+	.dm-branches {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.dm-branch-box {
+		border: 1px solid var(--ca-line);
+		border-radius: 8px;
+		padding: 10px;
+		background: color-mix(in srgb, var(--ca-bg) 60%, transparent);
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	.dm-branch-box.dm-job-branch {
+		border-color: rgba(59, 130, 246, 0.4);
+		background: color-mix(in srgb, #3b82f6 6%, var(--ca-bg));
+	}
+
+	.dm-branch-title {
+		font-size: 11.5px;
+		font-weight: 700;
+		color: var(--ca-text);
+	}
+
+	/* 复盘心得卡片 */
+	.dm-retro-card {
+		padding: 20px 22px;
+		border-radius: 10px;
+		border: 1px solid var(--ca-line);
+		background: var(--ca-soft);
+	}
+
+	.dm-retro-card h4 {
+		font-size: 14px;
+		font-weight: 700;
+		color: var(--ca-text);
+		margin-bottom: 8px;
+	}
+
+	.dm-retro-card p {
+		font-size: 13px;
+		color: var(--ca-muted);
+		line-height: 1.7;
+	}
+
+	/* ========== 侧边浮动弹出详情框 (Side Popover) ========== */
+	.dm-side-popover {
+		position: absolute;
+		z-index: 100;
+		width: 330px;
+		max-width: calc(100% - 32px);
+		background: var(--ca-bg);
+		border: 1.5px solid var(--ca-accent);
+		border-radius: 12px;
+		padding: 16px 18px;
+		box-shadow:
+			0 16px 42px -6px rgba(0, 0, 0, 0.28),
+			0 0 0 1px var(--ca-accent);
+		display: none;
+		opacity: 0;
+		transform: scale(0.96);
+		transition:
+			opacity 0.16s ease,
+			transform 0.16s ease;
+		pointer-events: none;
+	}
+
+	.dm-side-popover.is-open {
+		display: block;
+		opacity: 1;
+		transform: scale(1);
+		pointer-events: auto;
+	}
+
+	.dm-pop-arrow {
+		position: absolute;
+		width: 12px;
+		height: 12px;
+		background: var(--ca-bg);
+		pointer-events: none;
+	}
+
+	.dm-side-popover.arrow-left .dm-pop-arrow {
+		left: -7px;
+		border-left: 1.5px solid var(--ca-accent);
+		border-bottom: 1.5px solid var(--ca-accent);
+		transform: rotate(45deg);
+	}
+
+	.dm-side-popover.arrow-right .dm-pop-arrow {
+		right: -7px;
+		border-right: 1.5px solid var(--ca-accent);
+		border-top: 1.5px solid var(--ca-accent);
+		transform: rotate(45deg);
+	}
+
+	.dm-pop-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 8px;
+	}
+
+	.dm-pop-badge {
+		font-size: 10.5px;
+		font-weight: 700;
+		background: color-mix(in srgb, var(--ca-accent) 12%, var(--ca-soft));
+		border: 1px solid var(--ca-accent);
+		padding: 2px 7px;
+		border-radius: 4px;
+		color: var(--ca-accent);
+		letter-spacing: 0.3px;
+	}
+
+	.dm-pop-close {
+		background: transparent;
+		border: none;
+		font-size: 16px;
+		color: var(--ca-muted);
+		cursor: pointer;
+		padding: 2px 6px;
+		line-height: 1;
+		border-radius: 4px;
+		transition: all 0.15s ease;
+	}
+
+	.dm-pop-close:hover {
+		color: var(--ca-text);
+		background: var(--ca-soft);
+	}
+
+	.dm-pop-title {
+		font-size: 15px;
+		font-weight: 700;
+		color: var(--ca-text);
+		margin-bottom: 4px;
+		line-height: 1.35;
+	}
+
+	.dm-pop-sub {
+		font-size: 11.5px;
+		color: var(--ca-accent);
+		margin-bottom: 12px;
+		font-weight: 500;
+		line-height: 1.4;
+	}
+
+	.dm-pop-body {
+		font-size: 12.5px;
+		color: var(--ca-text);
+		line-height: 1.7;
+	}
+
+	.dm-pop-body strong {
+		color: var(--ca-text);
 	}
 </style>

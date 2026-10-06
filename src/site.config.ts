@@ -41,10 +41,6 @@ export const menuLinks: { path: string; title: string }[] = [
 		path: "/projects/",
 		title: "项目经历",
 	},
-	{
-		path: "/notes/",
-		title: "学习笔记",
-	},
 ];
 
 // https://expressive-code.com/reference/configuration/
