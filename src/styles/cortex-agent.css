@@ -191,6 +191,9 @@
 .ca-init-card:nth-child(n + 3) {
 	border-top: 1px solid var(--ca-line);
 }
+.ca-init-card:nth-child(3):last-child {
+	grid-column: 1 / -1;
+}
 .ca-init-top {
 	margin-bottom: 14px;
 }
@@ -954,6 +957,19 @@
 	line-height: 1.75;
 	color: var(--ca-muted);
 	margin: 0;
+}
+.cl-sop-output {
+	margin-top: 12px;
+	padding-top: 10px;
+	border-top: 1px dashed var(--ca-line);
+	font-size: 12px;
+	line-height: 1.6;
+	color: var(--ca-muted);
+}
+.cl-sop-output strong {
+	color: var(--ca-accent);
+	font-weight: 600;
+	margin-right: 2px;
 }
 
 /* SOP Footnote */

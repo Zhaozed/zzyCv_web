@@ -12,7 +12,7 @@ import "@/styles/cortex-closing.css";
 const initiatives = [
 	{
 		isCore: true,
-		badge: "核心攻坚 01 · 运行时架构",
+		badge: "关键实践 01 · 运行时架构",
 		title: "ToolHub 成本与调度确定性治理",
 		contextLabel: "核心挑战",
 		context: "122 个工具全量注入导致 1.5万 Token 描述膨胀与模型选择幻觉超时",
@@ -26,7 +26,7 @@ const initiatives = [
 	},
 	{
 		isCore: true,
-		badge: "核心攻坚 02 · 主动智能闭环",
+		badge: "关键实践 02 · 主动智能闭环",
 		title: "DeskMate Daily Brief · 晨间智能工作简报",
 		contextLabel: "核心挑战",
 		context: "现场多轮 ReAct 时延过长、离线预生成算力空转滞后、通用记忆高噪混杂",
@@ -51,20 +51,6 @@ const initiatives = [
 			{ val: "6 步", label: "标准接入 SOP" }
 		],
 		anchor: "#onboarding"
-	},
-	{
-		isCore: false,
-		badge: "交付提效 04 · 协作基础设施",
-		title: "多模态交互评审工作台 (Web Mock 工具)",
-		contextLabel: "协作价值",
-		context: "语音、表情、动作与卡片交织，突破静态原型限制，对齐多模态时序节奏",
-		action: "自研前端可播放评审工具，支持关键帧暂停批注与理想链路配置导出交付",
-		metrics: [
-			{ val: "前端 Mock", label: "交互评审工具" },
-			{ val: "帧级", label: "多模态时序协同" },
-			{ val: "JSON 导出", label: "标准配置交付" }
-		],
-		anchor: "#workbench"
 	}
 ];
 
@@ -72,9 +58,7 @@ const navigation = [
 	{ id: "overview", num: "TOP", label: "项目概览" },
 	{ id: "toolhub", num: "01", label: "Toolhub治理" },
 	{ id: "proactive", num: "02", label: "主动服务" },
-	{ id: "onboarding", num: "03", label: "工具接入与 SOP" },
-	{ id: "workbench", num: "04", label: "交互评审工作台" },
-	{ id: "retrospective", num: "05", label: "项目复盘" }
+	{ id: "onboarding", num: "03", label: "工具接入与 SOP" }
 ];
 ---
 
@@ -82,7 +66,7 @@ const navigation = [
 	meta={{
 		title: "Cortex-Agent · 桌面 AI 机器人生产力进化",
 		description:
-			"可以科技 Loona 桌面 AI 机器人项目：ToolHub 工具治理、DeskMate Daily Brief 晨间智能简报体系，以及办公能力接入与交互评审工作台。"
+			"可以科技 Loona 桌面 AI 机器人项目：ToolHub 工具治理、DeskMate Daily Brief 晨间智能简报体系，以及办公生态能力接入与标准接入 SOP。"
 	}}>
 	<article class="cortex-case">
 		<!-- 桌面端侧边目录 -->
@@ -148,7 +132,7 @@ const navigation = [
 				<div class="ca-initiatives-head">
 					<h3><span>EXECUTIVE SCORECARD</span>主要工作与成果总览 (Major Initiatives)</h3>
 					<p>
-						以「运行时架构治理」与「主动服务闭环」为双核主驱动，配套办公生态接入与评审工具赋能。
+						以「运行时架构治理」与「主动服务闭环」为核心抓手，配套办公生态接入与标准接入 SOP。
 					</p>
 				</div>
 				<div class="ca-initiatives-grid">
@@ -158,7 +142,6 @@ const navigation = [
 								<div class="ca-init-top">
 									<div class="ca-init-badge-row">
 										<span class="ca-init-badge">{item.badge}</span>
-										{item.isCore && <span class="ca-core-tag">双核驱动</span>}
 									</div>
 									<h4>{item.title}</h4>
 								</div>
@@ -193,7 +176,7 @@ const navigation = [
 		<!-- 01 Toolhub：ToolHub -->
 		<section class="ca-section" id="toolhub" data-case-section aria-labelledby="toolhub-heading">
 			<header class="ca-section-head">
-				<p class="ca-kicker"><span>01</span> 核心攻坚 · 运行时架构</p>
+				<p class="ca-kicker"><span>01</span> 关键实践 · 运行时架构</p>
 				<h2 id="toolhub-heading">ToolHub 治理：从全量注入到分层按需挂载</h2>
 			</header>
 			<ToolhubGovernance />
@@ -202,7 +185,7 @@ const navigation = [
 		<!-- 02 主动服务设计与评测闭环 -->
 		<ProactiveService />
 
-		<!-- 03 交付资产 & 04 项目复盘 -->
+		<!-- 03 办公生态接入与标准 SOP -->
 		<ProjectClosing />
 	</article>
 </PageLayout>

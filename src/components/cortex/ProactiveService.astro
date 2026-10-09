@@ -15,7 +15,7 @@ import BriefShowcase from "./BriefShowcase.astro";
 	data-case-section
 	aria-labelledby="proactive-heading">
 	<header class="ca-section-head">
-		<p class="ca-kicker"><span>02</span> 核心攻坚 · 主动智能闭环</p>
+		<p class="ca-kicker"><span>02</span> 关键实践 · 主动智能闭环</p>
 		<h2 id="proactive-heading">DeskMate Daily Brief 晨间智能工作简报</h2>
 	</header>
 
@@ -112,39 +112,29 @@ import BriefShowcase from "./BriefShowcase.astro";
 		<!-- PM 的破局取舍与决断 -->
 		<div class="mo-decision-summary">
 			<div class="mo-decision-head">
-				<span class="mo-decision-badge">★ PM 关键决断</span>
-				<h4>坚持现场按需生成，由工程代码与大模型明确分工——“确定性归代码，提炼性归模型”</h4>
+				<span class="mo-decision-badge">★ 架构设计原则</span>
+				<h4>坚持现场按需生成，工程代码与大模型明确分工——“确定性归代码，提炼性归模型”</h4>
 			</div>
 			<div class="mo-tradeoffs-grid">
 				<div class="mo-tradeoff-card">
 					<div class="mo-to-tag">取舍 01 / 数据输入剪枝</div>
-					<h5>LiveMem 场景化白名单剪枝</h5>
+					<h5>LiveMem 场景化白名单过滤</h5>
 					<p>
-						全量注入 LiveMem 导致上万 Token 膨胀且混杂海量闲聊。虽然 LiveMem 本身按天异步离线更新，但若无过滤直接消费会淹没工作主线。我们改为在消费端引入<strong
-							>场景化白名单投影</strong
-						>：仅放行核心工作字段（承诺、阻塞、计划），并保留<strong
-							>用户画像与人际协作背景</strong
-						>作为噪音隔离基准锚点；以增加前置抽取与过滤流水线复杂度为代价，物理阻断生活琐碎，记忆输入从
-						15,000 降至约 1,200 Token。
+						全量注入记忆导致万级 Token 膨胀且混杂海量闲聊。虽然 LiveMem 本身异步更新，但直接消费会严重淹没工作主线。我们改为在消费端引入<strong>工作场景白名单</strong>：仅放行核心工作字段（承诺、阻塞、计划），并保留人际协作背景作为必要上下文；以增加前置抽取与过滤为代价，阻断生活琐碎噪音，记忆输入从 15,000 降至约 1,200 Token（削减 92%）。
 					</p>
 				</div>
 				<div class="mo-tradeoff-card">
 					<div class="mo-to-tag">取舍 02 / 架构流水线</div>
-					<h5>上座即并发取数，模型单轮生成</h5>
+					<h5>上座触发代码并行取数，模型单轮归纳收敛</h5>
 					<p>
-						针对现场多轮 ReAct 调工具的长尾时延（30–40s）与离线定时预生成的算力空转/动态失效，我们将取数时机确立为<strong
-							>用户上座事件到达瞬间，由工程代码并发（约 0.5s）并行拉取实时日程与 LiveMem 当日工作承诺</strong
-						>，组装精简输入快照。大模型免除一切工具调度负担，仅负责<strong>单轮归纳、优先级重排与口语化生成（约 3~4s）</strong
-						>，端到端实测稳定控制在约 4~5s。
+						放弃<strong>现场多轮 ReAct 边想边查</strong>（避免 30~40s 长尾延迟），亦放弃<strong>离线定时预生成</strong>（避免算力浪费与突发日程变更失效）。确立为用户上座瞬间由<strong>工程代码并发（约 0.5s）并行拉取实时日程与 LiveMem 当日工作承诺</strong>，组装精简输入快照；大模型免除工具调度开销，仅负责<strong>单轮归纳、优先级重排与口语化生成（约 3~4s）</strong>，端到端延迟稳定收敛至约 4~5s。
 					</p>
 				</div>
 				<div class="mo-tradeoff-card">
 					<div class="mo-to-tag">取舍 03 / 具身交互协同</div>
-					<h5>具身动作与扫读体验协同</h5>
+					<h5>具身动作掩蔽后台耗时，多模态双通道触达</h5>
 					<p>
-						手机吸附到底座瞬间，机器人立即触发转头眨眼与开场问候（约 3~4s），<strong
-							>问候与动作和后台数据预查、单轮生成完全并行，大幅弱化体感等待</strong
-						>；卡片立现可交互，语音播报无缝切入。语音严格约束 ≤25 字单焦点播报，卡片通过 A2UI 结构化呈现供 5 秒快速扫读。
+						手机吸附到底座瞬间，机器人立即触发转头眨眼与开场问候（约 3~4s），<strong>问候动作与后台取数生成完全并行，实现体感零等待</strong>。生成完成后无缝切入：语音严格约束为 <strong>≤25 字单焦点播报</strong>（先提醒最紧急事项），屏幕同步以 A2UI 结构化卡片呈现，供用户 5 秒快速扫读完整安排。
 					</p>
 				</div>
 			</div>

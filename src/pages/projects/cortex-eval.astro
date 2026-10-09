@@ -9,8 +9,7 @@ const navigation = [
 	{ id: "overview", label: "项目概览" },
 	{ id: "problem", label: "问题与标准" },
 	{ id: "architecture", label: "方案与架构" },
-	{ id: "credibility", label: "可信与闭环" },
-	{ id: "retro", label: "项目复盘" }
+	{ id: "credibility", label: "可信与闭环" }
 ];
 
 const painPoints = [
@@ -483,27 +482,7 @@ export function routeJudge(metric: MetricType, evidence: TraceFrame) {
 	}
 ];
 
-const reflections = [
-	{
-		title: "评测分流设计：把业务预期转化为可验证的契约",
-		paragraphs: [
-			"Agent 的执行同时包含确定性约束与开放性表达。统一采用文本匹配，会误杀合理回答；全部交给模型打分，又可能让安全违规被整体高分掩盖。",
-			"因此，我依据<strong>可验证性选择裁判，依据风险等级设置门槛</strong>：对接口 Schema、工具入参、敏感写操作确认等明确约束，采用代码断言；对事实一致性、信息完整性与口播自然度，采用分维度 Rubric 和模型核验，并通过人工抽检校准。安全红线独立验收，不被其他维度的高分抵消。",
-			"以日程改期为例，“对象是否正确、授权是否满足、修改是否成功、回复是否准确”需要分别判定。拆开这些维度，才能区分问题出在决策、执行还是表达，并明确哪些失败必须阻断发版。",
-			"<strong>我的认知：</strong>评测设计的核心，是把业务预期转化为可验证的契约——底线有硬约束，表达有合理容差，失败有明确归因。"
-		]
-	},
-	{
-		title: "评测集建设：用结构化方法构建，用状态治理保证可信",
-		paragraphs: [
-			"高价值测试集需要同时解决三个问题：测什么、如何快速构建、如何保证结果不失真。",
-			"<strong>选题看决策分支。</strong>按照“业务任务 × 风险等级 × 关键状态”建立覆盖矩阵。日程改期中的同名目标、确认状态、时间冲突与工具失败，都会改变 Agent 的决策要求，应优先覆盖；表达变体则用于补充验证语言鲁棒性。",
-			"<strong>提效靠用例结构复用。</strong>可复用的构建路径是：从真实请求与历史失败中提炼种子用例，明确输入、初始状态、预期结果与判分依据，再借助模板或 LLM 扩展。人工集中审核业务预期和关键边界，通过小批试跑校准后入库。先验证种子用例，再扩大规模，才能同时控制构建成本与用例质量。",
-			"<strong>可信靠执行前提一致。</strong>在同 UID 共享可变状态、缺乏充分隔离的条件下，相关用例串行执行；独立用例执行前恢复声明的初始状态，多轮用例内部保留连续上下文，避免残留会话、记忆或日程污染结果。",
-			"<strong>我的认知：</strong>评测集的价值取决于有效覆盖与可重复验证。先确认用例、裁判和环境有效，再判断 Agent 能力，评测结果才能可靠地指导迭代与版本准入。"
-		]
-	}
-];
+
 ---
 
 <PageLayout
@@ -1390,48 +1369,7 @@ Planner: 正常检索可用时段并创建日程
 						</dd>
 					</div>
 				</dl>
-			</div>
-		</section>
-
-		<!-- 04 项目复盘 · 认知沉淀 -->
-		<section
-			class="ca-section ca-closing cl-retro-section"
-			id="retro"
-			data-case-section
-			aria-labelledby="retro-heading">
-			<header class="ca-section-head">
-				<p class="ca-kicker"><span>04</span> 项目复盘 · 认知沉淀</p>
-				<h2 id="retro-heading">项目复盘：两项 AI PM 核心思考</h2>
-				<p class="ca-copy">
-					从 0 到 1 落地 Agent 评测与版本验收平台的实践中，沉淀关于裁判分流选择与高保真评测集工程化构建的深层认知。
-				</p>
-			</header>
-
-			<div class="cl-asset-block ca-retro ca-reveal">
-				<div class="cl-asset-head">
-					<span class="cl-asset-tag">项目复盘 / RETROSPECTIVE</span>
-					<h3>这段经历沉淀的两项 AI PM 核心思考</h3>
-				</div>
-
-				<ol class="cl-retro-list">
-					{
-						reflections.map((item, i) => (
-							<li>
-								<span class="cl-retro-number" aria-hidden="true">
-									0{i + 1}
-								</span>
-								<div>
-									<h3>{item.title}</h3>
-									{item.paragraphs.map(p => (
-										<p set:html={p} />
-									))}
-								</div>
-							</li>
-						))
-					}
-				</ol>
-
-				<div class="ca-resources">
+				<div class="ca-resources" style="margin-top: 32px;">
 					<p class="ca-kicker">继续探索作品集</p>
 					<a href="/projects/cortex-agent/">Cortex-Agent 生产力进化 <span>→</span></a>
 					<a
